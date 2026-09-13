@@ -32,7 +32,7 @@
       }
       var btn = form.querySelector("button[type=submit]");
       if (btn) { btn.disabled = true; btn.textContent = "Wird gesendet …"; }
-      fetch("https://pixels-urw-mobility-ladder.trycloudflare.com/api/lead", {
+      fetch((window.LEAD_ENDPOINT || "https://pixels-urw-mobility-ladder.trycloudflare.com") + "/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
