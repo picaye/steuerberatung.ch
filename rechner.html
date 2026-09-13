@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Steuerrechner Schweiz – Steuerlast nach Kanton berechnen | steuerberatung.ch</title>
+<meta name="description" content="Kostenloser Steuerrechner für die Schweiz: Einkommen, Kanton und Abzüge eingeben – sofortige Schätzung Ihrer Steuerlast.">
+<link rel="canonical" href="https://steuerberatung.ch/rechner.html">
+<meta property="og:title" content="Steuerrechner Schweiz – Steuerlast nach Kanton berechnen | steuerberatung.ch">
+<meta property="og:description" content="Kostenloser Steuerrechner für die Schweiz: Einkommen, Kanton und Abzüge eingeben – sofortige Schätzung Ihrer Steuerlast.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://steuerberatung.ch/rechner.html">
+<meta property="og:site_name" content="steuerberatung.ch">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/extra.css">>
+
+</head>
+<body>
+<header class="site-header">
+<div class="container header-inner">
+<a class="logo" href="index.html"><span class="logo-mark">S</span> steuerberatung<span class="accent">.ch</span></a>
+<nav class="main-nav">
+<a href="leistungen.html">Leistungen</a>
+<a href="preise.html">Preise</a>
+<a href="ratgeber.html">Ratgeber</a>
+<a href="rechner.html">Rechner</a>
+<a href="en/index.html" class="lang">EN</a>
+</nav>
+<a class="btn btn-primary" href="kontakt.html">Kostenlose Beratung</a>
+</div>
+</header>
+<main>
+<div class="page-head"><div class="container">
+<h1>Steuerrechner Schweiz</h1>
+<p>Schätzen Sie Ihre Steuerlast nach Kanton – in Sekunden. Kostenlos, ohne Anmeldung.</p>
+</div></div>
+<div class="container">
+<section class="section">
+<form id="tax-calc" class="calc-form">
+<div class="form-row">
+<div class="form-field">
+<label for="canton-c">Kanton</label>
+<select id="canton-c" name="canton">
+<option>ZH</option><option>BE</option><option>LU</option><option>AG</option><option>SO</option>
+<option>BS</option><option>SH</option><option>AR</option><option>AI</option><option>SG</option>
+<option>GR</option><option>OW</option><option>GL</option><option>ZG</option><option>FR</option>
+<option>GE</option><option>NE</option><option>VD</option><option>VS</option><option>TI</option>
+<option>JU</option><option>TG</option><option>UR</option><option>NW</option><option>BL</option>
+</select>
+</div>
+<div class="form-field">
+<label for="income">Jahreseinkommen (CHF)</label>
+<input type="number" id="income" name="income" value="90000" min="0" step="1000">
+</div>
+</div>
+<div class="form-row">
+<div class="form-field">
+<label for="deductions">Abzüge (CHF, optional)</label>
+<input type="number" id="deductions" name="deductions" value="15000" min="0" step="500">
+</div>
+<div class="form-field">
+<label for="status">Status</label>
+<select id="status" name="status">
+<option value="single">Ledig</option>
+<option value="married">Verheiratet (gemeinsam)</option>
+</select>
+</div>
+</div>
+<div id="calc-result" class="calc-result" aria-live="polite"></div>
+<p class="muted disclaimer">Vereinfachte Schätzung auf Basis durchschnittlicher kantonaler Steuersätze. Keine Steuerberatung – für Ihren konkreten Fall gilt die kantonale Tarifordnung.</p>
+</form>
+</section>
+</div>
+</main>
+<footer class="site-footer">
+<div class="container footer-grid">
+<div>
+<div class="logo"><span class="logo-mark">S</span> steuerberatung<span class="accent">.ch</span></div>
+<p class="muted">Ihr unabhängiger Partner für Steuern in der Schweiz. Vergleich, Beratung und digitale Services – transparent und datenschutzkonform.</p>
+</div>
+<div>
+<h4>Services</h4>
+<a href="leistungen.html">Steuererklärung</a>
+<a href="leistungen.html">Steuerberatung</a>
+<a href="rechner.html">Steuerrechner</a>
+<a href="ratgeber.html">Ratgeber</a>
+</div>
+<div>
+<h4>Rechtliches</h4>
+<a href="impressum.html">Impressum</a>
+<a href="datenschutz.html">Datenschutz</a>
+<a href="agb.html">AGB</a>
+</div>
+<div>
+<h4>Kontakt</h4>
+<a href="kontakt.html">Beratung anfragen</a>
+<a href="mailto:info@steuerberatung.ch">info@steuerberatung.ch</a>
+</div>
+</div>
+<div class="container footer-bottom">
+<p class="muted">© 2026 steuerberatung.ch · Unabhängige Steuer-Information &amp; Vermittlung. Keine Steuerberatung im Sinne des DBG – die eigentliche Beratung erfolgt durch lizenzierte Partner.</p>
+</div>
+</footer>
+<script src="assets/app.js"></script>
+</body>
+</html>
