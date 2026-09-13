@@ -8,6 +8,7 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # repo root
 DATA = os.path.join(BASE, "data", "leads.jsonl")
+ORDERS = os.path.join(BASE, "data", "orders.jsonl")
 EMAIL_TO = "pino@calzo.com"
 EMAIL_FROM = "openclaw@calzo.com"
 SMTP_HOST = os.environ.get("SMTP_HOST", "localhost")
@@ -78,6 +79,8 @@ class Handler(BaseHTTPRequestHandler):
             self._json(404, {"error": "not found"})
 
     def do_POST(self):
+        if self.path == "/api/order":
+            return self._handle_order()
         if self.path != "/api/lead":
             return self._json(404, {"error": "not found"})
         try:
@@ -97,6 +100,42 @@ class Handler(BaseHTTPRequestHandler):
         rec = store_lead(lead)
         emailed = notify_email(rec)
         self._json(200, {"ok": True, "id": rec["ts"], "emailed": emailed})
+
+    def _handle_order(self):
+        try:
+            n = int(self.headers.get("Content-Length", 0))
+            data = json.loads(self.rfile.read(n) or b"{}")
+        except Exception:
+            return self._json(400, {"error": "invalid json"})
+        order = {
+            "name": str(data.get("name", ""))[:200],
+            "email": str(data.get("email", ""))[:200],
+            "canton": str(data.get("canton", ""))[:50],
+            "package": str(data.get("package", ""))[:50],
+            "price": str(data.get("price", ""))[:20],
+            "note": str(data.get("note", ""))[:1000],
+        }
+        if not order["name"] or not valid_email(order["email"]) or not order["package"]:
+            return self._json(400, {"error": "name, valid email and package required"})
+        rec = {"ts": datetime.datetime.now(datetime.timezone.utc).isoformat(), **order}
+        os.makedirs(os.path.dirname(ORDERS), exist_ok=True)
+        with open(ORDERS, "a") as f:
+            f.write(json.dumps(rec, ensure_ascii=False) + "\n")
+        try:
+            body = ("Neue Bestellung steuerberatung.ch\n\n"
+                    f"Paket: {rec['package']} ({rec['price']})\n"
+                    f"Name: {rec['name']}\nE-Mail: {rec['email']}\nKanton: {rec['canton']}\n"
+                    f"Notiz: {rec['note']}\nZeit: {rec['ts']}\n")
+            import subprocess
+            msg = (f"From: {EMAIL_FROM}\nTo: {EMAIL_TO}\n"
+                   f"Subject: [steuerberatung.ch] Bestellung: {rec['package']} - {rec['name']}\n"
+                   f"MIME-Version: 1.0\nContent-Type: text/plain; charset=utf-8\n\n{body}")
+            r = subprocess.run(["/opt/homebrew/bin/himalaya", "message", "send"],
+                               input=msg.encode("utf-8"), capture_output=True, timeout=30)
+            emailed = r.returncode == 0
+        except Exception:
+            emailed = False
+        self._json(200, {"ok": True, "emailed": emailed})
 
     def log_message(self, *a):
         pass

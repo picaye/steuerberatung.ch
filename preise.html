@@ -47,7 +47,7 @@
 <li>Beleg-Ordner-Vorlage</li>
 <li>Fristen-Kalender 2026</li>
 </ul>
-<a class="btn btn-secondary" href="kontakt.html">Basis wählen</a>
+<a class="btn btn-secondary" href="#bestellung">Basis wählen</a>
 </div>
 <div class="price-card featured">
 <h3>Komfort</h3>
@@ -59,7 +59,7 @@
 <li>Abzugs-Optimierungs-Workshop</li>
 <li>1× E-Mail-Frage (Antwort innert 48h)</li>
 </ul>
-<a class="btn btn-primary" href="kontakt.html">Komfort wählen</a>
+<a class="btn btn-primary" href="#bestellung">Komfort wählen</a>
 </div>
 <div class="price-card">
 <h3>Premium</h3>
@@ -71,7 +71,7 @@
 <li>Unbegrenzte E-Mail-Fragen (30 Tage)</li>
 <li>Einreichungs-Begleitung</li>
 </ul>
-<a class="btn btn-secondary" href="kontakt.html">Premium wählen</a>
+<a class="btn btn-secondary" href="#bestellung">Premium wählen</a>
 </div>
 </div>
 </section>
@@ -85,6 +85,53 @@
 </ol>
 <p class="muted">Zahlung und Lieferung werden per E-Mail an die von Ihnen angegebene Adresse bestätigt. 14 Tage Geld-zurück-Garantie, wenn das Paket nicht zu Ihrer Situation passt.</p>
 </section>
+
+<section class="section" id="bestellung">
+<h2>Paket bestellen</h2>
+<p class="muted">Nach der Bestellung erhalten Sie eine Bestätigung per E-Mail. Zahlung per Twint, Kreditkarte oder Rechnung – wir senden Ihnen die Zahlungsinformationen innert 24 Stunden.</p>
+<form id="order-form" class="lead-form">
+<div class="form-row">
+<div class="form-field">
+<label for="o-name">Name *</label>
+<input type="text" id="o-name" name="name" required maxlength="200">
+</div>
+<div class="form-field">
+<label for="o-email">E-Mail *</label>
+<input type="email" id="o-email" name="email" required maxlength="200">
+</div>
+</div>
+<div class="form-row">
+<div class="form-field">
+<label for="o-canton">Wohnkanton *</label>
+<select id="o-canton" name="canton" required>
+<option value="">– wählen –</option>
+<option>AG</option><option>AR</option><option>AI</option><option>BL</option><option>BS</option>
+<option>BE</option><option>FR</option><option>GE</option><option>GL</option><option>GR</option>
+<option>JU</option><option>LU</option><option>NE</option><option>NW</option><option>OW</option>
+<option>SG</option><option>SH</option><option>SZ</option><option>SO</option><option>TG</option>
+<option>TI</option><option>UR</option><option>VD</option><option>VS</option><option>ZG</option><option>ZH</option>
+</select>
+</div>
+<div class="form-field">
+<label for="o-package">Paket *</label>
+<select id="o-package" name="package" required>
+<option value="">– wählen –</option>
+<option value="Basis">Basis – CHF 149</option>
+<option value="Komfort">Komfort – CHF 299</option>
+<option value="Premium">Premium – CHF 599</option>
+</select>
+</div>
+</div>
+<div class="form-field">
+<label for="o-note">Notiz (optional)</label>
+<textarea id="o-note" name="note" rows="3" maxlength="1000" placeholder="Z. B. gewünschter Liefertermin, Fragen"></textarea>
+</div>
+<label class="consent"><input type="checkbox" required> Ich stimme den <a href="agb.html">AGB</a> und der <a href="datenschutz.html">Datenschutzerklärung</a> zu. *</label>
+<button type="submit" class="btn btn-primary btn-lg">Bestellung senden</button>
+<p id="order-status" class="form-status" role="status"></p>
+</form>
+</section>
+
 </div>
 </main>
 <footer class="site-footer">
@@ -116,6 +163,7 @@
 <p class="muted">© 2026 steuerberatung.ch · Unabhängige Steuer-Information &amp; Vermittlung. Keine Steuerberatung im Sinne des DBG – die eigentliche Beratung erfolgt durch lizenzierte Partner.</p>
 </div>
 </footer>
+<script src="assets/endpoint.js"></script>
 <script src="assets/app.js"></script>
 </body>
 </html>

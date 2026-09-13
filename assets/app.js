@@ -126,4 +126,44 @@
     calc.addEventListener("input", runCalc);
     runCalc();
   }
+
+  /* ---------- Order form (POST /api/order) ---------- */
+  var oform = document.getElementById("order-form");
+  if (oform) {
+    var ostatus = document.getElementById("order-status");
+    oform.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (ostatus) { ostatus.className = "form-status"; ostatus.textContent = ""; }
+      var data = {
+        name: oform.querySelector("[name=name]").value.trim(),
+        email: oform.querySelector("[name=email]").value.trim(),
+        canton: oform.querySelector("[name=canton]").value,
+        package: oform.querySelector("[name=package]").value,
+        price: oform.querySelector("[name=package]").selectedOptions[0] ? oform.querySelector("[name=package]").selectedOptions[0].text : "",
+        note: oform.querySelector("[name=note]").value.trim()
+      };
+      if (!data.name || !data.email || !data.package) {
+        if (ostatus) { ostatus.className = "form-status err"; ostatus.textContent = "Bitte Name, E-Mail und Paket angeben."; }
+        return;
+      }
+      var obtn = oform.querySelector("button[type=submit]");
+      if (obtn) { obtn.disabled = true; obtn.textContent = "Wird gesendet …"; }
+      fetch((window.LEAD_ENDPOINT || "https://pixels-urw-mobility-ladder.trycloudflare.com") + "/api/order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      })
+        .then(function (res) {
+          if (!res.ok) throw new Error("HTTP " + res.status);
+          if (ostatus) { ostatus.className = "form-status ok"; ostatus.textContent = "Vielen Dank! Ihre Bestellung ist eingegangen – Sie erhalten die Zahlungsinformationen innert 24 Stunden."; }
+          oform.reset();
+        })
+        .catch(function () {
+          if (ostatus) { ostatus.className = "form-status err"; ostatus.textContent = "Die Bestellung konnte nicht gesendet werden. Bitte schreiben Sie uns an info@steuerberatung.ch."; }
+        })
+        .finally(function () {
+          if (obtn) { obtn.disabled = false; obtn.textContent = "Bestellung senden"; }
+        });
+    });
+  }
 })();
