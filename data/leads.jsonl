@@ -1,3 +1,4 @@
 {"ts": "2026-09-13T20:14:37.462839+00:00", "name": "Test Person", "email": "test@example.com", "canton": "ZH", "situation": "Angestellt", "message": "Test lead - bitte ignorieren"}
 {"ts": "2026-09-13T20:16:05.260694+00:00", "name": "Test2", "email": "test2@example.com", "canton": "BE", "situation": "Selbststaendig", "message": "test"}
 {"ts": "2026-09-13T20:21:00.495528+00:00", "name": "E2E Test", "email": "e2e@test.ch", "canton": "ZH", "situation": "Angestellt", "message": "End-to-end test - bitte loeschen"}
+{"ts": "2026-09-13T21:00:35.518146+00:00", "name": "Public Test", "email": "public@test.ch", "canton": "ZH", "situation": "Angestellt", "message": "public tunnel test"}
