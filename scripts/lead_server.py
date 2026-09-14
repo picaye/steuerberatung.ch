@@ -10,6 +10,7 @@ BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # repo root
 DATA = os.path.join(BASE, "data", "leads.jsonl")
 ORDERS = os.path.join(BASE, "data", "orders.jsonl")
 EMAIL_TO = "pino@calzo.com"
+PAYPAL_EMAIL = "picaye@gmail.com"
 EMAIL_FROM = "openclaw@calzo.com"
 SMTP_HOST = os.environ.get("SMTP_HOST", "localhost")
 SMTP_PORT = int(os.environ.get("SMTP_PORT", "25"))
@@ -125,7 +126,7 @@ class Handler(BaseHTTPRequestHandler):
             body = ("Neue Bestellung steuerberatung.ch\n\n"
                     f"Paket: {rec['package']} ({rec['price']})\n"
                     f"Name: {rec['name']}\nE-Mail: {rec['email']}\nKanton: {rec['canton']}\n"
-                    f"Notiz: {rec['note']}\nZeit: {rec['ts']}\n")
+                    f"Notiz: {rec['note']}\nZeit: {rec['ts']}\n"f"\nZahlung: PayPal an {PAYPAL_EMAIL}\n")
             import subprocess
             msg = (f"From: {EMAIL_FROM}\nTo: {EMAIL_TO}\n"
                    f"Subject: [steuerberatung.ch] Bestellung: {rec['package']} - {rec['name']}\n"

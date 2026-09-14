@@ -155,7 +155,7 @@
       })
         .then(function (res) {
           if (!res.ok) throw new Error("HTTP " + res.status);
-          if (ostatus) { ostatus.className = "form-status ok"; ostatus.textContent = "Vielen Dank! Ihre Bestellung ist eingegangen – Sie erhalten die Zahlungsinformationen innert 24 Stunden."; }
+          if (ostatus) { ostatus.className = "form-status ok"; ostatus.textContent = "Vielen Dank! Ihre Bestellung ist eingegangen. Zahlung per PayPal an picaye@gmail.com – die Zugangsdaten erhalten Sie nach Zahlungseingang."; }
           oform.reset();
         })
         .catch(function () {
