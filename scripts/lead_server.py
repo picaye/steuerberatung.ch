@@ -3,12 +3,14 @@
 POST /api/lead -> stores lead in data/leads.jsonl, emails Pino, returns JSON.
 GET /health -> ok. Runs on port 8090 (free port).
 """
-import json, os, re, datetime, urllib.request, smtplib, ssl
+import json
+import urllib.parse, os, re, datetime, urllib.request, smtplib, ssl
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # repo root
 DATA = os.path.join(BASE, "data", "leads.jsonl")
 ORDERS = os.path.join(BASE, "data", "orders.jsonl")
+ANALYTICS = os.path.join(BASE, "data", "analytics.jsonl")
 EMAIL_TO = "pino@calzo.com"
 PAYPAL_EMAIL = "picaye@gmail.com"
 EMAIL_FROM = "openclaw@calzo.com"
@@ -78,6 +80,35 @@ class Handler(BaseHTTPRequestHandler):
             self._json(200, {"ok": True})
         else:
             self._json(404, {"error": "not found"})
+
+    def do_GET(self):
+        if self.path == "/track":
+            return self._track()
+        if self.path == "/health":
+            return self._json(200, {"ok": True})
+        return self._json(404, {"error": "not found"})
+
+    def _track(self):
+        # First-party, cookieless-ish: only a session id cookie we set.
+        parsed = urllib.parse.urlparse(self.path)
+        q = urllib.parse.parse_qs(parsed.query)
+        page = q.get("p", [""])[0][:200]
+        ref = q.get("r", [""])[0][:300]
+        sid = ""
+        ck = self.headers.get("Cookie", "")
+        for part in ck.split(";"):
+            if part.strip().startswith("sid="):
+                sid = part.strip()[4:][:64]
+        rec = {"ts": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+               "page": page, "ref": ref, "sid": sid}
+        os.makedirs(os.path.dirname(ANALYTICS), exist_ok=True)
+        with open(ANALYTICS, "a") as f:
+            f.write(json.dumps(rec, ensure_ascii=False) + "\n")
+        body = b"ok"
+        self.send_response(204)
+        self.send_header("Content-Length", "0")
+        self.send_header("Cache-Control", "no-store")
+        self.end_headers()
 
     def do_POST(self):
         if self.path == "/api/order":
