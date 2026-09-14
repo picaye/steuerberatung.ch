@@ -40,6 +40,7 @@ a:hover { text-decoration: underline; }
   top: 0;
   z-index: 50;
 }
+.site-header .container { position: relative; }
 .header-inner {
   display: flex;
   align-items: center;
