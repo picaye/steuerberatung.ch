@@ -39,7 +39,7 @@
       })
         .then(function (res) {
           if (!res.ok) throw new Error("HTTP " + res.status);
-          if (status) { status.className = "form-status ok"; status.textContent = "Vielen Dank! Wir melden uns innerhalb von 1–2 Werktagen bei Ihnen."; }
+          if (status) { status.className = "form-status ok"; status.textContent = "Vielen Dank! Wir melden uns innert 24 Stunden bei Ihnen."; }
           form.reset();
         })
         .catch(function () {

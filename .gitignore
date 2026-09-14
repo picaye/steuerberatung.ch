@@ -1,0 +1,7 @@
+data/*.jsonl
+data/*.log
+data/*.err
+data/metrics-report-*.md
+scripts/__pycache__/
+__pycache__/
+.DS_Store
