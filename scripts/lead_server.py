@@ -76,15 +76,10 @@ class Handler(BaseHTTPRequestHandler):
         self._json(204, {})
 
     def do_GET(self):
-        if self.path == "/health":
-            self._json(200, {"ok": True})
-        else:
-            self._json(404, {"error": "not found"})
-
-    def do_GET(self):
-        if self.path == "/track":
+        path = urllib.parse.urlparse(self.path).path
+        if path == "/track":
             return self._track()
-        if self.path == "/health":
+        if path == "/health":
             return self._json(200, {"ok": True})
         return self._json(404, {"error": "not found"})
 
