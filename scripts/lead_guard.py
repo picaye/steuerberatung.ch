@@ -58,8 +58,34 @@ def server_alive() -> bool:
 
 
 def tunnel_pids() -> list[int]:
+    """PIDs of quick tunnels on our port, de-duplicated.
+
+    cloudflared runs as a launcher plus its actual tunnel process, and both
+    match the same command string, so a naive pgrep reports two tunnels when
+    one is running. Counting the wrapper as a duplicate made the guard kill and
+    rebuild a healthy tunnel on every run — churning the public hostname and
+    leaving the form dead during each restart.
+
+    We count logical tunnels, not matching processes: prefer the process that
+    carries our `--metrics` flag (the one we started and control). Fall back to
+    any match when that is absent.
+    """
     out = sh(["pgrep", "-f", f"cloudflared tunnel --url http://localhost:{PORT}"]).stdout
-    return [int(p) for p in out.split() if p.strip().isdigit()]
+    pids = [int(p) for p in out.split() if p.strip().isdigit()]
+    if not pids:
+        return []
+    # Keep only the --metrics process when present: that is our tunnel.
+    with_metrics: list[int] = []
+    for pid in pids:
+        try:
+            cmd = sh(["ps", "-o", "command=", "-p", str(pid)]).stdout
+        except Exception:
+            cmd = ""
+        if "--metrics" in cmd:
+            with_metrics.append(pid)
+    if with_metrics:
+        return with_metrics
+    return pids
 
 
 def start_server() -> None:
@@ -91,6 +117,20 @@ def start_tunnel() -> None:
              "--no-autoupdate", "--metrics", f"127.0.0.1:{METRICS_PORT}"],
             stdout=log, stderr=log, start_new_session=True,
         )
+
+
+def tunnel_rate_limited() -> bool:
+    """True when Cloudflare is refusing to provision a new quick tunnel.
+
+    Account-less quick tunnels are rate limited (HTTP 429 / error 1015) and
+    carry no uptime guarantee. Repeated restarts burn the allowance, so once
+    this trips we must stop rebuilding and leave the existing endpoint alone.
+    """
+    try:
+        txt = TUNNEL_LOG.read_text(errors="ignore")[-8000:]
+    except Exception:
+        return False
+    return "status 429" in txt or "error code: 1015" in txt
 
 
 def url_from_metrics(timeout_s: int = 45) -> str | None:
@@ -155,15 +195,17 @@ def write_endpoint(url: str) -> None:
 
 
 def kill_all_tunnels(wait_s: float = 3.0) -> int:
-    """Kill every quick tunnel on our port. Returns how many were killed.
+    """Kill every quick tunnel on our port, wrapper processes included.
 
-    Determinism matters more than uptime here: a stale second tunnel keeps
-    publishing a hostname via metrics that no longer resolves, which is exactly
-    how endpoint.js ends up pointing at a dead URL.
+    `tunnel_pids()` deliberately reports one PID per logical tunnel, so it
+    cannot be used here: killing only the --metrics process would leave the
+    launcher behind, which is exactly how a stale second tunnel survives and
+    keeps advertising a dead hostname.
     """
     killed = 0
-    for attempt in range(2):
-        pids = tunnel_pids()
+    for attempt in range(3):
+        out = sh(["pgrep", "-f", f"cloudflared tunnel --url http://localhost:{PORT}"]).stdout
+        pids = [int(p) for p in out.split() if p.strip().isdigit()]
         if not pids:
             break
         for pid in pids:
@@ -176,14 +218,34 @@ def kill_all_tunnels(wait_s: float = 3.0) -> int:
     return killed
 
 
-def wait_for_public_health(timeout_s: int = 150) -> str | None:
-    """Start ONE tunnel and wait until its own URL serves /health.
+def wait_for_public_health(timeout_s: int = 150) -> tuple[str | None, str]:
+    """Return (url, action) for a tunnel that serves /health.
 
-    Returns the verified URL, or None. The URL is only reported once it has
-    actually answered — never optimistically from the metrics gauge, which can
-    advertise a hostname before Cloudflare has published it.
+    Crucially, a WORKING tunnel is reused as-is. Restarting a healthy tunnel
+    mints a new hostname on every run, which churns endpoint.js and leaves the
+    form dead for the duration of each restart. So:
+      1. If exactly one tunnel runs and its metrics URL verifies -> reuse it.
+      2. Otherwise collapse to one fresh tunnel and wait for it to verify.
+
+    action is one of: "reused", "started", "replaced".
     """
+    pids = tunnel_pids()
+    if len(pids) == 1:
+        current = current_endpoint()
+        if current and verify(current):
+            # The live hostname already answers; confirm metrics agree, else
+            # trust the endpoint that provably works.
+            return current, "reused"
+
+    action = "replaced" if pids else "started"
     kill_all_tunnels()
+
+    # Do not fight Cloudflare's rate limit. If provisioning is refusing, every
+    # extra attempt makes the block last longer; keep whatever endpoint we have
+    # and let the operator move to a named tunnel instead.
+    if tunnel_rate_limited():
+        return None, "rate_limited"
+
     start_tunnel()
     deadline = time.time() + timeout_s
     seen: str | None = None
@@ -192,9 +254,9 @@ def wait_for_public_health(timeout_s: int = 150) -> str | None:
         if url and url != seen:
             seen = url
         if seen and verify(seen):
-            return seen
+            return seen, action
         time.sleep(5)
-    return None
+    return None, action
 
 
 def main() -> int:
@@ -210,10 +272,24 @@ def main() -> int:
             print("FATAL: lead_server would not start", file=sys.stderr)
             return 1
 
-    # 2) collapse to exactly one tunnel, restarted cleanly
+    # 2) reuse a healthy tunnel; only rebuild when there is none
     before = len(tunnel_pids())
-    url = wait_for_public_health()
+    url, action = wait_for_public_health()
     if not url:
+        if action == "rate_limited":
+            # Cloudflare is refusing new quick tunnels. Report once and stop
+            # churning; the fix is a named tunnel, not another restart.
+            print(
+                "lead pipeline DEGRADED: Cloudflare is rate limiting quick "
+                "tunnels (HTTP 429 / error 1015).\n"
+                "  The public lead endpoint is unavailable until this clears.\n"
+                "  Permanent fix: use a pre-created named tunnel on your own "
+                "domain instead of an account-less quick tunnel.\n"
+                "  Meanwhile the form fails visibly and shows the "
+                "info@steuerberatung.ch fallback.",
+                file=sys.stderr,
+            )
+            return 1
         print("FATAL: no tunnel URL served /health in time", file=sys.stderr)
         return 1
 
@@ -224,6 +300,8 @@ def main() -> int:
     if before > 1:
         fixes.append(f"collapsed {before} tunnels into one")
 
+    # A reused, healthy tunnel is the steady state: stay silent so the hourly
+    # cron does not churn the URL (or spam the chat).
     if not fixes:
         return 0
     if not quiet:

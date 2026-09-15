@@ -10,6 +10,7 @@
       ok: "Vielen Dank! Wir melden uns innert 24 Stunden bei Ihnen.",
       errSend: "Die Anfrage konnte nicht gesendet werden. Bitte schreiben Sie uns an info@steuerberatung.ch.",
       errNoEndpoint: "Das Formular ist derzeit nicht verfügbar. Bitte schreiben Sie uns direkt an info@steuerberatung.ch.",
+      mailFallback: "Ihr E-Mail-Programm öffnet sich mit der fertigen Anfrage – bitte nur noch senden.",
       calcNoIncome: "Bitte ein Einkommen eingeben.",
       calcRate: "geschätzter effektiver Steuersatz (Bund + Kanton + Gemeinde)",
       calcTaxable: "Steuernbares Einkommen",
@@ -26,6 +27,7 @@
       ok: "Thank you! We will get back to you within 24 hours.",
       errSend: "Your request could not be sent. Please write to info@steuerberatung.ch.",
       errNoEndpoint: "The form is currently unavailable. Please write to us directly at info@steuerberatung.ch.",
+      mailFallback: "Your email client is opening with the enquiry ready — just press send.",
       calcNoIncome: "Please enter an income.",
       calcRate: "estimated effective tax rate (federal + cantonal + municipal)",
       calcTaxable: "Taxable income",
@@ -42,6 +44,7 @@
       ok: "Merci ! Nous vous répondons dans les 24 heures.",
       errSend: "La demande n'a pas pu être envoyée. Veuillez écrire à info@steuerberatung.ch.",
       errNoEndpoint: "Le formulaire est actuellement indisponible. Écrivez-nous directement à info@steuerberatung.ch.",
+      mailFallback: "Votre logiciel de messagerie s'ouvre avec la demande prête — il ne reste qu'à envoyer.",
       calcNoIncome: "Veuillez saisir un revenu.",
       calcRate: "taux d'imposition effectif estimé (Confédération + canton + commune)",
       calcTaxable: "Revenu imposable",
@@ -58,6 +61,7 @@
       ok: "Grazie! Rispondiamo entro 24 ore.",
       errSend: "La richiesta non è stata inviata. Scriva a info@steuerberatung.ch.",
       errNoEndpoint: "Il modulo non è attualmente disponibile. Ci scriva direttamente a info@steuerberatung.ch.",
+      mailFallback: "Si apre il Suo programma di posta con la richiesta pronta — basta inviarla.",
       calcNoIncome: "Inserisca un reddito.",
       calcRate: "aliquota d'imposta effettiva stimata (Confederazione + cantone + comune)",
       calcTaxable: "Reddito imponibile",
@@ -105,14 +109,30 @@
       var btnLabel = btn ? btn.textContent : "";
       if (btn) { btn.disabled = true; btn.textContent = T.sending; }
       var endpoint = window.LEAD_ENDPOINT;
-      if (!endpoint) {
-        // No endpoint configured: never fake success. Point the visitor at the
-        // mail fallback that works without any backend.
+      var mailFallback = function () {
+        // No usable endpoint: hand the enquiry to mail instead of losing it.
+        // The visitor gets a working path, and nothing is silently dropped.
+        var to = "info@steuerberatung.ch";
+        var subject = "Werbeanfrage steuerberatung.ch: " + data.name;
+        var body = [
+          "Firma / Name: " + data.name,
+          "E-Mail: " + data.email,
+          "Kanton / Region: " + data.canton,
+          "Interesse an: " + data.situation,
+          "",
+          data.message
+        ].join("\n");
+        window.location.href = "mailto:" + to +
+          "?subject=" + encodeURIComponent(subject) +
+          "&body=" + encodeURIComponent(body);
         if (status) {
-          status.className = "form-status err";
-          status.textContent = (T.errNoEndpoint || T.errSend);
+          status.className = "form-status ok";
+          status.textContent = (T.mailFallback || T.ok);
         }
         if (btn) { btn.disabled = false; btn.textContent = btnLabel; }
+      };
+      if (!endpoint) {
+        mailFallback();
         return;
       }
       fetch(endpoint.replace(/\/$/, "") + "/api/lead", {
@@ -131,10 +151,9 @@
           form.reset();
         })
         .catch(function () {
-          if (status) { status.className = "form-status err"; status.textContent = T.errSend; }
-        })
-        .finally(function () {
-          if (btn) { btn.disabled = false; btn.textContent = btnLabel; }
+          // Endpoint unreachable (tunnel down, quota, network): fall back to
+          // mail rather than telling the visitor their enquiry failed.
+          mailFallback();
         });
     });
   }
