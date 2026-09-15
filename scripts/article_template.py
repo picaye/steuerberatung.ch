@@ -120,7 +120,7 @@ def build(lang, slug, title, meta, sections):
 
     header = f"""<header class="site-header">
 <div class="container header-inner">
-<a class="logo" href="{pre}index.html" ><span class="logo-mark">S</span> steuerberatung<span class="accent">.ch</span></a>
+<a class="logo" href="{pre}index.html"><img class="logo-img" src="{pre}assets/logo.svg" alt="" width="32" height="32" aria-hidden="true"><span class="logo-text">steuerberatung<span class="accent">.ch</span></span></a>
 <button class="nav-toggle" type="button" aria-label="{t['menu']}" aria-expanded="false" aria-controls="main-nav">☰</button>
 <nav class="main-nav" id="main-nav">
 {nav_links}
@@ -133,7 +133,7 @@ def build(lang, slug, title, meta, sections):
     footer = f"""<footer class="site-footer">
 <div class="container footer-grid">
 <div>
-<div class="logo"><span class="logo-mark">S</span> steuerberatung<span class="accent">.ch</span></div>
+<div class="logo"><img class="logo-img" src="{pre}assets/logo.svg" alt="" width="32" height="32" aria-hidden="true"><span class="logo-text">steuerberatung<span class="accent">.ch</span></span></div>
 <p class="muted">{t['foot_about']}</p>
 </div>
 <div>
@@ -193,8 +193,11 @@ def build(lang, slug, title, meta, sections):
 <meta property="og:type" content="article">
 <meta property="og:url" content="{canon}">
 <meta property="og:site_name" content="steuerberatung.ch">
+<link rel="icon" type="image/png" sizes="32x32" href="{pre}assets/favicon-32.png">
+<link rel="apple-touch-icon" href="{pre}assets/logo-180.png">
 <link rel="stylesheet" href="{pre}assets/style.css">
 <link rel="stylesheet" href="{pre}assets/extra.css">
+<link rel="stylesheet" href="{pre}assets/redesign.css">
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
 </head>
 <body>
