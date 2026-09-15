@@ -1,1 +1,1 @@
-window.LEAD_ENDPOINT = "https://pixels-urw-mobility-ladder.trycloudflare.com";
+window.LEAD_ENDPOINT = "https://telecharger-alter-adaptive-gets.trycloudflare.com";
