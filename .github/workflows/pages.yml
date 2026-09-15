@@ -25,11 +25,29 @@ jobs:
         uses: actions/checkout@v4
       - name: Build public dist (exclude private data + server files)
         run: |
-          mkdir -p dist/en dist/assets
+          mkdir -p dist/en dist/fr dist/it dist/assets
           cp *.html dist/
+          # All language mirrors must ship. Previously only en/ was copied, so
+          # fr/ and it/ survived solely as leftovers of an older deployment and
+          # would have vanished on any clean publish.
           cp en/*.html dist/en/
-          cp assets/*.css assets/*.js dist/assets/
+          cp fr/*.html dist/fr/
+          cp it/*.html dist/it/
+          # All static assets, not just css/js: the logo, favicons and the
+          # og:image are referenced from every page's <head>.
+          cp assets/* dist/assets/
           cp sitemap.xml robots.txt dist/
+      - name: Fail if a language mirror is incomplete
+        run: |
+          for d in en fr it; do
+            n=$(ls dist/$d/*.html 2>/dev/null | wc -l)
+            root=$(ls dist/*.html | wc -l)
+            if [ "$n" -lt "$root" ]; then
+              echo "::error::$d has $n pages but root has $root — the $d mirror is incomplete"
+              exit 1
+            fi
+            echo "$d: $n pages (root: $root)"
+          done
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
@@ -39,3 +57,18 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Purge Cloudflare cache for changed assets
+        if: ${{ env.CF_TOKEN != '' }}
+        env:
+          CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_ZONE: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+        run: |
+          # app.js/endpoint.js are served with max-age=14400, so without a purge
+          # a deploy stays invisible at the edge for up to 4 hours.
+          curl -sS -X POST \
+            "https://api.cloudflare.com/client/v4/zones/${CF_ZONE}/purge_cache" \
+            -H "Authorization: Bearer ${CF_TOKEN}" \
+            -H "Content-Type: application/json" \
+            --data '{"files":["https://steuerberatung.ch/assets/app.js","https://steuerberatung.ch/assets/endpoint.js","https://steuerberatung.ch/assets/style.css","https://steuerberatung.ch/assets/extra.css","https://steuerberatung.ch/assets/redesign.css","https://steuerberatung.ch/assets/track.js"]}' \
+            | head -c 400
+        continue-on-error: true
