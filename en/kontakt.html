@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact – request free tax advice | steuerberatung.ch</title>
+<meta name="description" content="Request free tax advice in Switzerland: canton, situation, message – reply within 24 hours. No obligation.">
+<link rel="canonical" href="https://steuerberatung.ch/en/kontakt.html">
+<link rel="alternate" hreflang="de-CH" href="https://steuerberatung.ch/kontakt.html">
+<link rel="alternate" hreflang="en" href="https://steuerberatung.ch/en/kontakt.html">
+<link rel="alternate" hreflang="fr-CH" href="https://steuerberatung.ch/fr/kontakt.html">
+<link rel="alternate" hreflang="it-CH" href="https://steuerberatung.ch/it/kontakt.html">
+<link rel="alternate" hreflang="x-default" href="https://steuerberatung.ch/kontakt.html">
+<meta property="og:title" content="Contact – request free tax advice | steuerberatung.ch">
+<meta property="og:description" content="Request free tax advice in Switzerland: canton, situation, message – reply within 24 hours. No obligation.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://steuerberatung.ch/en/kontakt.html">
+<meta property="og:site_name" content="steuerberatung.ch">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/extra.css">
+
+</head>
+<body>
+<header class="site-header">
+<div class="container header-inner">
+<a class="logo" href="index.html"><span class="logo-mark">S</span> steuerberatung<span class="accent">.ch</span></a>
+<button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="main-nav">☰</button>
+<nav class="main-nav" id="main-nav">
+<a href="leistungen.html">Services</a>
+<a href="werbung.html">Advertising</a>
+<a href="ratgeber.html">Guides</a>
+<a href="rechner.html">Calculator</a>
+<a href="../index.html" class="lang">DE</a>
+<a href="../en/index.html" class="lang active" aria-current="true">EN</a>
+<a href="../fr/index.html" class="lang">FR</a>
+<a href="../it/index.html" class="lang">IT</a>
+</nav>
+<a class="btn btn-primary" href="kontakt.html">Free consultation</a>
+</div>
+</header>
+<main>
+<div class="page-head"><div class="container">
+<h1>Contact &amp; advice</h1>
+<p>Briefly describe your situation – we will get back to you within 24 hours with a suitable offer or partner. Free and with no obligation.</p>
+</div></div>
+<div class="container">
+<section class="section">
+<form id="lead-form" class="lead-form" action="/api/lead" method="POST">
+<div class="form-row">
+<div class="form-field">
+<label for="name">Name *</label>
+<input type="text" id="name" name="name" required maxlength="200">
+</div>
+<div class="form-field">
+<label for="email">Email *</label>
+<input type="email" id="email" name="email" required maxlength="200">
+</div>
+</div>
+<div class="form-row">
+<div class="form-field">
+<label for="canton">Canton of residence *</label>
+<select id="canton" name="canton" required>
+<option value="">– select –</option>
+<option>AG</option><option>AR</option><option>AI</option><option>BL</option><option>BS</option>
+<option>BE</option><option>FR</option><option>GE</option><option>GL</option><option>GR</option>
+<option>JU</option><option>LU</option><option>NE</option><option>NW</option><option>OW</option>
+<option>SG</option><option>SH</option><option>SZ</option><option>SO</option><option>TG</option>
+<option>TI</option><option>UR</option><option>VD</option><option>VS</option><option>ZG</option><option>ZH</option>
+</select>
+</div>
+<div class="form-field">
+<label for="situation">Your situation</label>
+<select id="situation" name="situation">
+<option value="">– select –</option>
+<option>Employed / salary</option>
+<option>Self-employed / business</option>
+<option>Cross-border commuter (DE/FR/IT)</option>
+<option>Home ownership / mortgage</option>
+<option>Pension / retirement</option>
+<option>Other</option>
+</select>
+</div>
+</div>
+<div class="form-field">
+<label for="message">Your message</label>
+<textarea id="message" name="message" rows="5" maxlength="2000" placeholder="E.g. income approx. CHF 90'000, 2 children, home in …"></textarea>
+</div>
+<label class="consent"><input type="checkbox" required> I agree that my details will be used to process the request in accordance with the <a href="datenschutz.html">privacy policy</a>. *</label>
+<button type="submit" class="btn btn-primary btn-lg">Send request</button>
+<p id="form-status" class="form-status" role="status"></p>
+</form>
+</section>
+<section class="section">
+<h2>Direct contact</h2>
+<p>Email: <a href="mailto:info@steuerberatung.ch">info@steuerberatung.ch</a><br>
+Reply within 24 hours (Mon–Fri).</p>
+</section>
+</div>
+</main>
+<footer class="site-footer">
+<div class="container footer-grid">
+<div>
+<div class="logo"><span class="logo-mark">S</span> steuerberatung<span class="accent">.ch</span></div>
+<p class="muted">Your independent partner for taxes in Switzerland. Comparison, advice and digital services – transparent and privacy-compliant.</p>
+</div>
+<div>
+<h4>Services</h4>
+<a href="leistungen.html">Tax return</a>
+<a href="leistungen.html">Tax advice</a>
+<a href="rechner.html">Tax calculator</a>
+<a href="ratgeber.html">Guides</a>
+</div>
+<div>
+<h4>Legal</h4>
+<a href="impressum.html">Imprint</a>
+<a href="datenschutz.html">Privacy policy</a>
+<a href="agb.html">Terms</a>
+</div>
+<div>
+<h4>Contact</h4>
+<a href="kontakt.html">Request advice</a>
+<a href="mailto:info@steuerberatung.ch">info@steuerberatung.ch</a>
+</div>
+</div>
+<div class="container footer-bottom">
+<p class="muted">© 2026 steuerberatung.ch · Independent tax information &amp; partner mediation. No tax advice within the meaning of the DBG – advice is provided exclusively by licensed partners.</p>
+</div>
+</footer>
+<script src="../assets/endpoint.js"></script>
+<script src="../assets/track.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

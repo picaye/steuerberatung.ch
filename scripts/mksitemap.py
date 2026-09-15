@@ -2,7 +2,9 @@
 import os, glob, datetime
 BASE = "/Users/pino/Code/steuerberatung.ch"
 SITE = "https://steuerberatung.ch"
-files = sorted(glob.glob(BASE + "/*.html")) + sorted(glob.glob(BASE + "/en/*.html"))
+files = sorted(glob.glob(BASE + "/*.html"))
+for lang in ("en", "fr", "it"):
+    files += sorted(glob.glob(BASE + f"/{lang}/*.html"))
 urls = []
 for f in files:
     rel = os.path.relpath(f, BASE)
