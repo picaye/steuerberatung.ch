@@ -99,13 +99,17 @@ def build(lang, slug, title, meta, sections):
     url_tail = f"{slug}.html"
     page_url = lambda l: (f"{SITE}/{url_tail}" if l == "de" else f"{SITE}/{l}/{url_tail}")
 
-    # language switcher: same-dir index for current lang, ../ for others
+    # language switcher: same-dir index for current lang; DE root index is ../index.html
     sw = []
     for l in LANGS:
         if l == lang:
             href = "index.html"
+        elif lang == "de":
+            href = f"{l}/index.html"
+        elif l == "de":
+            href = "../index.html"
         else:
-            href = f"../{l}/index.html" if lang != "de" else f"{l}/index.html"
+            href = f"../{l}/index.html"
         cls = 'class="lang active" aria-current="true"' if l == lang else 'class="lang"'
         sw.append(f'<a href="{href}" {cls}>{l.upper()}</a>')
     switcher = "\n".join(sw)
