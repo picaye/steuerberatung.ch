@@ -58,15 +58,21 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
       - name: Purge Cloudflare cache for changed assets
-        if: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
         env:
           CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CF_ZONE: ${{ secrets.CLOUDFLARE_ZONE_ID }}
         run: |
           # app.js/endpoint.js are served with max-age=14400, so without a purge
           # a deploy stays invisible at the edge for up to 4 hours.
-          # The condition tests the SECRET, not env.CF_TOKEN: a step's env vars
-          # do not exist yet when its `if` is evaluated.
+          #
+          # No `if` on the secret here: GitHub does not allow `secrets` in
+          # step conditions and rejects the whole workflow (0 jobs) if you try.
+          # Guard inside the script instead and stay non-fatal when the token
+          # is absent, so a missing secret can never break a deploy.
+          if [ -z "${CF_TOKEN}" ] || [ -z "${CF_ZONE}" ]; then
+            echo "Cloudflare secrets not configured — skipping cache purge."
+            exit 0
+          fi
           curl -sS -X POST \
             "https://api.cloudflare.com/client/v4/zones/${CF_ZONE}/purge_cache" \
             -H "Authorization: Bearer ${CF_TOKEN}" \
