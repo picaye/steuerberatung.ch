@@ -95,6 +95,34 @@ sollte die Quelle der Legende kennen — nicht nur wissen, dass die Regel fehlt.
 Eine Behauptung mit vier Teilaussagen kam erneut auf 0.790 und rutschte knapp
 unter das Gate. Das bestätigt die Regel: eine Aussage pro Behauptung.
 
+## Quellenregel: nur amtliches Schweizer Recht
+
+Für die Prüfung zählen ausschliesslich amtliche Schweizer Quellen:
+
+- **fedlex.admin.ch** — Bundesrecht (SR-Nummern). Die `?print=true`-Variante
+  liefert den Text serverseitig gerendert; ohne diesen Parameter kommt bei
+  einigen Erlassen nur die JavaScript-Hülle zurück.
+- **Amtliche Publikationen des Bundes**: ahv-iv.ch (Informationsstelle AHV/IV,
+  herausgegeben mit dem BSV), ch.ch, estv.admin.ch.
+
+Nicht als Quelle verwendet werden: kommerzielle Gesetzesportale, Anwalts- und
+Beratungsartikel, ausländische Behörden (z. B. deutsche Finanzämter) sowie
+deutsche Steuerliteratur.
+
+**Völkerrechtliche Verträge sind Schweizer Recht.** Das DBA Schweiz-Deutschland
+(SR 0.672.913.62) ist in der amtlichen Sammlung publiziert und damit zitierfähig
+— für die Grenzgängerregelung des Art. 15a ist es die einzige massgebende Quelle.
+Deutsches Steuerrecht (EStG) oder deutsche Behördenangaben sind es nicht.
+
+### Warum diese Regel praktisch zählt
+
+Der Grenzgänger-Artikel stützte sich zuerst auf einen Beratungsartikel, der von
+«Nichtrückkehrtagen» sprach. Der amtliche Vertragstext sagt «an mehr als
+60 Arbeitstagen». Beide Formulierungen passieren die Prüfung (0.98 bzw. 0.92),
+aber nur die erste steht im Gesetz. Eine Korrektur, die den Gesetzeswortlaut
+durch einen Praxisbegriff ersetzt, ist keine Verbesserung — sie entfernt die
+Belegbarkeit.
+
 ## Noch offen
 
 Nicht alle Einträge in `data/content-research.jsonl` sind geprüft. Einträge ohne
