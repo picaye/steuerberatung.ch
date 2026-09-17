@@ -1,0 +1,121 @@
+[
+  {
+    "id": "tipp-3a-7258",
+    "origin": "site",
+    "source": "ch_saeule3a",
+    "file": "steuern-sparen-tipps.html (DE, live)",
+    "claim": "2026 können Angestellte insgesamt bis zu 7'258 Franken in die Säule 3a einzahlen.",
+    "verdict": "supports",
+    "confidence": 1.0,
+    "needs_review": false,
+    "probabilities": {
+      "supports": 1.0,
+      "contradicts": 0.0,
+      "unusable": 0.0,
+      "silent": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "tipp-3a-36288",
+    "origin": "site",
+    "source": "ch_saeule3a",
+    "file": "steuern-sparen-tipps.html (DE, live)",
+    "claim": "Selbstständigerwerbende ohne 2. Säule können 2026 bis zu zwanzig Prozent des Einkommens und maximal 36'288 Franken in die Säule 3a einzahlen.",
+    "verdict": "supports",
+    "confidence": 0.99,
+    "needs_review": false,
+    "probabilities": {
+      "unusable": 0.0,
+      "contradicts": 0.0,
+      "supports": 1.0,
+      "silent": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "tipp-berufskosten-pauschale",
+    "origin": "site",
+    "source": "estv_abzuege_2026",
+    "file": "steuern-sparen-tipps.html (DE, live)",
+    "claim": "Der Pauschalabzug für die übrigen Berufskosten bei der direkten Bundessteuer beträgt im Jahr 2026 mindestens 2'000 Franken und höchstens 4'000 Franken.",
+    "verdict": "supports",
+    "confidence": 0.99,
+    "needs_review": false,
+    "probabilities": {
+      "unusable": 0.0,
+      "contradicts": 0.0,
+      "silent": 0.0,
+      "supports": 1.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "tipp-kinderbetreuung-25800",
+    "origin": "site",
+    "source": "estv_abzuege_2026",
+    "file": "steuern-sparen-tipps.html (DE, live)",
+    "claim": "Bei der direkten Bundessteuer können im Jahr 2026 für die Drittbetreuung eines Kindes Kosten von höchstens 25'800 Franken pro Kind abgezogen werden.",
+    "verdict": "supports",
+    "confidence": 1.0,
+    "needs_review": false,
+    "probabilities": {
+      "unusable": 0.0,
+      "contradicts": 0.0,
+      "silent": 0.0,
+      "supports": 1.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "kontrolle-alt-10100",
+    "origin": "control-false",
+    "source": "estv_abzuege_2026",
+    "file": "Kontrolle",
+    "claim": "Der maximale Abzug für Kinderdrittbetreuungskosten bei der direkten Bundessteuer beträgt im Jahr 2026 10'100 Franken pro Kind.",
+    "verdict": "contradicts",
+    "confidence": 1.0,
+    "needs_review": false,
+    "probabilities": {
+      "unusable": 0.0,
+      "contradicts": 1.0,
+      "supports": 0.0,
+      "silent": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "checkliste-einsprache-30",
+    "origin": "site",
+    "source": "dbg_art132",
+    "file": "steuer-checkliste-2026.html (DE, live)",
+    "claim": "Gegen eine Veranlagungsverfügung der direkten Bundessteuer kann innert 30 Tagen nach Zustellung schriftlich Einsprache erhoben werden.",
+    "verdict": "supports",
+    "confidence": 0.99,
+    "needs_review": false,
+    "probabilities": {
+      "unusable": 0.0,
+      "silent": 0.0,
+      "supports": 0.99,
+      "contradicts": 0.01
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "kontrolle-einsprache-60",
+    "origin": "control-false",
+    "source": "dbg_art132",
+    "file": "Kontrolle",
+    "claim": "Die Einsprachefrist gegen die Veranlagungsverfügung der direkten Bundessteuer beträgt 60 Tage.",
+    "verdict": "contradicts",
+    "confidence": 1.0,
+    "needs_review": false,
+    "probabilities": {
+      "supports": 0.0,
+      "unusable": 0.0,
+      "contradicts": 1.0,
+      "silent": 0.0
+    },
+    "model": "jev-latest"
+  }
+]
