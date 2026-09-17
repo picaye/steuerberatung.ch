@@ -64,6 +64,37 @@ Gefundene und behobene Fehler:
 Ohne Beanstandung bestätigt: Säule 3a CHF 7'258 / 36'288, AHV-Mindestbeitrag
 CHF 530, MWST-Schwelle CHF 100'000, VSt 35 %, Normalsatz 8,1 %.
 
+## Zweiter Einsatz: die fünf Artikel (17.09.2026)
+
+18 Behauptungen aus den fünf neuen Artikeln gegen die amtlichen Normen geprüft.
+Ergebnis: **14 von 14 inhaltlichen Aussagen `supports`** (0.79–1.00), keine
+Faktenfehler in den Artikeln. Die drei mitlaufenden falschen Kontrollen kamen
+alle als `contradicts` (0.97–1.00) heraus.
+
+Geprüft wurden unter anderem: VSt-Sätze 35/15/8 % (Art. 13 VStG), VSt-Frist
+3 Jahre (Art. 32 VStG), Grenzgänger 4,5 % und Gre-1 (Art. 15a DBA), 60
+Nichtrückkehrtage, MWST-Schwelle 100'000 (Art. 10), 30-Tage-Anmeldung
+(Art. 66), Sätze 8,1/2,6 % (Art. 25), Vereinsgrenze 250'000, AHV-Satz 10,0 %,
+sinkende Skala 5,371 % ab CHF 10'100, Mindestbeitrag CHF 530, Schuldzinsenabzug
+Art. 33 DBG (Vermögenserträge + CHF 50'000), Säule 3a 7'258/36'288.
+
+### Grenze des Verfahrens: verneinende Aussagen
+
+Eine Aussage der Form «X existiert nicht» lässt sich durch Zitat **nicht**
+bestätigen. Die Behauptung «ein pauschaler 5 %-Zinsabzug existiert nicht»
+kam folgerichtig als `silent` mit Confidence 0.370 zurück — Art. 33 DBG regelt,
+was abziehbar ist, und sagt über erfundene Regeln nichts.
+
+Solche Widerlegungen sind die riskanteste Klasse im Bestand: sie sind weder
+durch Zitat zu belegen noch zu widerlegen, also auch nicht maschinell zu
+sichern. Sie brauchen eine menschliche Entscheidung. Wer sie publiziert,
+sollte die Quelle der Legende kennen — nicht nur wissen, dass die Regel fehlt.
+
+### Weitere Beobachtung
+
+Eine Behauptung mit vier Teilaussagen kam erneut auf 0.790 und rutschte knapp
+unter das Gate. Das bestätigt die Regel: eine Aussage pro Behauptung.
+
 ## Noch offen
 
 Nicht alle Einträge in `data/content-research.jsonl` sind geprüft. Einträge ohne
