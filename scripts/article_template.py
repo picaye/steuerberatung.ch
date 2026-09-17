@@ -22,11 +22,11 @@ HREFLANG = {"de": "de-CH", "en": "en", "fr": "fr-CH", "it": "it-CH"}
 L = {
     "de": dict(
         nav=[("leistungen.html", "Leistungen"), ("werbung.html", "Werbung"),
-             ("ratgeber.html", "Ratgeber"), ("rechner.html", "Rechner")],
+             ("ratgeber.html", "Ratgeber")],
         cta_btn="Kostenlose Beratung", menu="Menü",
         foot_about="Ihr unabhängiger Partner für Steuern in der Schweiz. Vergleich, Beratung und digitale Services – transparent und datenschutzkonform.",
         foot_services=[("leistungen.html", "Steuererklärung"), ("leistungen.html", "Steuerberatung"),
-                       ("rechner.html", "Steuerrechner"), ("ratgeber.html", "Ratgeber")],
+                       ("ratgeber.html", "Ratgeber")],
         foot_legal=[("impressum.html", "Impressum"), ("datenschutz.html", "Datenschutz"), ("agb.html", "AGB")],
         foot_contact=[("kontakt.html", "Beratung anfragen")],
         h_services="Services", h_legal="Rechtliches", h_contact="Kontakt",
@@ -39,11 +39,11 @@ L = {
     ),
     "en": dict(
         nav=[("leistungen.html", "Services"), ("werbung.html", "Advertise"),
-             ("ratgeber.html", "Guides"), ("rechner.html", "Calculator")],
+             ("ratgeber.html", "Guides")],
         cta_btn="Free advice", menu="Menu",
         foot_about="Your independent partner for taxes in Switzerland. Comparison, advice and digital services – transparent and privacy-compliant.",
         foot_services=[("leistungen.html", "Tax return"), ("leistungen.html", "Tax advice"),
-                       ("rechner.html", "Tax calculator"), ("ratgeber.html", "Guides")],
+                       ("ratgeber.html", "Guides")],
         foot_legal=[("impressum.html", "Imprint"), ("datenschutz.html", "Privacy"), ("agb.html", "Terms")],
         foot_contact=[("kontakt.html", "Request advice")],
         h_services="Services", h_legal="Legal", h_contact="Contact",
@@ -56,11 +56,11 @@ L = {
     ),
     "fr": dict(
         nav=[("leistungen.html", "Prestations"), ("werbung.html", "Publicité"),
-             ("ratgeber.html", "Guide fiscal"), ("rechner.html", "Calculateur")],
+             ("ratgeber.html", "Guide fiscal")],
         cta_btn="Conseil gratuit", menu="Menu",
         foot_about="Votre partenaire indépendant pour les impôts en Suisse. Comparaison, conseil et services numériques – transparent et conforme à la protection des données.",
         foot_services=[("leistungen.html", "Déclaration d'impôt"), ("leistungen.html", "Conseil fiscal"),
-                       ("rechner.html", "Calculateur d'impôts"), ("ratgeber.html", "Guide fiscal")],
+                       ("ratgeber.html", "Guide fiscal")],
         foot_legal=[("impressum.html", "Mentions légales"), ("datenschutz.html", "Protection des données"), ("agb.html", "CGV")],
         foot_contact=[("kontakt.html", "Demander un conseil")],
         h_services="Services", h_legal="Mentions légales", h_contact="Contact",
@@ -73,11 +73,11 @@ L = {
     ),
     "it": dict(
         nav=[("leistungen.html", "Servizi"), ("werbung.html", "Pubblicità"),
-             ("ratgeber.html", "Guida fiscale"), ("rechner.html", "Calcolatore")],
+             ("ratgeber.html", "Guida fiscale")],
         cta_btn="Consulenza gratuita", menu="Menu",
         foot_about="Il vostro partner indipendente per le imposte in Svizzera. Confronto, consulenza e servizi digitali – trasparente e conforme alla protezione dei dati.",
         foot_services=[("leistungen.html", "Dichiarazione d'imposte"), ("leistungen.html", "Consulenza fiscale"),
-                       ("rechner.html", "Calcolatore d'imposte"), ("ratgeber.html", "Guida fiscale")],
+                       ("ratgeber.html", "Guida fiscale")],
         foot_legal=[("impressum.html", "Impressum"), ("datenschutz.html", "Protezione dei dati"), ("agb.html", "CGV")],
         foot_contact=[("kontakt.html", "Richiedere consulenza")],
         h_services="Servizi", h_legal="Note legali", h_contact="Contatto",
@@ -126,7 +126,6 @@ def build(lang, slug, title, meta, sections):
 {nav_links}
 {switcher}
 </nav>
-<a class="btn btn-primary" href="kontakt.html">{t['cta_btn']}</a>
 </div>
 </header>
 """
@@ -209,7 +208,6 @@ def build(lang, slug, title, meta, sections):
 </div></div>
 <nav class="toc"><div class="container"><strong>{t['toc']}</strong><ol>{toc}</ol></div></nav>
 {body}
-{cta}
 </main>
 {footer}
 <script src="{pre}assets/endpoint.js"></script>
