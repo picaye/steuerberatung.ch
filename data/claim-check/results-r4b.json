@@ -1,0 +1,32 @@
+[
+ {
+  "id": "priv-schuldzinsen-cap",
+  "claim": "Private Schuldzinsen sind bei der direkten Bundessteuer abzugsfähig im Umfang der steuerbaren Vermögenserträge und weiterer 50'000 Franken (Art. 33 Abs. 1 Bst. a DBG).",
+  "source": "dbg_art33a",
+  "verdict": "unusable",
+  "confidence": 0.65,
+  "needs_review": true,
+  "probabilities": {
+   "unusable": 0.74,
+   "contradicts": 0.01,
+   "supports": 0.04,
+   "silent": 0.21
+  },
+  "model": "jev-latest"
+ },
+ {
+  "id": "ahv-voller-satz-ab",
+  "claim": "Der volle Beitragssatz von 10,0 Prozent gilt ab einem Jahreseinkommen von 60'500 Franken; darunter gilt eine tiefere, sinkende Beitragsskala.",
+  "source": "ahv_2_02_skala",
+  "verdict": "supports",
+  "confidence": 0.62,
+  "needs_review": true,
+  "probabilities": {
+   "silent": 0.1,
+   "contradicts": 0.08,
+   "unusable": 0.11,
+   "supports": 0.71
+  },
+  "model": "jev-latest"
+ }
+]

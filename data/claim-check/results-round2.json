@@ -1,0 +1,87 @@
+[
+  {
+    "id": "grenz-4-5-norm",
+    "origin": "research",
+    "source": "grenzganger_dba",
+    "file": "data/content-research.jsonl:grenzgaenger",
+    "claim": "Die Quellensteuer von 4,5 Prozent für Grenzgänger nach Deutschland stützt sich auf Artikel 86 VStG (Verrechnungssteuergesetz).",
+    "verdict": "contradicts",
+    "confidence": 0.47,
+    "needs_review": true,
+    "probabilities": {
+      "supports": 0.03,
+      "contradicts": 0.59,
+      "silent": 0.37,
+      "unusable": 0.01
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "grenz-4-5-ok",
+    "origin": "research",
+    "source": "grenzganger_dba",
+    "file": "data/content-research.jsonl:grenzgaenger",
+    "claim": "Für echte Grenzgänger nach Deutschland erhebt die Schweiz eine Quellensteuer von 4,5 Prozent des Bruttobetrages der Vergütung; geregelt ist dies in Art. 15a DBA CH-DE.",
+    "verdict": "supports",
+    "confidence": 0.99,
+    "needs_review": false,
+    "probabilities": {
+      "silent": 0.0,
+      "supports": 1.0,
+      "unusable": 0.0,
+      "contradicts": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "grenz-60-tage",
+    "origin": "research",
+    "source": "grenzganger_dba",
+    "file": "data/content-research.jsonl:grenzgaenger",
+    "claim": "Eine Person weist weniger als 60 Nichtrückkehrtage auf, um als echter Grenzgänger zu qualifizieren.",
+    "verdict": "supports",
+    "confidence": 0.99,
+    "needs_review": false,
+    "probabilities": {
+      "contradicts": 0.0,
+      "supports": 1.0,
+      "unusable": 0.0,
+      "silent": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "mwst-reduziert-branchen",
+    "origin": "research",
+    "source": "mwstg_art25",
+    "file": "data/content-research.jsonl:mwst-100k (meta-Feld, wird publiziert)",
+    "claim": "Der reduzierte Mehrwertsteuersatz gilt unter anderem für das Baugewerbe und die Gastronomie.",
+    "verdict": "contradicts",
+    "confidence": 0.93,
+    "needs_review": false,
+    "probabilities": {
+      "silent": 0.05,
+      "unusable": 0.0,
+      "contradicts": 0.95,
+      "supports": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "control-gastro-normal",
+    "origin": "control",
+    "source": "mwstg_art25",
+    "file": "(Testkontrolle)",
+    "claim": "Für Lebensmittel, die im Rahmen von gastgewerblichen Leistungen abgegeben werden, gilt der Normalsatz.",
+    "verdict": "supports",
+    "confidence": 1.0,
+    "needs_review": false,
+    "probabilities": {
+      "contradicts": 0.0,
+      "unusable": 0.0,
+      "silent": 0.0,
+      "supports": 1.0
+    },
+    "model": "jev-latest"
+  }
+]

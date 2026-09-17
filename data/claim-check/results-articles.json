@@ -1,0 +1,308 @@
+[
+  {
+    "id": "v-rates",
+    "claim": "Die Verrechnungssteuer beträgt auf Kapitalerträgen wie Dividenden und Zinsen 35 Prozent, auf Leibrenten und Pensionen 15 Prozent und auf sonstigen Versicherungsleistungen 8 Prozent.",
+    "source": "vstg_art13",
+    "origin": "article",
+    "file": "verrechnungssteuer",
+    "verdict": "supports",
+    "confidence": 0.97,
+    "needs_review": false,
+    "probabilities": {
+      "supports": 0.98,
+      "unusable": 0.0,
+      "contradicts": 0.02,
+      "silent": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "v-frist",
+    "claim": "Der Anspruch auf Rückerstattung der Verrechnungssteuer erlischt, wenn der Antrag nicht innert drei Jahren nach Ablauf des Kalenderjahres gestellt wird, in dem die steuerbare Leistung fällig geworden ist (Art. 32 VStG).",
+    "source": "vstg_art32",
+    "origin": "article",
+    "file": "verrechnungssteuer",
+    "verdict": "supports",
+    "confidence": 1.0,
+    "needs_review": false,
+    "probabilities": {
+      "supports": 1.0,
+      "contradicts": 0.0,
+      "unusable": 0.0,
+      "silent": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "g-4-5",
+    "claim": "Echte deutsche Grenzgänger besteuert die Schweiz pauschal mit 4,5 Prozent des Bruttolohns; die Regelung steht in Art. 15a DBA Schweiz-Deutschland.",
+    "source": "grenzganger_dba",
+    "origin": "article",
+    "file": "grenzgaenger",
+    "verdict": "supports",
+    "confidence": 0.98,
+    "needs_review": false,
+    "probabilities": {
+      "unusable": 0.0,
+      "supports": 0.99,
+      "silent": 0.0,
+      "contradicts": 0.01
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "g-gre1",
+    "claim": "Der Grenzgängerstatus setzt voraus, dass die erwerbstätige Person dem Schweizer Arbeitgeber eine Ansässigkeitsbescheinigung des deutschen Finanzamts (Formular Gre-1) vorlegt.",
+    "source": "grenzganger_dba",
+    "origin": "article",
+    "file": "grenzgaenger",
+    "verdict": "supports",
+    "confidence": 0.97,
+    "needs_review": false,
+    "probabilities": {
+      "supports": 0.98,
+      "silent": 0.0,
+      "unusable": 0.0,
+      "contradicts": 0.02
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "g-60",
+    "claim": "Eine Person weist weniger als 60 Nichtrückkehrtage auf, um als echter Grenzgänger zu qualifizieren.",
+    "source": "grenzganger_dba",
+    "origin": "article",
+    "file": "grenzgaenger",
+    "verdict": "supports",
+    "confidence": 0.99,
+    "needs_review": false,
+    "probabilities": {
+      "silent": 0.0,
+      "contradicts": 0.0,
+      "unusable": 0.0,
+      "supports": 1.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "m-schwelle",
+    "claim": "Von der Mehrwertsteuerpflicht befreit ist, wer innerhalb eines Jahres im In- und Ausland weniger als 100 000 Franken Umsatz erzielt.",
+    "source": "mwstg_art10",
+    "origin": "article",
+    "file": "mwst-100k",
+    "verdict": "supports",
+    "confidence": 0.91,
+    "needs_review": false,
+    "probabilities": {
+      "silent": 0.0,
+      "contradicts": 0.06,
+      "unusable": 0.0,
+      "supports": 0.9400000000000001
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "m-30tage",
+    "claim": "Wer mehrwertsteuerpflichtig wird, hat sich unaufgefordert innert 30 Tagen nach Beginn der Steuerpflicht bei der ESTV anzumelden (Art. 66 MwStG).",
+    "source": "mwstg_art66",
+    "origin": "article",
+    "file": "mwst-100k",
+    "verdict": "supports",
+    "confidence": 0.86,
+    "needs_review": false,
+    "probabilities": {
+      "silent": 0.0,
+      "unusable": 0.0,
+      "contradicts": 0.1,
+      "supports": 0.9
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "m-saetze",
+    "claim": "Der Normalsatz der Mehrwertsteuer beträgt 8,1 Prozent, der reduzierte Satz 2,6 Prozent.",
+    "source": "mwstg_art25",
+    "origin": "article",
+    "file": "mwst-100k",
+    "verdict": "supports",
+    "confidence": 0.97,
+    "needs_review": false,
+    "probabilities": {
+      "unusable": 0.0,
+      "supports": 0.98,
+      "silent": 0.0,
+      "contradicts": 0.02
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "m-vereine",
+    "claim": "Für nicht gewinnstrebige, ehrenamtlich geführte Sport- und Kulturvereine sowie gemeinnützige Organisationen gilt eine Umsatzgrenze von 250 000 Franken.",
+    "source": "mwstg_art10",
+    "origin": "article",
+    "file": "mwst-100k",
+    "verdict": "supports",
+    "confidence": 0.98,
+    "needs_review": false,
+    "probabilities": {
+      "silent": 0.0,
+      "supports": 0.98,
+      "contradicts": 0.02,
+      "unusable": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "a-satz",
+    "claim": "Der AHV/IV/EO-Beitragssatz für Selbstständigerwerbende beträgt total 10,0 Prozent, bestehend aus AHV 8,1 Prozent, IV 1,4 Prozent und EO 0,5 Prozent.",
+    "source": "ahv_merkblatt_2_02",
+    "origin": "article",
+    "file": "ahv-mindestbeitrag",
+    "verdict": "supports",
+    "confidence": 0.93,
+    "needs_review": false,
+    "probabilities": {
+      "unusable": 0.02,
+      "supports": 0.95,
+      "silent": 0.0,
+      "contradicts": 0.03
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "a-skala",
+    "claim": "Für Jahreseinkommen unter 60 500 Franken gilt eine sinkende Beitragsskala von 5,371 Prozent bis 10,0 Prozent, mit Einkommensgrenzen ab 10 100 Franken.",
+    "source": "ahv_merkblatt_2_02",
+    "origin": "article",
+    "file": "ahv-mindestbeitrag",
+    "verdict": "supports",
+    "confidence": 0.79,
+    "needs_review": true,
+    "probabilities": {
+      "unusable": 0.04,
+      "silent": 0.0,
+      "contradicts": 0.11,
+      "supports": 0.85
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "a-min",
+    "claim": "Wer ein jährliches Erwerbseinkommen von weniger als 10 100 Franken erzielt, entrichtet den Mindestbeitrag von 530 Franken.",
+    "source": "ahv_merkblatt_2_02",
+    "origin": "article",
+    "file": "ahv-mindestbeitrag",
+    "verdict": "supports",
+    "confidence": 0.99,
+    "needs_review": false,
+    "probabilities": {
+      "unusable": 0.0,
+      "silent": 0.0,
+      "contradicts": 0.0,
+      "supports": 1.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "h-schuldzinsen",
+    "claim": "Private Schuldzinsen sind im Umfang der nach den Artikeln 20, 20a und 21 steuerbaren Vermögenserträge und weiterer 50 000 Franken abzugsfähig (Art. 33 DBG).",
+    "source": "dbg_art33",
+    "origin": "article",
+    "file": "hypothek",
+    "verdict": "supports",
+    "confidence": 0.95,
+    "needs_review": false,
+    "probabilities": {
+      "silent": 0.0,
+      "contradicts": 0.03,
+      "unusable": 0.01,
+      "supports": 0.96
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "h-5prozent",
+    "claim": "Ein pauschaler «5 %-Zinsabzug auf das Darlehen» existiert im Schweizer Steuerrecht nicht.",
+    "source": "dbg_art33",
+    "origin": "article",
+    "file": "hypothek",
+    "verdict": "silent",
+    "confidence": 0.37,
+    "needs_review": true,
+    "probabilities": {
+      "contradicts": 0.2,
+      "silent": 0.52,
+      "unusable": 0.0,
+      "supports": 0.28
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "k-3a",
+    "claim": "2026 können Angestellte bis zu 7 258 Franken und Selbstständigerwerbende bis zu 36 288 Franken in die Säule 3a einzahlen.",
+    "source": "ch_saeule3a",
+    "origin": "article",
+    "file": "(Kontrolle)",
+    "verdict": "supports",
+    "confidence": 0.98,
+    "needs_review": false,
+    "probabilities": {
+      "contradicts": 0.01,
+      "unusable": 0.0,
+      "supports": 0.99,
+      "silent": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "ctl-falsch",
+    "claim": "Der Normalsatz der Mehrwertsteuer beträgt 6,5 Prozent.",
+    "source": "mwstg_art25",
+    "origin": "control",
+    "file": "(Kontrolle)",
+    "verdict": "contradicts",
+    "confidence": 1.0,
+    "needs_review": false,
+    "probabilities": {
+      "contradicts": 1.0,
+      "unusable": 0.0,
+      "silent": 0.0,
+      "supports": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "ctl-ahv",
+    "claim": "Der AHV-Mindestbeitrag für Selbstständigerwerbende beträgt 3 000 Franken pro Jahr.",
+    "source": "ahv_merkblatt_2_02",
+    "origin": "control",
+    "file": "(Kontrolle)",
+    "verdict": "contradicts",
+    "confidence": 0.98,
+    "needs_review": false,
+    "probabilities": {
+      "silent": 0.01,
+      "contradicts": 0.99,
+      "unusable": 0.0,
+      "supports": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "ctl-vst",
+    "claim": "Auf Dividenden wird eine Verrechnungssteuer von 60 Prozent erhoben.",
+    "source": "vstg_art13",
+    "origin": "control",
+    "file": "(Kontrolle)",
+    "verdict": "contradicts",
+    "confidence": 0.97,
+    "needs_review": false,
+    "probabilities": {
+      "silent": 0.01,
+      "contradicts": 0.99,
+      "unusable": 0.0,
+      "supports": 0.0
+    },
+    "model": "jev-latest"
+  }
+]

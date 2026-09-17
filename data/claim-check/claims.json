@@ -1,0 +1,86 @@
+[
+  {
+    "id": "site-3a-mit-pk",
+    "origin": "site",
+    "source": "ch_saeule3a",
+    "file": "ratgeber.html / saeule-3a-nachzahlen.html",
+    "claim": "Der Maximalbetrag der Säule 3a für Angestellte mit Pensionskasse beträgt CHF 7'258 pro Jahr."
+  },
+  {
+    "id": "site-3a-ohne-pk",
+    "origin": "site",
+    "source": "ch_saeule3a",
+    "file": "ratgeber.html",
+    "claim": "Personen ohne Pensionskasse können bis zu 20 % des Einkommens abziehen, maximal CHF 36'288 pro Jahr."
+  },
+  {
+    "id": "site-ahv-min",
+    "origin": "site",
+    "source": "ahv_merkblatt_2_03",
+    "file": "research:ahv-mindestbeitrag-selbststaendige",
+    "claim": "Der jährliche Mindestbeitrag von Nichterwerbstätigen an AHV, IV und EO beträgt CHF 530."
+  },
+  {
+    "id": "site-mwst-schwelle",
+    "origin": "site",
+    "source": "mwstg_art10",
+    "file": "research:mwst-100k-pflicht-schweiz",
+    "claim": "Von der Mehrwertsteuerpflicht befreit ist, wer im In- und Ausland weniger als CHF 100'000 Umsatz pro Jahr erzielt (MwStG Art. 10 Abs. 2)."
+  },
+  {
+    "id": "site-vst-35",
+    "origin": "site",
+    "source": "vstg_art13",
+    "file": "research:verrechnungssteuer-schweiz-35-prozent",
+    "claim": "Die Verrechnungssteuer auf Kapitalerträgen wie Dividenden und Zinsen beträgt 35 Prozent der steuerbaren Leistung."
+  },
+  {
+    "id": "research-vst-norm",
+    "origin": "research",
+    "source": "vstg_art13",
+    "file": "data/content-research.jsonl",
+    "claim": "Der Steuersatz der Verrechnungssteuer von 35 Prozent auf Dividenden und Zinsen stützt sich auf Art. 86 VStG."
+  },
+  {
+    "id": "research-mwst-reduziert",
+    "origin": "research",
+    "source": "mwstg_art25",
+    "file": "data/content-research.jsonl",
+    "claim": "Der reduzierte Mehrwertsteuersatz in der Schweiz beträgt 2,5 Prozent."
+  },
+  {
+    "id": "research-mwst-normal",
+    "origin": "research",
+    "source": "mwstg_art25",
+    "file": "data/content-research.jsonl",
+    "claim": "Der Normalsatz der Mehrwertsteuer beträgt 8,1 Prozent."
+  },
+  {
+    "id": "research-mwst-art10",
+    "origin": "research",
+    "source": "mwstg_art10",
+    "file": "data/content-research.jsonl",
+    "claim": "Die Mehrwertsteuerpflicht beginnt bei einem Jahresumsatz von CHF 100'000 (MwStG Art. 10 Abs. 2)."
+  },
+  {
+    "id": "control-mwst-satz",
+    "origin": "control",
+    "source": "mwstg_art25",
+    "file": "(Testkontrolle)",
+    "claim": "Der Normalsatz der Mehrwertsteuer in der Schweiz beträgt 7,7 Prozent."
+  },
+  {
+    "id": "control-ahv-min",
+    "origin": "control",
+    "source": "ahv_merkblatt_2_03",
+    "file": "(Testkontrolle)",
+    "claim": "Der AHV-Mindestbeitrag für Nichterwerbstätige beträgt CHF 1'200 pro Jahr."
+  },
+  {
+    "id": "control-keine-quelle",
+    "origin": "control",
+    "source": "gibt_es_nicht",
+    "file": "(Testkontrolle)",
+    "claim": "Irgendeine Behauptung ohne hinterlegte Quelle."
+  }
+]

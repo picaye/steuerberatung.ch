@@ -1,0 +1,37 @@
+[
+  {
+    "id": "grenz-4-5-norm",
+    "origin": "research",
+    "source": "grenzganger_dba",
+    "file": "data/content-research.jsonl:grenzgaenger",
+    "claim": "Die Quellensteuer von 4,5 Prozent für Grenzgänger nach Deutschland stützt sich auf Artikel 86 VStG (Verrechnungssteuergesetz)."
+  },
+  {
+    "id": "grenz-4-5-ok",
+    "origin": "research",
+    "source": "grenzganger_dba",
+    "file": "data/content-research.jsonl:grenzgaenger",
+    "claim": "Für echte Grenzgänger nach Deutschland erhebt die Schweiz eine Quellensteuer von 4,5 Prozent des Bruttobetrages der Vergütung; geregelt ist dies in Art. 15a DBA CH-DE."
+  },
+  {
+    "id": "grenz-60-tage",
+    "origin": "research",
+    "source": "grenzganger_dba",
+    "file": "data/content-research.jsonl:grenzgaenger",
+    "claim": "Eine Person weist weniger als 60 Nichtrückkehrtage auf, um als echter Grenzgänger zu qualifizieren."
+  },
+  {
+    "id": "mwst-reduziert-branchen",
+    "origin": "research",
+    "source": "mwstg_art25",
+    "file": "data/content-research.jsonl:mwst-100k (meta-Feld, wird publiziert)",
+    "claim": "Der reduzierte Mehrwertsteuersatz gilt unter anderem für das Baugewerbe und die Gastronomie."
+  },
+  {
+    "id": "control-gastro-normal",
+    "origin": "control",
+    "source": "mwstg_art25",
+    "file": "(Testkontrolle)",
+    "claim": "Für Lebensmittel, die im Rahmen von gastgewerblichen Leistungen abgegeben werden, gilt der Normalsatz."
+  }
+]

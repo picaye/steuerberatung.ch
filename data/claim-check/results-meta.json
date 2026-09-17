@@ -1,0 +1,36 @@
+[
+  {
+    "id": "meta-vst-30tage",
+    "origin": "research",
+    "source": "vstg_art32",
+    "file": "content-research:verrechnungssteuer (meta, wird publiziert)",
+    "claim": "Der Antrag auf Rückerstattung der Verrechnungssteuer (Formular 110) muss innert 30 Tagen nach Fälligkeit der Dividende bei der ESTV eingereicht werden.",
+    "verdict": "contradicts",
+    "confidence": 1.0,
+    "needs_review": false,
+    "probabilities": {
+      "unusable": 0.0,
+      "supports": 0.0,
+      "silent": 0.0,
+      "contradicts": 1.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "art-vst-3jahre",
+    "origin": "site",
+    "source": "vstg_art32",
+    "file": "verrechnungssteuer-artikel",
+    "claim": "Wer die Verrechnungssteuer zurückholen will, hat dafür drei Jahre Zeit; die Frist läuft ab Ablauf des Kalenderjahres der Fälligkeit.",
+    "verdict": "supports",
+    "confidence": 0.99,
+    "needs_review": false,
+    "probabilities": {
+      "contradicts": 0.0,
+      "supports": 1.0,
+      "silent": 0.0,
+      "unusable": 0.0
+    },
+    "model": "jev-latest"
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "id": "fix-vst-art13",
+    "origin": "site",
+    "source": "vstg_art13",
+    "file": "content-research:verrechnungssteuer",
+    "claim": "Der Steuersatz der Verrechnungssteuer von 35 Prozent auf Dividenden und Zinsen stützt sich auf Art. 13 VStG."
+  },
+  {
+    "id": "fix-mwst-2-6",
+    "origin": "site",
+    "source": "mwstg_art25",
+    "file": "content-research:mwst-100k",
+    "claim": "Der reduzierte Mehrwertsteuersatz in der Schweiz beträgt 2,6 Prozent."
+  },
+  {
+    "id": "fix-grenz-dba",
+    "origin": "site",
+    "source": "grenzganger_dba",
+    "file": "content-research:grenzgaenger",
+    "claim": "Die Quellensteuer von 4,5 Prozent für echte Grenzgänger nach Deutschland stützt sich auf Art. 15a DBA CH-DE."
+  },
+  {
+    "id": "fix-mwst-saetze",
+    "origin": "site",
+    "source": "mwstg_art25",
+    "file": "content-research:mwst-100k",
+    "claim": "Die Mehrwertsteuersätze 2026 betragen 8,1 Prozent normal und 2,6 Prozent reduziert, insbesondere für Lebensmittel, Medikamente und Bücher; für gastgewerbliche Leistungen gilt der Normalsatz."
+  }
+]
