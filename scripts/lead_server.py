@@ -291,10 +291,7 @@ class Handler(BaseHTTPRequestHandler):
         q = urllib.parse.parse_qs(parsed.query)
         page = q.get("p", [""])[0][:200]
         ref = q.get("r", [""])[0][:300]
-        sid = ""
-        for part in self.headers.get("Cookie", "").split(";"):
-            if part.strip().startswith("sid="):
-                sid = part.strip()[4:][:64]
+        sid = q.get("sid", [""])[0][:64]
         rec = {"ts": datetime.datetime.now(datetime.timezone.utc).isoformat(),
                "page": page, "ref": ref, "sid": sid}
         os.makedirs(os.path.dirname(ANALYTICS), exist_ok=True)

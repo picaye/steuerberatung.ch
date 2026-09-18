@@ -11,7 +11,7 @@
     var page = location.pathname;
     var ref = document.referrer || "";
     var img = new Image();
-    img.src = (window.LEAD_ENDPOINT || "https://pixels-urw-mobility-ladder.trycloudflare.com") +
+    img.src = (window.LEAD_ENDPOINT || "https://lead.steuerberatung.ch") +
       "/track?p=" + encodeURIComponent(page) +
       "&r=" + encodeURIComponent(ref) +
       "&sid=" + encodeURIComponent(sid);
