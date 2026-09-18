@@ -1,0 +1,138 @@
+[
+  {
+    "id": "p13-first-payment",
+    "origin": "draft",
+    "source": "eak_13info",
+    "file": "13-ahv-rente-dezember-2026.html",
+    "claim": "Die erste Auszahlung der 13. AHV-Rente erfolgt im Dezember 2026 zusammen mit der Dezember-Rente; Berechtigte müssen nichts unternehmen, die Auszahlung erfolgt automatisch.",
+    "verdict": "supports",
+    "confidence": 1.0,
+    "needs_review": false,
+    "probabilities": {
+      "contradicts": 0.0,
+      "supports": 1.0,
+      "silent": 0.0,
+      "unusable": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "p13-height",
+    "origin": "draft",
+    "source": "bsv_umsetzung",
+    "file": "13-ahv-rente-dezember-2026.html",
+    "claim": "Die 13. AHV-Rente entspricht einem Zwölftel der Summe der während des Jahres ausgerichteten Altersrenten; Kinderrente, Zusatzrente und der Rentenzuschlag für Frauen der Übergangsgeneration AHV 21 sind nicht enthalten.",
+    "verdict": "supports",
+    "confidence": 0.99,
+    "needs_review": false,
+    "probabilities": {
+      "contradicts": 0.0,
+      "silent": 0.0,
+      "unusable": 0.0,
+      "supports": 1.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "p13-only-altersrenten",
+    "origin": "draft",
+    "source": "eak_13info",
+    "file": "13-ahv-rente-dezember-2026.html",
+    "claim": "Nur Altersrenten werden 13-mal pro Jahr ausbezahlt; Hinterlassenenrenten (Witwen, Witwer, Waisen), Kinderrenten und Invalidenrenten bleiben bei 12 Zahlungen pro Jahr.",
+    "verdict": "supports",
+    "confidence": 0.99,
+    "needs_review": false,
+    "probabilities": {
+      "unusable": 0.0,
+      "contradicts": 0.0,
+      "supports": 1.0,
+      "silent": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "p13-el",
+    "origin": "draft",
+    "source": "bsv_umsetzung",
+    "file": "13-ahv-rente-dezember-2026.html",
+    "claim": "Die Auszahlung der 13. AHV-Altersrente hat keinen Einfluss auf die Ergänzungsleistungen; sie wird bei der EL-Berechnung nicht als Einnahme angerechnet.",
+    "verdict": "supports",
+    "confidence": 1.0,
+    "needs_review": false,
+    "probabilities": {
+      "silent": 0.0,
+      "contradicts": 0.0,
+      "unusable": 0.0,
+      "supports": 1.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "p13-rounding",
+    "origin": "draft",
+    "source": "eak_13info",
+    "file": "13-ahv-rente-dezember-2026.html",
+    "claim": "Der Betrag der 13. Altersrente wird auf ganze Franken gerundet; eine genaue Berechnung ist erst im Dezember möglich.",
+    "verdict": "supports",
+    "confidence": 0.99,
+    "needs_review": false,
+    "probabilities": {
+      "contradicts": 0.0,
+      "silent": 0.0,
+      "unusable": 0.0,
+      "supports": 1.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "p13-rent amounts",
+    "origin": "draft",
+    "source": "bsv_leistungen",
+    "file": "13-ahv-rente-dezember-2026.html",
+    "claim": "Die AHV-Altersrente mit voller Beitragsdauer beträgt ab 1. Januar 2026 mindestens 1'260 und höchstens 2'520 Franken pro Monat.",
+    "verdict": "supports",
+    "confidence": 0.98,
+    "needs_review": false,
+    "probabilities": {
+      "supports": 0.98,
+      "contradicts": 0.01,
+      "unusable": 0.01,
+      "silent": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "p13-tax-100",
+    "origin": "draft",
+    "source": "zh_merkblatt",
+    "file": "13-ahv-rente-dezember-2026.html",
+    "claim": "AHV-Altersrenten sind bei der direkten Bundessteuer zu 100 Prozent steuerbar (Art. 22 Abs. 1 DBG); Ergänzungsleistungen sind steuerfrei (Art. 24 lit. h DBG).",
+    "verdict": "supports",
+    "confidence": 0.99,
+    "needs_review": false,
+    "probabilities": {
+      "supports": 1.0,
+      "contradicts": 0.0,
+      "silent": 0.0,
+      "unusable": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "p13-financing",
+    "origin": "draft",
+    "source": "bsv_umsetzung",
+    "file": "13-ahv-rente-dezember-2026.html",
+    "claim": "Das Parlament hat im Juni 2026 eine Erhöhung der Mehrwertsteuer um 0,4 Prozentpunkte beschlossen (Normalsatz von 8,1 auf 8,5 Prozent, Sondersatz von 3,8 auf 4 Prozent, reduzierter Satz bleibt 2,6 Prozent); das Volk stimmt am 29. November 2026 darüber ab, Inkrafttreten nicht vor 2028.",
+    "verdict": "supports",
+    "confidence": 1.0,
+    "needs_review": false,
+    "probabilities": {
+      "unusable": 0.0,
+      "silent": 0.0,
+      "supports": 1.0,
+      "contradicts": 0.0
+    },
+    "model": "jev-latest"
+  }
+]
