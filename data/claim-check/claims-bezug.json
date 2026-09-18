@@ -1,0 +1,142 @@
+[
+ {
+  "id": "refalter_frauen_2026",
+  "claim": "Das Referenzalter der Frauen liegt 2026 bei 64 Jahren und 6 Monaten (Jahrgang 1962); es wird ab 2025 schrittweise von 64 auf 65 erhöht.",
+  "source": "bsv_ahv21",
+  "file": "saeule-3a-bezug-staffeln.html",
+  "origin": "draft"
+ },
+ {
+  "id": "refalter_maenner_65",
+  "claim": "Das Referenzalter liegt für Männer bei 65 Jahren; Frauen des Jahrgangs 1964 und jünger haben ebenfalls das Referenzalter 65 (ab 2028 für alle 65).",
+  "source": "bsv_ahv21",
+  "file": "saeule-3a-bezug-staffeln.html",
+  "origin": "draft"
+ },
+ {
+  "id": "fenster_fruehestens_5_jahre",
+  "claim": "Säule-3a-Altersleistungen dürfen frühestens fünf Jahre vor Erreichen des Referenzalters ausgerichtet werden.",
+  "source": "bvv3_art3",
+  "file": "saeule-3a-bezug-staffeln.html",
+  "origin": "draft"
+ },
+ {
+  "id": "aufschieben_5_jahre_erwerbstaetig",
+  "claim": "Wer nach dem Referenzalter weiterhin erwerbstätig ist, kann den 3a-Bezug höchstens fünf Jahre über das Referenzalter hinaus aufschieben.",
+  "source": "bvv3_art3",
+  "file": "saeule-3a-bezug-staffeln.html",
+  "origin": "draft"
+ },
+ {
+  "id": "faellig_bei_referenzalter",
+  "claim": "Das 3a-Guthaben wird bei Erreichen des Referenzalters fällig; die Auflösung spätestens fünf Jahre nach dem Referenzalter ist Pflicht.",
+  "source": "ks18a",
+  "file": "saeule-3a-bezug-staffeln.html",
+  "origin": "draft"
+ },
+ {
+  "id": "getrennt_fuenftel",
+  "claim": "Kapitalleistungen aus der Säule 3a werden getrennt vom übrigen Einkommen besteuert; die Steuer wird zu einem Fünftel der Tarife berechnet.",
+  "source": "wl2026",
+  "file": "saeule-3a-bezug-staffeln.html",
+  "origin": "draft"
+ },
+ {
+  "id": "jahressteuer_art38",
+  "claim": "Kapitalleistungen aus Vorsorge unterliegen stets einer vollen Jahressteuer (Art. 38 Abs. 1 DBG).",
+  "source": "dbg_art38",
+  "file": "saeule-3a-bezug-staffeln.html",
+  "origin": "draft"
+ },
+ {
+  "id": "zusammenrechnung_zh",
+  "claim": "Im gleichen Steuerjahr fällig gewordene Kapitalleistungen werden zusammengezählt und gesamthaft mit einer einzigen Jahressteuer erfasst.",
+  "source": "zh_weisung",
+  "file": "saeule-3a-bezug-staffeln.html",
+  "origin": "draft"
+ },
+ {
+  "id": "zusammenrechnung_lu",
+  "claim": "Kapitalleistungen aus 2. Säule und Säule 3a werden für das Steuerjahr, in dem sie zugeflossen sind, zusammengerechnet und gesamthaft besteuert.",
+  "source": "lu_steuerbuch",
+  "file": "saeule-3a-bezug-staffeln.html",
+  "origin": "draft"
+ },
+ {
+  "id": "ctrl_false_altersgrenze",
+  "claim": "Säule-3a-Guthaben darf frühestens zehn Jahre vor dem Referenzalter bezogen werden.",
+  "source": "bvv3_art3",
+  "file": "(control planted false)",
+  "origin": "control"
+ },
+ {
+  "id": "ctrl_false_tarif",
+  "claim": "Kapitalleistungen aus Vorsorge werden zu zwei Dritteln der gewöhnlichen Tarife besteuert.",
+  "source": "wl2026",
+  "file": "(control planted false)",
+  "origin": "control"
+ },
+ {
+  "id": "ctrl_true_fuenftel",
+  "claim": "Die Steuer auf Kapitalleistungen aus der Säule 3a beträgt einen Fünftel des gewöhnlichen Tarifs.",
+  "source": "ks18a",
+  "file": "(control planted true)",
+  "origin": "control"
+ },
+ {
+  "id": "wef_vorbezug_alle_5",
+  "claim": "Ein WEF-Vorbezug aus der Säule 3a kann nur alle fünf Jahre geltend gemacht werden; eine Rückzahlung ist in der Säule 3a im Gegensatz zur zweiten Säule nicht möglich.",
+  "source": "ks18a",
+  "file": "saeule-3a-bezug-staffeln.html",
+  "origin": "draft"
+ },
+ {
+  "id": "erstantrag_saldiert_konto",
+  "claim": "Verlangt der Vorsorgenehmer innerhalb der fünf Jahre vor dem Referenzalter eine Auszahlung, wird das gesamte Konto kapital einschliesslich Zinsen steuerlich erfasst, auch wenn nur eine Teilauszahlung verlangt wurde.",
+  "source": "ks18a",
+  "file": "saeule-3a-bezug-staffeln.html",
+  "origin": "draft"
+ },
+ {
+  "id": "kein_splitting_neu_konten",
+  "claim": "Ein Splitting bestehender Vorsorgeguthaben ist nicht möglich: Neue Säule-3a-Konten können nicht durch teilweise Übertragung vorhandener Guthaben gebildet werden.",
+  "source": "ks18a",
+  "file": "saeule-3a-bezug-staffeln.html",
+  "origin": "draft"
+ },
+ {
+  "id": "volloesung_barauszahlung",
+  "claim": "Bei einer Barauszahlung wegen Aufnahme einer selbständigen Erwerbstätigkeit muss das gesamte Vorsorgeguthaben bezogen werden; ein Teilbezug ist nicht zulässig.",
+  "source": "ks18a",
+  "file": "saeule-3a-bezug-staffeln.html",
+  "origin": "draft"
+ },
+ {
+  "id": "ubertragung_volloesung",
+  "claim": "Die Übertragung in eine andere anerkannte Vorsorgeform setzt die vollständige Auflösung des entsprechenden Vorsorgekontos voraus.",
+  "source": "ks18a",
+  "file": "saeule-3a-bezug-staffeln.html",
+  "origin": "draft"
+ },
+ {
+  "id": "wef_altersgrenze",
+  "claim": "Ein WEF-Vorbezug aus der Säule 3a ist nur bis zu dem in Artikel 3 Absatz 1 BVV 3 festgelegten Alter möglich; danach kann nur noch die gesamte Leistung aus dem Vorsorgeverhältnis bezogen werden.",
+  "source": "ks18a",
+  "file": "saeule-3a-bezug-staffeln.html",
+  "origin": "draft"
+ },
+ {
+  "id": "tarif_50k",
+  "claim": "Die volle Jahressteuer der direkten Bundessteuer 2026 auf einem steuerbaren Einkommen von CHF 50'000 (alleinstehend) beträgt CHF 400.80.",
+  "source": "tarif2026",
+  "file": "saeule-3a-bezug-staffeln.html",
+  "origin": "draft"
+ },
+ {
+  "id": "tarif_200k",
+  "claim": "Die volle Jahressteuer der direkten Bundessteuer 2026 auf CHF 200'000 (alleinstehend) beträgt CHF 12'903.35.",
+  "source": "tarif2026",
+  "file": "saeule-3a-bezug-staffeln.html",
+  "origin": "draft"
+ }
+]
