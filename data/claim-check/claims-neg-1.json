@@ -1,0 +1,72 @@
+[
+ {
+  "id": "neg-5pzent-liste",
+  "claim": "Die vorliegende vollständige Aufzählung der Abzüge gemäss Artikel 33 Absatz 1 DBG (alle Buchstaben a bis j) enthält keinen Abzug von pauschal 5 Prozent auf Hypothekarschulden oder Darlehen.",
+  "source": "fedlex_dbg_art33",
+  "file": "hypothek-steuerabzug-schweiz.html (DE/EN/FR/IT)",
+  "origin": "published-negative"
+ },
+ {
+  "id": "ctrl-5pzent-liste",
+  "claim": "Die vorliegende vollständige Aufzählung der Abzüge gemäss Artikel 33 Absatz 1 DBG enthält einen Buchstaben, der einen Abzug von pauschal 5 Prozent auf Hypothekarschulden gewährt.",
+  "source": "fedlex_dbg_art33",
+  "file": "control-planted-false",
+  "origin": "control"
+ },
+ {
+  "id": "neg-ahv-hypo",
+  "claim": "Der vorliegende Text (Art. 33 und Art. 124 DBG) sieht für die Abzüge nach Artikel 33 kein Verfahren vor, bei dem Formulare oder Belege bei einer AHV-Ausgleichskasse einzureichen wären; die Steuererklärung wird gemäss Art. 124 bei der zuständigen Behörde eingereicht.",
+  "source": "fedlex_dbg_art33_art124",
+  "file": "hypothek-steuerabzug-schweiz.html (DE/EN/FR/IT)",
+  "origin": "published-negative"
+ },
+ {
+  "id": "ctrl-ahv-hypo",
+  "claim": "Der vorliegende Text verlangt, dass Belege für private Schuldzinsen nach Artikel 33 DBG bei der zuständigen AHV-Ausgleichskasse eingereicht werden.",
+  "source": "fedlex_dbg_art33_art124",
+  "file": "control-planted-false",
+  "origin": "control"
+ },
+ {
+  "id": "neg-grenz-88-91",
+  "claim": "Die vorliegenden Artikel 88 und 91 DBG erwähnen die AHV und die AHV-Ausgleichskasse mit keinem Wort; Abnehmerin und Abrechnungsadresse der Quellensteuer ist gemäss diesem Text ausschliesslich die zuständige Steuerbehörde.",
+  "source": "fedlex_dbg_art88_art91",
+  "file": "grenzgaenger-de-fr-it-steuern.html (DE/EN/FR/IT)",
+  "origin": "published-negative"
+ },
+ {
+  "id": "ctrl-ahv-88",
+  "claim": "Gemäss dem vorliegenden Artikel 88 DBG liefert der Schuldner die Quellensteuer periodisch der zuständigen AHV-Ausgleichskasse ab.",
+  "source": "fedlex_dbg_art88_art91",
+  "file": "control-planted-false",
+  "origin": "control"
+ },
+ {
+  "id": "neg-grenz-dba",
+  "claim": "Der vorliegende Artikel 15a DBA CH-DE verlangt als Nachweis der Ansässigkeit eine amtliche Bescheinigung der zuständigen Finanzbehörde des Ansässigkeitsstaates; schweizerische AHV-Formulare sind im Abkommen nicht vorgesehen.",
+  "source": "grenzganger_dba",
+  "file": "grenzgaenger-de-fr-it-steuern.html (DE/EN/FR/IT)",
+  "origin": "published-negative"
+ },
+ {
+  "id": "ctrl-grenz-dba",
+  "claim": "Der vorliegende Artikel 15a DBA CH-DE verlangt als Nachweis der Ansässigkeit eine Bescheinigung der schweizerischen AHV-Ausgleichskasse.",
+  "source": "grenzganger_dba",
+  "file": "control-planted-false",
+  "origin": "control"
+ },
+ {
+  "id": "neg-erbschaft-art1",
+  "claim": "Die vorliegende, abschliessende Aufzählung in Artikel 1 DBG nennt als Steuern der direkten Bundessteuer nur die Einkommenssteuer, die Gewinnsteuer und die Quellensteuer; eine eidgenössische Erbschafts- oder Schenkungssteuer ist darin nicht aufgeführt.",
+  "source": "fedlex_dbg_art1",
+  "file": "erbschaftssteuer-schenkungssteuer-schweiz.html (DE/EN/FR/IT)",
+  "origin": "published-negative"
+ },
+ {
+  "id": "ctrl-erbschaft-art1",
+  "claim": "Die vorliegende Aufzählung in Artikel 1 DBG nennt neben Einkommens-, Gewinn- und Quellensteuer auch eine eidgenössische Erbschaftssteuer.",
+  "source": "fedlex_dbg_art1",
+  "file": "control-planted-false",
+  "origin": "control"
+ }
+]

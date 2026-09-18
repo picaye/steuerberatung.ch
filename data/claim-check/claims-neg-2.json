@@ -1,0 +1,30 @@
+[
+ {
+  "id": "neg-ahv-hypo",
+  "claim": "Der vorliegende Text (Art. 33 und Art. 124 DBG) erwähnt die AHV und ihre Ausgleichskassen mit keinem Wort; nach diesem Text wird die Steuererklärung bei der zuständigen Behörde eingereicht.",
+  "source": "fedlex_dbg_art33_art124",
+  "file": "hypothek-steuerabzug-schweiz.html (DE/EN/FR/IT)",
+  "origin": "published-negative"
+ },
+ {
+  "id": "ctrl-ahv-hypo",
+  "claim": "Der vorliegende Text verlangt, dass Belege für private Schuldzinsen nach Artikel 33 DBG bei der zuständigen AHV-Ausgleichskasse eingereicht werden.",
+  "source": "fedlex_dbg_art33_art124",
+  "file": "control-planted-false",
+  "origin": "control"
+ },
+ {
+  "id": "neg-5pzent-voll",
+  "claim": "Die vorliegende vollständige Aufzählung der Abzüge gemäss Artikel 33 Absatz 1 DBG (alle Buchstaben a bis j) enthält keinen Abzug von pauschal 5 Prozent auf Hypothekarschulden oder Darlehen.",
+  "source": "fedlex_dbg_art33",
+  "file": "hypothek-steuerabzug-schweiz.html (DE/EN/FR/IT)",
+  "origin": "published-negative"
+ },
+ {
+  "id": "ctrl-5pzent-voll",
+  "claim": "Die vorliegende vollständige Aufzählung der Abzüge gemäss Artikel 33 Absatz 1 DBG enthält einen Buchstaben, der einen Abzug von pauschal 5 Prozent auf Hypothekarschulden gewährt.",
+  "source": "fedlex_dbg_art33",
+  "file": "control-planted-false",
+  "origin": "control"
+ }
+]

@@ -1,0 +1,16 @@
+[
+ {
+  "id": "neg-ahv-hypo",
+  "claim": "Gemäss dem vorliegenden Text (Art. 33 und Art. 124 DBG) werden die Steuererklärung samt den Beilagen bei der zuständigen Steuerbehörde eingereicht; keine der beiden Bestimmungen sieht vor, dass Belege für den Abzug privater Schuldzinsen bei einer AHV-Ausgleichskasse eingereicht werden.",
+  "source": "fedlex_dbg_art33_art124",
+  "file": "hypothek-steuerabzug-schweiz.html (DE/EN/FR/IT)",
+  "origin": "published-negative"
+ },
+ {
+  "id": "ctrl-ahv-hypo",
+  "claim": "Gemäss dem vorliegenden Text sind Belege für den Abzug privater Schuldzinsen nach Artikel 33 DBG bei der zuständigen AHV-Ausgleichskasse einzureichen.",
+  "source": "fedlex_dbg_art33_art124",
+  "file": "control-planted-false",
+  "origin": "control"
+ }
+]

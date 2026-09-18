@@ -123,6 +123,47 @@ aber nur die erste steht im Gesetz. Eine Korrektur, die den Gesetzeswortlaut
 durch einen Praxisbegriff ersetzt, ist keine Verbesserung — sie entfernt die
 Belegbarkeit.
 
+## Verneinende Behauptungen («X existiert nicht») — Methode
+
+Eine Verneinung ist gegen eine einzelne Textstelle nicht beweisbar: die
+Stelle kann zu dem, was sie NICHT enthält, nur «silent» sagen. Genau das
+passierte am 17.09. mit `h-5prozent` (silent 0.370). Der Weg, die
+gefährlichste Behauptungsklasse doch maschinell zu prüfen, ist die
+**vollständige Aufzählung**: Steuersachverhalte leben in abschliessenden
+Katalogen (Art. 33 Abs. 1 Bst. a–j DBG = alle Abzüge; Art. 1 DBG = welche
+Steuern der Bund erhebt; Art. 88/91 DBG = der Quellensteuer-Verfahrenskanal).
+Ist der Katalog vollständig abgeschrieben, wird aus «existiert nicht» eine
+prüfbare Aussage über den Text («die Liste enthält keinen Posten …»).
+
+Regeln, die gehalten haben (Runde 6, 2026-09-18, `claims-neg-*.json`):
+
+- **Vollständigkeit erzwingen.** fedlex-Volltext über `web_extract` (342 KB,
+  Datei-Cache) und die Artikelgrenzen per Headline-Marker abschneiden — ein
+  3000-Zeichen-Fenster durchschnitt Art. 33 mitten in Bst. j und machte das
+  Urteil wertlos. Im Quellen-Header explizit sagen, dass die Liste
+  abschliessend ist («Buchstaben a bis j — es gibt keinen weiteren»).
+- **Die Negation auf den TEXT richten, nicht auf die Welt.** «Das DBG kennt
+  keine AHV-Zuständigkeit» ist falsch formuliert (Art. 33 Bst. d erwähnt die
+  AHV sehr wohl, als Beitragsschuldnerin) und kommt als `contradicts` zurück —
+  das ist ein Formulierungsfehler des Prüfers, kein Fakt. Korrekt: «keine der
+  vorliegenden Bestimmungen sieht vor, dass Belege … bei einer
+  AHV-Ausgleichskasse eingereicht werden.» So 0.82 supports.
+- **Kontrollen in beide Richtungen reichen nicht — eine Negativ-Kontrolle
+  kann auch «silent» sein** (0.35): die planted-false-Forderung «Belege zur
+  AHV-Ausgleichskasse» steht in keinem der beiden Artikel, also widerlegt der
+  Text sie nicht, er schweigt. Für die echten Behauptungen zählt das Gate
+  `supports ≥ 0.80` gegen den vollständigen Katalog; `silent` bleibt
+  Menschenarbeit.
+- Kein 5-%-Zinsabzug anywhere in the full DBG/VStG: zusätzlich
+  deterministisch (regex, kein Modell) über beide Gesetzesvolltexte geprüft.
+
+Ergebnis Runde 6: alle sechs publizierten Verneinungen (5-%-Regel, AHV/Hypothek,
+AHV/Quellensteuer je ×2 Normen, DBA-Nachweisweg, keine eidg. Erbschaftssteuer)
+bestehen mit 0.81–0.99, die fünf planted-false-Kontrollen fallen korrekt durch
+(contradicts 0.91–1.0 bzw. silent 0.35). Die «Erfundene Regeln»-Abschnitte
+sind damit belegt; eine menschliche Nachprüfung des Blinden Flecks ist
+nicht mehr nötig.
+
 ## Noch offen
 
 Nicht alle Einträge in `data/content-research.jsonl` sind geprüft. Einträge ohne
