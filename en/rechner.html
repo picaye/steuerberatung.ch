@@ -1,20 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<title>Tax calculator temporarily offline – steuerberatung.ch</title>
-<meta name="description" content="The tax calculator is temporarily unavailable. Request a no-obligation quote instead – our partners compute your personal tax savings.">
-<meta name="robots" content="noindex, follow">
-<link rel="canonical" href="https://steuerberatung.ch/en/rechner.html">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="../assets/redesign.css">
-<link rel="stylesheet" href="../assets/extra.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Swiss Tax Calculator 2026 – estimate your tax burden by canton | steuerberatung.ch</title>
+<meta name="description" content="Tax calculator 2026: federal tax per the statutory tariff (Art. 36 DBG), cantonal and municipal tax per published average rates. Single/married, children, deductions – instant estimate.">
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../assets/logo-180.png">
+<link rel="canonical" href="https://steuerberatung.ch/en/rechner.html">
+<link rel="alternate" hreflang="de-CH" href="https://steuerberatung.ch/rechner.html">
+<link rel="alternate" hreflang="en" href="https://steuerberatung.ch/en/rechner.html">
+<link rel="alternate" hreflang="fr-CH" href="https://steuerberatung.ch/fr/rechner.html">
+<link rel="alternate" hreflang="it-CH" href="https://steuerberatung.ch/it/rechner.html">
+<link rel="alternate" hreflang="x-default" href="https://steuerberatung.ch/rechner.html">
+<meta property="og:title" content="Swiss Tax Calculator 2026 – estimate your tax burden by canton | steuerberatung.ch">
+<meta property="og:description" content="Tax calculator 2026: federal tax per the statutory tariff (Art. 36 DBG), cantonal and municipal tax per published average rates. Single/married, children, deductions – instant estimate.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://steuerberatung.ch/en/rechner.html">
+<meta property="og:site_name" content="steuerberatung.ch">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/extra.css">
+<link rel="stylesheet" href="../assets/redesign.css">
 </head>
 <body>
-<h1>The tax calculator is temporarily unavailable.</h1>
-<p>We have taken the calculator offline because it produced incorrect figures. We are working on a corrected version. In the meantime, our verified partners will compute your tax savings concretely – no obligation, tailored to your situation.</p>
-<p><a class="btn btn-primary btn-lg" href="kontakt.html?situation=Other&message=I%20would%20like%20a%20concrete%20calculation%20of%20my%20tax%20savings%20(calculator%20offline).">Request a no-obligation quote</a></p>
-<p style="margin-top:1.5rem"><a href="ratgeber.html">Or continue to the guides →</a></p>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html"><img class="logo-img" src="../assets/logo.svg" alt="" width="32" height="32" aria-hidden="true"><span class="logo-text">steuerberatung<span class="accent">.ch</span></span></a>
+    <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="main-nav">☰</button>
+    <nav class="main-nav" id="main-nav">
+      <a href="leistungen.html">Services</a>
+      <a href="werbung.html">Advertise</a>
+      <a href="ratgeber.html">Guides</a>
+      <a href="rechner.html">Calculator</a>
+<a href="index.html" class="lang">DE</a>
+<a href="index.html" class="lang active" aria-current="true">EN</a>
+<a href="../fr/index.html" class="lang">FR</a>
+<a href="../it/index.html" class="lang">IT</a>
+    </nav>
+  </div>
+</header>
+<main>
+<div class="page-head">
+  <div class="container">
+    <h1>Swiss Tax Calculator 2026</h1>
+    <p>Estimate your tax burden by canton – in seconds. Free, no registration.</p>
+  </div>
+</div>
+<div class="container">
+<section class="section">
+<form id="tax-calc" class="calc-form">
+<div class="form-row">
+<div class="form-field">
+<label for="canton-c">Canton (capital)</label>
+<select id="canton-c" name="canton">
+<option>ZH</option><option>BE</option><option>LU</option><option>UR</option><option>SZ</option><option>OW</option><option>NW</option><option>GL</option><option>ZG</option><option>FR</option><option>SO</option><option>BS</option><option>BL</option><option>SH</option><option>AR</option><option>AI</option><option>SG</option><option>GR</option><option>AG</option><option>TG</option><option>TI</option><option>VD</option><option>VS</option><option>NE</option><option>GE</option><option>JU</option>
+</select>
+</div>
+<div class="form-field">
+<label for="income">Annual income (CHF, gross)</label>
+<input type="number" id="income" name="income" value="90000" min="0" step="1000">
+</div>
+</div>
+<div class="form-row">
+<div class="form-field">
+<label for="status">Marital status</label>
+<select id="status" name="status">
+<option value="single">Single</option>
+<option value="married">Married (jointly taxed)</option>
+</select>
+</div>
+<div class="form-field">
+<label for="children">Children (number)</label>
+<input type="number" id="children" name="children" value="0" min="0" max="10" step="1">
+</div>
+</div>
+<div class="form-row">
+<div class="form-field">
+<label for="deductions">Deductions (CHF, optional)</label>
+<input type="number" id="deductions" name="deductions" value="" min="0" step="500" placeholder="blank = standard deductions">
+</div>
+</div>
+<button type="submit" class="btn btn-primary">Calculate</button>
+<div id="calc-result" class="calc-result" aria-live="polite"></div>
+<p class="muted disclaimer">The estimate applies to the canton capital without church tax; your municipality may differ. The tax authority assessment governs your actual case.</p>
+<p class="muted" style="font-size:.85rem">Federal tax: statutory 2026 tariff (Art. 36 DBG, SR 642.11). Cantonal + municipal tax: published 2026 average rates per canton capital (incl. federal, excl. church tax), separated arithmetically.</p>
+</form>
+</section>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <div class="logo"><img class="logo-img" src="../assets/logo.svg" alt="" width="32" height="32" aria-hidden="true"><span class="logo-text">steuerberatung<span class="accent">.ch</span></span></div>
+      <p class="muted">Your independent partner for Swiss taxes. Comparison, advice and digital services – transparent and privacy-compliant.</p>
+    </div>
+    <div>
+      <h4>Services</h4>
+      <a href="leistungen.html">Tax return</a>
+      <a href="leistungen.html">Tax advice</a>
+      <a href="rechner.html">Tax calculator</a>
+      <a href="ratgeber.html">Guides</a>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <a href="impressum.html">Imprint</a>
+      <a href="datenschutz.html">Privacy</a>
+      <a href="agb.html">Terms</a>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <a href="kontakt.html">Request advice</a>
+      <a href="mailto:info@steuerberatung.ch">info@steuerberatung.ch</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <p class="muted">© 2026 steuerberatung.ch · Independent tax information &amp; referral. Not tax advice within the meaning of the DBG – actual advice is provided by licensed partners.</p>
+  </div>
+</footer>
+<script src="../assets/tax_engine.js"></script>
+<script src="../assets/endpoint.js"></script>
+<script src="../assets/track.js"></script>
+<script src="../assets/app.js"></script>
 </body>
 </html>

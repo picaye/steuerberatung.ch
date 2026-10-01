@@ -14,7 +14,7 @@
       calcNoIncome: "Bitte ein Einkommen eingeben.",
       calcRate: "geschätzter effektiver Steuersatz (Bund + Kanton + Gemeinde)",
       calcTaxable: "Steuernbares Einkommen",
-      calcCantRate: "Kantonaler + kommunaler Satz",
+      calcCantRate: "Kantons- und Gemeindesteuer",
       calcFed: "Bundessteuer",
       calcTotal: "Geschätzte Gesamtsteuer",
       calcDisclaimer: "Vereinfachte Schätzung zu Informationszwecken. Keine Steuerberatung. " +
@@ -31,7 +31,7 @@
       calcNoIncome: "Please enter an income.",
       calcRate: "estimated effective tax rate (federal + cantonal + municipal)",
       calcTaxable: "Taxable income",
-      calcCantRate: "Cantonal + municipal rate",
+      calcCantRate: "Cantonal + municipal tax",
       calcFed: "Federal tax",
       calcTotal: "Estimated total tax",
       calcDisclaimer: "Simplified estimate for information purposes only. Not tax advice. " +
@@ -48,7 +48,7 @@
       calcNoIncome: "Veuillez saisir un revenu.",
       calcRate: "taux d'imposition effectif estimé (Confédération + canton + commune)",
       calcTaxable: "Revenu imposable",
-      calcCantRate: "Taux cantonal + communal",
+      calcCantRate: "Impôt cantonal + communal",
       calcFed: "Impôt fédéral",
       calcTotal: "Impôt total estimé",
       calcDisclaimer: "Estimation simplifiée à titre d'information. Ceci ne constitue pas un conseil fiscal. " +
@@ -65,7 +65,7 @@
       calcNoIncome: "Inserisca un reddito.",
       calcRate: "aliquota d'imposta effettiva stimata (Confederazione + cantone + comune)",
       calcTaxable: "Reddito imponibile",
-      calcCantRate: "Aliquota cantonale + comunale",
+      calcCantRate: "Imposta cantonale + comunale",
       calcFed: "Imposta federale",
       calcTotal: "Imposta totale stimata",
       calcDisclaimer: "Stima semplificata a scopo informativo. Non costituisce consulenza fiscale. " +
@@ -168,75 +168,40 @@
     });
   }
 
-  /* ---------- Tax calculator ---------- */
+  /* ---------- Tax calculator (engine: scripts/tax_engine.js, tested) ---------- */
   var calc = document.getElementById("tax-calc");
-  if (calc) {
-    var CANTONS = {
-      "AG": { base: 0.21, top: 0.36, threshold: 120000 },
-      "AR": { base: 0.18, top: 0.32, threshold: 110000 },
-      "AI": { base: 0.15, top: 0.28, threshold: 130000 },
-      "BL": { base: 0.20, top: 0.34, threshold: 120000 },
-      "BS": { base: 0.20, top: 0.33, threshold: 120000 },
-      "BE": { base: 0.19, top: 0.33, threshold: 125000 },
-      "FR": { base: 0.18, top: 0.32, threshold: 120000 },
-      "GE": { base: 0.22, top: 0.38, threshold: 115000 },
-      "GL": { base: 0.17, top: 0.31, threshold: 125000 },
-      "GR": { base: 0.16, top: 0.30, threshold: 130000 },
-      "JU": { base: 0.17, top: 0.31, threshold: 125000 },
-      "LU": { base: 0.18, top: 0.32, threshold: 125000 },
-      "NE": { base: 0.19, top: 0.33, threshold: 120000 },
-      "NW": { base: 0.16, top: 0.30, threshold: 130000 },
-      "OW": { base: 0.16, top: 0.30, threshold: 130000 },
-      "SG": { base: 0.15, top: 0.29, threshold: 135000 },
-      "SH": { base: 0.17, top: 0.31, threshold: 125000 },
-      "SZ": { base: 0.17, top: 0.31, threshold: 125000 },
-      "SO": { base: 0.18, top: 0.32, threshold: 125000 },
-      "TG": { base: 0.18, top: 0.32, threshold: 125000 },
-      "TI": { base: 0.17, top: 0.31, threshold: 125000 },
-      "UR": { base: 0.15, top: 0.29, threshold: 135000 },
-      "VD": { base: 0.20, top: 0.34, threshold: 120000 },
-      "VS": { base: 0.16, top: 0.30, threshold: 130000 },
-      "ZG": { base: 0.18, top: 0.32, threshold: 125000 },
-      "ZH": { base: 0.19, top: 0.33, threshold: 125000 }
-    };
-    var FEDERAL = 0.0773;
-
-    function effectiveRate(income, canton, deductions) {
-      var c = CANTONS[canton] || CANTONS["ZH"];
-      var taxable = Math.max(0, income - deductions);
-      var t = Math.min(1, taxable / c.threshold);
-      var cantRate = c.base + (c.top - c.base) * t;
-      return { taxable: taxable, cantRate: cantRate, total: cantRate + FEDERAL };
-    }
-
+  if (calc && window.TaxEngine) {
     function fmt(n) {
       return "CHF " + Math.round(n).toLocaleString("de-CH");
     }
-
     function runCalc() {
       var income = parseFloat(calc.querySelector("[name=income]").value) || 0;
-      var deductions = parseFloat(calc.querySelector("[name=deductions]").value) || 0;
       var canton = calc.querySelector("[name=canton]").value;
+      var married = calc.querySelector("[name=status]").value === "married";
+      var children = parseInt(calc.querySelector("[name=children]").value, 10) || 0;
+      var dedRaw = calc.querySelector("[name=deductions]").value;
+      var deductions = dedRaw === "" ? null : Math.max(0, parseFloat(dedRaw) || 0);
       var out = document.getElementById("calc-result");
       if (!out) return;
       if (income <= 0) {
         out.innerHTML = "<p class='muted'>" + T.calcNoIncome + "</p>";
         return;
       }
-      var r = effectiveRate(income, canton, deductions);
-      var tax = r.taxable * r.total;
+      var r = window.TaxEngine.estimate({
+        gross: income, canton: canton, married: married, children: children,
+        hasPension: true, deductions: deductions
+      });
       out.innerHTML =
-        "<div class='big'>" + (r.total * 100).toFixed(1) + " %</div>" +
+        "<div class='big'>" + (r.effective * 100).toFixed(1) + " %</div>" +
         "<p class='muted'>" + T.calcRate + "</p>" +
         "<table>" +
         "<tr><td>" + T.calcTaxable + "</td><td>" + fmt(r.taxable) + "</td></tr>" +
-        "<tr><td>" + T.calcCantRate + "</td><td>" + (r.cantRate * 100).toFixed(1) + " %</td></tr>" +
-        "<tr><td>" + T.calcFed + "</td><td>" + (FEDERAL * 100).toFixed(1) + " %</td></tr>" +
-        "<tr><td>" + T.calcTotal + "</td><td>" + fmt(tax) + "</td></tr>" +
+        "<tr><td>" + T.calcFed + "</td><td>" + fmt(r.federal) + "</td></tr>" +
+        "<tr><td>" + T.calcCantRate + "</td><td>" + fmt(r.cantonalCommunal) + "</td></tr>" +
+        "<tr><td>" + T.calcTotal + "</td><td>" + fmt(r.total) + "</td></tr>" +
         "</table>" +
         "<div class='disclaimer'>" + T.calcDisclaimer + "</div>";
     }
-
     calc.addEventListener("submit", function (e) { e.preventDefault(); runCalc(); });
     calc.addEventListener("input", runCalc);
     runCalc();

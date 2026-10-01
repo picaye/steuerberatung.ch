@@ -1,20 +1,125 @@
 <!DOCTYPE html>
 <html lang="it-CH">
 <head>
-<meta charset="utf-8">
-<title>Calcolatore fiscale temporaneamente non disponibile – steuerberatung.ch</title>
-<meta name="description" content="Il calcolatore fiscale è temporaneamente non disponibile. Richieda piuttosto un’offerta senza impegno – i nostri partner calcolano il Suo risparmio fiscale personale.">
-<meta name="robots" content="noindex, follow">
-<link rel="canonical" href="https://steuerberatung.ch/it/rechner.html">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="../assets/redesign.css">
-<link rel="stylesheet" href="../assets/extra.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calcolatore imposte Svizzera 2026 – onere fiscale per cantone | steuerberatung.ch</title>
+<meta name="description" content="Calcolatore imposte 2026 : imposta federale secondo la tariffa legale (art. 36 LOC), imposta cantonale e comunale secondo le aliquote medie pubblicate. Celibe/coniugato, figli, deduzioni – stima immediata.">
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../assets/logo-180.png">
+<link rel="canonical" href="https://steuerberatung.ch/it/rechner.html">
+<link rel="alternate" hreflang="de-CH" href="https://steuerberatung.ch/rechner.html">
+<link rel="alternate" hreflang="en" href="https://steuerberatung.ch/en/rechner.html">
+<link rel="alternate" hreflang="fr-CH" href="https://steuerberatung.ch/fr/rechner.html">
+<link rel="alternate" hreflang="it-CH" href="https://steuerberatung.ch/it/rechner.html">
+<link rel="alternate" hreflang="x-default" href="https://steuerberatung.ch/rechner.html">
+<meta property="og:title" content="Calcolatore imposte Svizzera 2026 – onere fiscale per cantone | steuerberatung.ch">
+<meta property="og:description" content="Calcolatore imposte 2026 : imposta federale secondo la tariffa legale (art. 36 LOC), imposta cantonale e comunale secondo le aliquote medie pubblicate. Celibe/coniugato, figli, deduzioni – stima immediata.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://steuerberatung.ch/it/rechner.html">
+<meta property="og:site_name" content="steuerberatung.ch">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/extra.css">
+<link rel="stylesheet" href="../assets/redesign.css">
 </head>
 <body>
-<h1>Il calcolatore fiscale è temporaneamente non disponibile.</h1>
-<p>Abbiamo rimosso il calcolatore perché forniva valori errati. Stiamo lavorando a una versione corretta. Nel frattempo, i nostri partner verificati calcolano concretamente il Suo risparmio fiscale – senza impegno e su misura per la Sua situazione.</p>
-<p><a class="btn btn-primary btn-lg" href="kontakt.html?situation=Altro&message=Vorrei%20un%20calcolo%20concreto%20del%20mio%20risparmio%20fiscale%20(calcolatore%20non%20disponibile).">Richieda un’offerta senza impegno</a></p>
-<p style="margin-top:1.5rem"><a href="ratgeber.html">Oppure continui verso le guide →</a></p>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html"><img class="logo-img" src="../assets/logo.svg" alt="" width="32" height="32" aria-hidden="true"><span class="logo-text">steuerberatung<span class="accent">.ch</span></span></a>
+    <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="main-nav">☰</button>
+    <nav class="main-nav" id="main-nav">
+      <a href="leistungen.html">Prestazioni</a>
+      <a href="werbung.html">Pubblicità</a>
+      <a href="ratgeber.html">Guide</a>
+      <a href="rechner.html">Calcolatore</a>
+<a href="index.html" class="lang">DE</a>
+<a href="../en/index.html" class="lang">EN</a>
+<a href="../fr/index.html" class="lang">FR</a>
+<a href="index.html" class="lang active" aria-current="true">IT</a>
+    </nav>
+  </div>
+</header>
+<main>
+<div class="page-head">
+  <div class="container">
+    <h1>Calcolatore imposte Svizzera 2026</h1>
+    <p>Stimi il Suo onere fiscale per cantone – in pochi secondi. Gratuito, senza registrazione.</p>
+  </div>
+</div>
+<div class="container">
+<section class="section">
+<form id="tax-calc" class="calc-form">
+<div class="form-row">
+<div class="form-field">
+<label for="canton-c">Cantone (capoluogo)</label>
+<select id="canton-c" name="canton">
+<option>ZH</option><option>BE</option><option>LU</option><option>UR</option><option>SZ</option><option>OW</option><option>NW</option><option>GL</option><option>ZG</option><option>FR</option><option>SO</option><option>BS</option><option>BL</option><option>SH</option><option>AR</option><option>AI</option><option>SG</option><option>GR</option><option>AG</option><option>TG</option><option>TI</option><option>VD</option><option>VS</option><option>NE</option><option>GE</option><option>JU</option>
+</select>
+</div>
+<div class="form-field">
+<label for="income">Reddito annuo (CHF, lordo)</label>
+<input type="number" id="income" name="income" value="90000" min="0" step="1000">
+</div>
+</div>
+<div class="form-row">
+<div class="form-field">
+<label for="status">Stato civile</label>
+<select id="status" name="status">
+<option value="single">Celibe</option>
+<option value="married">Coniugati (imposizione congiunta)</option>
+</select>
+</div>
+<div class="form-field">
+<label for="children">Figli (numero)</label>
+<input type="number" id="children" name="children" value="0" min="0" max="10" step="1">
+</div>
+</div>
+<div class="form-row">
+<div class="form-field">
+<label for="deductions">Deduzioni (CHF, facoltativo)</label>
+<input type="number" id="deductions" name="deductions" value="" min="0" step="500" placeholder="vuoto = deduzioni forfettarie">
+</div>
+</div>
+<button type="submit" class="btn btn-primary">Calcolare</button>
+<div id="calc-result" class="calc-result" aria-live="polite"></div>
+<p class="muted disclaimer">La stima vale per il capoluogo del cantone senza imposta ecclesiastica ; il Suo Comune può discostarsi. Fa fede unicamente la tassazione dell’autorità fiscale.</p>
+<p class="muted" style="font-size:.85rem">Imposta federale : tariffa legale 2026 (art. 36 LOC, RS 642.11). Imposta cantonale e comunale : aliquote medie pubblicate 2026 per capoluogo (imposta federale inclusa, ecclesiastica esclusa), separate per calcolo.</p>
+</form>
+</section>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <div class="logo"><img class="logo-img" src="../assets/logo.svg" alt="" width="32" height="32" aria-hidden="true"><span class="logo-text">steuerberatung<span class="accent">.ch</span></span></div>
+      <p class="muted">Il Suo partner indipendente per le imposte in Svizzera. Confronto, consulenza e servizi digitali – trasparenti e conformi alla protezione dei dati.</p>
+    </div>
+    <div>
+      <h4>Servizi</h4>
+      <a href="leistungen.html">Dichiarazione d’imposte</a>
+      <a href="leistungen.html">Consulenza fiscale</a>
+      <a href="rechner.html">Calcolatore d’imposte</a>
+      <a href="ratgeber.html">Guide</a>
+    </div>
+    <div>
+      <h4>Note legali</h4>
+      <a href="impressum.html">Colophon</a>
+      <a href="datenschutz.html">Protezione dei dati</a>
+      <a href="agb.html">CG</a>
+    </div>
+    <div>
+      <h4>Contatto</h4>
+      <a href="kontakt.html">Richiedere una consulenza</a>
+      <a href="mailto:info@steuerberatung.ch">info@steuerberatung.ch</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <p class="muted">© 2026 steuerberatung.ch · Informazione fiscale indipendente e mediazione. Non costituisce consulenza fiscale ai sensi della LOC – la consulenza effettiva è fornita da partner autorizzati.</p>
+  </div>
+</footer>
+<script src="../assets/tax_engine.js"></script>
+<script src="../assets/endpoint.js"></script>
+<script src="../assets/track.js"></script>
+<script src="../assets/app.js"></script>
 </body>
 </html>
