@@ -90,6 +90,16 @@
   var form = document.getElementById("lead-form");
   if (form) {
     var status = document.getElementById("form-status");
+    /* Pre-fill from query params (e.g. the rechner.html CTA link). */
+    try {
+      var qs = new URLSearchParams(window.location.search);
+      ["message", "situation"].forEach(function (k) {
+        var v = qs.get(k);
+        if (!v) return;
+        var el = form.querySelector("[name=" + k + "]");
+        if (el && !el.value) el.value = v;
+      });
+    } catch (e) { /* URLSearchParams unsupported: skip prefill */ }
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       if (status) { status.className = "form-status"; status.textContent = ""; }

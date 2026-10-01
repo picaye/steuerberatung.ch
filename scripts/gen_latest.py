@@ -65,6 +65,13 @@ L10N = {
 ARTICLE_RE = re.compile(r'<script type="application/ld\+json">(.*?)</script>', re.S)
 DATE_RE = re.compile(r'"date(?:Published|Modified)":\s*"(\d{4}-\d{2}-\d{2})"')
 
+# Hard-deadline articles pinned to the top of the strip regardless of date
+# (metrics-review 2026-10 R3: both expire 31.12.2026). Pinned order = list order.
+PINNED = [
+    "saeule-3a-nachzahlen.html",
+    "verrechnungssteuer-rueckerstattungsfrist-ablauf.html",
+]
+
 
 def esc(s: str) -> str:
     return (
@@ -129,6 +136,9 @@ def collect(lang: str) -> list[dict]:
             out.append(meta)
     # newest first; stable tiebreak by slug
     out.sort(key=lambda a: (a["date"], a["slug"]), reverse=True)
+    # pinned slugs jump to the front, in PINNED order
+    pins = {s: i for i, s in enumerate(PINNED)}
+    out.sort(key=lambda a: (pins.get(a["slug"], 10**9),))
     return out
 
 

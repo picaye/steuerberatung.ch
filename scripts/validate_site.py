@@ -39,6 +39,10 @@ for f in files:
     if not m or m.group(1) != EXPECT_LANG[d]:
         problems.append(f'{f}: html lang={m.group(1) if m else None} want={EXPECT_LANG[d]}')
 
+    # noindex stub pages (e.g. rechner.html takedown) carry no switcher/hreflang
+    if 'content="noindex' in s:
+        continue
+
     navs = re.findall(r'class="lang[ "]', s)
     if len(navs) != 4:
         problems.append(f'{f}: lang switcher anchors={len(navs)} want=4')
@@ -73,7 +77,14 @@ for f in files:
     for href in re.findall(r'href="([^"]+)"', open(f).read()):
         if href.startswith(('http', 'mailto:', '#', 'tel:')):
             continue
-        t = os.path.normpath(os.path.join(d, href.split('#')[0]))
+        path = href.split('#')[0].split('?')[0]
+        if not path:
+            continue
+        if path.startswith('/'):
+            # site-absolute URL -> resolve against repo root
+            t = os.path.normpath(os.path.join('.', path.lstrip('/')))
+        else:
+            t = os.path.normpath(os.path.join(d, path))
         if not os.path.exists(t):
             problems.append(f'{f}: broken link -> {href}')
 
