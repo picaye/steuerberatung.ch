@@ -22,8 +22,15 @@ for x in data:
     if ident in seen:
         continue
     seen.add(ident)
+    # Municipality-level entries carry an empty ZipCode in the factors feed,
+    # but the TaxLocationID encodes the main PLZ in its first 4 digits.
+    zip_ = loc.get("ZipCode", "") or ""
+    if not zip_:
+        lead = str(ident)[:4]
+        if lead != "0000":
+            zip_ = lead
     out.append({"id": ident, "city": loc["City"],
-                "zip": loc.get("ZipCode", ""), "canton": loc["Canton"]})
+                "zip": zip_, "canton": loc["Canton"]})
 out.sort(key=lambda e: (e["canton"], e["zip"] or "9999", e["city"]))
 
 header = ("// Generated from the official ESTV location dataset (2026) by "

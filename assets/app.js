@@ -214,15 +214,18 @@
 
     /* --- municipality autocomplete over the static ESTV location list --- */
     function allLocations() { return window.TAX_LOCATIONS || []; }
+    function norm(s) {
+      return (s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    }
     function matchLocations(q) {
-      q = q.trim().toLowerCase();
+      q = norm(q.trim());
       if (!q) return [];
       var out = [];
       var list = allLocations();
       for (var i = 0; i < list.length && out.length < 12; i++) {
         var L = list[i];
         if ((L.zip && L.zip.indexOf(q) === 0) ||
-            L.city.toLowerCase().indexOf(q) !== -1) out.push(L);
+            norm(L.city).indexOf(q) !== -1) out.push(L);
       }
       return out;
     }
