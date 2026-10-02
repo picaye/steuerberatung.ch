@@ -10,9 +10,9 @@ Usage:
 Emits: 4-way lang switcher, 5 hreflang alternates, localized chrome
 (header/nav/footer/CTA/date label), correct canonical + og:url.
 """
-import sys, os, json, datetime, html as htmllib
+import sys, os, re, json, datetime, html as htmllib
 
-BASE = "/Users/pino/Code/steuerberatung.ch"
+BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://steuerberatung.ch"
 
 LANGS = ["de", "en", "fr", "it"]
@@ -36,6 +36,7 @@ L = {
         cta_btn2="Jetzt kostenlos anfragen",
         published="Veröffentlicht am {date} · Unabhängige Steuer-Information für die Schweiz.",
         toc="Inhalt:",
+        related_h="Verwandte Artikel",
     ),
     "en": dict(
         nav=[("leistungen.html", "Services"), ("werbung.html", "Advertise"),
@@ -53,6 +54,7 @@ L = {
         cta_btn2="Request free advice",
         published="Published on {date} · Independent tax information for Switzerland.",
         toc="Contents:",
+        related_h="Related articles",
     ),
     "fr": dict(
         nav=[("leistungen.html", "Prestations"), ("werbung.html", "Publicité"),
@@ -70,6 +72,7 @@ L = {
         cta_btn2="Demander un conseil gratuit",
         published="Publié le {date} · Information fiscale indépendante pour la Suisse.",
         toc="Sommaire :",
+        related_h="Articles connexes",
     ),
     "it": dict(
         nav=[("leistungen.html", "Servizi"), ("werbung.html", "Pubblicità"),
@@ -87,11 +90,55 @@ L = {
         cta_btn2="Richiedi consulenza gratuita",
         published="Pubblicato il {date} · Informazione fiscale indipendente per la Svizzera.",
         toc="Indice:",
+        related_h="Articoli correlati",
     ),
 }
 
 
-def build(lang, slug, title, meta, sections):
+RELATED_START = "<!-- RELATED:START -->"
+RELATED_END = "<!-- RELATED:END -->"
+RELATED_MAP_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "related_map.json")
+
+
+def load_related_map():
+    """Single source of truth: scripts/related_map.json (slug -> [related slugs])."""
+    if not os.path.exists(RELATED_MAP_PATH):
+        return {}
+    with open(RELATED_MAP_PATH, encoding="utf-8") as f:
+        return json.load(f)
+
+
+def related_for(slug, related_map=None):
+    """Related slugs for an article from the map (exact or stem match)."""
+    m = related_map if related_map is not None else load_related_map()
+    key = slug if slug.endswith(".html") else slug + ".html"
+    return list(m.get(key, []))
+
+
+def render_related(lang, related):
+    """Localized 'Verwandte Artikel' block with markers, for insertion in <main>.
+
+    `related` is a list of article hrefs (e.g. "saeule-3a-nachzahlen.html").
+    Titles are read from each target page's JSON-LD headline when available.
+    """
+    t = L[lang]
+    base = BASE if lang == "de" else os.path.join(BASE, lang)
+    items = []
+    for href in related:
+        title_txt = href.rsplit(".html", 1)[0].replace("-", " ").capitalize()
+        p = os.path.join(base, href)
+        if os.path.exists(p):
+            m = re.search(r'"@type":\s*"Article".*?"headline":\s*"([^"]+)"', open(p, encoding="utf-8").read())
+            if m:
+                title_txt = m.group(1)
+        items.append(f'<li><a href="{href}">{htmllib.escape(title_txt)}</a></li>')
+    return (f'{RELATED_START}\n<section class="section related-section" aria-label="{t["related_h"]}">'
+            f'<div class="container"><h2>{t["related_h"]}</h2>'
+            f'<ul class="related-list">\n' + "\n".join(items) +
+            f'\n</ul></div></section>\n{RELATED_END}')
+
+
+def build(lang, slug, title, meta, sections, related=None):
     assert lang in LANGS, f"lang must be one of {LANGS}"
     t = L[lang]
     today = datetime.date.today().isoformat()
@@ -167,6 +214,8 @@ def build(lang, slug, title, meta, sections):
         f'<section class="section"><div class="container prose"><h2 id="s{i+1}">{h}</h2>{b}</div></section>'
         for i, (h, b) in enumerate(sections))
 
+    related_block = render_related(lang, related) if related else ""
+
     ld = {"@context": "https://***", "@type": "Article", "headline": title,
           "datePublished": today,
           "author": {"@type": "Organization", "name": "steuerberatung.ch"},
@@ -208,7 +257,7 @@ def build(lang, slug, title, meta, sections):
 </div></div>
 <nav class="toc"><div class="container"><strong>{t['toc']}</strong><ol>{toc}</ol></div></nav>
 {body}
-</main>
+{related_block}</main>
 {footer}
 <script src="{pre}assets/endpoint.js"></script>
 <script src="{pre}assets/track.js"></script>
@@ -230,4 +279,7 @@ if __name__ == "__main__":
         sys.exit(1)
     lang, slug, title, meta = a[0], a[1], a[2], a[3]
     secs = [(a[i], a[i + 1]) for i in range(4, len(a), 2)]
-    build(lang, slug, title, meta, secs)
+    # Related articles come from scripts/related_map.json automatically, so
+    # the publish cron needs no extra wiring: add the slug to the map and the
+    # 'Verwandte Artikel' block is emitted on build.
+    build(lang, slug, title, meta, secs, related=related_for(slug))

@@ -76,3 +76,12 @@
   .latest-list { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
   .latest-list li.featured { grid-column: 1 / -1; }
 }
+
+/* ===== related articles (Verwandte Artikel — scripts/backfill_related.py) ===== */
+.related-section { background: var(--bg, #f6f8f7); }
+.related-list { list-style: none; padding: 0; margin: 16px 0 0; display: grid; grid-template-columns: 1fr; gap: 12px; }
+.related-list li { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 20px; box-shadow: var(--shadow); transition: border-color .15s ease, transform .15s ease; }
+.related-list li:hover { border-color: var(--green); transform: translateY(-2px); }
+.related-list a { color: var(--ink); text-decoration: none; font-weight: 600; }
+.related-list a:hover { color: var(--green); }
+@media (min-width: 900px) { .related-list { grid-template-columns: repeat(3, 1fr); } }

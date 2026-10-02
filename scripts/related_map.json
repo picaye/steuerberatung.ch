@@ -1,0 +1,92 @@
+{
+  "13-ahv-rente-dezember-2026.html": [
+    "ahv-beitragsluecken-pruefen-nachzahlen.html",
+    "ahv-mindestbeitrag-selbststaendige.html",
+    "steuern-sparen-tipps.html"
+  ],
+  "ahv-beitragsluecken-pruefen-nachzahlen.html": [
+    "13-ahv-rente-dezember-2026.html",
+    "ahv-mindestbeitrag-selbststaendige.html",
+    "saeule-3a-nachzahlen.html"
+  ],
+  "ahv-mindestbeitrag-selbststaendige.html": [
+    "13-ahv-rente-dezember-2026.html",
+    "ahv-beitragsluecken-pruefen-nachzahlen.html",
+    "mwst-100k-pflicht-schweiz.html"
+  ],
+  "eigenmietwert-abschaffung-2029.html": [
+    "hypothek-steuerabzug-schweiz.html",
+    "erbschaftssteuer-schenkungssteuer-schweiz.html",
+    "steuern-sparen-tipps.html"
+  ],
+  "erbschaftssteuer-schenkungssteuer-schweiz.html": [
+    "hypothek-steuerabzug-schweiz.html",
+    "eigenmietwert-abschaffung-2029.html",
+    "kryptowaehrungen-steuern-schweiz.html"
+  ],
+  "grenzgaenger-de-fr-it-steuern.html": [
+    "individualbesteuerung-erklaert.html",
+    "steuer-checkliste-2026.html",
+    "steuern-sparen-tipps.html"
+  ],
+  "hypothek-steuerabzug-schweiz.html": [
+    "eigenmietwert-abschaffung-2029.html",
+    "erbschaftssteuer-schenkungssteuer-schweiz.html",
+    "steuern-sparen-tipps.html"
+  ],
+  "individualbesteuerung-erklaert.html": [
+    "steuern-sparen-tipps.html",
+    "pensionskassen-einkauf-steuern-sparen.html",
+    "grenzgaenger-de-fr-it-steuern.html"
+  ],
+  "kryptowaehrungen-steuern-schweiz.html": [
+    "verrechnungssteuer-schweiz-35-prozent.html",
+    "erbschaftssteuer-schenkungssteuer-schweiz.html",
+    "steuern-sparen-tipps.html"
+  ],
+  "mwst-100k-pflicht-schweiz.html": [
+    "ahv-mindestbeitrag-selbststaendige.html",
+    "steuer-checkliste-2026.html",
+    "steuern-sparen-tipps.html"
+  ],
+  "pensionskassen-einkauf-steuern-sparen.html": [
+    "saeule-3a-bezug-staffeln.html",
+    "saeule-3a-nachzahlen.html",
+    "steuern-sparen-tipps.html"
+  ],
+  "praemienverbilligung-2027-anmelden.html": [
+    "steuer-checkliste-2026.html",
+    "steuern-sparen-tipps.html",
+    "individualbesteuerung-erklaert.html"
+  ],
+  "saeule-3a-bezug-staffeln.html": [
+    "saeule-3a-nachzahlen.html",
+    "pensionskassen-einkauf-steuern-sparen.html",
+    "steuern-sparen-tipps.html"
+  ],
+  "saeule-3a-nachzahlen.html": [
+    "saeule-3a-bezug-staffeln.html",
+    "pensionskassen-einkauf-steuern-sparen.html",
+    "ahv-beitragsluecken-pruefen-nachzahlen.html"
+  ],
+  "steuer-checkliste-2026.html": [
+    "steuern-sparen-tipps.html",
+    "verrechnungssteuer-schweiz-35-prozent.html",
+    "praemienverbilligung-2027-anmelden.html"
+  ],
+  "steuern-sparen-tipps.html": [
+    "steuer-checkliste-2026.html",
+    "saeule-3a-bezug-staffeln.html",
+    "pensionskassen-einkauf-steuern-sparen.html"
+  ],
+  "verrechnungssteuer-rueckerstattungsfrist-ablauf.html": [
+    "verrechnungssteuer-schweiz-35-prozent.html",
+    "steuer-checkliste-2026.html",
+    "kryptowaehrungen-steuern-schweiz.html"
+  ],
+  "verrechnungssteuer-schweiz-35-prozent.html": [
+    "verrechnungssteuer-rueckerstattungsfrist-ablauf.html",
+    "kryptowaehrungen-steuern-schweiz.html",
+    "steuer-checkliste-2026.html"
+  ]
+}

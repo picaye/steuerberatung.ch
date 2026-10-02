@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import os, glob, datetime
-BASE = "/Users/pino/Code/steuerberatung.ch"
+BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://steuerberatung.ch"
 files = sorted(glob.glob(BASE + "/*.html"))
 for lang in ("en", "fr", "it"):
