@@ -22,7 +22,7 @@ HREFLANG = {"de": "de-CH", "en": "en", "fr": "fr-CH", "it": "it-CH"}
 L = {
     "de": dict(
         nav=[("leistungen.html", "Leistungen"), ("werbung.html", "Werbung"),
-             ("ratgeber.html", "Ratgeber")],
+             ("ratgeber.html", "Ratgeber"), ("rechner.html", "Rechner")],
         cta_btn="Kostenlose Beratung", menu="Menü",
         foot_about="Ihr unabhängiger Partner für Steuern in der Schweiz. Vergleich, Beratung und digitale Services – transparent und datenschutzkonform.",
         foot_services=[("leistungen.html", "Steuererklärung"), ("leistungen.html", "Steuerberatung"),
@@ -39,7 +39,7 @@ L = {
     ),
     "en": dict(
         nav=[("leistungen.html", "Services"), ("werbung.html", "Advertise"),
-             ("ratgeber.html", "Guides")],
+             ("ratgeber.html", "Guides"), ("rechner.html", "Calculator")],
         cta_btn="Free advice", menu="Menu",
         foot_about="Your independent partner for taxes in Switzerland. Comparison, advice and digital services – transparent and privacy-compliant.",
         foot_services=[("leistungen.html", "Tax return"), ("leistungen.html", "Tax advice"),
@@ -56,7 +56,7 @@ L = {
     ),
     "fr": dict(
         nav=[("leistungen.html", "Prestations"), ("werbung.html", "Publicité"),
-             ("ratgeber.html", "Guide fiscal")],
+             ("ratgeber.html", "Guide fiscal"), ("rechner.html", "Calculateur")],
         cta_btn="Conseil gratuit", menu="Menu",
         foot_about="Votre partenaire indépendant pour les impôts en Suisse. Comparaison, conseil et services numériques – transparent et conforme à la protection des données.",
         foot_services=[("leistungen.html", "Déclaration d'impôt"), ("leistungen.html", "Conseil fiscal"),
@@ -73,7 +73,7 @@ L = {
     ),
     "it": dict(
         nav=[("leistungen.html", "Servizi"), ("werbung.html", "Pubblicità"),
-             ("ratgeber.html", "Guida fiscale")],
+             ("ratgeber.html", "Guida fiscale"), ("rechner.html", "Calcolatore")],
         cta_btn="Consulenza gratuita", menu="Menu",
         foot_about="Il vostro partner indipendente per le imposte in Svizzera. Confronto, consulenza e servizi digitali – trasparente e conforme alla protezione dei dati.",
         foot_services=[("leistungen.html", "Dichiarazione d'imposte"), ("leistungen.html", "Consulenza fiscale"),
