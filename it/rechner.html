@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calcolatore imposte Svizzera 2026 – onere fiscale per cantone | steuerberatung.ch</title>
-<meta name="description" content="Calcolatore imposte 2026 : imposta federale secondo la tariffa legale (art. 36 LOC), imposta cantonale e comunale secondo le aliquote medie pubblicate. Celibe/coniugato, figli, deduzioni – stima immediata.">
+<title>Calcolatore imposte Svizzera 2026 – onere fiscale esatto per comune | steuerberatung.ch</title>
+<meta name="description" content="Calcolatore imposte 2026: imposta federale, cantonale, comunale, ecclesiastica e sulla sostanza secondo le tariffe ufficiali dell’AFC – per ogni comune della Svizzera. Celibe/coniugato, figli con età, calcolo immediato.">
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
 <link rel="apple-touch-icon" href="../assets/logo-180.png">
 <link rel="canonical" href="https://steuerberatung.ch/it/rechner.html">
@@ -13,8 +13,8 @@
 <link rel="alternate" hreflang="fr-CH" href="https://steuerberatung.ch/fr/rechner.html">
 <link rel="alternate" hreflang="it-CH" href="https://steuerberatung.ch/it/rechner.html">
 <link rel="alternate" hreflang="x-default" href="https://steuerberatung.ch/rechner.html">
-<meta property="og:title" content="Calcolatore imposte Svizzera 2026 – onere fiscale per cantone | steuerberatung.ch">
-<meta property="og:description" content="Calcolatore imposte 2026 : imposta federale secondo la tariffa legale (art. 36 LOC), imposta cantonale e comunale secondo le aliquote medie pubblicate. Celibe/coniugato, figli, deduzioni – stima immediata.">
+<meta property="og:title" content="Calcolatore imposte Svizzera 2026 – onere fiscale esatto per comune | steuerberatung.ch">
+<meta property="og:description" content="Calcolatore imposte 2026: imposta federale, cantonale, comunale, ecclesiastica e sulla sostanza secondo le tariffe ufficiali dell’AFC – per ogni comune della Svizzera. Celibe/coniugato, figli con età, calcolo immediato.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://steuerberatung.ch/it/rechner.html">
 <meta property="og:site_name" content="steuerberatung.ch">
@@ -43,7 +43,7 @@
 <div class="page-head">
   <div class="container">
     <h1>Calcolatore imposte Svizzera 2026</h1>
-    <p>Stimi il Suo onere fiscale per cantone – in pochi secondi. Gratuito, senza registrazione.</p>
+    <p>Imposta federale, cantonale, comunale, ecclesiastica e sulla sostanza secondo le tariffe ufficiali – per ogni comune. Gratuito, senza registrazione.</p>
   </div>
 </div>
 <div class="container">
@@ -51,14 +51,27 @@
 <form id="tax-calc" class="calc-form">
 <div class="form-row">
 <div class="form-field">
-<label for="canton-c">Cantone (capoluogo)</label>
-<select id="canton-c" name="canton">
-<option>ZH</option><option>BE</option><option>LU</option><option>UR</option><option>SZ</option><option>OW</option><option>NW</option><option>GL</option><option>ZG</option><option>FR</option><option>SO</option><option>BS</option><option>BL</option><option>SH</option><option>AR</option><option>AI</option><option>SG</option><option>GR</option><option>AG</option><option>TG</option><option>TI</option><option>VD</option><option>VS</option><option>NE</option><option>GE</option><option>JU</option>
-</select>
+<label for="calc-loc">Comune o CAP</label>
+<input type="text" id="calc-loc" name="location" value="Zürich" autocomplete="off" spellcheck="false" placeholder="p. es. 8400 o Winterthur">
+<div id="calc-loc-list" class="calc-loc-list" hidden></div>
 </div>
 <div class="form-field">
-<label for="income">Reddito annuo (CHF, lordo)</label>
+<label for="calc-year">Anno fiscale</label>
+<select id="calc-year" name="year">
+<option value="2026" selected>2026</option>
+<option value="2025">2025</option>
+</select>
+</div>
+</div>
+<div class="form-row">
+<div class="form-field">
+<label for="income">Reddito imponibile (CHF)</label>
 <input type="number" id="income" name="income" value="90000" min="0" step="1000">
+<p class="muted" style="font-size:.8rem;margin-top:4px">Indichi il valore del suo conteggio fiscale (dopo le deduzioni). Esempio: 100 000 CHF lordi per una persona sola danno circa 82 000 CHF imponibili.</p>
+</div>
+<div class="form-field">
+<label for="fortune">Sostanza netta (CHF, facoltativo)</label>
+<input type="number" id="fortune" name="fortune" value="" min="0" step="10000" placeholder="0">
 </div>
 </div>
 <div class="form-row">
@@ -66,24 +79,29 @@
 <label for="status">Stato civile</label>
 <select id="status" name="status">
 <option value="single">Celibe</option>
-<option value="married">Coniugati (imposizione congiunta)</option>
+<option value="married">Coniugato (imposizione congiunta)</option>
 </select>
 </div>
 <div class="form-field">
 <label for="children">Figli (numero)</label>
 <input type="number" id="children" name="children" value="0" min="0" max="10" step="1">
+<div id="calc-kid-ages" class="calc-kid-ages"></div>
 </div>
-</div>
-<div class="form-row">
 <div class="form-field">
-<label for="deductions">Deduzioni (CHF, facoltativo)</label>
-<input type="number" id="deductions" name="deductions" value="" min="0" step="500" placeholder="vuoto = deduzioni forfettarie">
+<label for="confession">Confessione (imposta ecclesiastica)</label>
+<select id="confession" name="confession">
+<option value="NONE">Senza Chiesa</option>
+<option value="REFORMED">Riformata</option>
+<option value="ROMAN_CATHOLIC">Cattolica romana</option>
+<option value="CHRIST_CATHOLIC">Cattolica cristiana</option>
+<option value="OTHERS">Altra</option>
+</select>
 </div>
 </div>
-<button type="submit" class="btn btn-primary">Calcolare</button>
+<button type="submit" class="btn btn-primary">Calcola</button>
 <div id="calc-result" class="calc-result" aria-live="polite"></div>
-<p class="muted disclaimer">La stima vale per il capoluogo del cantone senza imposta ecclesiastica ; il Suo Comune può discostarsi. Fa fede unicamente la tassazione dell’autorità fiscale.</p>
-<p class="muted" style="font-size:.85rem">Imposta federale : tariffa legale 2026 (art. 36 LOC, RS 642.11). Imposta cantonale e comunale : aliquote medie pubblicate 2026 per capoluogo (imposta federale inclusa, ecclesiastica esclusa), separate per calcolo.</p>
+<p class="muted disclaimer">Calcolato con le tariffe ufficiali e i moltiplicatori dell’Amministrazione federale delle contribuzioni (Swiss Tax Calculator, versione semplice): tutti i comuni, imposta ecclesiastica e sulla sostanza inclusi, con le procedure di splitting cantonali e le deduzioni per figli. L’input è il reddito imponibile; applichi in anticipo le deduzioni personali. Vincolante resta la tassazione dell’autorità fiscale.</p>
+<p class="muted" style="font-size:.85rem">Fonte dei dati: ESTV swisstaxcalculator.estv.admin.ch (tariffe, moltiplicatori e regole di deduzione 2026/2025). Se la connessione live manca, il calcolatore prosegue offline con una stima cantonale media – la visualizzazione indica la modalità.</p>
 </form>
 </section>
 </div>
@@ -118,6 +136,7 @@
   </div>
 </footer>
 <script src="../assets/tax_engine.js"></script>
+<script src="../assets/locations.js"></script>
 <script src="../assets/endpoint.js"></script>
 <script src="../assets/track.js"></script>
 <script src="../assets/app.js"></script>

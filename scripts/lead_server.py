@@ -26,7 +26,100 @@ EMAIL_FROM = "info@steuerberatung.ch"
 EMAIL_ACCOUNT = "steuerberatung"   # himalaya account name
 HIMALAYA = "/opt/homebrew/bin/himalaya"
 
-VERSION = 2
+VERSION = 3
+
+# ---------------------------------------------------------------- tax proxy
+# Official ESTV Swiss Tax Calculator API (the same engine behind
+# swisstaxcalculator.estv.admin.ch). We proxy it so the browser never needs a
+# cross-origin call to a federal server and so results are cached: the simple
+# calculator is a pure function of (year, location, relationship, confession,
+# children ages, taxable income, fortune).
+ESTV_API = ("https://swisstaxcalculator.estv.admin.ch/delegate/"
+            "ost-integration/v1/lg-proxy/operation/c3b67379_ESTV")
+ESTV_UA = "steuerberatung.ch-rechner/1.0"
+TAX_YEARS = {2025, 2026}
+CONFESSIONS = {"NONE": "NONE", "REFORMED": 1, "ROMAN_CATHOLIC": 2,
+               "CHRIST_CATHOLIC": 3, "OTHERS": 5}
+_tax_cache = {}
+
+
+def _estv(op, body):
+    key = op + "|" + json.dumps(body, sort_keys=True)
+    hit = _tax_cache.get(key)
+    if hit is not None:
+        return hit
+    req = urllib.request.Request(
+        ESTV_API + "/" + op, data=json.dumps(body).encode(),
+        headers={"Content-Type": "application/json",
+                 "Accept": "application/json", "User-Agent": ESTV_UA},
+        method="POST")
+    with urllib.request.urlopen(req, timeout=15) as r:
+        out = json.loads(r.read().decode())
+    if len(_tax_cache) > 5000:
+        _tax_cache.clear()
+    _tax_cache[key] = out
+    return out
+
+
+def tax_locations(q, year):
+    """Autocomplete for municipalities/PLZ via the official location search."""
+    r = _estv("API_searchLocation",
+              {"Search": q[:80], "Language": 1, "TaxYear": year})
+    seen, out = set(), []
+    for x in r.get("response", []):
+        ident = (x.get("TaxLocationID"))
+        if ident in seen:
+            continue
+        seen.add(ident)
+        out.append({"id": ident, "city": x.get("City", ""),
+                    "zip": x.get("ZipCode", ""), "canton": x.get("Canton", "")})
+        if len(out) >= 12:
+            break
+    return out
+
+
+def tax_calc(data):
+    """Validate + forward one simple-tax case to the ESTV API."""
+    year = int(data.get("year") or 2026)
+    if year not in TAX_YEARS:
+        return {"error": "unsupported year"}
+    loc = int(data.get("loc") or 0)
+    if not (100000000 <= loc <= 999999999):
+        return {"error": "unknown location"}
+    rel = int(data.get("rel") or 1)
+    if rel not in (1, 2):
+        return {"error": "bad relationship"}
+    conf = CONFESSIONS.get(str(data.get("confession") or "NONE").upper())
+    if conf is None:
+        return {"error": "bad confession"}
+    kids = data.get("children") or []
+    if not isinstance(kids, list) or len(kids) > 10:
+        return {"error": "too many children"}
+    ages = []
+    for k in kids:
+        a = int((k or {}).get("age", 10)) if isinstance(k, dict) else int(k)
+        ages.append({"Age": max(0, min(25, a))})
+    taxable = max(0, min(50_000_000, int(data.get("taxable") or 0)))
+    fortune = max(0, min(100_000_000, int(data.get("fortune") or 0)))
+    r = _estv("API_calculateSimpleTaxes", {
+        "TaxYear": year, "TaxLocationID": loc, "Relationship": rel,
+        "Confession1": conf, "Confession2": 0, "Children": ages,
+        "TaxableIncomeCanton": taxable, "TaxableIncomeFed": taxable,
+        "TaxableFortune": fortune})
+    resp = r.get("response")
+    if not isinstance(resp, dict):
+        return {"error": "upstream"}
+    return {"ok": True, "tax": {
+        "fed": resp.get("IncomeTaxFed", 0),
+        "canton": resp.get("IncomeTaxCanton", 0),
+        "city": resp.get("IncomeTaxCity", 0),
+        "church": resp.get("IncomeTaxChurch", 0),
+        "fortune": (resp.get("FortuneTaxCanton", 0) + resp.get("FortuneTaxCity", 0)
+                    + resp.get("FortuneTaxChurch", 0)),
+        "personal": resp.get("PersonalTax", 0),
+        "total": resp.get("TotalNetTax", 0),
+        "location": resp.get("Location", {}).get("City", ""),
+        "year": year}}
 
 
 def _env(name, default=""):
@@ -284,6 +377,20 @@ class Handler(BaseHTTPRequestHandler):
             return self._track()
         if path == "/health":
             return self._json(200, {"ok": True, "version": VERSION})
+        if path == "/api/tax/locations":
+            q = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query)
+            term = q.get("q", [""])[0]
+            try:
+                year = int(q.get("year", ["2026"])[0])
+            except ValueError:
+                year = 2026
+            if not term:
+                return self._json(400, {"error": "q required"})
+            try:
+                return self._json(200, {"ok": True,
+                                        "locations": tax_locations(term, year)})
+            except Exception as e:
+                return self._json(502, {"error": "upstream", "detail": str(e)[:120]})
         return self._json(404, {"error": "not found"})
 
     def _track(self):
@@ -303,13 +410,20 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
 
     def do_POST(self):
-        if self.path != "/api/lead":
+        if self.path not in ("/api/lead", "/api/tax"):
             return self._json(404, {"error": "not found"})
         try:
             n = int(self.headers.get("Content-Length", 0))
             data = json.loads(self.rfile.read(n) or b"{}")
         except Exception:
             return self._json(400, {"error": "invalid json"})
+        if self.path == "/api/tax":
+            try:
+                out = tax_calc(data)
+                return self._json(200 if out.get("ok") else 400, out)
+            except Exception as e:
+                return self._json(502, {"error": "upstream",
+                                        "detail": str(e)[:120]})
         lead = {
             "name": str(data.get("name", ""))[:200],
             "email": str(data.get("email", ""))[:200],

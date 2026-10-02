@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Steuerrechner Schweiz 2026 – Steuerlast nach Kanton berechnen | steuerberatung.ch</title>
-<meta name="description" content="Steuerrechner 2026: Bundessteuer nach gesetzlichem Tarif (Art. 36 DBG), Kantons- und Gemeindesteuer nach publizierten Durchschnittssätzen. Ledig/verheiratet, Kinder, Abzüge – sofortige Schätzung.">
+<title>Steuerrechner Schweiz 2026 – exakte Steuerlast nach Gemeinde berechnen | steuerberatung.ch</title>
+<meta name="description" content="Steuerrechner 2026: Bundes-, Kantons-, Gemeinde-, Kirchen- und Vermögenssteuer nach den offiziellen ESTV-Tarifen – für jede Gemeinde der Schweiz. Ledig/verheiratet, Kinder mit Alter, sofortige Berechnung.">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/logo-180.png">
 <link rel="canonical" href="https://steuerberatung.ch/rechner.html">
@@ -13,8 +13,8 @@
 <link rel="alternate" hreflang="fr-CH" href="https://steuerberatung.ch/fr/rechner.html">
 <link rel="alternate" hreflang="it-CH" href="https://steuerberatung.ch/it/rechner.html">
 <link rel="alternate" hreflang="x-default" href="https://steuerberatung.ch/rechner.html">
-<meta property="og:title" content="Steuerrechner Schweiz 2026 – Steuerlast nach Kanton berechnen | steuerberatung.ch">
-<meta property="og:description" content="Steuerrechner 2026: Bundessteuer nach gesetzlichem Tarif (Art. 36 DBG), Kantons- und Gemeindesteuer nach publizierten Durchschnittssätzen. Ledig/verheiratet, Kinder, Abzüge – sofortige Schätzung.">
+<meta property="og:title" content="Steuerrechner Schweiz 2026 – exakte Steuerlast nach Gemeinde berechnen | steuerberatung.ch">
+<meta property="og:description" content="Steuerrechner 2026: Bundes-, Kantons-, Gemeinde-, Kirchen- und Vermögenssteuer nach den offiziellen ESTV-Tarifen – für jede Gemeinde der Schweiz. Ledig/verheiratet, Kinder mit Alter, sofortige Berechnung.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://steuerberatung.ch/rechner.html">
 <meta property="og:site_name" content="steuerberatung.ch">
@@ -43,7 +43,7 @@
 <div class="page-head">
   <div class="container">
     <h1>Steuerrechner Schweiz 2026</h1>
-    <p>Schätzen Sie Ihre Steuerlast nach Kanton – in Sekunden. Kostenlos, ohne Anmeldung.</p>
+    <p>Bundes-, Kantons-, Gemeinde-, Kirchen- und Vermögenssteuer nach den offiziellen Tarifen – für jede Gemeinde. Kostenlos, ohne Anmeldung.</p>
   </div>
 </div>
 <div class="container">
@@ -51,14 +51,27 @@
 <form id="tax-calc" class="calc-form">
 <div class="form-row">
 <div class="form-field">
-<label for="canton-c">Kanton (Hauptort)</label>
-<select id="canton-c" name="canton">
-<option>ZH</option><option>BE</option><option>LU</option><option>UR</option><option>SZ</option><option>OW</option><option>NW</option><option>GL</option><option>ZG</option><option>FR</option><option>SO</option><option>BS</option><option>BL</option><option>SH</option><option>AR</option><option>AI</option><option>SG</option><option>GR</option><option>AG</option><option>TG</option><option>TI</option><option>VD</option><option>VS</option><option>NE</option><option>GE</option><option>JU</option>
-</select>
+<label for="calc-loc">Gemeinde oder PLZ</label>
+<input type="text" id="calc-loc" name="location" value="Zürich" autocomplete="off" spellcheck="false" placeholder="z. B. 8400 oder Winterthur">
+<div id="calc-loc-list" class="calc-loc-list" hidden></div>
 </div>
 <div class="form-field">
-<label for="income">Jahreseinkommen (CHF, brutto)</label>
+<label for="calc-year">Steuerjahr</label>
+<select id="calc-year" name="year">
+<option value="2026" selected>2026</option>
+<option value="2025">2025</option>
+</select>
+</div>
+</div>
+<div class="form-row">
+<div class="form-field">
+<label for="income">Steuerbares Einkommen (CHF)</label>
 <input type="number" id="income" name="income" value="90000" min="0" step="1000">
+<p class="muted" style="font-size:.8rem;margin-top:4px">Nach Abzügen – so wie es in Ihrer Steuerrechnung erscheint. Rechenbeispiel: 100'000 brutto ledig ergibt rund 82'000 steuerbar.</p>
+</div>
+<div class="form-field">
+<label for="fortune">Reinvermögen (CHF, optional)</label>
+<input type="number" id="fortune" name="fortune" value="" min="0" step="10000" placeholder="0">
 </div>
 </div>
 <div class="form-row">
@@ -72,18 +85,23 @@
 <div class="form-field">
 <label for="children">Kinder (Anzahl)</label>
 <input type="number" id="children" name="children" value="0" min="0" max="10" step="1">
+<div id="calc-kid-ages" class="calc-kid-ages"></div>
 </div>
-</div>
-<div class="form-row">
 <div class="form-field">
-<label for="deductions">Abzüge (CHF, optional)</label>
-<input type="number" id="deductions" name="deductions" value="" min="0" step="500" placeholder="leer = Pauschalabzüge">
+<label for="confession">Konfession (Kirchensteuer)</label>
+<select id="confession" name="confession">
+<option value="NONE">Keine Kirche</option>
+<option value="REFORMED">Reformiert</option>
+<option value="ROMAN_CATHOLIC">Römisch-katholisch</option>
+<option value="CHRIST_CATHOLIC">Christkatholisch</option>
+<option value="OTHERS">Andere</option>
+</select>
 </div>
 </div>
 <button type="submit" class="btn btn-primary">Berechnen</button>
 <div id="calc-result" class="calc-result" aria-live="polite"></div>
-<p class="muted disclaimer">Die Schätzung gilt für den Kantonshauptort ohne Kirchensteuer; Ihre Gemeinde kann abweichen. Für Ihren konkreten Fall gilt die Veranlagung der Steuerbehörde.</p>
-<p class="muted" style="font-size:.85rem">Bundessteuer: gesetzlicher Tarif 2026 (Art. 36 DBG, SR 642.11). Kantons- und Gemeindesteuer: publizierte Durchschnittssteuersätze je Kantonshauptort 2026 (inkl. Bundessteuer, ohne Kirchensteuer), daraus rechnerisch getrennt.</p>
+<p class="muted disclaimer">Berechnet nach den offiziellen Tarifen und Steuerfüssen der Eidgenössischen Steuerverwaltung (Swiss Tax Calculator, einfache Version): alle Gemeinden, inkl. Kirchen- und Vermögenssteuer, mit kantonalen Splittingverfahren und Kinderabzügen. Die Eingabe ist das steuerbare Einkommen; individuelle Abzüge (z. B. Pauschalen) müssen Sie vorab selbst berücksichtigen. Verbindlich bleibt die Veranlagung der Steuerbehörde.</p>
+<p class="muted" style="font-size:.85rem">Datenquelle: ESTV swisstaxcalculator.estv.admin.ch (Tarife, Steuerfüsse und Abzugsregeln 2026/2025). Fällt die Live-Anbindung aus, rechnet der Rechner offline mit Kantonsdurchschnitts-Schätzung weiter – die Anzeige kennzeichnet den Modus.</p>
 </form>
 </section>
 </div>
@@ -118,6 +136,7 @@
   </div>
 </footer>
 <script src="assets/tax_engine.js"></script>
+<script src="assets/locations.js"></script>
 <script src="assets/endpoint.js"></script>
 <script src="assets/track.js"></script>
 <script src="assets/app.js"></script>
