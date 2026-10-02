@@ -279,7 +279,8 @@ if __name__ == "__main__":
         sys.exit(1)
     lang, slug, title, meta = a[0], a[1], a[2], a[3]
     secs = [(a[i], a[i + 1]) for i in range(4, len(a), 2)]
-    # Related articles come from scripts/related_map.json automatically, so
-    # the publish cron needs no extra wiring: add the slug to the map and the
-    # 'Verwandte Artikel' block is emitted on build.
-    build(lang, slug, title, meta, secs, related=related_for(slug))
+    # Related articles come from scripts/related_map.json automatically for DE
+    # (issue #1 scope: DE-only, no FR/IT/EN fan-out), so the publish cron needs
+    # no extra wiring: add the slug to the map and the block is emitted on build.
+    rel = related_for(slug) if lang == "de" else None
+    build(lang, slug, title, meta, secs, related=rel)
