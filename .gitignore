@@ -1,5 +1,8 @@
 data/*.jsonl
 data/*.log
+data/*.bak-*
+data/linkmap-baseline-*.json
+.hermes-patches/
 data/*.err
 data/metrics-report-*.md
 scripts/__pycache__/
