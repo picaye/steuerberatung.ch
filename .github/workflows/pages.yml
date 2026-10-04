@@ -23,6 +23,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Gate — tax engine tests (AGENTS.md working contract)
+        # AGENTS.md declares these gates; without them here, any push to main
+        # shipped to Pages even when the engine tests failed. Non-zero exit
+        # fails the job BEFORE any artifact is built or deployed.
+        run: node scripts/test_tax_engine.js
+      - name: Gate — whole-site validator (lang mirrors, hreflang, links)
+        # Replaces the need for agents to remember to run this locally; the
+        # hand-rolled wc -l mirror check below stays as a build-artifact
+        # sanity net. stdlib-only script, no pip install needed.
+        run: python3 scripts/validate_site.py
       - name: Build public dist (exclude private data + server files)
         run: |
           mkdir -p dist/en dist/fr dist/it dist/assets
