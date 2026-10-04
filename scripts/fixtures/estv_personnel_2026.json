@@ -1,0 +1,173 @@
+{
+ "year": 2026,
+ "personnel": {
+  "ZH": [
+   24,
+   true
+  ],
+  "BE": [
+   0,
+   true
+  ],
+  "LU": [
+   50,
+   false
+  ],
+  "UR": [
+   70,
+   false
+  ],
+  "SZ": [
+   0,
+   true
+  ],
+  "OW": [
+   0,
+   true
+  ],
+  "NW": [
+   50,
+   false
+  ],
+  "GL": [
+   0,
+   true
+  ],
+  "ZG": [
+   0,
+   true
+  ],
+  "FR": [
+   0,
+   true
+  ],
+  "SO": [
+   50,
+   true
+  ],
+  "BS": [
+   0,
+   true
+  ],
+  "BL": [
+   0,
+   true
+  ],
+  "SH": [
+   60,
+   false
+  ],
+  "AR": [
+   0,
+   true
+  ],
+  "AI": [
+   0,
+   true
+  ],
+  "SG": [
+   0,
+   true
+  ],
+  "GR": [
+   0,
+   true
+  ],
+  "AG": [
+   0,
+   true
+  ],
+  "TG": [
+   0,
+   true
+  ],
+  "TI": [
+   20,
+   true
+  ],
+  "VD": [
+   0,
+   true
+  ],
+  "VS": [
+   24,
+   false
+  ],
+  "NE": [
+   0,
+   true
+  ],
+  "GE": [
+   25,
+   false
+  ],
+  "JU": [
+   0,
+   true
+  ]
+ },
+ "capitalBfs": {
+  "ZH": 261,
+  "BE": 351,
+  "LU": 1061,
+  "UR": 1201,
+  "SZ": 1372,
+  "OW": 1407,
+  "NW": 1509,
+  "GL": 1632,
+  "ZG": 1711,
+  "FR": 2196,
+  "SO": 2601,
+  "BS": 2701,
+  "BL": 2829,
+  "SH": 2939,
+  "AR": 3001,
+  "AI": 3101,
+  "SG": 3203,
+  "GR": 3901,
+  "AG": 4001,
+  "TG": 4566,
+  "TI": 5002,
+  "VD": 5586,
+  "VS": 6266,
+  "NE": 6458,
+  "GE": 6621,
+  "JU": 6800
+ },
+ "fedChildCredit": 263,
+ "social": {
+  "ahvIvEoPct": 5.3,
+  "alvPct": 1.1,
+  "nbuPct": 0.4,
+  "maxSalaryAlvNbu": 148200,
+  "bvg": {
+   "entryThreshold": 22680,
+   "coordination": 26460,
+   "minInsured": 3780,
+   "maxPensionableSalary": 90720,
+   "excessPct": 3.5,
+   "bands": [
+    [
+     0,
+     0.0
+    ],
+    [
+     25,
+     3.5
+    ],
+    [
+     35,
+     5.0
+    ],
+    [
+     45,
+     7.5
+    ],
+    [
+     55,
+     9.0
+    ]
+   ]
+  }
+ }
+}

@@ -64,6 +64,21 @@ def simple(year, loc, rel, kids, income):
     })
 
 
+def probe_quantum(year, loc, rel):
+    """100 if the canton floors taxable income to 100 CHF before the tariff
+    (base(X) == base(floor100(X))), 1 if it taxes the exact income.
+    Robust version: probes SEVERAL odd incomes high enough that tariffs are
+    active everywhere; returns 1 if ANY odd income differs from its floor twin.
+    (The old single-probe version misread BL married as 100: at low incomes
+    the exact and floored curves coincidentally agree.)"""
+    for x in (234567, 456789, 88888):
+        b = simple(year, loc, rel, [], x)["IncomeSimpleTaxCanton"]
+        b_floor = simple(year, loc, rel, [], (x // 100) * 100)["IncomeSimpleTaxCanton"]
+        if b != b_floor:
+            return 1
+    return 100
+
+
 def main():
     year = int(sys.argv[1]) if len(sys.argv) > 1 and sys.argv[1].isdigit() else 2026
     out = None
@@ -97,9 +112,18 @@ def main():
     t0 = time.time()
     with ThreadPoolExecutor(max_workers=4) as ex:
         fixtures = list(ex.map(run, jobs))
+
+    # income quantization probe (per canton x status)
+    quantum = {}
+    qjobs = [(kt, loc, rel) for kt, loc in CAPITALS.items() for rel in (1, 2)]
+    with ThreadPoolExecutor(max_workers=4) as ex:
+        qvals = list(ex.map(lambda j: probe_quantum(year, j[1], j[2]), qjobs))
+    for (kt, _, rel), q in zip(qjobs, qvals):
+        quantum.setdefault(kt, {})["married" if rel == 2 else "single"] = q
     os.makedirs(os.path.dirname(out), exist_ok=True)
     blob = {"year": year, "source": "ESTV API_calculateSimpleTaxes (official calculator)",
-            "fetched": time.strftime("%Y-%m-%dT%H:%M:%S%z"), "cases": fixtures}
+            "fetched": time.strftime("%Y-%m-%dT%H:%M:%S%z"), "cases": fixtures,
+            "quantum": quantum}
     with open(out, "w") as f:
         json.dump(blob, f, separators=(",", ":"))
     print(f"wrote {len(fixtures)} fixtures to {out} in {time.time()-t0:.0f}s")
