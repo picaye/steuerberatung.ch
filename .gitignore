@@ -1,4 +1,6 @@
 data/*.jsonl
+# content research plan is tracked (issue #3 pin visibility)
+!data/content-research.jsonl
 data/*.log
 data/*.bak-*
 data/linkmap-baseline-*.json
