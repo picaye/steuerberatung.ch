@@ -29,6 +29,11 @@
     "steuer-checkliste-2026.html",
     "steuern-sparen-tipps.html"
   ],
+  "grenzgaenger-homeoffice-telearbeit-regeln.html": [
+    "grenzgaenger-de-fr-it-steuern.html",
+    "steuer-checkliste-2026.html",
+    "steuern-sparen-tipps.html"
+  ],
   "hypothek-steuerabzug-schweiz.html": [
     "eigenmietwert-abschaffung-2029.html",
     "erbschaftssteuer-schenkungssteuer-schweiz.html",
@@ -93,5 +98,10 @@
     "mwst-100k-pflicht-schweiz.html",
     "verrechnungssteuer-schweiz-35-prozent.html",
     "erbschaftssteuer-schenkungssteuer-schweiz.html"
+  ],
+  "dividenden-ahv-pflicht-bge-9c-532-2025.html": [
+    "verrechnungssteuer-schweiz-35-prozent.html",
+    "verrechnungssteuer-rueckerstattungsfrist-ablauf.html",
+    "ahv-mindestbeitrag-selbststaendige.html"
   ]
 }
