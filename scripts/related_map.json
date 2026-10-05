@@ -22,7 +22,7 @@
   "erbschaftssteuer-schenkungssteuer-schweiz.html": [
     "hypothek-steuerabzug-schweiz.html",
     "eigenmietwert-abschaffung-2029.html",
-    "kryptowaehrungen-steuern-schweiz.html"
+    "transparenzregister-tjpg-meldepflicht.html"
   ],
   "grenzgaenger-de-fr-it-steuern.html": [
     "individualbesteuerung-erklaert.html",
@@ -47,7 +47,7 @@
   "mwst-100k-pflicht-schweiz.html": [
     "ahv-mindestbeitrag-selbststaendige.html",
     "steuer-checkliste-2026.html",
-    "steuern-sparen-tipps.html"
+    "transparenzregister-tjpg-meldepflicht.html"
   ],
   "pensionskassen-einkauf-steuern-sparen.html": [
     "saeule-3a-bezug-staffeln.html",
@@ -87,6 +87,11 @@
   "verrechnungssteuer-schweiz-35-prozent.html": [
     "verrechnungssteuer-rueckerstattungsfrist-ablauf.html",
     "kryptowaehrungen-steuern-schweiz.html",
-    "steuer-checkliste-2026.html"
+    "transparenzregister-tjpg-meldepflicht.html"
+  ],
+  "transparenzregister-tjpg-meldepflicht.html": [
+    "mwst-100k-pflicht-schweiz.html",
+    "verrechnungssteuer-schweiz-35-prozent.html",
+    "erbschaftssteuer-schenkungssteuer-schweiz.html"
   ]
 }
