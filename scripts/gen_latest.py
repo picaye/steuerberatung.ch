@@ -23,6 +23,7 @@ import argparse
 import datetime
 import json
 import re
+import subprocess
 import sys
 from pathlib import Path
 
@@ -127,10 +128,36 @@ def article_meta(path: Path) -> dict | None:
     return best
 
 
-def collect(lang: str) -> list[dict]:
+def git_tracked() -> set[str] | None:
+    """POSIX paths of files tracked in the git index, or None if not a repo.
+
+    Guard against the t_58b0adf3 regression: an unshipped draft sitting in a
+    dirty working tree must never leak into the published strips/sitemap.
+    Only files committed (tracked) on the current branch are eligible.
+    """
+    try:
+        r = subprocess.run(
+            ["git", "-C", str(ROOT), "ls-files", "--cached"],
+            capture_output=True, text=True, timeout=15,
+        )
+    except Exception:
+        return None
+    if r.returncode != 0:
+        return None
+    return set(r.stdout.split())
+
+
+def collect(lang: str, tracked: set[str] | None = None) -> list[dict]:
     base = ROOT if lang == "de" else ROOT / lang
+    if tracked is None:
+        tracked = git_tracked()
     out = []
     for p in sorted(base.glob("*.html")):
+        if tracked is not None:
+            rel = p.relative_to(ROOT).as_posix()
+            if rel not in tracked:
+                print(f"SKIP (untracked draft, not on this branch): {rel}", file=sys.stderr)
+                continue
         meta = article_meta(p)
         if meta:
             out.append(meta)

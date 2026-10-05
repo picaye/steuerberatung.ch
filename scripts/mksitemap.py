@@ -1,10 +1,24 @@
 #!/usr/bin/env python3
-import os, glob, datetime
+import os, glob, datetime, subprocess
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://steuerberatung.ch"
+# Guard (t_58b0adf3): only pages tracked in git enter the sitemap — an
+# unshipped draft in a dirty working tree must never leak a 404 URL.
+try:
+    _r = subprocess.run(["git", "-C", BASE, "ls-files", "--cached"],
+                        capture_output=True, text=True, timeout=15)
+    tracked = set(_r.stdout.split()) if _r.returncode == 0 else None
+except Exception:
+    tracked = None
 files = sorted(glob.glob(BASE + "/*.html"))
 for lang in ("en", "fr", "it"):
     files += sorted(glob.glob(BASE + f"/{lang}/*.html"))
+if tracked is not None:
+    dropped = [f for f in files
+               if os.path.relpath(f, BASE) not in tracked]
+    for f in dropped:
+        print("SKIP (untracked):", os.path.relpath(f, BASE))
+    files = [f for f in files if os.path.relpath(f, BASE) in tracked]
 urls = []
 for f in files:
     rel = os.path.relpath(f, BASE)
