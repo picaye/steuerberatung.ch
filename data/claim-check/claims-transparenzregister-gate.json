@@ -1,0 +1,114 @@
+[
+  {
+    "id": "tjpg-entry-force",
+    "claim": "Das TJPG (SR 955.3) ist am 1. Oktober 2026 in Kraft getreten.",
+    "source": "tjpg-entry-force",
+    "file": "transparenzregister-tjpg-meldepflicht.html (de/en/fr/it)",
+    "origin": "fedlex SR 955.3 / 955.31"
+  },
+  {
+    "id": "tjpg-bj-register",
+    "claim": "Das Transparenzregister wird vom Bundesamt für Justiz (BJ) geführt.",
+    "source": "tjpg-bj-register",
+    "file": "transparenzregister-tjpg-meldepflicht.html (de/en/fr/it)",
+    "origin": "fedlex SR 955.3 / 955.31"
+  },
+  {
+    "id": "tjpg-ag-gmbh-scope",
+    "claim": "Aktiengesellschaften und Gesellschaften mit beschränkter Haftung sind dem TJPG unterstellte Rechtseinheiten.",
+    "source": "tjpg-ag-gmbh-scope",
+    "file": "transparenzregister-tjpg-meldepflicht.html (de/en/fr/it)",
+    "origin": "fedlex SR 955.3 / 955.31"
+  },
+  {
+    "id": "tjpg-art51-hr-two-years",
+    "claim": "Juristische Personen, bei denen alle wirtschaftlich berechtigten Personen als Gesellschafterinnen oder Gesellschafter oder als Organ im Handelsregister eingetragen sind, müssen die Meldung spätestens zwei Jahre nach Inkrafttreten vornehmen.",
+    "source": "tjpg-art51-hr-two-years",
+    "file": "transparenzregister-tjpg-meldepflicht.html (de/en/fr/it)",
+    "origin": "fedlex SR 955.3 / 955.31"
+  },
+  {
+    "id": "tjpg-art51-ag-ord-rev-3mo",
+    "claim": "Aktiengesellschaften, die ihre Bücher durch eine Revisionsstelle ordentlich prüfen lassen müssen, müssen die Meldung spätestens drei Monate nach Inkrafttreten vornehmen.",
+    "source": "tjpg-art51-ag-ord-rev-3mo",
+    "file": "transparenzregister-tjpg-meldepflicht.html (de/en/fr/it)",
+    "origin": "fedlex SR 955.3 / 955.31"
+  },
+  {
+    "id": "tjpg-art51-other-ord-rev-4mo",
+    "claim": "Andere Gesellschaften, die ihre Bücher durch eine Revisionsstelle ordentlich prüfen lassen müssen, müssen die Meldung spätestens vier Monate nach Inkrafttreten vornehmen.",
+    "source": "tjpg-art51-other-ord-rev-4mo",
+    "file": "transparenzregister-tjpg-meldepflicht.html (de/en/fr/it)",
+    "origin": "fedlex SR 955.3 / 955.31"
+  },
+  {
+    "id": "tjpg-art51-ag-no-ord-rev-5mo",
+    "claim": "Aktiengesellschaften, die die Voraussetzungen für eine ordentliche Revision nicht erfüllen, müssen die Meldung spätestens fünf Monate nach Inkrafttreten vornehmen.",
+    "source": "tjpg-art51-ag-no-ord-rev-5mo",
+    "file": "transparenzregister-tjpg-meldepflicht.html (de/en/fr/it)",
+    "origin": "fedlex SR 955.3 / 955.31"
+  },
+  {
+    "id": "tjpg-art51-others-6mo",
+    "claim": "Andere Gesellschaften, die die Voraussetzungen für eine eingeschränkte Revision nicht erfüllen, und andere juristische Personen müssen die Meldung spätestens sechs Monate nach Inkrafttreten vornehmen.",
+    "source": "tjpg-art51-others-6mo",
+    "file": "transparenzregister-tjpg-meldepflicht.html (de/en/fr/it)",
+    "origin": "fedlex SR 955.3 / 955.31"
+  },
+  {
+    "id": "tjpg-new-co-1mo",
+    "claim": "Die Meldung an das Transparenzregister muss innerhalb eines Monats nach der Eintragung der Gesellschaft in das Handelsregister erfolgen.",
+    "source": "tjpg-new-co-1mo",
+    "file": "transparenzregister-tjpg-meldepflicht.html (de/en/fr/it)",
+    "origin": "fedlex SR 955.3 / 955.31"
+  },
+  {
+    "id": "tjpg-change-1mo",
+    "claim": "Die Gesellschaft muss jede Änderung einer im Transparenzregister eingetragenen Tatsache innerhalb eines Monats, nachdem sie davon Kenntnis erhalten hat, dem Transparenzregister melden.",
+    "source": "tjpg-change-1mo",
+    "file": "transparenzregister-tjpg-meldepflicht.html (de/en/fr/it)",
+    "origin": "fedlex SR 955.3 / 955.31"
+  },
+  {
+    "id": "tjpg-penalty-500k",
+    "claim": "Wer vorsätzlich die Pflicht zur Meldung an das Transparenzregister nach Artikel 9–11 oder 17 TJPG verletzt, wird mit Busse bis zu 500 000 Franken bestraft.",
+    "source": "tjpg-penalty-500k",
+    "file": "transparenzregister-tjpg-meldepflicht.html (de/en/fr/it)",
+    "origin": "fedlex SR 955.3 / 955.31"
+  },
+  {
+    "id": "tjpg-penalty-100k-disobey",
+    "claim": "Wer einer von der Kontrollstelle ergangenen rechtskräftigen Verfügung vorsätzlich nicht Folge leistet, wird mit Busse bis zu 100 000 Franken bestraft.",
+    "source": "tjpg-penalty-100k-disobey",
+    "file": "transparenzregister-tjpg-meldepflicht.html (de/en/fr/it)",
+    "origin": "fedlex SR 955.3 / 955.31"
+  },
+  {
+    "id": "tjpg-register-not-public",
+    "claim": "Das Transparenzregister ist nicht öffentlich einsehbar; online abrufen dürfen unter anderem die Kontrollstelle, Strafverfolgungsbehörden, die Meldestelle für Geldwäscherei und Finanzintermediäre zur Erfüllung ihrer GwG-Sorgfaltspflichten.",
+    "source": "tjpg-register-not-public",
+    "file": "transparenzregister-tjpg-meldepflicht.html (de/en/fr/it)",
+    "origin": "fedlex SR 955.3 / 955.31"
+  },
+  {
+    "id": "tjpg-internal-register-replaced",
+    "claim": "Für Aktionärinnen und Aktionäre sowie Gesellschafter, die der Meldepflicht nach den Artikeln 697j und 790a OR nachgekommen sind, gilt die Meldepflicht nach Artikel 13 TJPG als beachtet; das nach bisherigem Recht erstellte Verzeichnis der wirtschaftlich berechtigten Personen ist während zehn Jahren nach Inkrafttreten aufzubewahren.",
+    "source": "tjpg-internal-register-replaced",
+    "file": "transparenzregister-tjpg-meldepflicht.html (de/en/fr/it)",
+    "origin": "fedlex SR 955.3 / 955.31"
+  },
+  {
+    "id": "tjpg-control-plant-contradict",
+    "claim": "KONTROLLFRAGE (absichtlich falsch): Juristische Personen, bei denen alle wirtschaftlich berechtigten Personen im Handelsregister eingetragen sind, müssen die Meldung spätestens sechs Monate nach Inkrafttreten vornehmen.",
+    "source": "tjpg-control-plant-contradict",
+    "file": "transparenzregister-tjpg-meldepflicht.html (de/en/fr/it)",
+    "origin": "fedlex SR 955.3 / 955.31"
+  },
+  {
+    "id": "tjpg-penalty-plant-contradict",
+    "claim": "KONTROLLFRAGE (absichtlich falsch): Wer vorsätzlich die Meldepflicht nach Artikel 9 TJPG verletzt, wird mit Busse bis zu 20 000 Franken bestraft.",
+    "source": "tjpg-penalty-plant-contradict",
+    "file": "transparenzregister-tjpg-meldepflicht.html (de/en/fr/it)",
+    "origin": "fedlex SR 955.3 / 955.31"
+  }
+]
