@@ -1,0 +1,242 @@
+[
+  {
+    "id": "bge-date",
+    "claim": "Das Bundesgericht fällte das Urteil 9C_532/2025 am 25. Juni 2026; die Beschwerde der AG wurde abgewiesen.",
+    "source": "bge_dispositiv",
+    "file": "dividenden-ahv-pflicht-bge-9c-532-2025.html (DE)",
+    "verdict": "supports",
+    "confidence": 0.95,
+    "needs_review": false,
+    "probabilities": {
+      "unusable": 0.01,
+      "contradicts": 0.01,
+      "silent": 0.03,
+      "supports": 0.95
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "art45-basis",
+    "claim": "AHV-Beiträge werden nur vom Erwerbseinkommen erhoben, nicht vom Vermögensertrag; die Rechtsprechung stützt die Dividendenumqualifikation auf Art. 4 und 5 AHVG.",
+    "source": "bge_21_art45",
+    "file": "dividenden-ahv-pflicht-bge-9c-532-2025.html (DE)",
+    "verdict": "supports",
+    "confidence": 0.8,
+    "needs_review": false,
+    "probabilities": {
+      "silent": 0.01,
+      "supports": 0.85,
+      "unusable": 0.09,
+      "contradicts": 0.05
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "kumulativ",
+    "claim": "Eine Umqualifizierung der Dividende in beitragspflichtigen Lohn setzt kumulativ voraus, dass der Lohn im Vergleich zu branchenüblichen Gehältern unangemessen tief und die Dividende offensichtlich überhöht (10 % des Aktienwertes übersteigend) ist.",
+    "source": "bge_22_reclass",
+    "file": "dividenden-ahv-pflicht-bge-9c-532-2025.html (DE)",
+    "verdict": "supports",
+    "confidence": 0.86,
+    "needs_review": false,
+    "probabilities": {
+      "contradicts": 0.03,
+      "silent": 0.01,
+      "unusable": 0.07,
+      "supports": 0.89
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "wml-10pct",
+    "claim": "Nach der Wegleitung des BSV sind Dividenden von 10 Prozent oder mehr im Verhältnis zum Steuerwert der Wertpapiere vermutungsweise überhöht.",
+    "source": "wml_10pct",
+    "file": "dividenden-ahv-pflicht-bge-9c-532-2025.html (DE)",
+    "verdict": "supports",
+    "confidence": 0.98,
+    "needs_review": false,
+    "probabilities": {
+      "supports": 0.99,
+      "silent": 0.0,
+      "contradicts": 0.0,
+      "unusable": 0.01
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "wml-branchenueblich",
+    "claim": "Die WML sieht vor, dass die Aufrechnung bis zur Höhe eines branchenüblichen Gehalts vorzunehmen ist.",
+    "source": "wml_2012",
+    "file": "dividenden-ahv-pflicht-bge-9c-532-2025.html (DE)",
+    "verdict": "supports",
+    "confidence": 0.98,
+    "needs_review": false,
+    "probabilities": {
+      "unusable": 0.01,
+      "supports": 0.98,
+      "contradicts": 0.01,
+      "silent": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "fact-dividenden",
+    "claim": "Die AG schüttete in den Jahren 2021 und 2022 Dividenden von Fr. 582'000.- (2021) und Fr. 650'000.- (2022) an die Holding aus.",
+    "source": "bge_facts",
+    "file": "dividenden-ahv-pflicht-bge-9c-532-2025.html (DE)",
+    "verdict": "supports",
+    "confidence": 0.98,
+    "needs_review": false,
+    "probabilities": {
+      "silent": 0.01,
+      "supports": 0.99,
+      "contradicts": 0.0,
+      "unusable": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "fact-aufrechnung",
+    "claim": "Nach teilweiser Gutheissung der Einsprache betrug die Lohnaufrechnung Fr. 99'044.- für 2021 und Fr. 98'346.- für 2022.",
+    "source": "bge_facts",
+    "file": "dividenden-ahv-pflicht-bge-9c-532-2025.html (DE)",
+    "verdict": "supports",
+    "confidence": 0.99,
+    "needs_review": false,
+    "probabilities": {
+      "unusable": 0.0,
+      "silent": 0.0,
+      "contradicts": 0.0,
+      "supports": 1.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "fact-lohn-rente",
+    "claim": "Der tatsächlich ausbezahlte Lohn von Fr. 86'040.- entsprach exakt dem durchschnittlichen Einkommen, das gemäss Skala 44 der bundesamtlichen Rententabellen Anspruch auf die höchstmögliche monatliche AHV-Vollrente ergibt.",
+    "source": "bge_facts",
+    "file": "dividenden-ahv-pflicht-bge-9c-532-2025.html (DE)",
+    "verdict": "supports",
+    "confidence": 0.97,
+    "needs_review": false,
+    "probabilities": {
+      "supports": 0.98,
+      "contradicts": 0.01,
+      "unusable": 0.0,
+      "silent": 0.01
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "fact-965",
+    "claim": "Die Einnahmen der Holding stammten gemäss vorinstanzlichen Feststellungen zu 96,5 % aus der Beteiligung an der operativen Gesellschaft.",
+    "source": "bge_41_holding",
+    "file": "dividenden-ahv-pflicht-bge-9c-532-2025.html (DE)",
+    "verdict": "supports",
+    "confidence": 0.97,
+    "needs_review": false,
+    "probabilities": {
+      "contradicts": 0.02,
+      "unusable": 0.0,
+      "silent": 0.0,
+      "supports": 0.98
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "verjaehrung",
+    "claim": "AHV-Beiträge verjähren, wenn sie nicht innert fünf Jahren nach Ablauf des Kalenderjahres, für das sie geschuldet sind, durch Verfügung geltend gemacht werden (Art. 16 Abs. 1 AHVG).",
+    "source": "ahvg_art16",
+    "file": "dividenden-ahv-pflicht-bge-9c-532-2025.html (DE)",
+    "verdict": "supports",
+    "confidence": 1.0,
+    "needs_review": false,
+    "probabilities": {
+      "contradicts": 0.0,
+      "supports": 1.0,
+      "unusable": 0.0,
+      "silent": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "bsv-nr85",
+    "claim": "Das BSV publizierte das Urteil 9C_532/2025 am 4. August 2026 in der Rechtsprechungsauswahl Nr. 85.",
+    "source": "bsv_nr85",
+    "file": "dividenden-ahv-pflicht-bge-9c-532-2025.html (DE)",
+    "verdict": "supports",
+    "confidence": 0.98,
+    "needs_review": false,
+    "probabilities": {
+      "unusable": 0.0,
+      "supports": 0.99,
+      "contradicts": 0.01,
+      "silent": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "herzog",
+    "claim": "Der Bundesrat prüft im Bericht zum Postulat Herzog (22.4450, verabschiedet 15.10.2025), Dividenden, die eine gewisse Renditeschwelle übersteigen, gesetzlich als Lohn einzustufen.",
+    "source": "admin_ch_mm",
+    "file": "dividenden-ahv-pflicht-bge-9c-532-2025.html (DE)",
+    "verdict": "supports",
+    "confidence": 0.86,
+    "needs_review": false,
+    "probabilities": {
+      "contradicts": 0.01,
+      "supports": 0.9,
+      "silent": 0.09,
+      "unusable": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "ctrl-false-23",
+    "claim": "Das Bundesgericht stellt bei der Umqualifizierung von Dividenden auf die gesetzliche Faustregel ab, dass mindestens zwei Drittel des Gewinns als Lohn auszurichten sind.",
+    "source": "bge_22_reclass",
+    "file": "CONTROL (planted false — expect contradicts)",
+    "verdict": "contradicts",
+    "confidence": 0.85,
+    "needs_review": false,
+    "probabilities": {
+      "unusable": 0.01,
+      "contradicts": 0.89,
+      "silent": 0.1,
+      "supports": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "ctrl-true-durchgriff",
+    "claim": "Die Grundsätze des Durchgriffs können im AHV-Beitragsrecht analog herangezogen werden, wenn die Ausschüttung über eine zwischengeschaltete Holding erfolgt.",
+    "source": "bsv_nr85",
+    "file": "CONTROL (planted true — expect supports)",
+    "verdict": "supports",
+    "confidence": 0.93,
+    "needs_review": false,
+    "probabilities": {
+      "supports": 0.94,
+      "contradicts": 0.0,
+      "unusable": 0.05,
+      "silent": 0.01
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "deadline-arith",
+    "claim": "Für das Beitragsjahr 2021 können AHV-Beiträge bis zum 31. Dezember 2026 nachgefordert werden; für 2026 bis zum 31. Dezember 2031.",
+    "source": "ahvg_art16",
+    "file": "dividenden-ahv-pflicht-bge-9c-532-2025.html (DE) — NOTE: pure date arithmetic; checker cannot refute computed deadlines, verified in code (see card comment)",
+    "verdict": "supports",
+    "confidence": 0.91,
+    "needs_review": false,
+    "probabilities": {
+      "unusable": 0.0,
+      "supports": 0.93,
+      "silent": 0.01,
+      "contradicts": 0.06
+    },
+    "model": "jev-latest"
+  }
+]
