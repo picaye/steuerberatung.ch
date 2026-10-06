@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import os, glob, datetime, subprocess
+import os, glob, json, datetime, subprocess
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://steuerberatung.ch"
 # Guard (t_58b0adf3): only pages tracked in git enter the sitemap — an
@@ -19,6 +19,31 @@ if tracked is not None:
     for f in dropped:
         print("SKIP (untracked):", os.path.relpath(f, BASE))
     files = [f for f in files if os.path.relpath(f, BASE) in tracked]
+# Guard (issue #5 / Foreman): a tracked page whose content-research record is
+# still status:pending is staged, not published — keep it out of the sitemap.
+def _pending_slugs():
+    slugs = set()
+    try:
+        for line in open(os.path.join(BASE, "data", "content-research.jsonl"), encoding="utf-8"):
+            try:
+                r = json.loads(line)
+            except Exception:
+                continue
+            if r.get("status") == "pending" and r.get("slug"):
+                slugs.add(r["slug"])
+    except FileNotFoundError:
+        pass
+    return slugs
+_pending = _pending_slugs()
+if _pending:
+    kept = []
+    for f in files:
+        stem = os.path.splitext(os.path.basename(f))[0]
+        if stem in _pending:
+            print("SKIP (status:pending):", os.path.relpath(f, BASE))
+        else:
+            kept.append(f)
+    files = kept
 urls = []
 for f in files:
     # Staged/draft pages carry <meta name="robots" content="noindex"> — keep them out of the sitemap.

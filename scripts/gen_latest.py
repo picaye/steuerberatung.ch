@@ -154,10 +154,31 @@ def git_tracked() -> set[str] | None:
     return set(r.stdout.split())
 
 
+def _pending_slugs() -> set[str]:
+    """Slugs whose content-research.jsonl record is still status:pending.
+
+    Guard (issue #5): tracked != published. A staged draft committed to main
+    must not enter homepage strips until its record flips to published.
+    """
+    slugs: set[str] = set()
+    try:
+        for line in (ROOT / "data" / "content-research.jsonl").read_text(encoding="utf-8").splitlines():
+            try:
+                r = json.loads(line)
+            except Exception:
+                continue
+            if r.get("status") == "pending" and r.get("slug"):
+                slugs.add(r["slug"])
+    except FileNotFoundError:
+        pass
+    return slugs
+
+
 def collect(lang: str, tracked: set[str] | None = None) -> list[dict]:
     base = ROOT if lang == "de" else ROOT / lang
     if tracked is None:
         tracked = git_tracked()
+    pending = _pending_slugs()
     out = []
     for p in sorted(base.glob("*.html")):
         if tracked is not None:
@@ -166,6 +187,9 @@ def collect(lang: str, tracked: set[str] | None = None) -> list[dict]:
                 print(f"SKIP (untracked draft, not on this branch): {rel}", file=sys.stderr)
                 continue
         meta = article_meta(p)
+        if meta and meta["slug"] in pending:
+            print(f"SKIP (status:pending): {p.relative_to(ROOT).as_posix()}", file=sys.stderr)
+            continue
         if meta:
             out.append(meta)
     # newest first; stable tiebreak by slug
