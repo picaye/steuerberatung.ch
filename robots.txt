@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://steuerberatung.ch/sitemap.xml
+<!-- collision-proof A Tue Oct  6 13:31:41 UTC 2026 -->
