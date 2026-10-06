@@ -187,7 +187,9 @@ def collect(lang: str, tracked: set[str] | None = None) -> list[dict]:
                 print(f"SKIP (untracked draft, not on this branch): {rel}", file=sys.stderr)
                 continue
         meta = article_meta(p)
-        if meta and meta["slug"] in pending:
+        # pending records store the slug WITHOUT .html (mksitemap.py uses the
+        # stem too) — compare stems or this guard never fires.
+        if meta and Path(meta["slug"]).stem in pending:
             print(f"SKIP (status:pending): {p.relative_to(ROOT).as_posix()}", file=sys.stderr)
             continue
         if meta:
