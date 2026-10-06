@@ -21,6 +21,11 @@ if tracked is not None:
     files = [f for f in files if os.path.relpath(f, BASE) in tracked]
 urls = []
 for f in files:
+    # Staged/draft pages carry <meta name="robots" content="noindex"> — keep them out of the sitemap.
+    with open(f, encoding="utf-8", errors="ignore") as fh:
+        head = fh.read(4096)
+    if 'name="robots"' in head and "noindex" in head:
+        continue
     rel = os.path.relpath(f, BASE)
     if rel.endswith("/index.html"):
         path = "/" if rel == "index.html" else "/" + os.path.dirname(rel) + "/"
