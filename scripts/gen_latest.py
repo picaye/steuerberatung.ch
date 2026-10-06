@@ -82,8 +82,15 @@ def esc(s: str) -> str:
 
 
 def article_meta(path: Path) -> dict | None:
-    """Return {slug, headline, desc, date} for an Article page, else None."""
+    """Return {slug, headline, desc, date} for an Article page, else None.
+
+    Staged/draft pages carry <meta name="robots" content="noindex"> — keep
+    them out of the homepage strips (same rule as mksitemap.py, bced659).
+    """
     html = path.read_text(encoding="utf-8")
+    head = html[:4000]
+    if 'name="robots"' in head and "noindex" in head:
+        return None
     best: dict | None = None
     for blob in ARTICLE_RE.findall(html):
         try:
