@@ -1,0 +1,359 @@
+[
+  {
+    "id": "fr-40pct",
+    "claim": "Für die Anwendung von Artikel 17 Absatz 5 DBA CH-FR gilt Telearbeit eines in einem Vertragsstaat ansässigen Arbeitnehmers für einen im anderen Vertragsstaat ansässigen Arbeitgeber bis zu 40 Prozent der Arbeitszeit pro Kalenderjahr als beim Arbeitgeber im anderen Staat verrichtet.",
+    "source": "fr-zusatzabkommen-40pct",
+    "file": "draft: grenzgaenger-homeoffice-telearbeit-regeln (DE)",
+    "origin": "Zusatzprotokoll Telearbeit DBA CH-FR Ziff. 1 Bst. a, fedlex AS 2025 486",
+    "verdict": "supports",
+    "confidence": 0.88,
+    "needs_review": false,
+    "probabilities": {
+      "contradicts": 0.09,
+      "unusable": 0.0,
+      "silent": 0.0,
+      "supports": 0.91
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "fr-regime-1983",
+    "claim": "Nach der Grenzgänger-Vereinbarung vom 11. April 1983, die zwischen den Kantonen BE, BL, BS, JU, NE, SO, VD und VS und Frankreich gilt, sind die Vergütungen französischer Grenzgänger nur im Ansässigkeitsstaat Frankreich steuerbar; Frankreich zahlt dafür einen Ausgleich von 4,5 Prozent der Bruttolohnsumme an den anderen Staat.",
+    "source": "fr-botschaft-drei-regime",
+    "file": "draft (DE/EN/FR/IT — regime 1 of 3)",
+    "origin": "BBl 2023 2744 (Botschaft Zusatzabkommen CH-FR); ESTV Besteuerung an der Quelle",
+    "verdict": "supports",
+    "confidence": 0.91,
+    "needs_review": false,
+    "probabilities": {
+      "unusable": 0.0,
+      "supports": 0.9400000000000001,
+      "contradicts": 0.06,
+      "silent": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "fr-regime-genf",
+    "claim": "Der Kanton Genf leistet gemäss dem Abkommen vom 29. Januar 1973 über den finanziellen Ausgleich bezüglich der in Genf arbeitenden Grenzgänger den Departementen Ain und Haute-Savoie jährlich eine Ausgleichzahlung in der Höhe von 3,5 Prozent der Bruttolohnsumme, die Genfer Arbeitgeber an Einwohnerinnen und Einwohner dieser beiden Departemente, die in Genf arbeiten, zahlen.",
+    "source": "fr-botschaft-drei-regime",
+    "file": "draft (DE/EN/FR/IT — regime 2 of 3)",
+    "origin": "BBl 2023 2744 (Botschaft Zusatzabkommen CH-FR); Abkommen von 1973",
+    "verdict": "supports",
+    "confidence": 1.0,
+    "needs_review": false,
+    "probabilities": {
+      "supports": 1.0,
+      "contradicts": 0.0,
+      "silent": 0.0,
+      "unusable": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "fr-genf-freigrenze",
+    "claim": "Für Telearbeit von Genfer Arbeitgebern gilt eine Freigrenze von 15 Prozent: Die Schweiz zahlt nur für die Telearbeitstage, die zwischen 15 und 40 Prozent der Arbeitszeit ausmachen, einen Ausgleich an Frankreich.",
+    "source": "fr-botschaft-genf-freigrenze",
+    "file": "draft (DE/EN/FR/IT — Genf box)",
+    "origin": "BBl 2023 2744 (Ziff. 1 Bst. c Zusatzabkommen)",
+    "verdict": "supports",
+    "confidence": 0.92,
+    "needs_review": false,
+    "probabilities": {
+      "silent": 0.0,
+      "contradicts": 0.05,
+      "supports": 0.94,
+      "unusable": 0.01
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "fr-over40",
+    "claim": "Oberhalb der in Buchstabe a) vorgesehenen Grenze von 40 Prozent Telearbeit gelten die Bestimmungen von Artikel 17 Absätze 1–3 des Abkommens vom ersten Telearbeitstag an. In diesem Fall fällt der in Anwendung der Buchstaben b) und c) vorgesehene Ausgleich nicht an.",
+    "source": "fr-zusatzabkommen-ueber40",
+    "file": "draft (DE/FR/IT/EN)",
+    "origin": "Zusatzprotokoll Telearbeit DBA CH-FR Ziff. 1 Bst. d",
+    "verdict": "silent",
+    "confidence": 0.12,
+    "needs_review": true,
+    "probabilities": {
+      "supports": 0.3,
+      "contradicts": 0.31,
+      "silent": 0.34,
+      "unusable": 0.05
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "fr-10-days",
+    "claim": "In die Telearbeitsgrenze des Zusatzabkommens zählen temporäre Einsätze im Ansässigkeitsstaat oder in einem Drittstaat bis zu einer Gesamtdauer von zehn Tagen pro Jahr hinein.",
+    "source": "fr-zusatzabkommen-10tage",
+    "file": "draft (DE/FR/IT/EN)",
+    "origin": "Zusatzprotokoll Telearbeit DBA CH-FR Ziff. 3",
+    "verdict": "supports",
+    "confidence": 1.0,
+    "needs_review": false,
+    "probabilities": {
+      "silent": 0.0,
+      "contradicts": 0.0,
+      "supports": 1.0,
+      "unusable": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "fr-40pct-remittance",
+    "claim": "Der Staat des Arbeitgebers überweist dem Wohnsitzstaat 40 Prozent der auf die Telearbeit entfallenden Steuern als Ausgleich.",
+    "source": "fr-zusatzabkommen-ausgleich",
+    "file": "draft (background box)",
+    "origin": "Zusatzprotokoll Telearbeit DBA CH-FR Ziff. 1 Bst. b",
+    "verdict": "supports",
+    "confidence": 0.98,
+    "needs_review": false,
+    "probabilities": {
+      "supports": 0.99,
+      "contradicts": 0.01,
+      "unusable": 0.0,
+      "silent": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "fr-applicable-2023",
+    "claim": "Ungeachtet des allgemeinen Inkrafttretens gelten die Bestimmungen der Artikel 4 und 10 des Zusatzabkommens CH-FR für ab dem 1. Januar 2023 ausbezahlte Vergütungen; das Zusatzabkommen selbst trat am 24. Juli 2025 in Kraft.",
+    "source": "fr-zusatzabkommen-anwendbarkeit",
+    "file": "draft (timeline box)",
+    "origin": "Zusatzabkommen CH-FR Art. 11 Abs. 3 + Inkrafttretenszeile, fedlex AS 2025 486",
+    "verdict": "supports",
+    "confidence": 0.99,
+    "needs_review": false,
+    "probabilities": {
+      "contradicts": 0.01,
+      "silent": 0.0,
+      "unusable": 0.0,
+      "supports": 0.99
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "fr-reporting-nov30",
+    "claim": "Der Staat des Arbeitgebers meldet dem Wohnsitzstaat jährlich bis spätestens 30. November des Folgejahres die Telearbeitstage bzw. Telearbeitsquote und die Bruttovergütungen der betroffenen Arbeitnehmer.",
+    "source": "fr-zusatzabkommen-meldung",
+    "file": "draft (DE/FR)",
+    "origin": "Art. 28ter DBA CH-FR (Zusatzabkommen Art. 6)",
+    "verdict": "supports",
+    "confidence": 0.97,
+    "needs_review": false,
+    "probabilities": {
+      "silent": 0.0,
+      "contradicts": 0.02,
+      "supports": 0.98,
+      "unusable": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "de-45pct",
+    "claim": "Die Schweiz kann auf dem Bruttolohn deutscher Grenzgänger eine Quellensteuer von höchstens 4,5 Prozent erheben, wenn die Ansässigkeit amtlich bescheinigt ist (Art. 15a Abs. 1 DBA CH-DE).",
+    "source": "de-dba-art15a-45",
+    "file": "draft (DE/EN/FR/IT)",
+    "origin": "Art. 15a Abs. 1 DBA CH-DE, SR 0.672.913.62",
+    "verdict": "supports",
+    "confidence": 0.98,
+    "needs_review": false,
+    "probabilities": {
+      "contradicts": 0.01,
+      "unusable": 0.0,
+      "silent": 0.0,
+      "supports": 0.99
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "de-60-days",
+    "claim": "Deutsche Grenzgänger verlieren den Grenzgängerstatus erst, wenn sie bei Beschäftigung während des gesamten Kalenderjahres an mehr als 60 Arbeittagen beruflich bedingt nicht an ihren Wohnsitz zurückkehren (Art. 15a Abs. 2 DBA CH-DE).",
+    "source": "de-dba-art15a-60",
+    "file": "draft (DE/EN/FR/IT)",
+    "origin": "Art. 15a Abs. 2 DBA CH-DE, SR 0.672.913.62",
+    "verdict": "supports",
+    "confidence": 0.99,
+    "needs_review": false,
+    "probabilities": {
+      "supports": 0.99,
+      "contradicts": 0.01,
+      "silent": 0.0,
+      "unusable": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "de-no-tax-tolerance",
+    "claim": "Das DBA Schweiz–Deutschland kennt keine prozentuale Telearbeit-Toleranzgrenze auf Steuerseite; massgebend ist der Ort der tatsächlichen Arbeitsausübung (Art. 15) und die 60-Nichtrückkehrtage-Schwelle des Art. 15a.",
+    "source": "de-dba-art15-tagesprinzip",
+    "file": "draft (conflict-resolution core claim)",
+    "origin": "Art. 15 Abs. 1 + Art. 15a DBA CH-DE (vollständiger Wortlaut zitiert; keine Telearbeit-Bestimmung im Abkommen)",
+    "verdict": "supports",
+    "confidence": 0.55,
+    "needs_review": true,
+    "probabilities": {
+      "supports": 0.67,
+      "silent": 0.25,
+      "contradicts": 0.06,
+      "unusable": 0.02
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "de-homeoffice-not-nichttrueckkehr",
+    "claim": "Nach der Verständigungsvereinbarung zum DBA CH-DE liegt eine regelmässige Rückkehr vor, wenn der Arbeitnehmer sich an mindestens 20 Prozent der vereinbarten Arbeitstage vom Wohnsitz an den Arbeitsort und zurück begibt.",
+    "source": "de-uv-20pct",
+    "file": "draft (praxis box)",
+    "origin": "Verständigungsvereinbarung Ziff. 5 Bst. b, fedlex SR 0.672.913.62",
+    "verdict": "supports",
+    "confidence": 0.98,
+    "needs_review": false,
+    "probabilities": {
+      "supports": 0.99,
+      "contradicts": 0.01,
+      "silent": 0.0,
+      "unusable": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "sv-499",
+    "claim": "Die Rahmenvereinbarung sieht vor, dass Personen, die in dem Staat arbeiten, in dem sich auch der Sitz ihres Arbeitgebers befindet, bis zu 50 % (maximal 49,9 % der Arbeitszeit) grenzüberschreitende Telearbeit im Wohnstaat leisten dürfen und dass die Zuständigkeit für die Sozialversicherungen im Staat des Arbeitgebersitzes verbleibt; Schweizer Arbeitgeber müssen dazu bei ihrer AHV-Ausgleichskasse via die Plattform ALPS eine Bescheinigung A1 beantragen.",
+    "source": "sv-rahmen-499",
+    "file": "draft (DE/EN/FR/IT)",
+    "origin": "BSV 'Telearbeit', bsv.admin.ch/de/telearbeit (2.9.2025)",
+    "verdict": "silent",
+    "confidence": 0.79,
+    "needs_review": true,
+    "probabilities": {
+      "contradicts": 0.08,
+      "supports": 0.07,
+      "silent": 0.84,
+      "unusable": 0.01
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "sv-25",
+    "claim": "Unter 25 Prozent Telearbeit im Wohnstaat ändert sich die Sozialversicherungszuständigkeit nach den ordentlichen Regeln ohnehin nicht; die Rahmenvereinbarung gilt für den Bereich zwischen 25 und 49,9 Prozent.",
+    "source": "sv-unter-25",
+    "file": "draft (DE/EN/FR/IT)",
+    "origin": "BSV 'Telearbeit'",
+    "verdict": "supports",
+    "confidence": 0.96,
+    "needs_review": false,
+    "probabilities": {
+      "contradicts": 0.03,
+      "supports": 0.97,
+      "silent": 0.0,
+      "unusable": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "sv-not-tax",
+    "claim": "Die Rahmenvereinbarung zur grenzüberschreitenden Telearbeit betrifft nur die Sozialversicherung, nicht das Steuerrecht.",
+    "source": "sv-nur-sozialversicherung",
+    "file": "draft (conflict-resolution core claim)",
+    "origin": "BSV 'Telearbeit'",
+    "verdict": "supports",
+    "confidence": 0.89,
+    "needs_review": false,
+    "probabilities": {
+      "unusable": 0.03,
+      "silent": 0.05,
+      "supports": 0.91,
+      "contradicts": 0.01
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "sv-de-fr-it",
+    "claim": "Die Rahmenvereinbarung gilt im Verhältnis zu Deutschland, Österreich, Frankreich, Italien (ab 1.1.2024) und Liechtenstein seit dem 1. Juli 2023.",
+    "source": "sv-grenzgaenger-de-fr",
+    "file": "draft (timeline box)",
+    "origin": "BSV 'Telearbeit'",
+    "verdict": "supports",
+    "confidence": 0.69,
+    "needs_review": true,
+    "probabilities": {
+      "supports": 0.76,
+      "silent": 0.15,
+      "contradicts": 0.08,
+      "unusable": 0.01
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "qstv-5a",
+    "claim": "Das ESTV-Formular für die Bescheinigung nach Art. 5a QStV steht seit dem 1. Januar 2025 zur Verfügung. Bei einem Austritt vor dem 31. Dezember hat der bisherige Arbeitgeber einem in Frankreich ansässigen Arbeitnehmer auf Verlangen eine Bescheinigung über Telearbeitstage/-quote, temporäre Einsätze und Übernachtungen auszustellen (Art. 127 Abs. 3 DBG i.V.m. Art. 5a QStV).",
+    "source": "qstv-5a-inhalt",
+    "file": "draft (DE/FR)",
+    "origin": "ESTV Erläuterungen Formular Art. 5a QStV, Ziff. 3",
+    "verdict": "supports",
+    "confidence": 0.97,
+    "needs_review": false,
+    "probabilities": {
+      "supports": 0.98,
+      "contradicts": 0.02,
+      "silent": 0.0,
+      "unusable": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "ctrl-false-fr",
+    "claim": "Das Zusatzabkommen CH-FR erlaubt Grenzgängern, bis zu 49,9 Prozent ihrer jährlichen Arbeitszeit im Homeoffice zu leisten, ohne dass sich das Besteuerungsrecht ändert.",
+    "source": "ctrl-false-fr-499",
+    "file": "PLANTED CONTROL — must return contradicts",
+    "origin": "control",
+    "verdict": "contradicts",
+    "confidence": 0.99,
+    "needs_review": false,
+    "probabilities": {
+      "silent": 0.0,
+      "contradicts": 0.99,
+      "supports": 0.0,
+      "unusable": 0.01
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "ctrl-false-de",
+    "claim": "Nach Art. 15a DBA CH-DE erhebt die Schweiz auf dem Bruttolohn deutscher Grenzgänger eine Quellensteuer von 35 Prozent.",
+    "source": "ctrl-false-de-35",
+    "file": "PLANTED CONTROL — must return contradicts",
+    "origin": "control",
+    "verdict": "contradicts",
+    "confidence": 0.99,
+    "needs_review": false,
+    "probabilities": {
+      "unusable": 0.01,
+      "contradicts": 0.99,
+      "supports": 0.0,
+      "silent": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "ctrl-false-sv",
+    "claim": "Die multilaterale Rahmenvereinbarung des BSV zur grenzüberschreitenden Telearbeit harmonisiert die Besteuerung von Homeoffice-Tagen zwischen der Schweiz und den Unterzeichnerstaaten.",
+    "source": "ctrl-false-sv-tax",
+    "file": "PLANTED CONTROL — must return contradicts",
+    "origin": "control",
+    "verdict": "contradicts",
+    "confidence": 1.0,
+    "needs_review": false,
+    "probabilities": {
+      "unusable": 0.0,
+      "contradicts": 1.0,
+      "supports": 0.0,
+      "silent": 0.0
+    },
+    "model": "jev-latest"
+  }
+]
