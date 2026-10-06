@@ -33,6 +33,11 @@ jobs:
         # hand-rolled wc -l mirror check below stays as a build-artifact
         # sanity net. stdlib-only script, no pip install needed.
         run: python3 scripts/validate_site.py
+      - name: Gate — draft-leak regression guards (t_b76643d1)
+        # grenzg draft-leak saga had three untested guard patches; this suite
+        # (noindex / status:pending / untracked in mksitemap + gen_latest)
+        # fails the deploy if any guard regresses. stdlib-only, no pip.
+        run: python3 scripts/test_draft_leak_guards.py
       - name: Build public dist (exclude private data + server files)
         run: |
           mkdir -p dist/en dist/fr dist/it dist/assets
