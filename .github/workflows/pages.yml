@@ -9,6 +9,7 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  deployments: read
 
 concurrency:
   group: "pages"
@@ -69,7 +70,39 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: "dist"
+      - name: Wait for previous Pages deployment to settle
+        run: |
+          # Back-to-back pushes: the PREVIOUS run's Pages deployment can still
+          # be in progress when this run reaches the deploy step, and
+          # deploy-pages then fails hard with HTTP 400 "due to in progress
+          # deployment" (run 37463967336 attempt 1, 2026-10-06). The Actions
+          # concurrency group serialises the workflow runs, but the Pages
+          # deployment outlives its run, so the group alone cannot prevent
+          # this. Poll until the newest github-pages deployment is no longer
+          # queued/in_progress before creating ours. gh picks up GITHUB_TOKEN
+          # from the step environment automatically.
+          for i in $(seq 1 20); do
+            dep=$(gh api "repos/$GITHUB_REPOSITORY/deployments?environment=github-pages&per_page=1" --jq '.[0].id // empty')
+            if [ -z "$dep" ]; then echo "no previous deployment found"; break; fi
+            state=$(gh api "repos/$GITHUB_REPOSITORY/deployments/$dep/statuses?per_page=1" --jq '.[0].state // "unknown"')
+            echo "previous deployment $dep state: $state (poll $i/20)"
+            case "$state" in
+              queued|in_progress) sleep 15 ;;
+              *) break ;;
+            esac
+            if [ "$i" -eq 20 ]; then
+              echo "::error::previous Pages deployment $dep still $state after 5 minutes"
+              exit 1
+            fi
+          done
+        continue-on-error: true
       - name: Deploy to GitHub Pages
+        # Do NOT "fix" a failed deploy by re-running the workflow run: a
+        # re-run uploads a SECOND 'github-pages' artifact for the same run and
+        # deploy-pages then dies with "Multiple artifacts named github-pages
+        # were unexpectedly found" (attempt 2 of run 37463967336). That
+        # collision is an artefact of re-running, not of pushing — push a
+        # follow-up commit (or workflow_dispatch) instead.
         id: deployment
         uses: actions/deploy-pages@v4
       - name: Purge Cloudflare cache for changed assets
