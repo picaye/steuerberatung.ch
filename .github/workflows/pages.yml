@@ -71,6 +71,8 @@ jobs:
         with:
           path: "dist"
       - name: Wait for previous Pages deployment to settle
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           # Back-to-back pushes: the PREVIOUS run's Pages deployment can still
           # be in progress when this run reaches the deploy step, and
