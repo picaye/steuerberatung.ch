@@ -1,0 +1,37 @@
+[
+  {
+    "id": "bvv3-inkrafttreten-2027-06-01",
+    "claim": "Die Aenderung der BVV 3 zur Flexibilisierung der Beguenstigtenordnung in der Saeeule 3a tritt am 1. Juni 2027 in Kraft; der Bundesrat hat sie an seiner Sitzung vom 12. Juni 2026 beschlossen.",
+    "source": "bsv-mitteilung-168",
+    "file": "card: saeule-3a-beguenstigte-neu-2027",
+    "origin": "BSV Mitteilung ueber die berufliche Vorsorge Nr. 168, Rz 1168 (Stand 1.7.2026)"
+  },
+  {
+    "id": "bvv3-inhalt-patchwork",
+    "claim": "In Zukunft koennen Versicherte in der Saeeule 3a beispielsweise ihre Kinder als erste Beguenstigte ihres Vorsorgeguthabens benennen, auch in Patchworkfamilien, selbst wenn sie verheiratet sind oder in einer eingetragenen Partnerschaft leben.",
+    "source": "bsv-mitteilung-168",
+    "file": "card: saeule-3a-beguenstigte-neu-2027",
+    "origin": "BSV Mitteilung Nr. 168 Rz 1168"
+  },
+  {
+    "id": "bvv2-13-rente-85-prozent",
+    "claim": "Die 13. AHV-Altersrente wird aus der Berechnung der 85-Prozent-Grenze (Altersrente der Vorsorgeeinrichtung plus AHV-Rente gegenueber dem letzten AHV-Lohn) ausdruecklich ausgenommen; die BVV-2-Aenderung tritt am 1. August 2026 in Kraft.",
+    "source": "bsv-mitteilung-168",
+    "file": "card: saeule-3a-beguenstigte-neu-2027 (BVG-Kontextbox)",
+    "origin": "BSV Mitteilung Nr. 168 Rz 1168"
+  },
+  {
+    "id": "ctrl-false-bvv3-date",
+    "claim": "Die Flexibilisierung der Beguenstigtenordnung in der Saeeule 3a (BVV 3) tritt am 1. Januar 2027 in Kraft.",
+    "source": "bsv-mitteilung-168",
+    "file": "PLANTED CONTROL — must return contradicts",
+    "origin": "control"
+  },
+  {
+    "id": "ctrl-false-13-rente-counted",
+    "claim": "Bei der 85-Prozent-Ueberentschaedigungsgrenze der BVV 2 wird die 13. AHV-Altersrente ab Dezember 2026 mitberuecksichtigt und kann zur Kuerzung der Vorsorgeleistungen fuehren.",
+    "source": "bsv-mitteilung-168",
+    "file": "PLANTED CONTROL — must return contradicts",
+    "origin": "control"
+  }
+]
