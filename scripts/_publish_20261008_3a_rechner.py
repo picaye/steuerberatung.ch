@@ -125,6 +125,7 @@ JS = """
 def page(lang, d):
     faq = "\n".join("<h3>%s</h3><p>%s</p>" % (q, a) for q, a in d["faq"])
     dirp = "" if lang == "de" else lang + "/"
+    up = "" if lang == "de" else "../"
     alts = "\n".join('<link rel="alternate" hreflang="%s" href="https://steuerberatung.ch/%s3a-rechner.html">' % (l, "" if l == "de" else l + "/") for l in ["de", "en", "fr", "it"])
     html = f"""<!DOCTYPE html>
 <html lang="{lang}">
@@ -133,27 +134,27 @@ def page(lang, d):
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{d['title']} | steuerberatung.ch</title>
 <meta name="description" content="{d['desc']}">
-<link rel="icon" type="image/png" sizes="32x32" href="{dirp}assets/favicon-32.png">
-<link rel="canonical" href="https://steuerberatung.ch/{dirp}3a-rechner.html">
+<link rel="icon" type="image/png" sizes="32x32" href="{up}assets/favicon-32.png">
+<link rel="canonical" href="https://steuerberatung.ch/{up}3a-rechner.html">
 {alts}
 <meta property="og:title" content="{d['title']}">
 <meta property="og:description" content="{d['desc']}">
 <meta property="og:type" content="website">
-<link rel="stylesheet" href="{dirp}assets/style.css">
-<link rel="stylesheet" href="{dirp}assets/extra.css?v=3">
-<link rel="stylesheet" href="{dirp}assets/redesign.css">
+<link rel="stylesheet" href="{up}assets/style.css">
+<link rel="stylesheet" href="{up}assets/extra.css?v=3">
+<link rel="stylesheet" href="{up}assets/redesign.css">
 </head>
 <body>
 <header class="site-header">
   <div class="container header-inner">
-    <a class="logo" href="{dirp}index.html"><img class="logo-img" src="{dirp}assets/logo.svg" alt="" width="32" height="32" aria-hidden="true"><span class="logo-text">steuerberatung<span class="accent">.ch</span></span></a>
+    <a class="logo" href="{up}index.html"><img class="logo-img" src="{up}assets/logo.svg" alt="" width="32" height="32" aria-hidden="true"><span class="logo-text">steuerberatung<span class="accent">.ch</span></span></a>
     <button class="nav-toggle" type="button" aria-label="Menü" aria-expanded="false" aria-controls="main-nav">☰</button>
     <nav class="main-nav" id="main-nav">
-      <a href="{dirp}leistungen.html">Leistungen</a>
-      <a href="{dirp}werbung.html">Werbung</a>
-      <a href="{dirp}ratgeber.html">Ratgeber</a>
-      <a href="{dirp}rechner.html">Rechner</a>
-<a href="{dirp}index.html" class="lang{' active' if lang=='de' else ''}">DE</a>
+      <a href="{up}leistungen.html">Leistungen</a>
+      <a href="{up}werbung.html">Werbung</a>
+      <a href="{up}ratgeber.html">Ratgeber</a>
+      <a href="{up}rechner.html">Rechner</a>
+<a href="{up}index.html" class="lang{' active' if lang=='de' else ''}">DE</a>
 <a href="/en/index.html" class="lang{' active' if lang=='en' else ''}">EN</a>
 <a href="/fr/index.html" class="lang{' active' if lang=='fr' else ''}">FR</a>
 <a href="/it/index.html" class="lang{' active' if lang=='it' else ''}">IT</a>
@@ -199,7 +200,7 @@ def page(lang, d):
 <button class="btn" type="submit">{d['btn']}</button>
 </form>
 <div id="a3-out"></div>
-<p class="muted"><a href="{dirp}rechner.html">{d['cta']}</a></p>
+<p class="muted"><a href="{up}rechner.html">{d['cta']}</a></p>
 </section>
 <section class="section">{faq}</section>
 </div>
@@ -207,20 +208,20 @@ def page(lang, d):
 <footer class="site-footer">
   <div class="container footer-grid">
     <div>
-      <div class="logo"><img class="logo-img" src="{dirp}assets/logo.svg" alt="" width="32" height="32" aria-hidden="true"><span class="logo-text">steuerberatung<span class="accent">.ch</span></span></div>
+      <div class="logo"><img class="logo-img" src="{up}assets/logo.svg" alt="" width="32" height="32" aria-hidden="true"><span class="logo-text">steuerberatung<span class="accent">.ch</span></span></div>
     </div>
     <div>
       <h4>Services</h4>
-      <a href="{dirp}leistungen.html">Steuererklärung</a>
-      <a href="{dirp}rechner.html">Steuerrechner</a>
-      <a href="{dirp}3a-rechner.html">3a-Rechner</a>
-      <a href="{dirp}ratgeber.html">Ratgeber</a>
+      <a href="{up}leistungen.html">Steuererklärung</a>
+      <a href="{up}rechner.html">Steuerrechner</a>
+      <a href="{up}3a-rechner.html">3a-Rechner</a>
+      <a href="{up}ratgeber.html">Ratgeber</a>
     </div>
   </div>
 </footer>
 <script>window.A3_I18N={{frmt:"CHF "}};</script>
-<script src="{dirp}assets/locations.js?v=3"></script>
-<script src="{dirp}assets/endpoint.js"></script>
+<script src="{up}assets/locations.js?v=3"></script>
+<script src="{up}assets/endpoint.js"></script>
 <script>{JS}</script>
 </body>
 </html>"""
