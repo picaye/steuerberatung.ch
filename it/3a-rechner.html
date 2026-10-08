@@ -110,7 +110,7 @@
     var q=norm(locInput.value.trim()); sel=null;
     if(q.length<2){list.hidden=true;return;}
     var hits=all().filter(function(l){return norm(l.city).indexOf(q)>=0||l.zip.indexOf(q.slice(0,4))===0||norm(l.canton||'').indexOf(q)===0;}).slice(0,12);
-    list.innerHTML=hits.map(function(l){return '<div class="calc-loc-item" data-id="'+l.id+'" data-name="'+l.city+'">'+l.zip+' '+l.city+' ('+l.canton+')'</div>';}).join('');
+    list.innerHTML=hits.map(function(l){return '<div class="calc-loc-item" data-id="'+l.id+'" data-name="'+l.city+'">'+l.zip+' '+l.city+' ('+l.canton+')</div>';}).join('');
     list.hidden=!hits.length;
   });
   list.addEventListener('click',function(e){

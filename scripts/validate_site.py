@@ -88,6 +88,20 @@ for f in files:
         if not os.path.exists(t):
             problems.append(f'{f}: broken link -> {href}')
 
+# 8. inline JS must parse (node --check) — catches string/regex bugs before push
+import subprocess, tempfile
+for f in files:
+    s = open(f, encoding='utf-8').read()
+    for i, js in enumerate(re.findall(r'<script>(.*?)</script>', s, re.S)):
+        if len(js) < 40:
+            continue
+        with tempfile.NamedTemporaryFile('w', suffix='.js', delete=False, encoding='utf-8') as tf:
+            tf.write(js); tmp = tf.name
+        r = subprocess.run(['node', '--check', tmp], capture_output=True, text=True)
+        if r.returncode != 0:
+            problems.append(f'{f}: inline script #{i} syntax error: {r.stderr.strip().splitlines()[-1] if r.stderr.strip() else "?"}')
+        os.unlink(tmp)
+
 print(f'checked {len(files)} pages')
 if problems:
     print(f'{len(problems)} PROBLEM(S):')
