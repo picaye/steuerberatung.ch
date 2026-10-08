@@ -128,7 +128,7 @@ def page(lang, d):
     up = "" if lang == "de" else "../"
     alts = "\n".join('<link rel="alternate" hreflang="%s" href="https://steuerberatung.ch/%s3a-rechner.html">' % (l, "" if l == "de" else l + "/") for l in ["de", "en", "fr", "it"]) + '\n<link rel="alternate" hreflang="x-default" href="https://steuerberatung.ch/3a-rechner.html">'
     html = f"""<!DOCTYPE html>
-<html lang="{lang}">
+<html lang="{ {'fr':'fr-CH','it':'it-CH'}.get(lang, lang) }">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
