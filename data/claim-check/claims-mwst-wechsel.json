@@ -32,7 +32,8 @@
     "claim": "Die Erhöhung der Mehrwertsteuer könnte Anfang 2028 in Kraft treten; ein festes Datum ist nicht amtlich festgelegt.",
     "source": "admin-ch-inkrafttreten",
     "file": "card: mwst-wechsel-8-5-prozent-praxis",
-    "origin": "admin.ch MM 5.10.2026; BSV 'Umsetzung 13. AHV-Rente' (nicht vor 2028)"
+    "origin": "admin.ch MM 5.10.2026; BSV 'Umsetzung 13. AHV-Rente' (nicht vor 2028)",
+    "gate_note": "ACCEPTED-LOW-CONFIDENCE (0.74, gate run 8.10): correct behaviour — no primary states a fixed date; article must not print a hard date until amtlich festgelegt (BBl/ESTV after the 29.11.2026 vote)."
   },
   {
     "id": "mwst-entsstehung-art40",
