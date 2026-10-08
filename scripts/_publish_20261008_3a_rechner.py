@@ -135,7 +135,7 @@ def page(lang, d):
 <title>{d['title']} | steuerberatung.ch</title>
 <meta name="description" content="{d['desc']}">
 <link rel="icon" type="image/png" sizes="32x32" href="{up}assets/favicon-32.png">
-<link rel="canonical" href="https://steuerberatung.ch/3a-rechner.html">
+<link rel="canonical" href="https://steuerberatung.ch/{dirp}3a-rechner.html">
 {alts}
 <meta property="og:title" content="{d['title']}">
 <meta property="og:description" content="{d['desc']}">
