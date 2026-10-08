@@ -38,6 +38,7 @@ L10N = {
         "sub": "Frisch veröffentlicht – das Neueste aus dem Ratgeber.",
         "new": "Neu",
         "cta": "Zum Artikel →",
+        "more": "Alle Artikel im Ratgeber →",
         "aria": "Aktuelle Artikel",
     },
     "en": {
@@ -45,6 +46,7 @@ L10N = {
         "sub": "Freshly published – the newest from our guides.",
         "new": "New",
         "cta": "Read the article →",
+        "more": "All articles in the guides →",
         "aria": "Latest articles",
     },
     "fr": {
@@ -52,6 +54,7 @@ L10N = {
         "sub": "Publiés récemment – les nouveautés de nos guides.",
         "new": "Nouveau",
         "cta": "Lire l’article →",
+        "more": "Tous les articles du guide fiscal →",
         "aria": "Articles récents",
     },
     "it": {
@@ -59,6 +62,7 @@ L10N = {
         "sub": "Di recente pubblicazione – le novità dalle nostre guide.",
         "new": "Nuovo",
         "cta": "Leggi l’articolo →",
+        "more": "Tutti gli articoli della guida →",
         "aria": "Articoli recenti",
     },
 }
@@ -66,12 +70,8 @@ L10N = {
 ARTICLE_RE = re.compile(r'<script type="application/ld\+json">(.*?)</script>', re.S)
 DATE_RE = re.compile(r'"date(?:Published|Modified)":\s*"(\d{4}-\d{2}-\d{2})"')
 
-# Hard-deadline articles pinned to the top of the strip regardless of date
-# (metrics-review 2026-10 R3: both expire 31.12.2026). Pinned order = list order.
-PINNED = [
-    "saeule-3a-nachzahlen.html",
-    "verrechnungssteuer-rueckerstattungsfrist-ablauf.html",
-]
+# Hard-deadline pinning REMOVED 2026-10-08 (Pino): strip is strictly newest-first.
+PINNED: list[str] = []
 
 
 def esc(s: str) -> str:
@@ -232,6 +232,7 @@ def render(lang: str, articles: list[dict], today: datetime.date) -> str:
         lines.append("</article>")
         lines.append("</li>")
     lines.append("</ol>")
+    lines.append('<p class="latest-more"><a href="ratgeber.html">%s</a></p>' % esc(t["more"]))
     lines.append("</div>")
     lines.append("</section>")
     lines.append(MARK_END)
@@ -262,7 +263,7 @@ def inject(index: Path, block: str) -> bool:
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--count", type=int, default=5)
+    ap.add_argument("--count", type=int, default=6)
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--today", default=None, help="ISO date override for the 'New' badge")
     args = ap.parse_args()
