@@ -104,7 +104,7 @@
   var form=document.getElementById('a3-form'), out=document.getElementById('a3-out');
   var locInput=document.getElementById('a3-loc'), list=document.getElementById('a3-loc-list');
   var sel=null;
-  function norm(s){return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');}
+  function norm(s){return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
   function all(){return window.TAX_LOCATIONS||[];}
   locInput.addEventListener('input',function(){
     var q=norm(locInput.value.trim()); sel=null;
