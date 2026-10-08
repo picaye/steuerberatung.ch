@@ -81,7 +81,7 @@ JS = """
   var form=document.getElementById('a3-form'), out=document.getElementById('a3-out');
   var locInput=document.getElementById('a3-loc'), list=document.getElementById('a3-loc-list');
   var sel=null;
-  function norm(s){return s.toLowerCase().normalize('NFD').replace(/[\\u0300-\\u036f]/g,'');}
+  function norm(s){return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
   function all(){return window.TAX_LOCATIONS||[];}
   locInput.addEventListener('input',function(){
     var q=norm(locInput.value.trim()); sel=null;
@@ -106,7 +106,7 @@ JS = """
     var max=pk?7258:Math.min(36288,Math.round(inc*0.2));
     var contrib=Math.min(max,Math.max(0,parseInt(form.contrib.value.replace(/[^0-9]/g,''),10)||max));
     var ep=window.LEAD_ENDPOINT||'';
-    function call(taxable){return fetch(ep.replace(/\\/$/,'')+'/api/tax',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({year:2026,loc:loc.id,rel:1,confession:'NONE',children:[],taxable:taxable,fortune:fort})}).then(function(r){if(!r.ok)throw 0;return r.json();});}
+    function call(taxable){return fetch(ep.replace(/\/$/,'')+'/api/tax',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({year:2026,loc:loc.id,rel:1,confession:'NONE',children:[],taxable:taxable,fortune:fort})}).then(function(r){if(!r.ok)throw 0;return r.json();});}
     var base=Math.max(0,inc-contrib);
     Promise.all([call(inc),call(base)]).then(function(rs){
       if(!rs[0].ok||!rs[1].ok)throw 0;
