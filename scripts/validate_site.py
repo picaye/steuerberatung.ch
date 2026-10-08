@@ -89,18 +89,35 @@ for f in files:
             problems.append(f'{f}: broken link -> {href}')
 
 # 8. inline JS must parse (node --check) — catches string/regex bugs before push
+#    (t_47f77cb2: broken 3a-rechner JS passed CI 3x because nothing ever
+#    parsed the inline <script> blocks shipped inside HTML pages.)
+#    Match <script> with optional attributes but skip non-JS types (ld+json).
 import subprocess, tempfile
+inline_checked = 0
+inline_files = []
 for f in files:
     s = open(f, encoding='utf-8').read()
-    for i, js in enumerate(re.findall(r'<script>(.*?)</script>', s, re.S)):
-        if len(js) < 40:
-            continue
+    hit = 0
+    for i, m in enumerate(re.finditer(r'<script((?![^>]*type="application/ld\+json")[^>]*)>(.*?)</script>', s, re.S)):
+        attrs, js = m.group(1), m.group(2)
+        if 'src=' in attrs:
+            continue  # external script — not inline
+        if len(js.strip()) < 10:
+            continue  # skip empty/placeholder blocks
         with tempfile.NamedTemporaryFile('w', suffix='.js', delete=False, encoding='utf-8') as tf:
             tf.write(js); tmp = tf.name
         r = subprocess.run(['node', '--check', tmp], capture_output=True, text=True)
+        inline_checked += 1; hit += 1
         if r.returncode != 0:
-            problems.append(f'{f}: inline script #{i} syntax error: {r.stderr.strip().splitlines()[-1] if r.stderr.strip() else "?"}')
+            # node's stderr ends with a version banner; surface the SyntaxError line
+            err = next((ln for ln in r.stderr.splitlines() if 'Error' in ln),
+                       r.stderr.strip().splitlines()[-1] if r.stderr.strip() else '?')
+            problems.append(f'{f}: inline script #{i} syntax error: {err.strip()}')
         os.unlink(tmp)
+    if hit:
+        inline_files.append(f'{f} ({hit})')
+print(f'inline JS gate: {inline_checked} inline scripts parsed with node --check')
+print('inline JS gate files: ' + ', '.join(inline_files))
 
 print(f'checked {len(files)} pages')
 if problems:
