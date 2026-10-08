@@ -109,8 +109,8 @@
   locInput.addEventListener('input',function(){
     var q=norm(locInput.value.trim()); sel=null;
     if(q.length<2){list.hidden=true;return;}
-    var hits=all().filter(function(l){return norm(l.name).indexOf(q)>=0||l.zip.indexOf(q.slice(0,4))===0;}).slice(0,12);
-    list.innerHTML=hits.map(function(l){return '<div class="calc-loc-item" data-id="'+l.id+'" data-name="'+l.name+'">'+l.zip+' '+l.name+'</div>';}).join('');
+    var hits=all().filter(function(l){return norm(l.city).indexOf(q)>=0||l.zip.indexOf(q.slice(0,4))===0||norm(l.canton||'').indexOf(q)===0;}).slice(0,12);
+    list.innerHTML=hits.map(function(l){return '<div class="calc-loc-item" data-id="'+l.id+'" data-name="'+l.city+'">'+l.zip+' '+l.city+' ('+l.canton+')'</div>';}).join('');
     list.hidden=!hits.length;
   });
   list.addEventListener('click',function(e){
@@ -121,7 +121,7 @@
   function T(k){return (window.A3_I18N||{})[k]||k;}
   form.addEventListener('submit',function(e){
     e.preventDefault();
-    var loc=sel||all().filter(function(l){return norm(l.name)===norm(locInput.value.trim());})[0];
+    var loc=sel||all().filter(function(l){return norm(l.city)===norm(locInput.value.trim());})[0];
     if(!loc){out.innerHTML='<p class="a3-err">'+T('err')+'</p>';return;}
     var inc=Math.max(0,parseInt(form.income.value.replace(/[^0-9]/g,''),10)||0);
     var fort=Math.max(0,parseInt(form.fortune.value.replace(/[^0-9]/g,''),10)||0);
