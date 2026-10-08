@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pillar 3a calculator 2026: how much you really save | steuerberatung.ch</title>
+<meta name="description" content="Pillar 3a savings calculator 2026: the real tax saving of your 3a contribution using official FTA tariffs for your municipality. Maximum amounts, marginal tax rate, catch-up contributions – free, no sign-up.">
+<link rel="icon" type="image/png" sizes="32x32" href="en/assets/favicon-32.png">
+<link rel="canonical" href="https://steuerberatung.ch/en/3a-rechner.html">
+<link rel="alternate" hreflang="de" href="https://steuerberatung.ch/3a-rechner.html">
+<link rel="alternate" hreflang="en" href="https://steuerberatung.ch/en/3a-rechner.html">
+<link rel="alternate" hreflang="fr" href="https://steuerberatung.ch/fr/3a-rechner.html">
+<link rel="alternate" hreflang="it" href="https://steuerberatung.ch/it/3a-rechner.html">
+<meta property="og:title" content="Pillar 3a calculator 2026: how much you really save">
+<meta property="og:description" content="Pillar 3a savings calculator 2026: the real tax saving of your 3a contribution using official FTA tariffs for your municipality. Maximum amounts, marginal tax rate, catch-up contributions – free, no sign-up.">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="en/assets/style.css">
+<link rel="stylesheet" href="en/assets/extra.css?v=3">
+<link rel="stylesheet" href="en/assets/redesign.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="en/index.html"><img class="logo-img" src="en/assets/logo.svg" alt="" width="32" height="32" aria-hidden="true"><span class="logo-text">steuerberatung<span class="accent">.ch</span></span></a>
+    <button class="nav-toggle" type="button" aria-label="Menü" aria-expanded="false" aria-controls="main-nav">☰</button>
+    <nav class="main-nav" id="main-nav">
+      <a href="en/leistungen.html">Leistungen</a>
+      <a href="en/werbung.html">Werbung</a>
+      <a href="en/ratgeber.html">Ratgeber</a>
+      <a href="en/rechner.html">Rechner</a>
+<a href="en/index.html" class="lang">DE</a>
+<a href="/en/index.html" class="lang active">EN</a>
+<a href="/fr/index.html" class="lang">FR</a>
+<a href="/it/index.html" class="lang">IT</a>
+    </nav>
+  </div>
+</header>
+<main>
+<div class="page-head">
+  <div class="container">
+    <h1>Pillar 3a calculator</h1>
+    <p>Computed with the official FTA tariffs for your municipality: how much tax does your 3a contribution save – and what is the optimal amount for you?</p>
+  </div>
+</div>
+<div class="container">
+<section class="section">
+<form id="a3-form" class="calc-form">
+<div class="form-row">
+<div class="form-field">
+<label for="a3-loc">Municipality or ZIP</label>
+<input type="text" id="a3-loc" value="Zürich" autocomplete="off" spellcheck="false" placeholder="z. B. 8400">
+<div id="a3-loc-list" class="calc-loc-list" hidden></div>
+</div>
+<div class="form-field">
+<label for="a3-inc">Taxable income (CHF)</label>
+<input type="text" id="a3-inc" name="income" value="95000" inputmode="numeric">
+</div>
+<div class="form-field">
+<label for="a3-fort">Taxable wealth (CHF)</label>
+<input type="text" id="a3-fort" name="fortune" value="80000" inputmode="numeric">
+</div>
+</div>
+<div class="form-row">
+<div class="form-field">
+<label for="a3-pk">2. Säule</label>
+<select id="a3-pk" name="pension"><option value="with">With pension fund (2nd pillar)</option><option value="no">Without pension fund (self-employed)</option></select>
+</div>
+<div class="form-field">
+<label for="a3-contrib">3a contribution</label>
+<input type="text" id="a3-contrib" name="contrib" value="7258" inputmode="numeric">
+<p class="muted">Maximum with pension fund: CHF 7,258 · without pension fund: CHF 36,288</p>
+</div>
+</div>
+<button class="btn" type="submit">Calculate saving</button>
+</form>
+<div id="a3-out"></div>
+<p class="muted"><a href="en/rechner.html">See your full tax load? Go to the main tax calculator →</a></p>
+</section>
+<section class="section"><h3>Is the maximum amount worth it?</h3><p>At a 30% marginal rate you save roughly CHF 2,180 per year on a CHF 7,258 contribution – over 30 years of compounding this is Switzerland's most effective savings lever.</p>
+<h3>What is the marginal tax rate?</h3><p>The percentage by which your total tax rises if your income grows by CHF 100. The calculator derives it for your municipality and income – typically 25% to 45%.</p>
+<h3>Can I catch up?</h3><p>Yes: since 2026, missing contribution years from 2025 onwards can be filled retroactively (up to 10 years) on top of the annual amount.</p></section>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <div class="logo"><img class="logo-img" src="en/assets/logo.svg" alt="" width="32" height="32" aria-hidden="true"><span class="logo-text">steuerberatung<span class="accent">.ch</span></span></div>
+    </div>
+    <div>
+      <h4>Services</h4>
+      <a href="en/leistungen.html">Steuererklärung</a>
+      <a href="en/rechner.html">Steuerrechner</a>
+      <a href="en/3a-rechner.html">3a-Rechner</a>
+      <a href="en/ratgeber.html">Ratgeber</a>
+    </div>
+  </div>
+</footer>
+<script>window.A3_I18N={frmt:"CHF "};</script>
+<script src="en/assets/locations.js?v=3"></script>
+<script src="en/assets/endpoint.js"></script>
+<script>
+(function(){
+  var form=document.getElementById('a3-form'), out=document.getElementById('a3-out');
+  var locInput=document.getElementById('a3-loc'), list=document.getElementById('a3-loc-list');
+  var sel=null;
+  function norm(s){return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+  function all(){return window.TAX_LOCATIONS||[];}
+  locInput.addEventListener('input',function(){
+    var q=norm(locInput.value.trim()); sel=null;
+    if(q.length<2){list.hidden=true;return;}
+    var hits=all().filter(function(l){return norm(l.name).indexOf(q)>=0||l.zip.indexOf(q.slice(0,4))===0;}).slice(0,12);
+    list.innerHTML=hits.map(function(l){return '<div class="calc-loc-item" data-id="'+l.id+'" data-name="'+l.name+'">'+l.zip+' '+l.name+'</div>';}).join('');
+    list.hidden=!hits.length;
+  });
+  list.addEventListener('click',function(e){
+    var it=e.target.closest('[data-id]'); if(!it)return;
+    sel={id:+it.dataset.id,name:it.dataset.name}; locInput.value=it.dataset.name; list.hidden=true;
+  });
+  function fmt(n){return (T('frmt'))+n.toLocaleString('de-CH');}
+  function T(k){return (window.A3_I18N||{})[k]||k;}
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var loc=sel||all().filter(function(l){return norm(l.name)===norm(locInput.value.trim());})[0];
+    if(!loc){out.innerHTML='<p class="a3-err">'+T('err')+'</p>';return;}
+    var inc=Math.max(0,parseInt(form.income.value.replace(/[^0-9]/g,''),10)||0);
+    var fort=Math.max(0,parseInt(form.fortune.value.replace(/[^0-9]/g,''),10)||0);
+    var pk=form.pension.value==='with';
+    var max=pk?7258:Math.min(36288,Math.round(inc*0.2));
+    var contrib=Math.min(max,Math.max(0,parseInt(form.contrib.value.replace(/[^0-9]/g,''),10)||max));
+    var ep=window.LEAD_ENDPOINT||'';
+    function call(taxable){return fetch(ep.replace(/\/$/,'')+'/api/tax',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({year:2026,loc:loc.id,rel:1,confession:'NONE',children:[],taxable:taxable,fortune:fort})}).then(function(r){if(!r.ok)throw 0;return r.json();});}
+    var base=Math.max(0,inc-contrib);
+    Promise.all([call(inc),call(base)]).then(function(rs){
+      if(!rs[0].ok||!rs[1].ok)throw 0;
+      var t0=rs[0].tax.total,t1=rs[1].tax.total,save=Math.max(0,t0-t1);
+      var rate=inc>0?(save/contrib*100):0;
+      out.innerHTML='<div class="a3-grid">'
+        +'<div class="a3-card"><h3>'+T('without')+'</h3><p class="a3-num">'+fmt(t0)+'</p></div>'
+        +'<div class="a3-card"><h3>'+T('with3a')+'</h3><p class="a3-num">'+fmt(t1)+'</p></div>'
+        +'<div class="a3-card a3-hi"><h3>'+T('saved')+'</h3><p class="a3-num">'+fmt(save)+'</p><p class="muted">'+T('rate')+': '+rate.toFixed(1)+' %</p></div>'
+        +'</div><p class="muted">'+T('note')+'</p>';
+    }).catch(function(){out.innerHTML='<p class="a3-err">'+T('err')+'</p>';});
+  });
+})();
+</script>
+</body>
+</html>
