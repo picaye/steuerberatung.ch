@@ -2,7 +2,7 @@
   "13-ahv-rente-dezember-2026.html": [
     "ahv-beitragsluecken-pruefen-nachzahlen.html",
     "ahv-mindestbeitrag-selbststaendige.html",
-    "steuern-sparen-tipps.html"
+    "ahv-rentenerhoehung-2027-neue-betraege.html"
   ],
   "ahv-beitragsluecken-pruefen-nachzahlen.html": [
     "13-ahv-rente-dezember-2026.html",
@@ -77,17 +77,17 @@
   "saeule-3a-bezug-staffeln.html": [
     "saeule-3a-nachzahlen.html",
     "pensionskassen-einkauf-steuern-sparen.html",
-    "steuern-sparen-tipps.html"
+    "teilliquidation-pensionskasse-auszahlung.html"
   ],
   "saeule-3a-nachzahlen.html": [
     "saeule-3a-bezug-staffeln.html",
     "pensionskassen-einkauf-steuern-sparen.html",
-    "ahv-beitragsluecken-pruefen-nachzahlen.html"
+    "ahv-rentenerhoehung-2027-neue-betraege.html"
   ],
   "steuer-checkliste-2026.html": [
     "steuern-sparen-tipps.html",
     "verrechnungssteuer-schweiz-35-prozent.html",
-    "praemienverbilligung-2027-anmelden.html"
+    "erwerbsbedingter-umzug-kosten-abzug.html"
   ],
   "steuern-sparen-tipps.html": [
     "steuer-checkliste-2026.html",
@@ -102,7 +102,7 @@
   "verrechnungssteuer-schweiz-35-prozent.html": [
     "verrechnungssteuer-rueckerstattungsfrist-ablauf.html",
     "kryptowaehrungen-steuern-schweiz.html",
-    "transparenzregister-tjpg-meldepflicht.html"
+    "auslaendisches-depot-neobroker-steuererklaerung.html"
   ],
   "transparenzregister-tjpg-meldepflicht.html": [
     "mwst-100k-pflicht-schweiz.html",
@@ -113,5 +113,30 @@
     "verrechnungssteuer-schweiz-35-prozent.html",
     "verrechnungssteuer-rueckerstattungsfrist-ablauf.html",
     "ahv-mindestbeitrag-selbststaendige.html"
+  ],
+  "ahv-rentenerhoehung-2027-neue-betraege.html": [
+    "13-ahv-rente-dezember-2026.html",
+    "saeule-3a-nachzahlen.html",
+    "ahv-beitragsluecken-pruefen-nachzahlen.html"
+  ],
+  "erwerbsbedingter-umzug-kosten-abzug.html": [
+    "steuer-checkliste-2026.html",
+    "steuern-sparen-tipps.html",
+    "grenzgaenger-de-fr-it-steuern.html"
+  ],
+  "auslaendisches-depot-neobroker-steuererklaerung.html": [
+    "kryptowaehrungen-steuern-schweiz.html",
+    "verrechnungssteuer-schweiz-35-prozent.html",
+    "steuern-sparen-tipps.html"
+  ],
+  "ueberbrueckungsleistungen-ahv-fruehpensionierung.html": [
+    "saeule-3a-bezug-staffeln.html",
+    "13-ahv-rente-dezember-2026.html",
+    "praemienverbilligung-2027-anmelden.html"
+  ],
+  "teilliquidation-pensionskasse-auszahlung.html": [
+    "saeule-3a-bezug-staffeln.html",
+    "pensionskassen-einkauf-steuern-sparen.html",
+    "steuern-sparen-tipps.html"
   ]
 }
