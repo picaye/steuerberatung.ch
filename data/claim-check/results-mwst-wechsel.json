@@ -1,0 +1,155 @@
+[
+  {
+    "id": "mwst-normal-81",
+    "claim": "Der heutige MWST-Normalsatz beträgt 8,1 Prozent (Art. 25 Abs. 1 MWSTG, Stand 31.3.2025).",
+    "source": "mwstg-art25-abs1",
+    "file": "card: mwst-wechsel-8-5-prozent-praxis",
+    "origin": "fedlex SR 641.20 Art. 25 Abs. 1",
+    "verdict": "supports",
+    "confidence": 1.0,
+    "needs_review": false,
+    "probabilities": {
+      "contradicts": 0.0,
+      "supports": 1.0,
+      "silent": 0.0,
+      "unusable": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "mwst-reduziert-26",
+    "claim": "Der reduzierte Steuersatz beträgt 2,6 Prozent und gilt u.a. für Lebensmittel, Medikamente, Zeitungen, Zeitschriften, Bücher und Produkte für die Monatshygiene (Art. 25 Abs. 2 MWSTG).",
+    "source": "mwstg-art25-abs2",
+    "file": "card: mwst-wechsel-8-5-prozent-praxis",
+    "origin": "fedlex SR 641.20 Art. 25 Abs. 2 Bst. a",
+    "verdict": "supports",
+    "confidence": 0.99,
+    "needs_review": false,
+    "probabilities": {
+      "unusable": 0.0,
+      "contradicts": 0.01,
+      "silent": 0.0,
+      "supports": 0.99
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "mwst-beherbergung-38",
+    "claim": "Die Steuer auf Beherbergungsleistungen beträgt heute 3,8 Prozent (Sondersatz, Art. 25 Abs. 4 MWSTG); der Sondersatz gilt bis längstens zum 31. Dezember 2027.",
+    "source": "mwstg-art25-abs4",
+    "file": "card: mwst-wechsel-8-5-prozent-praxis",
+    "origin": "fedlex SR 641.20 Art. 25 Abs. 4",
+    "verdict": "supports",
+    "confidence": 0.8,
+    "needs_review": false,
+    "probabilities": {
+      "supports": 0.85,
+      "unusable": 0.01,
+      "contradicts": 0.14,
+      "silent": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "mwst-vorlage-85",
+    "claim": "Über die AHV-Zusatzfinanzierung durch Erhöhung der Mehrwertsteuer um 0,4 Prozentpunkte wird am 29. November 2026 abgestimmt: Der Normalsatz steigt von 8,1 auf 8,5 Prozent, der Sondersatz für die Hotellerie von 3,8 auf 4,0 Prozent, der reduzierte Satz von 2,6 Prozent wird nicht erhöht.",
+    "source": "admin-ch-bundesrat-mm-2026-10-05",
+    "file": "card: mwst-wechsel-8-5-prozent-praxis",
+    "origin": "admin.ch MM 'Bundesrat empfiehlt Ja zur Erhöhung der Mehrwertsteuer für die 13. AHV-Rente', 5.10.2026",
+    "verdict": "supports",
+    "confidence": 1.0,
+    "needs_review": false,
+    "probabilities": {
+      "unusable": 0.0,
+      "supports": 1.0,
+      "silent": 0.0,
+      "contradicts": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "mwst-inkrafttreten-2028",
+    "claim": "Die Erhöhung der Mehrwertsteuer könnte Anfang 2028 in Kraft treten; ein festes Datum ist nicht amtlich festgelegt.",
+    "source": "admin-ch-inkrafttreten",
+    "file": "card: mwst-wechsel-8-5-prozent-praxis",
+    "origin": "admin.ch MM 5.10.2026; BSV 'Umsetzung 13. AHV-Rente' (nicht vor 2028)",
+    "verdict": "supports",
+    "confidence": 0.74,
+    "needs_review": true,
+    "probabilities": {
+      "supports": 0.8,
+      "contradicts": 0.04,
+      "silent": 0.14,
+      "unusable": 0.02
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "mwst-entsstehung-art40",
+    "claim": "Die Umsatzsteuerschuld entsteht mit der Rechnungsstellung, bei Teilrechnungen/Teilzahlungen mit deren Ausgabe bzw. Vereinnahmung, bei Vorauszahlungen mit der Vereinnahmung des Entgelts (Art. 40 Abs. 1 MWSTG); bei Abrechnung nach vereinnahmten Entgelten mit der Vereinnahmung (Art. 40 Abs. 2).",
+    "source": "mwstg-art40",
+    "file": "card: mwst-wechsel-8-5-prozent-praxis (Praxis-Mechanik — KORRIGIERT: Card zitierte Art. 37, das ist die Saldo-/Pauschalsteuersatzmethode)",
+    "origin": "fedlex SR 641.20 Art. 40 Abs. 1-2",
+    "verdict": "supports",
+    "confidence": 0.95,
+    "needs_review": false,
+    "probabilities": {
+      "contradicts": 0.04,
+      "supports": 0.96,
+      "silent": 0.0,
+      "unusable": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "ctrl-false-normal-85",
+    "claim": "Der MWST-Normalsatz beträgt seit dem 1. Januar 2026 8,5 Prozent.",
+    "source": "mwstg-art25-abs1",
+    "file": "PLANTED CONTROL — must return contradicts",
+    "origin": "control",
+    "verdict": "contradicts",
+    "confidence": 0.97,
+    "needs_review": false,
+    "probabilities": {
+      "unusable": 0.0,
+      "silent": 0.02,
+      "contradicts": 0.98,
+      "supports": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "ctrl-false-reduziert-erhoht",
+    "claim": "Die Vorlage zur AHV-Zusatzfinanzierung erhöht auch den reduzierten Satz von 2,6 auf 3,0 Prozent.",
+    "source": "admin-ch-bundesrat-mm-2026-10-05",
+    "file": "PLANTED CONTROL — must return contradicts",
+    "origin": "control",
+    "verdict": "contradicts",
+    "confidence": 1.0,
+    "needs_review": false,
+    "probabilities": {
+      "silent": 0.0,
+      "supports": 0.0,
+      "unusable": 0.0,
+      "contradicts": 1.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "ctrl-false-art37",
+    "claim": "Artikel 37 MWSTG regelt, wann die Umsatzsteuerschuld entsteht (massgebend ist der Zeitpunkt der Leistungserbringung).",
+    "source": "mwstg-art37-titel",
+    "file": "PLANTED CONTROL — must return contradicts",
+    "origin": "control",
+    "verdict": "contradicts",
+    "confidence": 1.0,
+    "needs_review": false,
+    "probabilities": {
+      "supports": 0.0,
+      "unusable": 0.0,
+      "contradicts": 1.0,
+      "silent": 0.0
+    },
+    "model": "jev-latest"
+  }
+]
