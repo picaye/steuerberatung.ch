@@ -39,6 +39,14 @@ jobs:
         # (noindex / status:pending / untracked in mksitemap + gen_latest)
         # fails the deploy if any guard regresses. stdlib-only, no pip.
         run: python3 scripts/test_draft_leak_guards.py
+      - name: Gate — publish queue integrity (pin/hold_until, gh#6)
+        # Read-only assertion (gh#6): a pending card with priority
+        # pin-YYYY-MM-DD must carry a matching hold_until, or the publish
+        # cron's 6-day rule cannot protect it. This defect recurred 3x
+        # (b2e19d6 revert, 16bbe2d, e4d494f backfills). The gate fails the
+        # job — it never auto-fixes the queue; the research cron repairs
+        # its own appends before pushing.
+        run: python3 scripts/validate_queue.py
       - name: Build public dist (exclude private data + server files)
         run: |
           mkdir -p dist/en dist/fr dist/it dist/assets

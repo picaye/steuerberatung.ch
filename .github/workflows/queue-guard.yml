@@ -1,0 +1,20 @@
+name: Queue guard (PR)
+
+# gh#6: pages.yml only fires on push to main, so a PR introducing the
+# "pin without hold_until" pattern (or a duplicate/past-pin card) would
+# stay green until it merged and failed the deploy. This job asserts the
+# same queue integrity rules on every PR — read-only, no auto-fix.
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  queue-guard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout PR head
+        uses: actions/checkout@v4
+      - name: Validate publish queue (pin/hold_until, duplicates, past pins)
+        run: python3 scripts/validate_queue.py
