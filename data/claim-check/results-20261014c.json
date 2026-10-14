@@ -1,0 +1,53 @@
+[
+  {
+    "id": "c-qst-frist3",
+    "origin": "draft",
+    "source": "estv_quelle",
+    "file": "quellensteuer-nov-zusatzabzuege.html",
+    "claim": "Quellensteuerpflichtige mit Wohnsitz oder Aufenthalt in der Schweiz können bis am 31. März des Folgejahres einen Antrag auf nachträgliche ordentliche Veranlagung einreichen.",
+    "verdict": "supports",
+    "confidence": 1.0,
+    "needs_review": false,
+    "probabilities": {
+      "supports": 1.0,
+      "contradicts": 0.0,
+      "silent": 0.0,
+      "unusable": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "c-ks-ur3",
+    "origin": "draft",
+    "source": "estv_steuerfuss",
+    "file": "kapitalsteuer-ag-gmbh.html",
+    "claim": "Im Kanton Uri gilt der Steuerfuss nur für die Gewinnsteuer; eine Kapitalsteuer beim Kanton gibt es nicht.",
+    "verdict": "supports",
+    "confidence": 0.41,
+    "needs_review": true,
+    "probabilities": {
+      "supports": 0.5599999999999999,
+      "contradicts": 0.1,
+      "silent": 0.18,
+      "unusable": 0.16
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "c-ks-ur4",
+    "origin": "draft",
+    "source": "estv_steuerfuss",
+    "file": "kapitalsteuer-ag-gmbh.html",
+    "claim": "Die Urner Gemeinden erheben Kapitalsteuern mit proportionalen Sätzen zwischen 0,01 Promille und 4,0 Promille.",
+    "verdict": "supports",
+    "confidence": 0.37,
+    "needs_review": true,
+    "probabilities": {
+      "supports": 0.53,
+      "contradicts": 0.06,
+      "silent": 0.21,
+      "unusable": 0.2
+    },
+    "model": "jev-latest"
+  }
+]

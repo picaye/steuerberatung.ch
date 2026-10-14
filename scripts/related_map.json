@@ -1,152 +1,177 @@
 {
-  "13-ahv-rente-dezember-2026.html": [
-    "ahv-beitragsluecken-pruefen-nachzahlen.html",
-    "ahv-mindestbeitrag-selbststaendige.html",
-    "ahv-rentenerhoehung-2027-neue-betraege.html"
-  ],
-  "krankenkassenpramien-steuerabzug.html": [
-    "praemienverbilligung-2027-anmelden.html",
-    "steuer-checkliste-2026.html",
-    "steuern-sparen-tipps.html"
-  ],
-  "ahv-beitragsluecken-pruefen-nachzahlen.html": [
-    "13-ahv-rente-dezember-2026.html",
-    "ahv-mindestbeitrag-selbststaendige.html",
-    "saeule-3a-nachzahlen.html"
-  ],
-  "ahv-mindestbeitrag-selbststaendige.html": [
-    "13-ahv-rente-dezember-2026.html",
-    "ahv-beitragsluecken-pruefen-nachzahlen.html",
-    "mwst-100k-pflicht-schweiz.html"
-  ],
-  "eigenmietwert-abschaffung-2029.html": [
-    "hypothek-steuerabzug-schweiz.html",
-    "erbschaftssteuer-schenkungssteuer-schweiz.html",
-    "steuern-sparen-tipps.html"
-  ],
-  "expats-steuern-schweiz.html": [
-    "grenzgaenger-de-fr-it-steuern.html",
-    "steuern-sparen-tipps.html",
-    "kryptowaehrungen-steuern-schweiz.html"
-  ],
-  "mwst-agov-pflicht-oktober-2026.html": [
-    "mwst-100k-pflicht-schweiz.html",
-    "steuer-checkliste-2026.html",
-    "transparenzregister-tjpg-meldepflicht.html"
-  ],
-  "erbschaftssteuer-schenkungssteuer-schweiz.html": [
-    "hypothek-steuerabzug-schweiz.html",
-    "eigenmietwert-abschaffung-2029.html",
-    "transparenzregister-tjpg-meldepflicht.html"
-  ],
-  "grenzgaenger-de-fr-it-steuern.html": [
-    "individualbesteuerung-erklaert.html",
-    "expats-steuern-schweiz.html",
-    "steuern-sparen-tipps.html"
-  ],
-  "grenzgaenger-homeoffice-telearbeit-regeln.html": [
-    "grenzgaenger-de-fr-it-steuern.html",
-    "steuer-checkliste-2026.html",
-    "steuern-sparen-tipps.html"
-  ],
-  "hypothek-steuerabzug-schweiz.html": [
-    "eigenmietwert-abschaffung-2029.html",
-    "erbschaftssteuer-schenkungssteuer-schweiz.html",
-    "steuern-sparen-tipps.html"
-  ],
-  "individualbesteuerung-erklaert.html": [
-    "steuern-sparen-tipps.html",
-    "pensionskassen-einkauf-steuern-sparen.html",
-    "grenzgaenger-de-fr-it-steuern.html"
-  ],
-  "kryptowaehrungen-steuern-schweiz.html": [
-    "verrechnungssteuer-schweiz-35-prozent.html",
-    "erbschaftssteuer-schenkungssteuer-schweiz.html",
-    "steuern-sparen-tipps.html"
-  ],
-  "mwst-100k-pflicht-schweiz.html": [
-    "mwst-agov-pflicht-oktober-2026.html",
-    "steuer-checkliste-2026.html",
-    "transparenzregister-tjpg-meldepflicht.html"
-  ],
-  "pensionskassen-einkauf-steuern-sparen.html": [
-    "saeule-3a-bezug-staffeln.html",
-    "saeule-3a-nachzahlen.html",
-    "steuern-sparen-tipps.html"
-  ],
-  "praemienverbilligung-2027-anmelden.html": [
-    "steuer-checkliste-2026.html",
-    "steuern-sparen-tipps.html",
-    "individualbesteuerung-erklaert.html"
-  ],
-  "saeule-3a-bezug-staffeln.html": [
-    "saeule-3a-nachzahlen.html",
-    "pensionskassen-einkauf-steuern-sparen.html",
-    "teilliquidation-pensionskasse-auszahlung.html"
-  ],
-  "saeule-3a-nachzahlen.html": [
-    "saeule-3a-bezug-staffeln.html",
-    "pensionskassen-einkauf-steuern-sparen.html",
-    "ahv-rentenerhoehung-2027-neue-betraege.html"
-  ],
-  "steuer-checkliste-2026.html": [
-    "steuern-sparen-tipps.html",
-    "verrechnungssteuer-schweiz-35-prozent.html",
-    "erwerbsbedingter-umzug-kosten-abzug.html"
-  ],
-  "steuern-sparen-tipps.html": [
-    "steuer-checkliste-2026.html",
-    "saeule-3a-bezug-staffeln.html",
-    "pensionskassen-einkauf-steuern-sparen.html"
-  ],
-  "verrechnungssteuer-rueckerstattungsfrist-ablauf.html": [
-    "verrechnungssteuer-schweiz-35-prozent.html",
-    "steuer-checkliste-2026.html",
-    "kryptowaehrungen-steuern-schweiz.html"
-  ],
-  "verrechnungssteuer-schweiz-35-prozent.html": [
-    "verrechnungssteuer-rueckerstattungsfrist-ablauf.html",
-    "kryptowaehrungen-steuern-schweiz.html",
-    "auslaendisches-depot-neobroker-steuererklaerung.html"
-  ],
-  "transparenzregister-tjpg-meldepflicht.html": [
-    "mwst-100k-pflicht-schweiz.html",
-    "verrechnungssteuer-schweiz-35-prozent.html",
-    "erbschaftssteuer-schenkungssteuer-schweiz.html"
-  ],
-  "dividenden-ahv-pflicht-bge-9c-532-2025.html": [
-    "verrechnungssteuer-schweiz-35-prozent.html",
-    "verrechnungssteuer-rueckerstattungsfrist-ablauf.html",
-    "ahv-mindestbeitrag-selbststaendige.html"
-  ],
-  "ahv-rentenerhoehung-2027-neue-betraege.html": [
-    "13-ahv-rente-dezember-2026.html",
-    "saeule-3a-nachzahlen.html",
-    "ahv-beitragsluecken-pruefen-nachzahlen.html"
-  ],
-  "erwerbsbedingter-umzug-kosten-abzug.html": [
-    "steuer-checkliste-2026.html",
-    "steuern-sparen-tipps.html",
-    "grenzgaenger-de-fr-it-steuern.html"
-  ],
-  "auslaendisches-depot-neobroker-steuererklaerung.html": [
-    "kryptowaehrungen-steuern-schweiz.html",
-    "verrechnungssteuer-schweiz-35-prozent.html",
-    "steuern-sparen-tipps.html"
-  ],
-  "ueberbrueckungsleistungen-ahv-fruehpensionierung.html": [
-    "saeule-3a-bezug-staffeln.html",
-    "13-ahv-rente-dezember-2026.html",
-    "praemienverbilligung-2027-anmelden.html"
-  ],
-  "teilliquidation-pensionskasse-auszahlung.html": [
-    "saeule-3a-bezug-staffeln.html",
-    "pensionskassen-einkauf-steuern-sparen.html",
-    "steuern-sparen-tipps.html"
-  ],
-  "phishing-steuerbescheid-agov-betrug.html": [
-    "mwst-agov-pflicht-oktober-2026.html",
-    "verrechnungssteuer-rueckerstattungsfrist-ablauf.html",
-    "steuer-checkliste-2026.html"
-  ]
+ "13-ahv-rente-dezember-2026.html": [
+  "ahv-beitragsluecken-pruefen-nachzahlen.html",
+  "ahv-mindestbeitrag-selbststaendige.html",
+  "ahv-rentenerhoehung-2027-neue-betraege.html"
+ ],
+ "krankenkassenpramien-steuerabzug.html": [
+  "praemienverbilligung-2027-anmelden.html",
+  "steuer-checkliste-2026.html",
+  "steuern-sparen-tipps.html"
+ ],
+ "ahv-beitragsluecken-pruefen-nachzahlen.html": [
+  "13-ahv-rente-dezember-2026.html",
+  "ahv-mindestbeitrag-selbststaendige.html",
+  "saeule-3a-nachzahlen.html"
+ ],
+ "ahv-mindestbeitrag-selbststaendige.html": [
+  "13-ahv-rente-dezember-2026.html",
+  "ahv-beitragsluecken-pruefen-nachzahlen.html",
+  "minijobs-lohnschwelle-ahv-pflicht.html"
+ ],
+ "eigenmietwert-abschaffung-2029.html": [
+  "hypothek-steuerabzug-schweiz.html",
+  "erbschaftssteuer-schenkungssteuer-schweiz.html",
+  "steuern-sparen-tipps.html"
+ ],
+ "expats-steuern-schweiz.html": [
+  "grenzgaenger-de-fr-it-steuern.html",
+  "steuern-sparen-tipps.html",
+  "quellensteuer-nov-zusatzabzuege.html"
+ ],
+ "mwst-agov-pflicht-oktober-2026.html": [
+  "mwst-100k-pflicht-schweiz.html",
+  "mwst-ausfuhr-0-prozent-nachweis.html",
+  "transparenzregister-tjpg-meldepflicht.html"
+ ],
+ "erbschaftssteuer-schenkungssteuer-schweiz.html": [
+  "hypothek-steuerabzug-schweiz.html",
+  "eigenmietwert-abschaffung-2029.html",
+  "transparenzregister-tjpg-meldepflicht.html"
+ ],
+ "grenzgaenger-de-fr-it-steuern.html": [
+  "quellensteuer-nov-zusatzabzuege.html",
+  "expats-steuern-schweiz.html",
+  "minijobs-lohnschwelle-ahv-pflicht.html"
+ ],
+ "grenzgaenger-homeoffice-telearbeit-regeln.html": [
+  "grenzgaenger-de-fr-it-steuern.html",
+  "steuer-checkliste-2026.html",
+  "steuern-sparen-tipps.html"
+ ],
+ "hypothek-steuerabzug-schweiz.html": [
+  "eigenmietwert-abschaffung-2029.html",
+  "erbschaftssteuer-schenkungssteuer-schweiz.html",
+  "steuern-sparen-tipps.html"
+ ],
+ "individualbesteuerung-erklaert.html": [
+  "steuern-sparen-tipps.html",
+  "pensionskassen-einkauf-steuern-sparen.html",
+  "grenzgaenger-de-fr-it-steuern.html"
+ ],
+ "kryptowaehrungen-steuern-schweiz.html": [
+  "verrechnungssteuer-schweiz-35-prozent.html",
+  "erbschaftssteuer-schenkungssteuer-schweiz.html",
+  "steuern-sparen-tipps.html"
+ ],
+ "mwst-100k-pflicht-schweiz.html": [
+  "mwst-agov-pflicht-oktober-2026.html",
+  "eu-zoll-3-euro-kleinsendungen.html",
+  "mwst-ausfuhr-0-prozent-nachweis.html"
+ ],
+ "pensionskassen-einkauf-steuern-sparen.html": [
+  "saeule-3a-bezug-staffeln.html",
+  "saeule-3a-nachzahlen.html",
+  "steuern-sparen-tipps.html"
+ ],
+ "praemienverbilligung-2027-anmelden.html": [
+  "steuer-checkliste-2026.html",
+  "steuern-sparen-tipps.html",
+  "individualbesteuerung-erklaert.html"
+ ],
+ "saeule-3a-bezug-staffeln.html": [
+  "saeule-3a-nachzahlen.html",
+  "pensionskassen-einkauf-steuern-sparen.html",
+  "teilliquidation-pensionskasse-auszahlung.html"
+ ],
+ "saeule-3a-nachzahlen.html": [
+  "saeule-3a-bezug-staffeln.html",
+  "pensionskassen-einkauf-steuern-sparen.html",
+  "quellensteuer-nov-zusatzabzuege.html"
+ ],
+ "steuer-checkliste-2026.html": [
+  "steuern-sparen-tipps.html",
+  "verrechnungssteuer-schweiz-35-prozent.html",
+  "erwerbsbedingter-umzug-kosten-abzug.html"
+ ],
+ "steuern-sparen-tipps.html": [
+  "steuer-checkliste-2026.html",
+  "saeule-3a-bezug-staffeln.html",
+  "pensionskassen-einkauf-steuern-sparen.html"
+ ],
+ "verrechnungssteuer-rueckerstattungsfrist-ablauf.html": [
+  "verrechnungssteuer-schweiz-35-prozent.html",
+  "steuer-checkliste-2026.html",
+  "kryptowaehrungen-steuern-schweiz.html"
+ ],
+ "verrechnungssteuer-schweiz-35-prozent.html": [
+  "verrechnungssteuer-rueckerstattungsfrist-ablauf.html",
+  "kryptowaehrungen-steuern-schweiz.html",
+  "kapitalsteuer-ag-gmbh.html"
+ ],
+ "transparenzregister-tjpg-meldepflicht.html": [
+  "mwst-100k-pflicht-schweiz.html",
+  "verrechnungssteuer-schweiz-35-prozent.html",
+  "kapitalsteuer-ag-gmbh.html"
+ ],
+ "dividenden-ahv-pflicht-bge-9c-532-2025.html": [
+  "verrechnungssteuer-schweiz-35-prozent.html",
+  "verrechnungssteuer-rueckerstattungsfrist-ablauf.html",
+  "kapitalsteuer-ag-gmbh.html"
+ ],
+ "ahv-rentenerhoehung-2027-neue-betraege.html": [
+  "13-ahv-rente-dezember-2026.html",
+  "saeule-3a-nachzahlen.html",
+  "ahv-beitragsluecken-pruefen-nachzahlen.html"
+ ],
+ "erwerbsbedingter-umzug-kosten-abzug.html": [
+  "steuer-checkliste-2026.html",
+  "steuern-sparen-tipps.html",
+  "grenzgaenger-de-fr-it-steuern.html"
+ ],
+ "auslaendisches-depot-neobroker-steuererklaerung.html": [
+  "kryptowaehrungen-steuern-schweiz.html",
+  "verrechnungssteuer-schweiz-35-prozent.html",
+  "steuern-sparen-tipps.html"
+ ],
+ "ueberbrueckungsleistungen-ahv-fruehpensionierung.html": [
+  "saeule-3a-bezug-staffeln.html",
+  "13-ahv-rente-dezember-2026.html",
+  "praemienverbilligung-2027-anmelden.html"
+ ],
+ "teilliquidation-pensionskasse-auszahlung.html": [
+  "saeule-3a-bezug-staffeln.html",
+  "pensionskassen-einkauf-steuern-sparen.html",
+  "steuern-sparen-tipps.html"
+ ],
+ "phishing-steuerbescheid-agov-betrug.html": [
+  "mwst-agov-pflicht-oktober-2026.html",
+  "verrechnungssteuer-rueckerstattungsfrist-ablauf.html",
+  "steuer-checkliste-2026.html"
+ ],
+ "eu-zoll-3-euro-kleinsendungen.html": [
+  "mwst-ausfuhr-0-prozent-nachweis.html",
+  "mwst-100k-pflicht-schweiz.html",
+  "transparenzregister-tjpg-meldepflicht.html"
+ ],
+ "minijobs-lohnschwelle-ahv-pflicht.html": [
+  "quellensteuer-nov-zusatzabzuege.html",
+  "grenzgaenger-de-fr-it-steuern.html",
+  "ahv-mindestbeitrag-selbststaendige.html"
+ ],
+ "mwst-ausfuhr-0-prozent-nachweis.html": [
+  "eu-zoll-3-euro-kleinsendungen.html",
+  "mwst-agov-pflicht-oktober-2026.html",
+  "mwst-100k-pflicht-schweiz.html"
+ ],
+ "quellensteuer-nov-zusatzabzuege.html": [
+  "grenzgaenger-de-fr-it-steuern.html",
+  "expats-steuern-schweiz.html",
+  "saeule-3a-nachzahlen.html"
+ ],
+ "kapitalsteuer-ag-gmbh.html": [
+  "verrechnungssteuer-schweiz-35-prozent.html",
+  "dividenden-ahv-pflicht-bge-9c-532-2025.html",
+  "transparenzregister-tjpg-meldepflicht.html"
+ ]
 }

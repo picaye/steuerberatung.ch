@@ -1,0 +1,135 @@
+[
+ {
+  "id": "c-eu-150",
+  "origin": "draft",
+  "source": "zoll_de",
+  "file": "eu-zoll-3-euro-kleinsendungen.html",
+  "claim": "Die Einfuhrabgabenfreiheit für Waren in Sendungen mit einem Gesamtwert bis 150 Euro wurde mit Wirkung zum 1. Juli 2026 gestrichen."
+ },
+ {
+  "id": "c-eu-3",
+  "origin": "draft",
+  "source": "zoll_de",
+  "file": "eu-zoll-3-euro-kleinsendungen.html",
+  "claim": "Für Sendungen bis zu einem Wert von 150 Euro im Fernabsatz gilt ein pauschaler Zoll von 3 Euro pro Warenkategorie, das bedeutet je angemeldeter Position der Zollanmeldung."
+ },
+ {
+  "id": "c-eu-fee",
+  "origin": "draft",
+  "source": "zoll_de",
+  "file": "eu-zoll-3-euro-kleinsendungen.html",
+  "claim": "Ab dem 1. November 2026 wird nach jetzigem Stand bei Sendungen im Fernabsatzverkehr unabhängig vom Warenwert zusätzlich eine Abfertigungspauschale (Union Handling Fee) von 2 Euro je Warenkategorie erhoben; die Höhe ist noch nicht abschliessend beschlossen."
+ },
+ {
+  "id": "c-eu-ioss",
+  "origin": "draft",
+  "source": "bmf",
+  "file": "eu-zoll-3-euro-kleinsendungen.html",
+  "claim": "Bei IOSS-Sendungen ist generell der 3-Euro-Zoll vorgesehen und eine Zollpräferenz nicht möglich; in e-zoll ist der Präferenzcode 500 zu erklären."
+ },
+ {
+  "id": "c-ahv-2500",
+  "origin": "draft",
+  "source": "akzug",
+  "file": "minijobs-lohnschwelle-ahv-pflicht.html",
+  "claim": "Ist der Bruttojahreslohn nicht höher als 2'500 Franken pro Arbeitgeber, müssen Beiträge an AHV/IV/EO und ALV nur auf ausdrücklichen Wunsch der versicherten Person abgerechnet werden; ausgenommen sind Tätigkeiten in Privathaushalten, für die auch unter 2'500 Franken Beitragspflicht gilt."
+ },
+ {
+  "id": "c-ahv-2300",
+  "origin": "draft",
+  "source": "akso",
+  "file": "minijobs-lohnschwelle-ahv-pflicht.html",
+  "claim": "Die Grenze für geringfügige Löhne beträgt seit 1. Januar 2025 CHF 2'500 pro Kalenderjahr und Arbeitgeber; bis 31.12.2024 betrug sie CHF 2'300."
+ },
+ {
+  "id": "c-ahv-kultur",
+  "origin": "draft",
+  "source": "akso",
+  "file": "minijobs-lohnschwelle-ahv-pflicht.html",
+  "claim": "Ab dem 1. Januar 2026 werden Tätigkeiten in den Bereichen Design, Museen, Medien und Chöre ab dem ersten verdienten Franken AHV-beitragspflichtig."
+ },
+ {
+  "id": "c-ahv-sack",
+  "origin": "draft",
+  "source": "svazurich",
+  "file": "minijobs-lohnschwelle-ahv-pflicht.html",
+  "claim": "In Privathaushalten sind Einkommen von Personen, die im betreffenden Kalenderjahr höchstens 25 Jahre alt werden, bis 750 Franken pro Privathaushalt und Kalenderjahr beitragsfrei."
+ },
+ {
+  "id": "c-mwst-belege",
+  "origin": "draft",
+  "source": "bazg",
+  "file": "mwst-ausfuhr-0-prozent-nachweis.html",
+  "claim": "Als Nachweis einer Ausfuhr gelten die elektronische Ausfuhrveranlagungsverfügung mit digitaler Signatur, das zollamtlich gestempelte Doppel der Zollanmeldung für Rohtabak und Tabakfabrikate (Form. 11.44), das zollamtlich bestätigte Ausfuhrdokument im Reiseverkehr und bestimmte zollamtliche Verfahrensdokumente."
+ },
+ {
+  "id": "c-mwst-inland",
+  "origin": "draft",
+  "source": "bazg",
+  "file": "mwst-ausfuhr-0-prozent-nachweis.html",
+  "claim": "Kann die Ausfuhr nicht nachgewiesen werden, müssen die Lieferungen im Inland versteuert werden."
+ },
+ {
+  "id": "c-qst-frist",
+  "origin": "draft",
+  "source": "estv_quelle",
+  "file": "quellensteuer-nov-zusatzabzuege.html",
+  "claim": "Der Antrag auf nachträgliche ordentliche Veranlagung ist bis zum 31. März des Folgejahres einzureichen."
+ },
+ {
+  "id": "c-qst-120k",
+  "origin": "draft",
+  "source": "estv_quelle",
+  "file": "quellensteuer-nov-zusatzabzuege.html",
+  "claim": "Die nachträgliche ordentliche Veranlagung ist für Quellensteuerpflichtige mit einem Bruttoeinkommen über CHF 120'000 pro Jahr obligatorisch."
+ },
+ {
+  "id": "c-qst-neub",
+  "origin": "draft",
+  "source": "estv_quelle",
+  "file": "quellensteuer-nov-zusatzabzuege.html",
+  "claim": "Quellensteuerpflichtige können bis zum 31. März des Folgejahres eine Neuberechnung beantragen, wenn ein falscher Tarif angewendet oder der Bruttolohn falsch ermittelt wurde (Art. 137 DBG und Art. 49 StHG)."
+ },
+ {
+  "id": "c-ks-ag",
+  "origin": "draft",
+  "source": "kb_ag",
+  "file": "kapitalsteuer-ag-gmbh.html",
+  "claim": "Im Kanton Aargau beträgt die Kapitalsteuer 0,75 Promille des steuerbaren Eigenkapitals und die Gewinnsteuer wird an die Kapitalsteuer angerechnet."
+ },
+ {
+  "id": "c-ks-min",
+  "origin": "draft",
+  "source": "kb_ag",
+  "file": "kapitalsteuer-ag-gmbh.html",
+  "claim": "Kapitalgesellschaften und Genossenschaften entrichten in Aargau eine Mindeststeuer von 500 Franken als einfache (100%ige) Kantonssteuer; das Eigenkapital der Vereine und Stiftungen wird besteuert, soweit es 50'000 Franken übersteigt."
+ },
+ {
+  "id": "c-ks-ur",
+  "origin": "draft",
+  "source": "estv_steuerfuss",
+  "file": "kapitalsteuer-ag-gmbh.html",
+  "claim": "Im Kanton Uri erheben der Kanton und die Kirchgemeinden keine Kapitalsteuer; die Urner Gemeinden kennen proportionale Sätze zwischen 0,01 und 4,0 Promille."
+ },
+ {
+  "id": "c-ks-vd",
+  "origin": "draft",
+  "source": "estv_steuerfuss",
+  "file": "kapitalsteuer-ag-gmbh.html",
+  "claim": "Im Kanton Waadt dürfen die Kantons- und Gemeindesteuern zusammen 30 Prozent des steuerbaren Reingewinns und 7 Promille des steuerbaren Kapitals nicht überschreiten."
+ },
+ {
+  "id": "c-ks-lu",
+  "origin": "draft",
+  "source": "estv_steuerfuss",
+  "file": "kapitalsteuer-ag-gmbh.html",
+  "claim": "Der Kanton Luzern erhebt eine feste Kapitalsteuer von 0,01 Promille auf dem Anteil des steuerbaren Eigenkapitals, der auf Beteiligungen, Patente und vergleichbare Rechte sowie Konzernforderungen entfällt."
+ },
+ {
+  "id": "c-ks-grenze",
+  "origin": "draft",
+  "source": "estv_steuerfuss",
+  "file": "kapitalsteuer-ag-gmbh.html",
+  "claim": "Die Mehrheit der Kantone sieht bei den Gewinn- und Kapitalsteuern juristischer Personen keine Belastungsobergrenze vor."
+ }
+]
