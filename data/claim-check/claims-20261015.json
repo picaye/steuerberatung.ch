@@ -1,0 +1,303 @@
+[
+ {
+  "id": "r-eu-150",
+  "origin": "retro-gate issue #9",
+  "source": "zoll_de",
+  "file": "eu-zoll-3-euro-kleinsendungen.html",
+  "claim": "Die Einfuhrabgabenfreiheit für Waren in Sendungen mit einem Gesamtwert bis 150 Euro wurde mit Wirkung zum 1. Juli 2026 gestrichen."
+ },
+ {
+  "id": "r-eu-3",
+  "origin": "retro-gate issue #9",
+  "source": "zoll_de",
+  "file": "eu-zoll-3-euro-kleinsendungen.html",
+  "claim": "Für Sendungen bis zu einem Wert von 150 Euro im Fernabsatz gilt ein pauschaler Zoll von 3 Euro pro Warenkategorie, das bedeutet je angemeldeter Position der Zollanmeldung."
+ },
+ {
+  "id": "r-eu-fee",
+  "origin": "retro-gate issue #9",
+  "source": "zoll_de",
+  "file": "eu-zoll-3-euro-kleinsendungen.html",
+  "claim": "Ab dem 1. November 2026 wird nach jetzigem Stand bei Sendungen im Fernabsatzverkehr unabhängig vom Warenwert zusätzlich eine Abfertigungspauschale (Union Handling Fee) von 2 Euro je Warenkategorie erhoben; die Höhe beruht auf noch nicht abschliessend beschlossenen Entwürfen."
+ },
+ {
+  "id": "r-eu-ioss",
+  "origin": "retro-gate issue #9",
+  "source": "bmf3",
+  "file": "eu-zoll-3-euro-kleinsendungen.html",
+  "claim": "Bei IOSS-Sendungen ist gemäss Art. 2 lit. a der VO (EU) 2026/382 generell der 3-Euro-Zoll vorgesehen; eine Zollpräferenz ist ausgeschlossen."
+ },
+ {
+  "id": "r-eu-reg",
+  "origin": "retro-gate issue #9",
+  "source": "eurlex382",
+  "file": "eu-zoll-3-euro-kleinsendungen.html",
+  "claim": "Verordnung (EU) 2026/382 des Rates vom 11. Februar 2026 zur Änderung der Verordnung (EG) Nr. 1186/2009 hinsichtlich der Abschaffung der schwellenbasierten Zollbefreiung."
+ },
+ {
+  "id": "r-eu-temp",
+  "origin": "retro-gate issue #9",
+  "source": "ec_ref",
+  "file": "eu-zoll-3-euro-kleinsendungen.html",
+  "claim": "Der 3-Euro-Pauschalzoll ist ausdrücklich eine befristete Übergangslösung (temporäre Abgabe)."
+ },
+ {
+  "id": "r-eu-22",
+  "origin": "retro-gate issue #9",
+  "source": "eu22",
+  "file": "eu-zoll-3-euro-kleinsendungen.html",
+  "claim": "Die Mehrwertsteuerbefreiung für die Einfuhr von Waren mit einem Wert von nicht mehr als 22 Euro ist bereits am 1. Juli 2021 entfallen."
+ },
+ {
+  "id": "r-eu-calc",
+  "origin": "retro-gate issue #9",
+  "source": "zoll_int",
+  "file": "eu-zoll-3-euro-kleinsendungen.html",
+  "claim": "Eine Fernabsatzsendung aus einem Nicht-EU-Staat mit drei Warenkategorien (z. B. Socken, Plüschtier, Ladekabel) kostet seit 1.7.2026 9 Euro Zoll; ab 1.11.2026 kommen 6 Euro Abfertigungspauschale hinzu."
+ },
+ {
+  "id": "r-eu-until",
+  "origin": "retro-gate issue #9",
+  "source": "ec_ref",
+  "file": "eu-zoll-3-euro-kleinsendungen.html",
+  "claim": "Der temporäre 3-Euro-Zoll auf Kleinsendungen bis 150 Euro gilt als Übergangslösung bis zum 1. Juli 2028; ab diesem Datum wird der EU Customs Data Hub für E-Commerce verpflichtend."
+ },
+ {
+  "id": "r-eu-fee2",
+  "origin": "retro-gate issue #9",
+  "source": "zoll_int",
+  "file": "eu-zoll-3-euro-kleinsendungen.html",
+  "claim": "Ab dem 1. November 2026 wird zusätzlich eine Abfertigungspauschale (Union Handling Fee) von 2 Euro je Warenkategorie erhoben, unabhängig vom Warenwert."
+ },
+ {
+  "id": "r-ahv-2500",
+  "origin": "retro-gate issue #9",
+  "source": "ahv204",
+  "file": "minijobs-lohnschwelle-ahv-pflicht.html",
+  "claim": "Löhne, die 2'500 Franken pro Kalenderjahr und Arbeitgeber nicht übersteigen, sind grundsätzlich beitragsfrei (AHV/IV/EO/ALV), sofern die Arbeitnehmenden die Beitragsentrichtung nicht verlangen."
+ },
+ {
+  "id": "r-ahv-ganz",
+  "origin": "retro-gate issue #9",
+  "source": "ahv204",
+  "file": "minijobs-lohnschwelle-ahv-pflicht.html",
+  "claim": "Übersteigt der Lohn 2'500 Franken pro Jahr und Arbeitgeber, sind die AHV/IV/EO- und ALV-Beiträge vom gesamten Lohn abzuziehen, nicht nur vom überschiessenden Betrag."
+ },
+ {
+  "id": "r-ahv-erhoehung",
+  "origin": "retro-gate issue #9",
+  "source": "ahvv2025",
+  "file": "minijobs-lohnschwelle-ahv-pflicht.html",
+  "claim": "Der Grenzbetrag für geringfügige Löhne nach Art. 34d Abs. 1 AHVV wurde per 1. Januar 2025 von 2'300 auf 2'500 Franken erhöht."
+ },
+ {
+  "id": "r-ahv-verlangen",
+  "origin": "retro-gate issue #9",
+  "source": "ahv204",
+  "file": "minijobs-lohnschwelle-ahv-pflicht.html",
+  "claim": "Arbeitnehmende können verlangen, dass AHV/IV/EO- und ALV-Beiträge auch auf Löhnen von weniger als 2'500 Franken im Jahr abgerechnet werden."
+ },
+ {
+  "id": "r-ahv-haushalt",
+  "origin": "retro-gate issue #9",
+  "source": "ahv204",
+  "file": "minijobs-lohnschwelle-ahv-pflicht.html",
+  "claim": "Wer Personal in einem Privathaushalt beschäftigt, muss die AHV-Beiträge in jedem Fall abrechnen, unabhängig von der Lohnhöhe."
+ },
+ {
+  "id": "r-ahv-sack",
+  "origin": "retro-gate issue #9",
+  "source": "ahv204",
+  "file": "minijobs-lohnschwelle-ahv-pflicht.html",
+  "claim": "In Privathaushalten sind Löhne von jährlich maximal 750 Franken beitragsfrei, wenn sie an Personen ausbezahlt werden, die bis zum 31. Dezember nach ihrem 25. Geburtstag zählen."
+ },
+ {
+  "id": "r-ahv-kultur",
+  "origin": "retro-gate issue #9",
+  "source": "ahvv2026",
+  "file": "minijobs-lohnschwelle-ahv-pflicht.html",
+  "claim": "Der Arbeitgeberkatalog mit voller Beitragspflicht auch bei geringfügigen Löhnen im Kultur- und Medienbereich (Art. 34d Abs. 2 Bst. b AHVV) wurde per 1. Januar 2026 um Chöre, elektronische Medien und Printmedien, Designunternehmen sowie Museen ergänzt."
+ },
+ {
+  "id": "r-mwst-evv",
+  "origin": "retro-gate issue #9",
+  "source": "bazg",
+  "file": "mwst-ausfuhr-0-prozent-nachweis.html",
+  "claim": "Als Nachweis einer Ausfuhr gilt die elektronische Ausfuhrveranlagungsverfügung mit digitaler Signatur."
+ },
+ {
+  "id": "r-mwst-1144",
+  "origin": "retro-gate issue #9",
+  "source": "bazg",
+  "file": "mwst-ausfuhr-0-prozent-nachweis.html",
+  "claim": "Als Nachweis einer Ausfuhr gilt das zollamtlich gestempelte Doppel der Zollanmeldung für Rohtabak und Tabakfabrikate (Formular 11.44)."
+ },
+ {
+  "id": "r-mwst-reise",
+  "origin": "retro-gate issue #9",
+  "source": "bazg",
+  "file": "mwst-ausfuhr-0-prozent-nachweis.html",
+  "claim": "Als Nachweis einer Ausfuhr gilt das zollamtlich bestätigte Ausfuhrdokument im Reiseverkehr."
+ },
+ {
+  "id": "r-mwst-inland",
+  "origin": "retro-gate issue #9",
+  "source": "bazg",
+  "file": "mwst-ausfuhr-0-prozent-nachweis.html",
+  "claim": "Kann die Ausfuhr nicht nachgewiesen werden, müssen die Lieferungen im Inland versteuert werden."
+ },
+ {
+  "id": "r-mwst-81",
+  "origin": "retro-gate issue #9",
+  "source": "mwstg25",
+  "file": "mwst-ausfuhr-0-prozent-nachweis.html",
+  "claim": "Der MWST-Normalsatz im Inland beträgt 8,1 Prozent."
+ },
+ {
+  "id": "r-mwst-passar",
+  "origin": "retro-gate issue #9",
+  "source": "bazg_passar",
+  "file": "mwst-ausfuhr-0-prozent-nachweis.html",
+  "claim": "Die Parallelphase von E-dec Export ist abgeschlossen; Ausnahmegesuche für eine verlängerte Benutzung von E-dec Export werden nicht mehr akzeptiert, und die Ausfuhranmeldung erfolgt im Standard über das Warenverkehrssystem Passar."
+ },
+ {
+  "id": "r-qst-frist",
+  "origin": "retro-gate issue #9",
+  "source": "dbg89",
+  "file": "quellensteuer-nov-zusatzabzuege.html",
+  "claim": "Der Antrag auf nachträgliche ordentliche Veranlagung muss bis am 31. März des auf das Steuerjahr folgenden Jahres eingereicht werden."
+ },
+ {
+  "id": "r-qst-120k",
+  "origin": "retro-gate issue #9",
+  "source": "estv_quelle",
+  "file": "quellensteuer-nov-zusatzabzuege.html",
+  "claim": "Die nachträgliche ordentliche Veranlagung ist für Quellensteuerpflichtige mit einem Bruttoeinkommen über CHF 120'000 pro Jahr obligatorisch."
+ },
+ {
+  "id": "r-qst-neub",
+  "origin": "retro-gate issue #9",
+  "source": "estv_quelle",
+  "file": "quellensteuer-nov-zusatzabzuege.html",
+  "claim": "Quellensteuerpflichtige können eine Neuberechnung der Quellensteuer bis zum 31. März des Folgejahres beantragen."
+ },
+ {
+  "id": "r-ks-bund",
+  "origin": "retro-gate issue #9",
+  "source": "dbg68",
+  "file": "kapitalsteuer-ag-gmbh.html",
+  "claim": "Auf Bundesebene wird keine Kapitalsteuer erhoben; die direkte Bundessteuer auf dem Gewinn von Kapitalgesellschaften und Genossenschaften beträgt 8,5 Prozent des Reingewinns."
+ },
+ {
+  "id": "r-ks-ag",
+  "origin": "retro-gate issue #9",
+  "source": "kb_ag",
+  "file": "kapitalsteuer-ag-gmbh.html",
+  "claim": "Im Kanton Aargau beträgt die Kapitalsteuer 0,75 Promille des steuerbaren Eigenkapitals."
+ },
+ {
+  "id": "r-ks-min",
+  "origin": "retro-gate issue #9",
+  "source": "kb_ag",
+  "file": "kapitalsteuer-ag-gmbh.html",
+  "claim": "In Aargau entrichten Kapitalgesellschaften eine Mindeststeuer von Fr. 500.– und Genossenschaften eine Mindeststeuer von Fr. 100.– als einfache (100%ige) Kantonssteuer."
+ },
+ {
+  "id": "r-ks-vereine",
+  "origin": "retro-gate issue #9",
+  "source": "kb_ag",
+  "file": "kapitalsteuer-ag-gmbh.html",
+  "claim": "Im Kanton Aargau wird das Eigenkapital der Vereine und Stiftungen nur besteuert, soweit es Fr. 50'000.– übersteigt."
+ },
+ {
+  "id": "r-ks-ur-kanton",
+  "origin": "retro-gate issue #9",
+  "source": "estv_ks",
+  "file": "kapitalsteuer-ag-gmbh.html",
+  "claim": "Der Kanton Uri erhebt auf kantonaler Ebene keine Kapitalsteuer; die Kapitalgesellschaften und Genossenschaften unterliegen dort nur der Gewinnsteuer."
+ },
+ {
+  "id": "r-ks-ur-gemeinden",
+  "origin": "retro-gate issue #9",
+  "source": "estv_ks",
+  "file": "kapitalsteuer-ag-gmbh.html",
+  "claim": "Im Kanton Uri sehen die Steuerfüsse der Gemeinden für juristische Personen proportionale Sätze zwischen 0,01 Promille und 4,0 Promille vor."
+ },
+ {
+  "id": "r-ks-lu",
+  "origin": "retro-gate issue #9",
+  "source": "estv_ks",
+  "file": "kapitalsteuer-ag-gmbh.html",
+  "claim": "Der Kanton Luzern erhebt eine feste Kapitalsteuer von 0,01 Promille auf dem Anteil des steuerbaren Eigenkapitals, der auf Beteiligungen von Beteiligungsgesellschaften, Patente und vergleichbare Rechte sowie Konzernforderungen entfällt."
+ },
+ {
+  "id": "r-ks-vd",
+  "origin": "retro-gate issue #9",
+  "source": "estv_ks",
+  "file": "kapitalsteuer-ag-gmbh.html",
+  "claim": "Der Kanton Waadt kennt eine Belastungsobergrenze, nach der Kantons- und Gemeindesteuern zusammen 7 Promille des steuerbaren Kapitals und 30 Prozent des steuerbaren Reingewinns nicht überschreiten dürfen."
+ },
+ {
+  "id": "r-ks-ag-fuss",
+  "origin": "retro-gate issue #9",
+  "source": "estv_ks",
+  "file": "kapitalsteuer-ag-gmbh.html",
+  "claim": "Der Steuerfuss der Kantonssteuer für juristische Personen im Kanton Aargau (Hauptort Aarau) beträgt 2026 115 Prozent."
+ },
+ {
+  "id": "p-false-1",
+  "origin": "retro-gate issue #9",
+  "source": "zoll_de",
+  "file": "PLANTED-CONTROL",
+  "claim": "Die Zollfreigrenze von 150 Euro für Sendungen aus Drittländern gilt seit dem 1. Juli 2026 unverändert fort."
+ },
+ {
+  "id": "p-false-2",
+  "origin": "retro-gate issue #9",
+  "source": "ahv204",
+  "file": "PLANTED-CONTROL",
+  "claim": "Die Lohngrenze für geringfügige Beschäftigung beträgt seit 1. Januar 2025 CHF 2'300 pro Kalenderjahr und Arbeitgeber."
+ },
+ {
+  "id": "p-false-3",
+  "origin": "retro-gate issue #9",
+  "source": "kb_ag",
+  "file": "PLANTED-CONTROL",
+  "claim": "Im Kanton Aargau entrichten Genossenschaften eine Mindeststeuer von Fr. 500.–."
+ },
+ {
+  "id": "p-false-4",
+  "origin": "retro-gate issue #9",
+  "source": "bazg_passar",
+  "file": "PLANTED-CONTROL",
+  "claim": "E-dec Export bleibt auch nach dem 1. Januar 2026 das reguläre Standard-System für Ausfuhranmeldungen; eine Umstellung auf Passar ist nicht erfolgt."
+ },
+ {
+  "id": "p-false-5",
+  "origin": "retro-gate issue #9",
+  "source": "dbg89",
+  "file": "PLANTED-CONTROL",
+  "claim": "Der Antrag auf nachträgliche ordentliche Veranlagung muss spätestens bis zum 30. November des Steuerjahres eingereicht werden."
+ },
+ {
+  "id": "p-true-1",
+  "origin": "retro-gate issue #9",
+  "source": "zoll_int",
+  "file": "PLANTED-CONTROL",
+  "claim": "Enthält eine Sendung vier Paar Socken, ein Plüschtier und ein Mobiltelefon-Ladekabel, werden 9 Euro Zoll erhoben."
+ },
+ {
+  "id": "p-true-2",
+  "origin": "retro-gate issue #9",
+  "source": "mwstg25",
+  "file": "PLANTED-CONTROL",
+  "claim": "Der Normalsatz der Mehrwertsteuer beträgt 8,1 Prozent."
+ },
+ {
+  "id": "p-true-3",
+  "origin": "retro-gate issue #9",
+  "source": "ahvv2026",
+  "file": "PLANTED-CONTROL",
+  "claim": "Der Arbeitgeberkatalog von Art. 34d Abs. 2 Bst. b AHVV wurde um Chöre, elektronische Medien und Printmedien, Designunternehmen sowie Museen ergänzt."
+ }
+]
