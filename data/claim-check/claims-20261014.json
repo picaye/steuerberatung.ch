@@ -60,7 +60,8 @@
   "origin": "draft",
   "source": "mwst_ausfuhr_nachweis",
   "file": "mwst-ausfuhr-0-prozent-nachweis.html",
-  "claim": "Als Nachweis für eine Ausfuhr gelten die elektronische Ausfuhrveranlagungsverfügung mit digitaler Signatur, das zollamtlich gestempelte Doppel der Zollanmeldung für Rohtabak und Tabakfabrikate (Form. 11.44), das zollamtlich bestätigte Ausfuhrdokument im Reiseverkehr sowie zollamtliche Dokumente über ordnungsgemäss abgeschlossene oder im Ausland veranlagte Verfahren der vorübergehenden Verwendung."
+  "claim": "Als Nachweis für eine Ausfuhr gelten die elektronische Ausfuhrveranlagungsverfügung mit digitaler Signatur, das zollamtlich gestempelte Doppel der Zollanmeldung für Rohtabak und Tabakfabrikate (Form. 11.44), das zollamtlich bestätigte Ausfuhrdokument im Reiseverkehr sowie zollamtliche Dokumente über ordnungsgemäss abgeschlossene oder im Ausland veranlagte Verfahren der vorübergehenden Verwendung.",
+  "gate_note": "ACCEPTED-LOW-CONFIDENCE (0.77, retro rerun2 15.10; wobble 0.63->0.77->0.79->0.77 around the line): all four Beleg-Typen backed by staged bazg list + ESTV/BAZG eVV passages; residual gap is naming only (bazg predates the e-dec->eVV switch of 1.1.2026, page's eVV naming now matches sources); human-checked by Foreman."
  },
  {
   "id": "c-mwst-inland",
@@ -123,7 +124,8 @@
   "origin": "draft",
   "source": "uri_kapitalsteuer",
   "file": "kapitalsteuer-ag-gmbh.html",
-  "claim": "Im Kanton Uri erhebt der Kanton keine Kapitalsteuer (der Steuerfuss gilt nur für die Gewinnsteuer); die Urner Gemeinden kennen proportionale Sätze zwischen 0,01 und 4,0 Promille."
+  "claim": "Im Kanton Uri erhebt der Kanton keine Kapitalsteuer; die Urner Gemeinden kennen proportionale Sätze zwischen 0,01 und 4,0 Promille.",
+  "gate_note": "ACCEPTED-LOW-CONFIDENCE (0.56, retro rerun2 15.10): parenthetical '(der Steuerfuss gilt nur für die Gewinnsteuer)' dropped as interpretation not in the staged snippet; uri_kapitalsteuer backs both remaining facts verbatim ('Der Kanton Uri kennt keine Kapitalsteuer auf Kantonsebene' + Art. 96 Abs. 1 StG 0,01-4,0 Promille); deletion-only change, human-checked by Foreman."
  },
  {
   "id": "c-ks-vd",
