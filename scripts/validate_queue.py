@@ -89,8 +89,23 @@ def validate(path, today):
         priority = rec.get("priority")
         hold_until = rec.get("hold_until")
 
-        if status != "pending":
-            continue  # published/superseded etc. — not selectable, no pin rules
+        if status == "published":
+            # Rule 5 (added 2026-10-15 after the 601d990 breach): a card
+            # published BEFORE its hold_until date consumed a future slot.
+            hu = hold_until if isinstance(hold_until, str) and DATE_RE.match(hold_until or "") else None
+            if hu is None and isinstance(priority, str):
+                m5 = PIN_RE.match(priority)
+                if m5:
+                    hu = m5.group(1)
+            if hu and parse_date(hu) and parse_date(hu) > today:
+                failures.append(
+                    f"FAIL: {slug} (line {line_no}) — published before "
+                    f"hold_until {hu!r} (today {today.isoformat()}): a pinned "
+                    f"card was self-published early; restore it to pending "
+                    f"or annotate hold_until to the actual publish date "
+                    f"with a breach note"
+                )
+            continue  # published/superseded etc. — pin rules otherwise N/A
 
         if slug in published_slugs:
             failures.append(
