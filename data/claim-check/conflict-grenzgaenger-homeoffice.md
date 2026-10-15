@@ -202,3 +202,25 @@ Additional accepted-silent annotations (human-verified, per Foreman):
 
 Together with de-no-tax-tolerance (0.55) and sv-country-list (0.69):
 four accepted-silent items, all human-checked. T2 commit approved.
+
+## fr-over40 run-to-run wobble — source-snippet fix (2026-10-15, dev)
+
+Three gate runs on the same claim flipped verdicts: silent 0.12 (run #4,
+2026-10-06) -> contradicts 0.11 (prestage, 2026-10-14) -> silent 0.15
+(recheck, 2026-10-15). Root cause is NOT the claim text: the staged
+snippet for fr-zusatzabkommen-ueber40 quoted Ziff. 1 Bst. d, whose
+"Oberhalb der in Buchstabe a) vorgesehenen Grenze" cross-reference
+points at Bst. a — the only place the 40 % figure appears. The judge
+saw the claim's inserted "von 40 Prozent" with no 40 % anchor inside
+the snippet and wobbled between silent and contradicts.
+
+Fix (Foreman P2): inlined the verbatim Bst. a passage (identical text
+already staged under fr-zusatzabkommen-40pct) at the head of the
+fr-zusatzabkommen-ueber40 snippet, so the cross-reference resolves
+within one source block. No claim or draft text changed.
+
+Verify (host-side, Foreman): claim_check 3x — fr-over40 must never
+return contradicts; planted controls must still fail as designed.
+Timing rule: if not on origin by ~08:00 2026-10-16, publish proceeds
+under the standing stop-rule (recheck 2026-10-15: 0 real-claim
+contradicts).
