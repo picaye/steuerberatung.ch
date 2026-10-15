@@ -58,7 +58,7 @@
  {
   "id": "c-mwst-belege",
   "origin": "draft",
-  "source": "bazg",
+  "source": "mwst_ausfuhr_nachweis",
   "file": "mwst-ausfuhr-0-prozent-nachweis.html",
   "claim": "Als Nachweis für eine Ausfuhr gelten die elektronische Ausfuhrveranlagungsverfügung mit digitaler Signatur, das zollamtlich gestempelte Doppel der Zollanmeldung für Rohtabak und Tabakfabrikate (Form. 11.44), das zollamtlich bestätigte Ausfuhrdokument im Reiseverkehr sowie zollamtliche Dokumente über ordnungsgemäss abgeschlossene oder im Ausland veranlagte Verfahren der vorübergehenden Verwendung."
  },
@@ -121,7 +121,7 @@
  {
   "id": "c-ks-ur",
   "origin": "draft",
-  "source": "estv_steuerfuss",
+  "source": "uri_kapitalsteuer",
   "file": "kapitalsteuer-ag-gmbh.html",
   "claim": "Im Kanton Uri erhebt der Kanton keine Kapitalsteuer (der Steuerfuss gilt nur für die Gewinnsteuer); die Urner Gemeinden kennen proportionale Sätze zwischen 0,01 und 4,0 Promille."
  },
@@ -163,7 +163,7 @@
  {
   "id": "ctrl-false-ks-ur-erhebung",
   "origin": "control",
-  "source": "estv_steuerfuss",
+  "source": "uri_kapitalsteuer",
   "file": "PLANTED CONTROL — must return contradicts",
   "claim": "Der Kanton Uri erhebt auf kantonaler Ebene eine Kapitalsteuer im jährlichen Vielfachen des einfachen Steuerfusses."
  }
