@@ -60,7 +60,7 @@
   "origin": "draft",
   "source": "bazg",
   "file": "mwst-ausfuhr-0-prozent-nachweis.html",
-  "claim": "Als Nachweis einer Ausfuhr gelten die elektronische Ausfuhrveranlagungsverfügung mit digitaler Signatur, das zollamtlich gestempelte Doppel der Zollanmeldung für Rohtabak und Tabakfabrikate (Form. 11.44), das zollamtlich bestätigte Ausfuhrdokument im Reiseverkehr und bestimmte zollamtliche Verfahrensdokumente."
+  "claim": "Als Nachweis für eine Ausfuhr gelten die elektronische Ausfuhrveranlagungsverfügung mit digitaler Signatur, das zollamtlich gestempelte Doppel der Zollanmeldung für Rohtabak und Tabakfabrikate (Form. 11.44), das zollamtlich bestätigte Ausfuhrdokument im Reiseverkehr sowie zollamtliche Dokumente über ordnungsgemäss abgeschlossene oder im Ausland veranlagte Verfahren der vorübergehenden Verwendung."
  },
  {
   "id": "c-mwst-inland",
@@ -72,7 +72,7 @@
  {
   "id": "c-qst-frist",
   "origin": "draft",
-  "source": "estv_quelle",
+  "source": "estv_nov_frist",
   "file": "quellensteuer-nov-zusatzabzuege.html",
   "claim": "Der Antrag auf nachträgliche ordentliche Veranlagung ist bis zum 31. März des Folgejahres einzureichen."
  },
@@ -98,18 +98,32 @@
   "claim": "Im Kanton Aargau beträgt die Kapitalsteuer 0,75 Promille des steuerbaren Eigenkapitals und die Gewinnsteuer wird an die Kapitalsteuer angerechnet."
  },
  {
-  "id": "c-ks-min",
+  "id": "c-ks-min-kg",
   "origin": "draft",
   "source": "kb_ag",
   "file": "kapitalsteuer-ag-gmbh.html",
-  "claim": "Kapitalgesellschaften und Genossenschaften entrichten in Aargau eine Mindeststeuer von 500 Franken als einfache (100%ige) Kantonssteuer; das Eigenkapital der Vereine und Stiftungen wird besteuert, soweit es 50'000 Franken übersteigt."
+  "claim": "Kapitalgesellschaften entrichten im Aargau eine Mindeststeuer von 500 Franken als einfache (100%ige) Kantonssteuer."
+ },
+ {
+  "id": "c-ks-min-gen",
+  "origin": "draft",
+  "source": "kb_ag",
+  "file": "kapitalsteuer-ag-gmbh.html",
+  "claim": "Genossenschaften entrichten im Aargau eine Mindeststeuer von 100 Franken als einfache (100%ige) Kantonssteuer."
+ },
+ {
+  "id": "c-ks-ag-freibetrag",
+  "origin": "draft",
+  "source": "kb_ag",
+  "file": "kapitalsteuer-ag-gmbh.html",
+  "claim": "Das Eigenkapital der Vereine und Stiftungen wird im Aargau besteuert, soweit es 50'000 Franken übersteigt."
  },
  {
   "id": "c-ks-ur",
   "origin": "draft",
   "source": "estv_steuerfuss",
   "file": "kapitalsteuer-ag-gmbh.html",
-  "claim": "Im Kanton Uri erheben der Kanton und die Kirchgemeinden keine Kapitalsteuer; die Urner Gemeinden kennen proportionale Sätze zwischen 0,01 und 4,0 Promille."
+  "claim": "Im Kanton Uri erhebt der Kanton keine Kapitalsteuer (der Steuerfuss gilt nur für die Gewinnsteuer); die Urner Gemeinden kennen proportionale Sätze zwischen 0,01 und 4,0 Promille."
  },
  {
   "id": "c-ks-vd",
@@ -131,5 +145,26 @@
   "source": "estv_steuerfuss",
   "file": "kapitalsteuer-ag-gmbh.html",
   "claim": "Die Mehrheit der Kantone sieht bei den Gewinn- und Kapitalsteuern juristischer Personen keine Belastungsobergrenze vor."
+ },
+ {
+  "id": "ctrl-false-ks-min-gen",
+  "origin": "control",
+  "source": "kb_ag",
+  "file": "PLANTED CONTROL — must return contradicts",
+  "claim": "Genossenschaften entrichten im Aargau eine Mindeststeuer von 500 Franken."
+ },
+ {
+  "id": "ctrl-false-qst-erstreckbar",
+  "origin": "control",
+  "source": "estv_nov_frist",
+  "file": "PLANTED CONTROL — must return contradicts",
+  "claim": "Die Frist für den Antrag auf nachträgliche ordentliche Veranlagung (NOV) ist verlängerbar."
+ },
+ {
+  "id": "ctrl-false-ks-ur-erhebung",
+  "origin": "control",
+  "source": "estv_steuerfuss",
+  "file": "PLANTED CONTROL — must return contradicts",
+  "claim": "Der Kanton Uri erhebt auf kantonaler Ebene eine Kapitalsteuer im jährlichen Vielfachen des einfachen Steuerfusses."
  }
 ]
