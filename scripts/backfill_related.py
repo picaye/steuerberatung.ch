@@ -3,8 +3,12 @@
 
 Idempotent and re-runnable: the block lives between
 <!-- RELATED:START --> / <!-- RELATED:END --> markers just before </main>;
-a re-run replaces the existing block in place. Root DE only — no en/fr/it
-fan-out (per gh:picaye/steuerberatung.ch#1 scope).
+a re-run replaces the existing block in place. This script's scope is the
+root DE articles only (the Oct-2 issue #1 backfill batch). Site-wide rule
+(t_b74df8d0, CTO 2026-10-16): every article page in every language carries
+a RELATED block with exactly 3 language-local links — en/fr/it pages get
+their lists at build time in the publish scripts; validate_site.py checks
+all of them.
 
 Usage: python3 scripts/backfill_related.py [--check]
   --check: report what would change, write nothing.

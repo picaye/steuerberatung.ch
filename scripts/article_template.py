@@ -279,8 +279,11 @@ if __name__ == "__main__":
         sys.exit(1)
     lang, slug, title, meta = a[0], a[1], a[2], a[3]
     secs = [(a[i], a[i + 1]) for i in range(4, len(a), 2)]
-    # Related articles come from scripts/related_map.json automatically for DE
-    # (issue #1 scope: DE-only, no FR/IT/EN fan-out), so the publish cron needs
-    # no extra wiring: add the slug to the map and the block is emitted on build.
+    # Site rule (t_b74df8d0, CTO 2026-10-16): every article page carries a
+    # RELATED block with exactly 3 language-local links (validate_site.py
+    # checks it). DE root articles get theirs automatically from
+    # scripts/related_map.json — add the slug to the map and the block is
+    # emitted on build, so the publish cron needs no extra wiring. Multilingual
+    # pages pass their own language-local list to build(..., related=[...]).
     rel = related_for(slug) if lang == "de" else None
     build(lang, slug, title, meta, secs, related=rel)

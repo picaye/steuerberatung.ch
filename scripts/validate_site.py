@@ -13,6 +13,8 @@ Checks per page (root DE + en/ fr/ it/):
   6. every internal href resolves to an existing file
   7. no cross-language leakage: lang-dir pages must not link ../<page>.html
      when <page>.html exists in their own dir
+  8. RELATED block (where present): exactly 3 internal links, no self-link,
+     all resolving inside the page's own language dir, no cross-language hrefs
 """
 import re, glob, os, sys
 
@@ -87,6 +89,40 @@ for f in files:
             t = os.path.normpath(os.path.join(d, path))
         if not os.path.exists(t):
             problems.append(f'{f}: broken link -> {href}')
+
+# 8. RELATED block well-formedness (t_b74df8d0, CTO 2026-10-16):
+#    multilingual related blocks are the site rule — every page that carries
+#    a RELATED block must have exactly 3 internal links, no self-link, all
+#    resolving inside its own language dir, and no cross-language hrefs.
+rel_pages = 0
+for f in files:
+    s = open(f, encoding='utf-8').read()
+    if 'RELATED:START' not in s:
+        continue
+    rel_pages += 1
+    d = os.path.dirname(f)
+    page = os.path.basename(f)
+    m = re.search(r'RELATED:START(.*?)RELATED:END', s, re.S)
+    if not m:
+        problems.append(f'{f}: RELATED:START without matching RELATED:END')
+        continue
+    hrefs = re.findall(r'href="([^"]+)"', m.group(1))
+    if len(hrefs) != 3:
+        problems.append(f'{f}: RELATED links={len(hrefs)} want=3')
+    for href in hrefs:
+        if href.startswith(('http', 'mailto:', 'tel:', '#')):
+            problems.append(f'{f}: RELATED link not internal: {href}')
+            continue
+        path = href.split('#')[0].split('?')[0]
+        if not path or path.startswith('/') or path.startswith('../') \
+                or re.match(r'(en|fr|it)/', path):
+            problems.append(f'{f}: RELATED cross-language/absolute href: {href}')
+            continue
+        if path == page:
+            problems.append(f'{f}: RELATED self-link: {href}')
+        if not os.path.exists(os.path.normpath(os.path.join(d, path))):
+            problems.append(f'{f}: RELATED broken link -> {href}')
+print(f'RELATED gate: {rel_pages} pages with block checked')
 
 # 8. inline JS must parse (node --check) — catches string/regex bugs before push
 #    (t_47f77cb2: broken 3a-rechner JS passed CI 3x because nothing ever
