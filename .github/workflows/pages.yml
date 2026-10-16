@@ -64,7 +64,13 @@ jobs:
           # All static assets, not just css/js: the logo, favicons and the
           # og:image are referenced from every page's <head>.
           cp assets/* dist/assets/
-          cp sitemap.xml robots.txt dist/
+          # All root .txt files: sitemap.xml, robots.txt AND the IndexNow
+          # verification key file <key>.txt — the latter must be served at
+          # the site root or every ping is accepted (HTTP 200) yet silently
+          # dropped at the keyLocation check. It survived earlier deploys
+          # only as a leftover artifact; a clean publish deleted it
+          # (t_32a2a8c3).
+          cp *.txt dist/
       - name: Fail if a language mirror is incomplete
         run: |
           for d in en fr it; do
