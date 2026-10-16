@@ -76,7 +76,11 @@ jobs:
         run: |
           for d in en fr it; do
             n=$(ls dist/$d/*.html 2>/dev/null | wc -l)
-            root=$(ls dist/*.html | wc -l)
+            # 404.html is a single root-only error page by design (t_3b546302):
+            # GitHub Pages serves /404.html for EVERY missing URL regardless of
+            # language, so it has no en/fr/it mirror. Count it out of the root
+            # baseline or this gate would fail on it forever.
+            root=$(ls dist/*.html | grep -vc '^dist/404\.html$')
             if [ "$n" -lt "$root" ]; then
               echo "::error::$d has $n pages but root has $root — the $d mirror is incomplete"
               exit 1
