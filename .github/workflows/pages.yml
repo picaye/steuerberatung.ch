@@ -156,7 +156,7 @@ jobs:
             echo "no committed IndexNow key file — skipping ping."
             exit 0
           fi
-          if ! git rev-parse -q --verify 'HEAD^{\commit}' >/dev/null; then
+          if ! git rev-parse -q --verify 'HEAD^' >/dev/null; then
             echo "no parent commit available (shallow/first commit) — skipping ping."
             exit 0
           fi
