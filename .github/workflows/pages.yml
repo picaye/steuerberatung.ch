@@ -64,13 +64,14 @@ jobs:
           # All static assets, not just css/js: the logo, favicons and the
           # og:image are referenced from every page's <head>.
           cp assets/* dist/assets/
-          # All root .txt files: sitemap.xml, robots.txt AND the IndexNow
-          # verification key file <key>.txt — the latter must be served at
-          # the site root or every ping is accepted (HTTP 200) yet silently
-          # dropped at the keyLocation check. It survived earlier deploys
-          # only as a leftover artifact; a clean publish deleted it
-          # (t_32a2a8c3).
-          cp *.txt dist/
+          # sitemap.xml explicitly (it is .xml, NOT .txt — a `cp *.txt` glob
+          # silently dropped it and the live site 404'd, t_eed3b4cd) plus all
+          # root .txt files: robots.txt AND the IndexNow verification key
+          # file <key>.txt — the latter must be served at the site root or
+          # every ping is accepted (HTTP 200) yet silently dropped at the
+          # keyLocation check. It survived earlier deploys only as a
+          # leftover artifact; a clean publish deleted it (t_32a2a8c3).
+          cp sitemap.xml *.txt dist/
       - name: Fail if a language mirror is incomplete
         run: |
           for d in en fr it; do
@@ -82,6 +83,22 @@ jobs:
             fi
             echo "$d: $n pages (root: $root)"
           done
+      - name: Fail if sitemap.xml is missing or truncated
+        run: |
+          # t_eed3b4cd: commit 46c37b7 swapped `cp sitemap.xml robots.txt`
+          # for `cp *.txt` and sitemap.xml (.xml) silently vanished from
+          # dist — a green deploy 404'd the sitemap live. Assert the file
+          # ships and is non-trivial before the artifact is uploaded.
+          if [ ! -f dist/sitemap.xml ]; then
+            echo "::error::dist/sitemap.xml is missing — the build dropped the sitemap"
+            exit 1
+          fi
+          locs=$(grep -c '<loc>' dist/sitemap.xml)
+          if [ "$locs" -lt 150 ]; then
+            echo "::error::dist/sitemap.xml has only $locs <loc> entries (<150) — sitemap truncated"
+            exit 1
+          fi
+          echo "sitemap.xml OK: $locs <loc> entries"
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
