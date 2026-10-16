@@ -24,6 +24,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # fetch-depth 2 so the post-deploy IndexNow step can diff HEAD^..HEAD
+          # to find the changed pages. Default (1) would hide the parent commit.
+          fetch-depth: 2
       - name: Gate — tax engine tests (AGENTS.md working contract)
         # AGENTS.md declares these gates; without them here, any push to main
         # shipped to Pages even when the engine tests failed. Non-zero exit
@@ -137,4 +141,31 @@ jobs:
             -H "Content-Type: application/json" \
             --data '{"files":["https://steuerberatung.ch/assets/app.js","https://steuerberatung.ch/assets/endpoint.js","https://steuerberatung.ch/assets/style.css","https://steuerberatung.ch/assets/extra.css","https://steuerberatung.ch/assets/redesign.css","https://steuerberatung.ch/assets/track.js"]}' \
             | head -c 400
+        continue-on-error: true
+      - name: IndexNow ping changed pages
+        # t_32a2a8c3: the grenzgänger article shipped live via the manual-slot
+        # chain (dev guard-drop -> Foreman gate -> CTO host push) and was never
+        # pinged — the ping only lived in the publish cron's prompt, so the
+        # manual path could skip it. This step makes it structural: every
+        # deploy pings the html pages the push changed. Non-fatal by design
+        # (same pattern as the Cloudflare purge above): a ping failure must
+        # never fail an otherwise-green deploy.
+        run: |
+          KEY_FILE=$(git ls-files | grep -E '^[0-9a-f]{32}\.txt$' | head -1)
+          if [ -z "$KEY_FILE" ]; then
+            echo "no committed IndexNow key file — skipping ping."
+            exit 0
+          fi
+          if ! git rev-parse -q --verify 'HEAD^{\commit}' >/dev/null; then
+            echo "no parent commit available (shallow/first commit) — skipping ping."
+            exit 0
+          fi
+          changed=$(git diff --name-only 'HEAD^' HEAD -- '*.html')
+          if [ -z "$changed" ]; then
+            echo "no html pages changed in this push — skipping ping."
+            exit 0
+          fi
+          urls=$(echo "$changed" | sed 's|^|https://steuerberatung.ch/|')
+          echo "IndexNow pinging:"; echo "$urls"
+          INDEXNOW_KEY="${KEY_FILE%.txt}" python3 scripts/indexnow_ping.py $urls
         continue-on-error: true

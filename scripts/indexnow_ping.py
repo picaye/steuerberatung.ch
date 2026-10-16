@@ -7,7 +7,11 @@ Usage:
 
 Reads the IndexNow key from the gitignored ``.indexnow_key`` file at the
 repo root (the public key file ``<key>.txt`` is committed and served at the
-site root, so ``keyLocation`` is sent as well).
+site root, so ``keyLocation`` is sent as well). In CI the file is absent,
+so the key may also come from the ``INDEXNOW_KEY`` env var — the key is
+public by design (it is the basename of the committed verification file),
+which is why the Pages workflow derives it from ``git ls-files`` instead
+of storing a repo secret.
 
 POSTs the URL batch to https://api.indexnow.org/indexnow with
 {host, key, keyLocation, urlList}, then also to https://www.bing.com/indexnow
@@ -32,9 +36,13 @@ UA = "steuerberatung-indexnow-ping/1.0"
 
 
 def read_key():
-    """Return (key, key_location) from the repo-root .indexnow_key."""
+    """Return (key, key_location) from INDEXNOW_KEY env or the repo-root .indexnow_key."""
+    import os
     import pathlib
 
+    key = os.environ.get("INDEXNOW_KEY", "").strip()
+    if key:
+        return key, f"https://{HOST}/{key}.txt"
     root = pathlib.Path(__file__).resolve().parent.parent
     key_file = root / ".indexnow_key"
     if not key_file.exists():
