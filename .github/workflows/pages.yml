@@ -103,6 +103,24 @@ jobs:
             exit 1
           fi
           echo "sitemap.xml OK: $locs <loc> entries"
+      - name: Fail if 404.html is missing or empty
+        run: |
+          # t_b462b318: the custom 404 page (t_3b546302) only works if
+          # dist/404.html actually ships — without it GitHub Pages silently
+          # falls back to the generic error page and the build stays green.
+          # Same failure class as the sitemap drop (46c37b7, t_eed3b4cd): an
+          # edit to the copy step above could revert the site to GitHub's
+          # default 404 with zero CI signal. The mirror gate only EXEMPTS
+          # 404.html from the count (grep -vc) — it never asserts it exists.
+          if [ ! -f dist/404.html ]; then
+            echo "::error::dist/404.html is missing — the build dropped the custom 404 page"
+            exit 1
+          fi
+          if [ ! -s dist/404.html ]; then
+            echo "::error::dist/404.html is empty — the custom 404 page would render as a blank error"
+            exit 1
+          fi
+          echo "404.html OK: $(wc -c < dist/404.html) bytes"
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
