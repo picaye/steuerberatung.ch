@@ -224,3 +224,21 @@ return contradicts; planted controls must still fail as designed.
 Timing rule: if not on origin by ~08:00 2026-10-16, publish proceeds
 under the standing stop-rule (recheck 2026-10-15: 0 real-claim
 contradicts).
+
+## Pre-push gate re-run, Fri Oct 16 slot (Foreman, 2026-10-16 09:35)
+
+Ran the verbatim host-side command 3x on commit 471f9ae (dev guard-drop,
+unpushed). Results: data/claim-check/results-grenzgaenger-homeoffice-prepush-20261016{,-run2,-run3}.json
+
+- 21 claims each run: supports 17, silent 1, contradicts 3 — all three
+  contradicts are the planted controls (0.99/0.99/1.0 every run). Controls
+  fail as designed, so the verdicts are trustworthy.
+- fr-over40 wobble RESOLVED by the Bst.-a snippet inlining: supports
+  0.93 / 0.96 / 0.96 — never contradicts in any run (requirement met).
+- Sub-0.8 items are only the three previously human-annotated accepted-silent
+  claims: de-no-tax-tolerance (0.56), sv-499 (0.76), sv-de-fr-it (0.67).
+  No new unresolved claims.
+- GATE GREEN 3/3. Push of 471f9ae is unblocked. Close #5 only after
+  deployed-page verify: curl -sL all 4 langs + marker + explicit
+  three-regime/Genf content check (pm ruling: green gate with 0 'Genf'
+  hits on the live page is still a FAIL).

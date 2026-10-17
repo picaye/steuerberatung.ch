@@ -45,6 +45,7 @@ if _pending:
             kept.append(f)
     files = kept
 urls = []
+per_lang = {"de": [], "en": [], "fr": [], "it": []}
 for f in files:
     # Staged/draft pages carry <meta name="robots" content="noindex"> — keep them out of the sitemap.
     with open(f, encoding="utf-8", errors="ignore") as fh:
@@ -52,11 +53,26 @@ for f in files:
     if 'name="robots"' in head and "noindex" in head:
         continue
     rel = os.path.relpath(f, BASE)
+    lang = rel.split("/")[0] if "/" in rel else "de"
     if rel.endswith("/index.html"):
         path = "/" if rel == "index.html" else "/" + os.path.dirname(rel) + "/"
     else:
         path = "/" + rel
-    urls.append(f"  <url><loc>{SITE}{path}</loc><lastmod>{datetime.date.today().isoformat()}</lastmod></url>")
-xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "\n".join(urls) + "\n</urlset>\n"
-open(BASE + "/sitemap.xml", "w").write(xml)
-print("sitemap:", len(urls), "urls")
+    entry = f"  <url><loc>{SITE}{path}</loc><lastmod>{datetime.date.today().isoformat()}</lastmod></url>"
+    urls.append(entry)
+    per_lang.setdefault(lang, []).append(entry)
+
+def urlset(entries):
+    return ('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+            + "\n".join(entries) + "\n</urlset>\n")
+
+for lang, entries in per_lang.items():
+    open(BASE + f"/sitemap-{lang}.xml", "w").write(urlset(entries))
+today = datetime.date.today().isoformat()
+idx = ['<?xml version="1.0" encoding="UTF-8"?>', '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+for lang in ("de", "en", "fr", "it"):
+    idx.append(f"  <sitemap><loc>{SITE}/sitemap-{lang}.xml</loc><lastmod>{today}</lastmod></sitemap>")
+idx.append("</sitemapindex>")
+idx.append("")
+open(BASE + "/sitemap.xml", "w").write("\n".join(idx))
+print("sitemap index + per-language:", {k: len(v) for k, v in per_lang.items()})

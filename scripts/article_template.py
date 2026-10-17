@@ -223,9 +223,16 @@ def build(lang, slug, title, meta, sections, related=None, sources=None):
                          f'<p class="sources-note">{SOURCES_NOTE[lang].format(d=today.replace("-", "."))}</p></div></section>\n')
     related_block = sources_block + (render_related(lang, related) if related else "")
 
+    crumb_home = SITE + ("/index.html" if lang == "de" else "/%s/index.html" % lang)
+    crumb_ratg = SITE + ("/ratgeber.html" if lang == "de" else "/%s/ratgeber.html" % lang)
+    breadcrumb = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": {"de": "Start", "en": "Home", "fr": "Accueil", "it": "Home"}[lang], "item": crumb_home},
+        {"@type": "ListItem", "position": 2, "name": L[lang]["nav"][2][1], "item": crumb_ratg},
+        {"@type": "ListItem", "position": 3, "name": title, "item": SITE + ("/" if lang == "de" else "/%s/" % lang) + url_tail}]}
+
     ld = {"@context": "https://***", "@type": "Article", "headline": title,
           "datePublished": today, "dateModified": today,
-          "author": {"@type": "Organization", "name": "steuerberatung.ch"},
+          "author": {"@type": "Organization", "name": "steuerberatung.ch"}, "reviewedBy": {"@type": "Organization", "name": "steuerberatung.ch Redaktion"},
           "publisher": {"@type": "Organization", "name": "steuerberatung.ch"},
           "description": meta,
           "inLanguage": HTML_LANG[lang]}
@@ -254,6 +261,7 @@ def build(lang, slug, title, meta, sections, related=None, sources=None):
 <link rel="stylesheet" href="{pre}assets/extra.css?v=4">
 <link rel="stylesheet" href="{pre}assets/redesign.css">
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
+<script type="application/ld+json">{json.dumps(breadcrumb, ensure_ascii=False)}</script>
 </head>
 <body>
 {header}

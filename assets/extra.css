@@ -146,3 +146,7 @@
 .sources a{color:var(--green,#2e7d4f);text-decoration:underline}
 .sources-note{font-size:.85rem;color:#667;margin-top:8px}
 .partner-note{margin:14px 0}
+
+/* Mid-article CTA (2026-10-17) */
+.cta-mid{background:#f0f7f1;border-left:4px solid var(--green,#2e7d4f);border-radius:8px;padding:14px 18px;margin:22px 0;font-size:.97rem}
+.cta-mid a{color:var(--green,#2e7d4f);font-weight:600}
