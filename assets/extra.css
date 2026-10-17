@@ -121,3 +121,21 @@
 .hub-card li { margin: 6px 0; }
 .hub-card a { color: var(--green-dark); font-weight: 600; text-decoration: none; }
 .hub-card a:hover { text-decoration: underline; }
+
+/* Article search (2026-10-17) */
+.search-box{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.search-box input[type=search]{flex:1 1 320px;padding:14px 18px;font-size:1.05rem;border:2px solid var(--border,#d7e0d8);border-radius:var(--radius,10px);background:#fff}
+.search-box input[type=search]:focus{outline:none;border-color:var(--green,#2e7d4f)}
+.search-all{font-size:.9rem;color:#556;display:flex;gap:6px;align-items:center;cursor:pointer}
+.search-count{margin:10px 0 2px;font-size:.9rem;color:#667;min-height:1.2em}
+.search-chips{margin:6px 0 14px;font-size:.9rem;color:#667}
+.search-chip{border:1px solid var(--border,#d7e0d8);background:#f4f8f4;border-radius:999px;padding:4px 12px;margin:2px 4px 2px 0;font-size:.85rem;cursor:pointer}
+.search-chip:hover{background:#e6f0e8}
+.search-results{list-style:none;padding:0;margin:0}
+.search-results li{padding:14px 0;border-bottom:1px solid #edf1ee}
+.search-results li a{font-weight:600;font-size:1.05rem;color:var(--green,#2e7d4f)}
+.search-results li a:hover{text-decoration:underline}
+.search-date{font-size:.8rem;color:#8a958c;margin-left:6px}
+.search-lang{font-size:.7rem;font-weight:700;background:#eef3ef;border-radius:4px;padding:1px 6px;color:#567}
+.search-snip{margin:6px 0 0;font-size:.92rem;color:#445;line-height:1.5}
+.search-none{color:#667;font-style:italic}
