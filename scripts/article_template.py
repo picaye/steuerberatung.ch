@@ -24,17 +24,17 @@ L = {
         nav=[("leistungen.html", "Leistungen"), ("werbung.html", "Werbung"),
              ("ratgeber.html", "Ratgeber"), ("rechner.html", "Rechner"), ("suche.html", "Suche")],
         cta_btn="Kostenlose Beratung", menu="Menü",
-        foot_about="Ihr unabhängiger Partner für Steuern in der Schweiz. Vergleich, Beratung und digitale Services – transparent und datenschutzkonform.",
+        foot_about="Ihr unabhängiger Partner für Steuern in der Schweiz. Steuer-Ratgeber, Rechner und Vermittlung geprüfter Fachpersonen – transparent und datenschutzkonform.",
         foot_services=[("leistungen.html", "Steuererklärung"), ("leistungen.html", "Steuerberatung"),
                        ("ratgeber.html", "Ratgeber")],
         foot_legal=[("impressum.html", "Impressum"), ("datenschutz.html", "Datenschutz"), ("agb.html", "AGB")],
         foot_contact=[("kontakt.html", "Beratung anfragen")],
         h_services="Services", h_legal="Rechtliches", h_contact="Kontakt",
-        foot_bottom="© 2026 steuerberatung.ch · Unabhängige Steuer-Information &amp; Vermittlung. Keine Steuerberatung im Sinne des DBG – die eigentliche Beratung erfolgt durch lizenzierte Partner.",
+        foot_bottom="© 2026 steuerberatung.ch · Unabhängige Steuer-Information &amp; Vermittlung. steuerberatung.ch erbringt keine individuelle Steuer- oder Rechtsberatung. Die Beratung erfolgt ausschliesslich durch die vermittelten Fachpersonen.",
         cta_h="Unsicher bei Ihrer Steuererklärung?",
         cta_p="Kostenlose Erstberatung: Wir prüfen Ihre Situation und vermitteln einen geprüften Partner in Ihrem Kanton.",
         cta_btn2="Jetzt kostenlos anfragen",
-        published="Veröffentlicht am {date} · Unabhängige Steuer-Information für die Schweiz.",
+        published="Veröffentlicht am {date} · Zuletzt aktualisiert am {date} · Unabhängige Steuer-Information für die Schweiz.",
         toc="Inhalt:",
         related_h="Verwandte Artikel",
     ),
@@ -42,17 +42,17 @@ L = {
         nav=[("leistungen.html", "Services"), ("werbung.html", "Advertise"),
              ("ratgeber.html", "Guides"), ("rechner.html", "Calculator"), ("search.html", "Search")],
         cta_btn="Free advice", menu="Menu",
-        foot_about="Your independent partner for taxes in Switzerland. Comparison, advice and digital services – transparent and privacy-compliant.",
+        foot_about="Your independent partner for taxes in Switzerland. Tax guides, calculators and referral to vetted specialists – transparent and privacy-compliant.",
         foot_services=[("leistungen.html", "Tax return"), ("leistungen.html", "Tax advice"),
                        ("ratgeber.html", "Guides")],
         foot_legal=[("impressum.html", "Imprint"), ("datenschutz.html", "Privacy"), ("agb.html", "Terms")],
         foot_contact=[("kontakt.html", "Request advice")],
         h_services="Services", h_legal="Legal", h_contact="Contact",
-        foot_bottom="© 2026 steuerberatung.ch · Independent tax information &amp; partner mediation. No tax advice within the meaning of the Swiss Federal Direct Tax Act (FATA) – advice is provided exclusively by licensed partners.",
+        foot_bottom="© 2026 steuerberatung.ch · Independent tax information &amp; partner mediation. steuerberatung.ch does not provide individual tax or legal advice. Advice is provided exclusively by the referred specialists.",
         cta_h="Not sure about your tax return?",
         cta_p="Free initial consultation: we review your situation and match you with a vetted partner in your canton.",
         cta_btn2="Request free advice",
-        published="Published on {date} · Independent tax information for Switzerland.",
+        published="Published on {date} · Last updated {date} · Independent tax information for Switzerland.",
         toc="Contents:",
         related_h="Related articles",
     ),
@@ -60,17 +60,17 @@ L = {
         nav=[("leistungen.html", "Prestations"), ("werbung.html", "Publicité"),
              ("ratgeber.html", "Guide fiscal"), ("rechner.html", "Calculateur"), ("recherche.html", "Recherche")],
         cta_btn="Conseil gratuit", menu="Menu",
-        foot_about="Votre partenaire indépendant pour les impôts en Suisse. Comparaison, conseil et services numériques – transparent et conforme à la protection des données.",
+        foot_about="Votre partenaire indépendant pour les impôts en Suisse. Guides fiscaux, calculateurs et médiation de spécialistes vérifiés – en toute transparence et dans le respect de la protection des données.",
         foot_services=[("leistungen.html", "Déclaration d'impôt"), ("leistungen.html", "Conseil fiscal"),
                        ("ratgeber.html", "Guide fiscal")],
         foot_legal=[("impressum.html", "Mentions légales"), ("datenschutz.html", "Protection des données"), ("agb.html", "CGV")],
         foot_contact=[("kontakt.html", "Demander un conseil")],
         h_services="Services", h_legal="Mentions légales", h_contact="Contact",
-        foot_bottom="© 2026 steuerberatung.ch · Information fiscale indépendante &amp; mise en relation. Aucun conseil fiscal au sens de la LIFD – le conseil est fourni exclusivement par des partenaires agréés.",
+        foot_bottom="© 2026 steuerberatung.ch · Information fiscale indépendante &amp; mise en relation. steuerberatung.ch ne fournit pas de conseil fiscal ou juridique individuel. Le conseil est fourni exclusivement par les spécialistes mandatés.",
         cta_h="Incertain pour votre déclaration d'impôt ?",
         cta_p="Premier conseil gratuit : nous examinons votre situation et vous mettons en relation avec un partenaire vérifié dans votre canton.",
         cta_btn2="Demander un conseil gratuit",
-        published="Publié le {date} · Information fiscale indépendante pour la Suisse.",
+        published="Publié le {date} · Dernière mise à jour : {date} · Information fiscale indépendante pour la Suisse.",
         toc="Sommaire :",
         related_h="Articles connexes",
     ),
@@ -78,17 +78,17 @@ L = {
         nav=[("leistungen.html", "Servizi"), ("werbung.html", "Pubblicità"),
              ("ratgeber.html", "Guida fiscale"), ("rechner.html", "Calcolatore"), ("ricerca.html", "Ricerca")],
         cta_btn="Consulenza gratuita", menu="Menu",
-        foot_about="Il vostro partner indipendente per le imposte in Svizzera. Confronto, consulenza e servizi digitali – trasparente e conforme alla protezione dei dati.",
+        foot_about="Il vostro partner indipendente per le imposte in Svizzera. Guide fiscali, calcolatori e mediazione di specialisti verificati – trasparente e conforme alla protezione dei dati.",
         foot_services=[("leistungen.html", "Dichiarazione d'imposte"), ("leistungen.html", "Consulenza fiscale"),
                        ("ratgeber.html", "Guida fiscale")],
         foot_legal=[("impressum.html", "Impressum"), ("datenschutz.html", "Protezione dei dati"), ("agb.html", "CGV")],
         foot_contact=[("kontakt.html", "Richiedere consulenza")],
         h_services="Servizi", h_legal="Note legali", h_contact="Contatto",
-        foot_bottom="© 2026 steuerberatung.ch · Informazione fiscale indipendente &amp; messa in relazione. Nessuna consulenza fiscale ai sensi della LIFD – la consulenza è fornita esclusivamente da partner autorizzati.",
+        foot_bottom="© 2026 steuerberatung.ch · Informazione fiscale indipendente &amp; mediazione. steuerberatung.ch non fornisce consulenza fiscale o giuridica individuale. La consulenza è fornita esclusivamente dagli specialisti incaricati.",
         cta_h="Incerti sulla vostra dichiarazione d'imposte?",
         cta_p="Prima consulenza gratuita: esaminiamo la vostra situazione e vi mettiamo in contatto con un partner verificato nel vostro cantone.",
         cta_btn2="Richiedi consulenza gratuita",
-        published="Pubblicato il {date} · Informazione fiscale indipendente per la Svizzera.",
+        published="Pubblicato il {date} · Ultimo aggiornamento: {date} · Informazione fiscale indipendente per la Svizzera.",
         toc="Indice:",
         related_h="Articoli correlati",
     ),
@@ -138,7 +138,7 @@ def render_related(lang, related):
             f'\n</ul></div></section>\n{RELATED_END}')
 
 
-def build(lang, slug, title, meta, sections, related=None):
+def build(lang, slug, title, meta, sections, related=None, sources=None):
     assert lang in LANGS, f"lang must be one of {LANGS}"
     t = L[lang]
     today = datetime.date.today().isoformat()
@@ -214,10 +214,17 @@ def build(lang, slug, title, meta, sections, related=None):
         f'<section class="section"><div class="container prose"><h2 id="s{i+1}">{h}</h2>{b}</div></section>'
         for i, (h, b) in enumerate(sections))
 
-    related_block = render_related(lang, related) if related else ""
+    SOURCES_H = {"de": "Quellen", "en": "Sources", "fr": "Sources", "it": "Fonti"}
+    SOURCES_NOTE = {"de": "Amtliche Quellen (Originaltexte), Stand {d}.", "en": "Official sources (original texts), as of {d}.", "fr": "Sources officielles (textes originaux), état du {d}.", "it": "Fonti ufficiali (testi originali), stato del {d}."}
+    sources_block = ""
+    if sources:
+        links = "\n".join(f'<li><a href="{u}" rel="noopener">{lbl}</a></li>' for u, lbl in sources)
+        sources_block = (f'<section class="section sources"><div class="container prose"><h2>{SOURCES_H[lang]}</h2><ul>{links}</ul>'
+                         f'<p class="sources-note">{SOURCES_NOTE[lang].format(d=today.replace("-", "."))}</p></div></section>\n')
+    related_block = sources_block + (render_related(lang, related) if related else "")
 
     ld = {"@context": "https://***", "@type": "Article", "headline": title,
-          "datePublished": today,
+          "datePublished": today, "dateModified": today,
           "author": {"@type": "Organization", "name": "steuerberatung.ch"},
           "publisher": {"@type": "Organization", "name": "steuerberatung.ch"},
           "description": meta,
@@ -244,7 +251,7 @@ def build(lang, slug, title, meta, sections, related=None):
 <link rel="icon" type="image/png" sizes="32x32" href="{pre}assets/favicon-32.png">
 <link rel="apple-touch-icon" href="{pre}assets/logo-180.png">
 <link rel="stylesheet" href="{pre}assets/style.css">
-<link rel="stylesheet" href="{pre}assets/extra.css">
+<link rel="stylesheet" href="{pre}assets/extra.css?v=4">
 <link rel="stylesheet" href="{pre}assets/redesign.css">
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
 </head>

@@ -139,3 +139,10 @@
 .search-lang{font-size:.7rem;font-weight:700;background:#eef3ef;border-radius:4px;padding:1px 6px;color:#567}
 .search-snip{margin:6px 0 0;font-size:.92rem;color:#445;line-height:1.5}
 .search-none{color:#667;font-style:italic}
+
+/* Sources section + partner note (2026-10-17) */
+.sources ul{margin:8px 0 4px;padding-left:20px}
+.sources li{margin:4px 0;font-size:.95rem}
+.sources a{color:var(--green,#2e7d4f);text-decoration:underline}
+.sources-note{font-size:.85rem;color:#667;margin-top:8px}
+.partner-note{margin:14px 0}
