@@ -121,6 +121,27 @@ jobs:
             exit 1
           fi
           echo "404.html OK: $(wc -c < dist/404.html) bytes"
+      - name: Fail if search assets are missing or empty
+        run: |
+          # t_4e7c309f: the four search pages (suche/search/recherche/ricerca,
+          # ce910fc) are inert without dist/assets/search-index.js (the whole
+          # ~600KB article index) and dist/assets/search.js (the client). Both
+          # ship only through `cp assets/* dist/assets/` in the build step
+          # above — an edit that drops either one kills all four search pages
+          # while CI stays green. Same failure class as the sitemap drop
+          # (46c37b7, t_eed3b4cd) and the 404 page (t_b462b318): assert the
+          # artifacts exist AND are non-empty before the artifact is uploaded.
+          for f in dist/assets/search-index.js dist/assets/search.js; do
+            if [ ! -f "$f" ]; then
+              echo "::error::$f is missing — the build dropped a search asset and every search page would be dead"
+              exit 1
+            fi
+            if [ ! -s "$f" ]; then
+              echo "::error::$f is empty — search would load but never work"
+              exit 1
+            fi
+            echo "$f OK: $(wc -c < "$f") bytes"
+          done
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
