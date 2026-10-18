@@ -158,7 +158,7 @@ jobs:
           # new non-article page must be added to the list on purpose.
           # The four search pages have per-language names (suche/search/
           # recherche/ricerca); all are exempt.
-          EXEMPT=" 3a-rechner.html 404.html agb.html datenschutz.html impressum.html index.html kontakt.html leistungen.html partner-pruefung.html ratgeber.html rechner.html recherche.html ricerca.html search.html suche.html werbung.html "
+          EXEMPT=" 3a-rechner.html bezugsrechner.html 404.html agb.html datenschutz.html impressum.html index.html kontakt.html leistungen.html partner-pruefung.html ratgeber.html rechner.html recherche.html ricerca.html search.html suche.html werbung.html "
           fail=0
           check_dir() { # $1 = dir, $2 = language sources-heading text
             local checked=0 missing=0 base
