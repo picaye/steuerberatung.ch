@@ -109,7 +109,11 @@ def run_scripts(tmp: Path) -> tuple[str, str]:
         )
         if r.returncode != 0:
             raise RuntimeError(f"{script} failed rc={r.returncode}\n{r.stderr}")
+    # sitemap.xml may be an INDEX (per-language split since 2026-10-17):
+    # concatenate the index plus every referenced per-language urlset.
     sitemap = (tmp / "sitemap.xml").read_text(encoding="utf-8")
+    for extra in sorted(tmp.glob("sitemap-*.xml")):
+        sitemap += extra.read_text(encoding="utf-8")
     strips = ""
     for idx in (tmp / "index.html", tmp / "en" / "index.html"):
         html = idx.read_text(encoding="utf-8")

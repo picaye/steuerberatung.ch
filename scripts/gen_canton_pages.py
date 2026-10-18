@@ -7,6 +7,15 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://steuerberatung.ch"
 raw = json.load(open(os.path.join(ROOT, "data/cantons_raw.json"), encoding="utf-8"))
 by_canton = {r["canton"]: r for r in raw}
+EFF = json.load(open(os.path.join(ROOT, "data/cantons_effektiv.json"), encoding="utf-8"))
+try:
+    I18N = json.load(open(os.path.join(ROOT, "data/cantons_i18n.json"), encoding="utf-8"))
+except Exception:
+    I18N = {}
+def fuss_kurz(s):
+    import re as _re
+    m = _re.match(r"\s*([0-9]+(?:[.,][0-9]+)?\s*%[^;)]*|[^;]*)", s or "")
+    return (m.group(1).strip()[:28] if m else "–")
 
 # slug + localized display names (official exonyms)
 CANTONS = [
@@ -44,32 +53,32 @@ UI = {
  h1="Kanton {n}", sub="Steuererklärung {y}: Fristen, Steuerfuss, offizielles Tool und Besonderheiten – kurz und amtlich belegt.",
  frist="Abgabefrist Steuerperiode {y}", fuss="Durchschnittlicher Steuerfuss (natürliche Personen)",
  tool="Online-Steuererklärung", amt="Kantonales Steueramt", spec="Besonderheiten",
- cmp_h="Steuerfüsse im Vergleich", cmp_intro="Der durchschnittliche Steuerfuss (Kanton + Gemeinden, Ehepaar ohne Kinder, ohne Kirchensteuer, Nettoabgabe) laut ESTV per 1.1.2026:",
- cmp_col1="Kanton", cmp_col2="Steuerfuss", back="Alle Kantone", cta="Steuererklärung im Kanton {n}Professionell machen lassen? Geprüfte Fachperson im Kanton {n} finden",
+ eff_h="Effektive Steuerbelastung", cmp_h="Steuerfüsse im Vergleich", cmp_intro="Der durchschnittliche Steuerfuss (Kanton + Gemeinden, Ehepaar ohne Kinder, ohne Kirchensteuer, Nettoabgabe) laut ESTV per 1.1.2026:",
+ cmp_col1="Kanton", cmp_col2="Steuerfuss Hauptort", cmp_col3="Effektive Belastung*", back="Alle Kantone", cta="Steuererklärung im Kanton {n}Professionell machen lassen? Geprüfte Fachperson im Kanton {n} finden",
  more_h="Ratgeber-Artikel", ld_type="Steuererklärung {n}"),
 "en": dict(ttl="Tax return canton {n} {y}: deadlines, tax multiplier & online tool",
  dsc="Tax return {n} {y}: filing deadline, average tax multiplier, official online tool ({sw}) and canton-specific facts for individuals and the self-employed.",
  h1="Canton {n}", sub="Tax return {y}: deadlines, tax multiplier, official tool and cantonal specifics – concise and sourced to official pages.",
  frist="Deadline tax period {y}", fuss="Average tax multiplier (natural persons)",
  tool="Online tax return", amt="Cantonal tax administration", spec="Cantonal specifics",
- cmp_h="Tax multipliers compared", cmp_intro="Average tax multiplier (canton + communes, married couple without children, no church tax, net tax) per FTA as of 1 Jan 2026:",
- cmp_col1="Canton", cmp_col2="Multiplier", back="All cantons", cta="Have your {n} tax return done professionally? Find a vetted specialist in {n}",
+ eff_h="Effective tax burden", cmp_h="Tax multipliers compared", cmp_intro="Average tax multiplier (canton + communes, married couple without children, no church tax, net tax) per FTA as of 1 Jan 2026:",
+ cmp_col1="Canton", cmp_col2="Multiplier (capital)", cmp_col3="Effective burden*", back="All cantons", cta="Have your {n} tax return done professionally? Find a vetted specialist in {n}",
  more_h="Related guides", ld_type="Tax return {n}"),
 "fr": dict(ttl="Déclaration d'impôts canton {n} {y}: délais, multiplicateur & outil en ligne",
  dsc="Déclaration d'impôts {n} {y}: délai de dépôt, multiplicateur d'impôt moyen, outil officiel en ligne ({sw}) et particularités cantonales pour personnes physiques et indépendants.",
  h1="Canton {n}", sub="Déclaration d'impôts {y}: délais, multiplicateur, outil officiel et particularités cantonales – concis et sourcé aux pages officielles.",
  frist="Délai période fiscale {y}", fuss="Multiplicateur moyen (personnes physiques)",
  tool="Déclaration en ligne", amt="Administration fiscale cantonale", spec="Particularités cantonales",
- cmp_h="Multiplicateurs comparés", cmp_intro="Multiplicateur moyen (canton + communes, couple marié sans enfants, sans impôt ecclésiastique, perception nette) selon l'AFC au 1er janvier 2026:",
- cmp_col1="Canton", cmp_col2="Multiplicateur", back="Tous les cantons", cta="Faire établir votre déclaration {n} par un spécialiste vérifié",
+ eff_h="Charge fiscale effective", cmp_h="Multiplicateurs comparés", cmp_intro="Multiplicateur moyen (canton + communes, couple marié sans enfants, sans impôt ecclésiastique, perception nette) selon l'AFC au 1er janvier 2026:",
+ cmp_col1="Canton", cmp_col2="Multiplicateur (chef-lieu)", cmp_col3="Charge effective*", back="Tous les cantons", cta="Faire établir votre déclaration {n} par un spécialiste vérifié",
  more_h="Guides liés", ld_type="Déclaration d'impôts {n}"),
 "it": dict(ttl="Dichiarazione d'imposte canton {n} {y}: termini, moltiplicatore & tool online",
  dsc="Dichiarazione d'imposte {n} {y}: termine di consegna, moltiplicatore medio, tool ufficiale online ({sw}) e particolarità cantonali per persone fisiche e indipendenti.",
  h1="Cantone {n}", sub="Dichiarazione d'imposte {y}: termini, moltiplicatore, tool ufficiale e particolarità cantonali – conciso e con fonti ufficiali.",
  frist="Termine periodo fiscale {y}", fuss="Moltiplicatore medio (persone fisiche)",
  tool="Dichiarazione online", amt="Amministrazione cantonale delle imposte", spec="Particolarità cantonali",
- cmp_h="Moltiplicatori a confronto", cmp_intro="Moltiplicatore medio (cantone + comuni, coppia sposata senza figli, senza imposta ecclesiastica, gettito netto) secondo l'AFC al 1.1.2026:",
- cmp_col1="Cantone", cmp_col2="Moltiplicatore", back="Tutti i cantoni", cta="Far compilare la vostra dichiarazione {n} da uno specialista verificato",
+ eff_h="Carico fiscale effettivo", cmp_h="Moltiplicatori a confronto", cmp_intro="Moltiplicatore medio (cantone + comuni, coppia sposata senza figli, senza imposta ecclesiastica, gettito netto) secondo l'AFC al 1.1.2026:",
+ cmp_col1="Cantone", cmp_col2="Moltiplicatore (capoluogo)", cmp_col3="Carico effettivo*", back="Tutti i cantoni", cta="Far compilare la vostra dichiarazione {n} da uno specialista verificato",
  more_h="Guide correlate", ld_type="Dichiarazione d'imposte {n}"),
 }
 
@@ -101,15 +110,24 @@ def page(lang, code, slug, names, idx):
     r = by_canton.get(code)
     if not r:
         print("NO DATA for", code); return 0
-    n = names[idx]  # 1=de 2=en 3=fr 4=it -> idx offset
-    u = UI[lang]; up = "" if lang == "de" else "../"
+    r = dict(r)
+    for ov in I18N.get(lang, []):
+        if ov.get("canton") == code:
+            for k, v in ov.items():
+                if k != "canton": r[k] = v
+            break
+    n = names[idx - 1]
+    u = UI[lang]
+    assetup = "../" if lang == "de" else "../../"
+    langup = "../"
+    up = assetup
     dpath = f"kanton/{slug}.html" if lang == "de" else f"{lang}/kanton/{slug}.html"
     canon = SITE + ("/kanton/" if lang == "de" else f"/{lang}/kanton/") + slug + ".html"
     alts = "\n".join('<link rel="alternate" hreflang="%s" href="%s/%s%s">' % (HL[l], SITE, "" if l=="de" else l+"/", dpath.split(l+"/",1)[1] if l!="de" else dpath) for l in ["de"])
     alts = "\n".join('<link rel="alternate" hreflang="%s" href="%s/%skanton/%s.html">' % (HL[l], SITE, "" if l=="de" else l+"/", slug) for l in ["de","en","fr","it"]) + '\n<link rel="alternate" hreflang="x-default" href="%s/kanton/%s.html">' % (SITE, slug)
-    nav = "\n".join('      <a href="%s%s">%s</a>' % (up, p, t) for p, t in NAV[lang])
+    nav = "\n".join('      <a href="%s%s">%s</a>' % (langup, p, t) for p, t in NAV[lang])
     sw = "\n".join('<a href="%s" class="lang%s"%s>%s</a>' % (
-        ("index.html" if l=="de" else l+"/index.html") if lang=="de" else ("../index.html" if l=="de" else "../%s/index.html" % l),
+        (langup + "index.html") if l == lang else (assetup + ("index.html" if l == "de" else l + "/index.html")),
         " active" if l==lang else "", ' aria-current="true"' if l==lang else "", l.upper()) for l in ["de","en","fr","it"])
     f = FOOT[lang]
     fs = " ".join('<a href="%s%s">%s</a>' % (up, p, t) for p, t in f["services"])
@@ -125,11 +143,12 @@ def page(lang, code, slug, names, idx):
     def num(x):
         try: return float(str(x).replace("%","").replace(",",".").strip())
         except Exception: return 999
-    rows = sorted(CANTONS, key=lambda c: num(by_canton.get(c[0],{}).get("steuerfuss_2026","999")))
+    rows = sorted(CANTONS, key=lambda c: EFF.get(c[0], 999))
     cmp_rows = "".join(
-        '<tr%s><td><a href="%skanton/%s.html">%s</a></td><td>%s</td></tr>' % (
-        ' class="cmp-here"' if c[0]==code else "", up, c[1], c[idx], by_canton.get(c[0],{}).get("steuerfuss_2026","–")) for c in rows)
-    more = "\n".join('<li><a href="%s%s">%s</a></li>' % (up, s, t) for s, t in MORE[lang])
+        '<tr%s><td><a href="%s%s.html">%s</a></td><td>%s</td><td>%s</td></tr>' % (
+        ' class="cmp-here"' if c[0]==code else "", "", c[1], c[idx + 1],
+        fuss_kurz(by_canton.get(c[0],{}).get("steuerfuss_2026","–")), str(EFF.get(c[0],"–")) + " %") for c in rows)
+    more = "\n".join('<li><a href="%s%s">%s</a></li>' % (langup, s, t) for s, t in MORE[lang])
     cta_lbl = u["cta"].replace("{n}", n)
     ld = json.dumps([
       {"@context":SITE and "https://schema.org","@type":"BreadcrumbList","itemListElement":[
@@ -158,7 +177,7 @@ def page(lang, code, slug, names, idx):
 <body>
 <header class="site-header">
   <div class="container header-inner">
-    <a class="logo" href="index.html"><img class="logo-img" src="{up}assets/logo.svg" alt="" width="32" height="32" aria-hidden="true"><span class="logo-text">steuerberatung<span class="accent">.ch</span></span></a>
+    <a class="logo" href="{langup}index.html"><img class="logo-img" src="{up}assets/logo.svg" alt="" width="32" height="32" aria-hidden="true"><span class="logo-text">steuerberatung<span class="accent">.ch</span></span></a>
     <button class="nav-toggle" type="button" aria-label="Menü" aria-expanded="false" aria-controls="main-nav">☰</button>
     <nav class="main-nav" id="main-nav">
 {nav}
@@ -176,17 +195,18 @@ def page(lang, code, slug, names, idx):
 <section class="section"><div class="container prose">
 <div class="canton-facts">
   <div><h3>{u['frist']}</h3><p>{esc(frist)}</p></div>
-  <div><h3>{u['fuss']}</h3><p>{esc(fuss)}</p></div>
+  <div><h3>{u['fuss']}</h3><p>{esc(fuss_kurz(fuss))}</p></div>
+  <div><h3>{u['eff_h']}</h3><p>{EFF.get(code, chr(8211))} %</p></div>
   <div><h3>{u['tool']}</h3><p><a href="{sw_url}" rel="noopener">{esc(sw_name)} →</a></p></div>
   <div><h3>{u['amt']}</h3><p><a href="{amt_url}" rel="noopener">{u['amt']} {n} →</a></p></div>
 </div>
 <h2>{u['spec']}</h2>
 <p>{esc(bem)}</p>
-<div class="cta-mid"><a href="kontakt.html">{cta_lbl} →</a></div>
+<div class="cta-mid"><a href="{langup}kontakt.html">{cta_lbl} →</a></div>
 <h2 id="cmp">{u['cmp_h']}</h2>
 <p>{u['cmp_intro']}</p>
-<table><thead><tr><th>{u['cmp_col1']}</th><th>{u['cmp_col2']}</th></tr></thead><tbody>{cmp_rows}</tbody></table>
-<p><em>Quelle: <a href="https://www.estv2.admin.ch/stp/ds/e-steuersatz-steuerfuss-de.pdf" rel="noopener">ESTV – Steuersatz und Steuerfuss (PDF, Stand 1.1.2026)</a>. Durchschnittswerte; Ihre Gemeinde weicht ab – konkret rechnet der <a href="{up}rechner.html">Steuerrechner</a>.</em></p>
+<table><thead><tr><th>{u['cmp_col1']}</th><th>{u['cmp_col2']}</th><th>{u['cmp_col3']}</th></tr></thead><tbody>{cmp_rows}</tbody></table>
+<p><em>Quelle: <a href="https://www.estv2.admin.ch/stp/ds/e-steuersatz-steuerfuss-de.pdf" rel="noopener">ESTV – Steuersatz und Steuerfuss (PDF, Stand 1.1.2026)</a>. * Effektive Belastung: Ehepaar ohne Kinder, steuerbares Einkommen CHF 85’000, mittlerer Gemeindesteuerfuss, berechnet mit dem eigenen Steuerrechner (Durchschnittswerte; Ihre Gemeinde weicht ab) – konkret rechnet der <a href="{langup}rechner.html">Steuerrechner</a>.</em></p>
 <h2>{u['more_h']}</h2>
 <ul>{more}</ul>
 </div></section>

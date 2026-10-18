@@ -19,14 +19,15 @@ Checks per page (root DE + en/ fr/ it/):
 import re, glob, os, sys
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-EXPECT_LANG = {'': 'de', 'en': 'en', 'fr': 'fr-CH', 'it': 'it-CH'}
-EXPECT_ACTIVE = {'': 'DE', 'en': 'EN', 'fr': 'FR', 'it': 'IT'}
+EXPECT_LANG = {'': 'de', 'kanton': 'de', 'en': 'en', 'fr': 'fr-CH', 'it': 'it-CH'}
+EXPECT_ACTIVE = {'kanton': 'DE', '': 'DE', 'en': 'EN', 'fr': 'FR', 'it': 'IT'}
 BASE = 'https://steuerberatung.ch'
 
 os.chdir(REPO)
-files = sorted(glob.glob('*.html'))
+files = sorted(glob.glob('*.html')) + sorted(glob.glob('kanton/*.html'))
 for lang in ('en', 'fr', 'it'):
     files += sorted(glob.glob(f'{lang}/*.html'))
+    files += sorted(glob.glob(f'{lang}/kanton/*.html'))
 
 problems = []
 for f in files:
@@ -38,8 +39,8 @@ for f in files:
         rel_url = f'{BASE}/{d + "/" if d else ""}'
 
     m = re.search(r'<html lang="([^"]+)"', s)
-    if not m or m.group(1) != EXPECT_LANG[d]:
-        problems.append(f'{f}: html lang={m.group(1) if m else None} want={EXPECT_LANG[d]}')
+    if not m or m.group(1) != EXPECT_LANG[d.split('/')[0]]:
+        problems.append(f'{f}: html lang={m.group(1) if m else None} want={EXPECT_LANG[d.split('/')[0]]}')
 
     # noindex stub pages (e.g. rechner.html takedown) carry no switcher/hreflang
     if 'content="noindex' in s:
@@ -49,8 +50,8 @@ for f in files:
     if len(navs) != 4:
         problems.append(f'{f}: lang switcher anchors={len(navs)} want=4')
     act = re.search(r'class="lang active"[^>]*>([A-Z]{2})<', s)
-    if not act or act.group(1) != EXPECT_ACTIVE[d]:
-        problems.append(f'{f}: active switcher={act.group(1) if act else None} want={EXPECT_ACTIVE[d]}')
+    if not act or act.group(1) != EXPECT_ACTIVE[d.split('/')[0]]:
+        problems.append(f'{f}: active switcher={act.group(1) if act else None} want={EXPECT_ACTIVE[d.split('/')[0]]}')
 
     hl = s.count('hreflang=')
     if hl != 5:

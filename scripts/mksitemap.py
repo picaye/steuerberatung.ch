@@ -10,9 +10,10 @@ try:
     tracked = set(_r.stdout.split()) if _r.returncode == 0 else None
 except Exception:
     tracked = None
-files = sorted(glob.glob(BASE + "/*.html"))
+files = sorted(glob.glob(BASE + "/*.html")) + sorted(glob.glob(BASE + "/kanton/*.html"))
 for lang in ("en", "fr", "it"):
     files += sorted(glob.glob(BASE + f"/{lang}/*.html"))
+    files += sorted(glob.glob(BASE + f"/{lang}/kanton/*.html"))
 if tracked is not None:
     dropped = [f for f in files
                if os.path.relpath(f, BASE) not in tracked]
@@ -53,7 +54,8 @@ for f in files:
     if 'name="robots"' in head and "noindex" in head:
         continue
     rel = os.path.relpath(f, BASE)
-    lang = rel.split("/")[0] if "/" in rel else "de"
+    top = rel.split("/")[0] if "/" in rel else "de"
+    lang = top if top in ("en", "fr", "it") else "de"
     if rel.endswith("/index.html"):
         path = "/" if rel == "index.html" else "/" + os.path.dirname(rel) + "/"
     else:

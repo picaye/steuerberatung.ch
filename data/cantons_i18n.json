@@ -1,0 +1,398 @@
+{
+  "en": [
+    {
+      "canton": "ZH",
+      "abgabefrist_2026": "31 March 2027 (Steuerbuch ZStB 133.1: 2026 tax return due by 31 March 2027; deadline extension only on request filed before the deadline expires)",
+      "bemerkungen": "Largest canton; municipal tax rates vary widely (City of Zurich 119 %). No inheritance tax for direct descendants and spouses. The tax return must be filed online via the tax portal."
+    },
+    {
+      "canton": "BE",
+      "abgabefrist_2026": "15 March 2027 (self-employed persons and farmers: 15 May 2027); extension only on request — special case 2026: the filing deadline for tax period 2025 was automatically extended to 30 November 2026 due to a software migration",
+      "bemerkungen": "Bern works with multiples of the simple tax (no percentage tax rate). Login via BE-Login / AGOV. Early deadline (mid-March) in intercantonal comparison."
+    },
+    {
+      "canton": "LU",
+      "abgabefrist_2026": "usually 31 March 2027; the printed deadline is decisive (30 days after delivery); representatives and limited taxpayers: 31 August 2027 (Wegleitung ESTV/Steuern LU, period 2026)",
+      "bemerkungen": "From tax period 2025, Lucerne uses its own cantonal portal esteuern.lu.ch (no longer etax.ch). Central Swiss canton with moderate tax rates; significant variation between municipalities."
+    },
+    {
+      "canton": "UR",
+      "abgabefrist_2026": "expected 31 March 2027 (published deadline for period 2025: 31 March 2026; online extension requests from receipt of the activation letter in early 2027)",
+      "bemerkungen": "Small Inner Swiss canton with low tax rates. eTax Uri is part of the cantonal eTax family (Ringler); login partly via AGOV."
+    },
+    {
+      "canton": "SZ",
+      "abgabefrist_2026": "31 March 2027 (guide to the 2026 tax return: 'to be filed by 31 March 2027'); extension requests via efristen.sz.ch, usually until 31 December",
+      "bemerkungen": "Municipal tax rates in canton Schwyz vary greatly (district rates are added on). No inheritance tax for close relatives and spouses."
+    },
+    {
+      "canton": "OW",
+      "abgabefrist_2026": "expected 30 April 2027 (published deadline for period 2025: 30 April 2026; free extension via efristen.ow.ch until 31 December)",
+      "bemerkungen": "High multiples are misleading: Obwalden halves the simple tax base and is one of the most tax-favourable cantons in Switzerland (low effective burden)."
+    },
+    {
+      "canton": "NW",
+      "abgabefrist_2026": "31 March 2027 ('the tax return must be filed by 31 March of the following year'); online extension possible",
+      "bemerkungen": "Low-tax Inner Swiss canton near Zug/Lucerne; fully electronic filing without signature."
+    },
+    {
+      "canton": "GL",
+      "abgabefrist_2026": "31 March 2027 (date on the form; online deadline extensions until 31 December 2027 according to the 2026 guide)",
+      "bemerkungen": "One of the lowest combined tax rates in Switzerland (capital 119 %). The cantonal tax administration also implements the individual health-insurance premium subsidy."
+    },
+    {
+      "canton": "ZG",
+      "abgabefrist_2026": "30 April 2027 ('to be filed by 30 April'); extension requests are generally granted until 31 December (online)",
+      "bemerkungen": "Zug is one of the most tax-friendly cantons in Switzerland (low combined tax rate, no inheritance tax for direct descendants). From period 2025, a full browser solution; login via AGOV."
+    },
+    {
+      "canton": "FR",
+      "abgabefrist_2026": "The issue date of the 2026 tax return is decisive (deadline printed on the declaration; extensions possible via the Guichet virtuel)",
+      "bemerkungen": "Bilingual canton (German/French); separate tax rates for income and wealth. FriTax is the official software (download/online); e-Tax PM for legal entities."
+    },
+    {
+      "canton": "SO",
+      "abgabefrist_2026": "31 March 2027 (filing date 31 March; on request, extension to 31 July or — with a CHF 30 fee — to 30 November)",
+      "bemerkungen": "Plateau canton with medium tax rates; the 2025 tax return is mailed out in February 2026 (login at eTax.so.ch with the access data from the tax return cover sheet)."
+    },
+    {
+      "canton": "BS",
+      "abgabefrist_2026": "expected 31 March 2027 (published deadline for period 2025: 31 March 2026); free online extension until 30 September, further-reaching requests CHF 40",
+      "bemerkungen": "City canton: no separate municipal tax rate — cantonal and municipal taxes are combined. The BalTax download has been replaced by BalTax Online; login via AGOV."
+    },
+    {
+      "canton": "BL",
+      "abgabefrist_2026": "31 March 2027 for employees and non-earning persons (self-employed: 30 June 2027; secondary taxpayers: 30 November 2027); extension usually until 30 November",
+      "bemerkungen": "Clearly lower municipal rates than Basel-Stadt; Liestal 65 %. Note: the official tax administration page www.baselland.ch/politik-und-behorden/direktionen/finanz-und-kirchendirektion/steuerverwaltung sits behind a Cloudflare WAF (HTTP 403 with curl, also a browser challenge) — the tax portal etax.bl.ch is reachable (HTTP 200 verified)."
+    },
+    {
+      "canton": "SH",
+      "abgabefrist_2026": "expected 31 March 2027 (the filing deadline is set annually; period 2025: 31 March 2026); eFristerstreckung (online extension) up to 30 November at the latest",
+      "bemerkungen": "Northernmost canton; low combined tax rate (159 %). Schaffhausen does not use the shared eTax.ch platform — its own downloadable tax software plus paperless filing (eFiling)."
+    },
+    {
+      "canton": "AR",
+      "abgabefrist_2026": "usually 31 March 2027; the date on page 1 of the tax return is decisive (period 2025: 31.3.2026); online extension (first free, further requests CHF 25)",
+      "bemerkungen": "Eastern Swiss half canton with a multi-fraction system (the simple tax is halved). Data is stored on servers within the canton's territory; login via AGOV."
+    },
+    {
+      "canton": "AI",
+      "abgabefrist_2026": "30 April 2027 (online extension until 30 November at the latest; deemed granted if no objection is raised within 14 days)",
+      "bemerkungen": "The cantonal tax rate is decided at the Landsgemeinde (cantonal assembly). Very low profit tax rates for legal entities (6–11.5 %, statutory cap on the tax burden of 30 %)."
+    },
+    {
+      "canton": "SG",
+      "abgabefrist_2026": "usually 31 March 2027 (period 2025: 31.3.2026; date on page 1); online request possible (only if tax bills are paid), extension usually until end of September, maximum 31 December",
+      "bemerkungen": "From tax period 2025, a new web application E-Tax SG on the canton's own portal (no longer etax.ch). Relatively high city tax rate (138 %)."
+    },
+    {
+      "canton": "GR",
+      "abgabefrist_2026": "31 March 2027 for employees, pupils/students and pensioners; 30 September 2027 for self-employed persons, simple partnerships and limited taxpayers (extension can be requested until 20 May, at most until 30 September)",
+      "bemerkungen": "Largest canton; tax rates of the many municipalities vary widely (tourist resorts partly higher). SofTax GR is the official download software (Windows/Mac) with electronic transmission."
+    },
+    {
+      "canton": "AG",
+      "abgabefrist_2026": "31 March 2027 (employees, pensioners); de facto until 30 June 2027 without request and without reminder; self-employed persons and shareholders of family companies: 30 June 2027",
+      "bemerkungen": "From tax period 2025, eTAX AARGAU replaces the previous EasyTax download solution; browser-based, login also via AGOV. Generous tolerance until end of June for natural persons."
+    },
+    {
+      "canton": "TG",
+      "abgabefrist_2026": "30 April 2027 ('by 30 April of the year following the tax period', StP 155); extensions until 31 December of the filing year are free of charge (request via the municipal tax office)",
+      "bemerkungen": "Canton with its own download software eFisc (Windows/macOS/Linux) including electronic transmission; no eTax cantonal portal. Above-average combined tax rate of the capital."
+    },
+    {
+      "canton": "TI",
+      "abgabefrist_2026": "30 April 2027 (fixed deadline; extension via the online request 'richiesta di proroga' possible)",
+      "bemerkungen": "Italian-speaking canton. Cross-border commuters from EU/EFTA are subject to withholding tax (imposta alla fonte) with special tariffs and lump-sum deductions. Tax burden cap: cantonal plus municipal taxes may not exceed 60 % of the taxable net income (ESTV, as of 1 January 2026)."
+    },
+    {
+      "canton": "VD",
+      "abgabefrist_2026": "15 March 2027 (délai général); tolerance deadline until 30 June 2027 without request; free extension until 30 September if requested by 30 June (e-Délai)",
+      "bemerkungen": "French-speaking canton with one of the highest cantonal tax rates (155 %). The classic VaudTax software is being gradually replaced by the online 'Prestation VaudTax'. No obligation to pay out church tax (church tax is omitted from the statistics)."
+    },
+    {
+      "canton": "VS",
+      "abgabefrist_2026": "31 March 2027 (échéance générale; period 2025: 31.3.2026); extension stages according to schedule: until 31 July (employees), until 31 October (self-employed), special cases until 31 December",
+      "bemerkungen": "Bilingual canton (German/French); three separate return forms (canton, municipality, Confederation). Specific family/spouse relief and a tax burden cap with a deductible of CHF 10,000 (ESTV, as of 1 January 2026)."
+    },
+    {
+      "canton": "NE",
+      "abgabefrist_2026": "usually 31 March 2027 (period 2025: 31 March 2026; date on the tax form); extension via online form/Guichet unique",
+      "bemerkungen": "French-speaking canton; high cantonal tax rate (124 %), low municipal share. Clic & Tax is the official software for natural persons (PM Tax for legal entities), transmission via the Guichet unique."
+    },
+    {
+      "canton": "GE",
+      "abgabefrist_2026": "31 March 2027 ('31 mars de chaque année', also for non-taxable persons); fee-based extension requests (CHF 20/40/60 depending on duration) before the deadline expires",
+      "bemerkungen": "French-speaking city canton. Low tax rate, but a progressive tariff with a high effective burden; family allowances (allocations) and social deductions shape practice. Tax burden cap 60 % of the taxable net income (ESTV, as of 1 January 2026). The Déclaration en ligne in the e-démarches account is pre-filled."
+    },
+    {
+      "canton": "JU",
+      "abgabefrist_2026": "28 February 2027 (délai légal art. 154 al. 1 LI — the earliest ordinary deadline in Switzerland; period 2025: 28.2.2026); extension until 31 October can be requested",
+      "bemerkungen": "Youngest and French-speaking canton; JuraTax Online runs entirely in the browser via the Guichet virtuel (no download software). Extension requests are usually free of charge."
+    }
+  ],
+  "fr": [
+    {
+      "canton": "ZH",
+      "abgabefrist_2026": "31 mars 2027 (Steuerbuch ZStB 133.1 : déclaration 2026 à déposer jusqu'au 31 mars 2027 ; prolongation du délai uniquement sur requête présentée avant l'échéance)",
+      "bemerkungen": "Plus grand canton ; les taux communaux varient fortement (ville de Zurich 119 %). Pas de droits de succession pour les descendants directs et les conjoints. La déclaration d'impôt doit être déposée en ligne via le portail fiscal."
+    },
+    {
+      "canton": "BE",
+      "abgabefrist_2026": "15 mars 2027 (indépendants et agriculteurs : 15 mai 2027) ; prolongation uniquement sur requête — cas particulier 2026 : le délai de dépôt pour la période 2025 a été prolongé automatiquement au 30 novembre 2026 en raison d'une migration logicielle",
+      "bemerkungen": "Berne travaille avec des multiples de l'impôt simple (pas de taux en pourcentage). Connexion via BE-Login / AGOV. Échéance précoce (mi-mars) en comparaison intercantonale."
+    },
+    {
+      "canton": "LU",
+      "abgabefrist_2026": "en général 31 mars 2027 ; le délai imprimé fait foi (30 jours après la notification) ; représentations et contribuables soumis à une imposition limitée : 31 août 2027 (Wegleitung ESTV/Steuern LU, période 2026)",
+      "bemerkungen": "À partir de la période fiscale 2025, Lucerne utilise son propre portail cantonal esteuern.lu.ch (et non plus etax.ch). Canton de Suisse centrale aux taux modérés ; variantes communales importantes."
+    },
+    {
+      "canton": "UR",
+      "abgabefrist_2026": "prévue le 31 mars 2027 (délai publié pour la période 2025 : 31 mars 2026 ; prolongation en ligne dès réception du courrier d'activation début 2027)",
+      "bemerkungen": "Petit canton de Suisse intérieure aux taux bas. eTax Uri fait partie de la famille eTax cantonale (Ringler) ; connexion en partie via AGOV."
+    },
+    {
+      "canton": "SZ",
+      "abgabefrist_2026": "31 mars 2027 (guide de la déclaration 2026 : « à déposer jusqu'au 31 mars 2027 ») ; requêtes de prolongation via efristen.sz.ch, en général jusqu'au 31 décembre",
+      "bemerkungen": "Taux communaux très variables dans le canton de Schwytz (les taux de district s'y ajoutent). Pas de droits de succession pour les proches parents et les conjoints."
+    },
+    {
+      "canton": "OW",
+      "abgabefrist_2026": "prévue le 30 avril 2027 (délai publié pour la période 2025 : 30 avril 2026 ; prolongation gratuite via efristen.ow.ch jusqu'au 31 décembre)",
+      "bemerkungen": "Les multiples élevés sont trompeurs : Obwald réduit de moitié l'impôt simple et fait partie des cantons les plus avantageux fiscalement de Suisse (charge effective basse)."
+    },
+    {
+      "canton": "NW",
+      "abgabefrist_2026": "31 mars 2027 (« la déclaration d'impôt doit être déposée jusqu'au 31 mars de l'année suivante ») ; prolongation possible en ligne",
+      "bemerkungen": "Canton de Suisse intérieure à faible fiscalité, proche de Zoug/Lucerne ; dépôt entièrement électronique sans signature."
+    },
+    {
+      "canton": "GL",
+      "abgabefrist_2026": "31 mars 2027 (date sur le formulaire ; prolongations en ligne jusqu'au 31 décembre 2027 selon le guide 2026)",
+      "bemerkungen": "L'un des taux combinés les plus bas de Suisse (chef-lieu 119 %). L'administration fiscale cantonale est aussi l'organe d'exécution de la réduction individuelle des primes d'assurance-maladie."
+    },
+    {
+      "canton": "ZG",
+      "abgabefrist_2026": "30 avril 2027 (« à déposer jusqu'au 30 avril ») ; les requêtes de prolongation sont en général accordées jusqu'au 31 décembre (en ligne)",
+      "bemerkungen": "Zoug fait partie des cantons les plus avantageux fiscalement de Suisse (taux combiné bas, pas de droits de succession pour les descendants directs). Depuis la période 2025, solution entièrement dans le navigateur ; connexion via AGOV."
+    },
+    {
+      "canton": "FR",
+      "abgabefrist_2026": "La date d'envoi de la déclaration 2026 fait foi (délai indiqué sur la déclaration ; prolongations possibles via le Guichet virtuel)",
+      "bemerkungen": "Canton bilingue (allemand/français) ; taux séparés pour le revenu et la fortune. FriTax est le logiciel officiel (téléchargement/en ligne) ; e-Tax PM pour les personnes morales."
+    },
+    {
+      "canton": "SO",
+      "abgabefrist_2026": "31 mars 2027 (date de dépôt 31 mars ; sur requête, prolongation au 31 juillet ou — moyennant un émolument de CHF 30 — au 30 novembre)",
+      "bemerkungen": "Canton du Plateau aux taux moyens ; la déclaration 2025 est envoyée en février 2026 (connexion sur eTax.so.ch avec les données d'accès de l'envoi de la déclaration)."
+    },
+    {
+      "canton": "BS",
+      "abgabefrist_2026": "prévue le 31 mars 2027 (délai publié pour la période 2025 : 31 mars 2026) ; prolongation en ligne gratuite jusqu'au 30 septembre, requêtes allant plus loin : CHF 40",
+      "bemerkungen": "Canton-ville : pas de taux communal séparé — impôt cantonal et communal sont fusionnés. Le téléchargement BalTax a été remplacé par BalTax Online ; connexion via AGOV."
+    },
+    {
+      "canton": "BL",
+      "abgabefrist_2026": "31 mars 2027 pour les salariés et les personnes sans activité lucrative (indépendants : 30 juin 2027 ; contribuables soumis à une imposition secondaire : 30 novembre 2027) ; prolongation en général jusqu'au 30 novembre",
+      "bemerkungen": "Taux communaux nettement plus bas que Bâle-Ville ; Liestal 65 %. Attention : la page officielle de l'administration fiscale www.baselland.ch/politik-und-behorden/direktionen/finanz-und-kirchendirektion/steuerverwaltung se trouve derrière un WAF Cloudflare (HTTP 403 avec curl, challenge navigateur également) — le portail fiscal etax.bl.ch est accessible (HTTP 200 vérifié)."
+    },
+    {
+      "canton": "SH",
+      "abgabefrist_2026": "prévue le 31 mars 2027 (le délai de dépôt est fixé chaque année ; période 2025 : 31 mars 2026) ; eFristerstreckung (prolongation en ligne) jusqu'au 30 novembre au plus",
+      "bemerkungen": "Canton le plus septentrional ; taux combiné bas (159 %). Schaffhouse n'utilise pas la plateforme commune eTax.ch — propre logiciel fiscal en téléchargement plus dépôt sans papier (eFiling)."
+    },
+    {
+      "canton": "AR",
+      "abgabefrist_2026": "en général 31 mars 2027 ; la date figurant sur la page 1 de la déclaration fait foi (période 2025 : 31.3.2026) ; prolongation en ligne (la première gratuite, les suivantes CHF 25)",
+      "bemerkungen": "Demi-canton de Suisse orientale avec système à fractions multiples (l'impôt simple est réduit de moitié). Les données sont stockées sur des serveurs situés sur le territoire du canton ; connexion via AGOV."
+    },
+    {
+      "canton": "AI",
+      "abgabefrist_2026": "30 avril 2027 (prolongation en ligne jusqu'au 30 novembre au plus ; considérée comme accordée si aucune opposition n'est formulée dans les 14 jours)",
+      "bemerkungen": "Le taux cantonal est décidé à la Landsgemeinde (assemblée cantonale). Taux d'imposition des bénéfices très bas pour les personnes morales (6 à 11,5 %, plafonnement légal de la charge à 30 %)."
+    },
+    {
+      "canton": "SG",
+      "abgabefrist_2026": "en général 31 mars 2027 (période 2025 : 31.3.2026 ; date sur la page 1) ; requête en ligne possible (uniquement si les factures d'impôt sont payées), prolongation usuelle jusqu'à fin septembre, au maximum le 31 décembre",
+      "bemerkungen": "À partir de la période fiscale 2025, nouvelle application web E-Tax SG sur le portail propre du canton (et non plus etax.ch). Taux de la ville relativement élevé (138 %)."
+    },
+    {
+      "canton": "GR",
+      "abgabefrist_2026": "31 mars 2027 pour les salariés, les élèves/étudiants et les rentiers ; 30 septembre 2027 pour les indépendants, les sociétés simples et les contribuables soumis à une imposition limitée (prolongation pouvant être demandée jusqu'au 20 mai, au plus jusqu'au 30 septembre)",
+      "bemerkungen": "Plus grand canton ; les taux des nombreuses communes varient fortement (stations touristiques parfois plus élevées). SofTax GR est le logiciel officiel en téléchargement (Windows/Mac) avec transmission électronique."
+    },
+    {
+      "canton": "AG",
+      "abgabefrist_2026": "31 mars 2027 (salariés, rentiers) ; de facto jusqu'au 30 juin 2027 sans requête et sans rappel ; indépendants et actionnaires de sociétés familiales : 30 juin 2027",
+      "bemerkungen": "À partir de la période fiscale 2025, eTAX AARGAU remplace l'ancienne solution de téléchargement EasyTax ; basée sur navigateur, connexion aussi via AGOV. Tolérance généreuse jusqu'à fin juin pour les personnes physiques."
+    },
+    {
+      "canton": "TG",
+      "abgabefrist_2026": "30 avril 2027 (« jusqu'au 30 avril de l'année suivant la période fiscale », StP 155) ; prolongations jusqu'au 31 décembre de l'année de déclaration gratuites (requête auprès de l'impôt communal)",
+      "bemerkungen": "Canton disposant de son propre logiciel en téléchargement eFisc (Windows/macOS/Linux) avec transmission électronique ; pas de portail cantonal eTax. Taux combiné du chef-lieu supérieur à la moyenne."
+    },
+    {
+      "canton": "TI",
+      "abgabefrist_2026": "30 avril 2027 (Termine fisso ; prolongation possible via la requête en ligne « richiesta di proroga »)",
+      "bemerkungen": "Canton italophone. Les travailleurs frontaliers de l'UE/AELE sont soumis à l'impôt à la source (imposta alla fonte) avec des tarifs particuliers et des déductions forfaitaires. Plafonnement de la charge : les impôts cantonal et communal ne peuvent dépasser 60 % du revenu net imposable (ESTV, au 1er janvier 2026)."
+    },
+    {
+      "canton": "VD",
+      "abgabefrist_2026": "15 mars 2027 (délai général) ; délai de tolérance jusqu'au 30 juin 2027 sans requête ; prolongation gratuite jusqu'au 30 septembre en cas de requête avant le 30 juin (e-Délai)",
+      "bemerkungen": "Canton francophone avec l'un des taux cantonaux les plus élevés (155 %). Le logiciel classique VaudTax est progressivement remplacé par la « Prestation VaudTax » en ligne. Pas d'obligation de versement de l'impôt ecclésiastique (l'impôt ecclésiastique est omis dans les statistiques)."
+    },
+    {
+      "canton": "VS",
+      "abgabefrist_2026": "31 mars 2027 (échéance générale ; période 2025 : 31.3.2026) ; échelons de prolongation selon le calendrier : jusqu'au 31 juillet (salariés), jusqu'au 31 octobre (indépendants), cas spéciaux jusqu'au 31 décembre",
+      "bemerkungen": "Canton bilingue (allemand/français) ; trois bordereaux séparés (canton, commune, Confédération). Allègements spécifiques pour les familles et les conjoints et plafonnement de la charge avec franchise de CHF 10 000 (ESTV, au 1er janvier 2026)."
+    },
+    {
+      "canton": "NE",
+      "abgabefrist_2026": "en général 31 mars 2027 (période 2025 : 31 mars 2026 ; date sur le formulaire d'impôt) ; prolongation via formulaire en ligne/Guichet unique",
+      "bemerkungen": "Canton francophone ; taux cantonal élevé (124 %), part communale basse. Clic & Tax est le logiciel officiel pour les personnes physiques (PM Tax pour les personnes morales), transmission via le Guichet unique."
+    },
+    {
+      "canton": "GE",
+      "abgabefrist_2026": "31 mars 2027 (« 31 mars de chaque année », aussi pour les personnes non imposables) ; requêtes de prolongation payantes (CHF 20/40/60 selon la durée) avant l'échéance",
+      "bemerkungen": "Canton-ville francophone. Taux bas, mais barème progressif avec une charge effective élevée ; les allocations et les déductions sociales marquent la pratique. Plafonnement de la charge à 60 % du revenu net imposable (ESTV, au 1er janvier 2026). La Déclaration en ligne dans le compte e-démarches est préremplie."
+    },
+    {
+      "canton": "JU",
+      "abgabefrist_2026": "28 février 2027 (délai légal art. 154 al. 1 LI — la plus précoce des échéances ordinaires de Suisse ; période 2025 : 28.2.2026) ; prolongation jusqu'au 31 octobre pouvant être demandée",
+      "bemerkungen": "Canton le plus jeune et francophone ; JuraTax Online fonctionne entièrement dans le navigateur via le Guichet virtuel (pas de logiciel en téléchargement). Requêtes de prolongation en général gratuites."
+    }
+  ],
+  "it": [
+    {
+      "canton": "ZH",
+      "abgabefrist_2026": "31 marzo 2027 (Steuerbuch ZStB 133.1: dichiarazione 2026 da presentare entro il 31 marzo 2027; proroga solo su richiesta presentata prima della scadenza)",
+      "bemerkungen": "Cantone più grande; le aliquote comunali variano molto (città di Zurigo 119 %). Nessuna tassa di successione per discendenti diretti e coniugi. La dichiarazione d'imposta va presentata online tramite il portale fiscale."
+    },
+    {
+      "canton": "BE",
+      "abgabefrist_2026": "15 marzo 2027 (indipendenti e agricoltori: 15 maggio 2027); proroga solo su richiesta — caso speciale 2026: il termine di presentazione per il periodo 2025 è stato prorogato automaticamente al 30 novembre 2026 a causa della migrazione del software",
+      "bemerkungen": "Berna lavora con moltiplicatori dell'imposta semplice (nessuna aliquota in percentuale). Login tramite BE-Login / AGOV. Termine anticipato (metà marzo) nel confronto intercantonale."
+    },
+    {
+      "canton": "LU",
+      "abgabefrist_2026": "di norma 31 marzo 2027; fa fede il termine stampato (30 giorni dalla notifica); rappresentanze e contribuenti parzialmente soggetti: 31 agosto 2027 (Wegleitung ESTV/Steuern LU, periodo 2026)",
+      "bemerkungen": "Dal periodo d'imposta 2025 Lucerna utilizza il proprio portale cantonale esteuern.lu.ch (non più etax.ch). Cantone della Svizzera centrale con aliquote moderate; differenze comunali rilevanti."
+    },
+    {
+      "canton": "UR",
+      "abgabefrist_2026": "previsto per il 31 marzo 2027 (termine pubblicato per il periodo 2025: 31 marzo 2026; proroga online dal ricevimento della lettera di attivazione all'inizio del 2027)",
+      "bemerkungen": "Piccolo cantone della Svizzera interna con aliquote basse. eTax Uri fa parte della famiglia eTax cantonale (Ringler); login in parte tramite AGOV."
+    },
+    {
+      "canton": "SZ",
+      "abgabefrist_2026": "31 marzo 2027 (guida alla dichiarazione 2026: «da presentare entro il 31 marzo 2027»); richieste di proroga via efristen.sz.ch, di norma fino al 31 dicembre",
+      "bemerkungen": "Aliquote comunali molto differenziate nel cantone Svitto (si aggiungono le aliquote di distretto). Nessuna tassa di successione per i congiunti più stretti e i coniugi."
+    },
+    {
+      "canton": "OW",
+      "abgabefrist_2026": "previsto per il 30 aprile 2027 (termine pubblicato per il periodo 2025: 30 aprile 2026; proroga gratuita via efristen.ow.ch fino al 31 dicembre)",
+      "bemerkungen": "Gli alti moltiplicatori ingannano: Obvaldo dimezza l'imposta semplice ed è tra i cantoni fiscalmente più vantaggiosi della Svizzera (carico effettivo basso)."
+    },
+    {
+      "canton": "NW",
+      "abgabefrist_2026": "31 marzo 2027 («la dichiarazione d'imposta va presentata entro il 31 marzo dell'anno successivo»); proroga possibile online",
+      "bemerkungen": "Cantone della Svizzera interna a bassa fiscalità, vicino a Zugo/Lucerna; presentazione completamente elettronica senza firma."
+    },
+    {
+      "canton": "GL",
+      "abgabefrist_2026": "31 marzo 2027 (data sul modulo; proroghe online fino al 31 dicembre 2027 secondo la guida 2026)",
+      "bemerkungen": "Una delle aliquote combinate più basse della Svizzera (capoluogo 119 %). L'amministrazione fiscale cantonale è anche l'ufficio esecutore del sussidio individuale ai premi di assicurazione malattie."
+    },
+    {
+      "canton": "ZG",
+      "abgabefrist_2026": "30 aprile 2027 («da presentare entro il 30 aprile»); le richieste di proroga sono generalmente accordate fino al 31 dicembre (online)",
+      "bemerkungen": "Zugo è tra i cantoni più favorevoli fiscalmente della Svizzera (aliquota combinata bassa, nessuna tassa di successione per i discendenti diretti). Dal periodo 2025 soluzione completamente via browser; login tramite AGOV."
+    },
+    {
+      "canton": "FR",
+      "abgabefrist_2026": "Fa fede la data d'invio della dichiarazione 2026 (termine indicato sulla dichiarazione; proroghe possibili tramite il Guichet virtuel)",
+      "bemerkungen": "Cantone bilingue (tedesco/francese); aliquote separate per reddito e sostanza. FriTax è il software ufficiale (download/online); e-Tax PM per le persone giuridiche."
+    },
+    {
+      "canton": "SO",
+      "abgabefrist_2026": "31 marzo 2027 (termine di consegna 31 marzo; su richiesta proroga al 31 luglio o — dietro tassa di CHF 30 — al 30 novembre)",
+      "bemerkungen": "Cantone dell'Altopiano con aliquote medie; la dichiarazione 2025 viene spedita nel febbraio 2026 (login su eTax.so.ch con i dati d'accesso contenuti nell'invio della dichiarazione)."
+    },
+    {
+      "canton": "BS",
+      "abgabefrist_2026": "previsto per il 31 marzo 2027 (termine pubblicato per il periodo 2025: 31 marzo 2026); proroga online gratuita fino al 30 settembre, richieste più ampie CHF 40",
+      "bemerkungen": "Cantone città: nessuna aliquota comunale separata — imposta cantonale e comunale sono unificate. Il download BalTax è stato sostituito da BalTax Online; login tramite AGOV."
+    },
+    {
+      "canton": "BL",
+      "abgabefrist_2026": "31 marzo 2027 per i salariati e i senza attività lucrativa (indipendenti: 30 giugno 2027; contribuenti soggetti a imposizione secondaria: 30 novembre 2027); proroga di norma fino al 30 novembre",
+      "bemerkungen": "Aliquote comunali nettamente più basse di Basilea Città; Liestal 65 %. Attenzione: la pagina ufficiale dell'amministrazione fiscale www.baselland.ch/politik-und-behorden/direktionen/finanz-und-kirchendirektion/steuerverwaltung è protetta da un WAF Cloudflare (HTTP 403 con curl, anche challenge del browser) — è raggiungibile il portale fiscale etax.bl.ch (HTTP 200 verificato)."
+    },
+    {
+      "canton": "SH",
+      "abgabefrist_2026": "previsto per il 31 marzo 2027 (il termine di presentazione è fissato ogni anno; periodo 2025: 31 marzo 2026); eFristerstreckung (proroga online) al massimo fino al 30 novembre",
+      "bemerkungen": "Cantone più settentrionale; aliquota combinata bassa (159 %). Sciaffusa non utilizza la piattaforma comune eTax.ch — proprio software fiscale scaricabile più presentazione senza carta (eFiling)."
+    },
+    {
+      "canton": "AR",
+      "abgabefrist_2026": "di norma 31 marzo 2027; fa fede la data sulla pagina 1 della dichiarazione (periodo 2025: 31.3.2026); proroga online (la prima gratuita, le successive CHF 25)",
+      "bemerkungen": "Semcantone della Svizzera orientale con sistema a frazioni multiple (l'imposta semplice è dimezzata). I dati sono archiviati su server sul territorio cantonale; login tramite AGOV."
+    },
+    {
+      "canton": "AI",
+      "abgabefrist_2026": "30 aprile 2027 (proroga online fino al 30 novembre al massimo; considerata accordata se entro 14 giorni non viene formulata alcuna opposizione)",
+      "bemerkungen": "L'aliquota cantonale è decisa alla Landsgemeinde (assemblea cantonale). Aliquote sull'utile molto basse per le persone giuridiche (6–11,5 %, limite legale del carico fiscale al 30 %)."
+    },
+    {
+      "canton": "SG",
+      "abgabefrist_2026": "di norma 31 marzo 2027 (periodo 2025: 31.3.2026; data sulla pagina 1); richiesta online possibile (solo se le fatture d'imposta sono pagate), proroga di solito fino a fine settembre, al massimo il 31 dicembre",
+      "bemerkungen": "Dal periodo d'imposta 2025 nuova applicazione web E-Tax SG sul portale proprio del cantone (non più etax.ch). Aliquota della città relativamente alta (138 %)."
+    },
+    {
+      "canton": "GR",
+      "abgabefrist_2026": "31 marzo 2027 per salariati, allievi/studenti e pensionati; 30 settembre 2027 per indipendenti, società semplici e contribuenti parzialmente soggetti (proroga richiedibile fino al 20 maggio, al massimo fino al 30 settembre)",
+      "bemerkungen": "Cantone più grande; le aliquote dei numerosi comuni variano molto (località turistiche in parte più alte). SofTax GR è il software ufficiale scaricabile (Windows/Mac) con trasmissione elettronica."
+    },
+    {
+      "canton": "AG",
+      "abgabefrist_2026": "31 marzo 2027 (salariati, pensionati); di fatto fino al 30 giugno 2027 senza richiesta e senza sollecito; indipendenti e azionisti di società di famiglia: 30 giugno 2027",
+      "bemerkungen": "Dal periodo d'imposta 2025 eTAX AARGAU sostituisce la precedente soluzione di download EasyTax; basata su browser, login anche tramite AGOV. Tolleranza generosa fino a fine giugno per le persone fisiche."
+    },
+    {
+      "canton": "TG",
+      "abgabefrist_2026": "30 aprile 2027 («entro il 30 aprile dell'anno successivo al periodo d'imposta», StP 155); proroghe fino al 31 dicembre dell'anno di dichiarazione gratuite (richiesta presso l'imposta comunale)",
+      "bemerkungen": "Cantone con proprio software scaricabile eFisc (Windows/macOS/Linux) incl. trasmissione elettronica; nessun portale cantonale eTax. Aliquota combinata del capoluogo superiore alla media."
+    },
+    {
+      "canton": "TI",
+      "abgabefrist_2026": "30 aprile 2027 (termine fisso; proroga possibile tramite la richiesta online «richiesta di proroga»)",
+      "bemerkungen": "Cantone italofono. I frontalieri dell'UE/AELE sono soggetti all'imposta alla fonte con tariffe speciali e deduzioni forfettarie. Limite del carico fiscale: le imposte cantonale e comunale non possono superare il 60 % del reddito netto imponibile (ESTV, al 1° gennaio 2026)."
+    },
+    {
+      "canton": "VD",
+      "abgabefrist_2026": "15 marzo 2027 (délai général); termine di tolleranza fino al 30 giugno 2027 senza richiesta; proroga gratuita fino al 30 settembre se richiesta entro il 30 giugno (e-Délai)",
+      "bemerkungen": "Cantone francofono con una delle aliquote cantonali più alte (155 %). Il software classico VaudTax è sostituito gradualmente dalla «Prestation VaudTax» online. Nessun obbligo di versamento dell'imposta ecclesiastica (l'imposta ecclesiastica è omessa nelle statistiche)."
+    },
+    {
+      "canton": "VS",
+      "abgabefrist_2026": "31 marzo 2027 (échéance générale; periodo 2025: 31.3.2026); scaglioni di proroga secondo il calendario: fino al 31 luglio (dipendenti), fino al 31 ottobre (indipendenti), casi speciali fino al 31 dicembre",
+      "bemerkungen": "Cantone bilingue (tedesco/francese); tre moduli di dichiarazione separati (cantone, comune, Confederazione). Agevolazioni specifiche per famiglie e coniugi e limite del carico fiscale con franchigia di CHF 10 000 (ESTV, al 1° gennaio 2026)."
+    },
+    {
+      "canton": "NE",
+      "abgabefrist_2026": "di norma 31 marzo 2027 (periodo 2025: 31 marzo 2026; data sul modulo fiscale); proroga tramite modulo online/Guichet unique",
+      "bemerkungen": "Cantone francofono; aliquota cantonale alta (124 %), quota comunale bassa. Clic & Tax è il software ufficiale per le persone fisiche (PM Tax per le persone giuridiche), trasmissione tramite il Guichet unique."
+    },
+    {
+      "canton": "GE",
+      "abgabefrist_2026": "31 marzo 2027 («31 mars de chaque année», anche per le persone non imponibili); richieste di proroga a pagamento (CHF 20/40/60 a seconda della durata) prima della scadenza",
+      "bemerkungen": "Cantone città francofono. Aliquota bassa, ma barème progressivo con carico effettivo elevato; assegni (allocations) e deduzioni sociali caratterizzano la prassi. Limite del carico fiscale al 60 % del reddito netto imponibile (ESTV, al 1° gennaio 2026). La Déclaration en ligne nel conto e-démarches è precompilata."
+    },
+    {
+      "canton": "JU",
+      "abgabefrist_2026": "28 febbraio 2027 (délai légal art. 154 al. 1 LI — la più precoce delle scadenze ordinarie della Svizzera; periodo 2025: 28.2.2026); proroga fino al 31 ottobre richiedibile",
+      "bemerkungen": "Cantone più giovane e francofono; JuraTax Online funziona completamente nel browser tramite il Guichet virtuel (nessun software scaricabile). Richieste di proroga di norma gratuite."
+    }
+  ]
+}
