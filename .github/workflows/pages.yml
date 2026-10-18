@@ -53,7 +53,7 @@ jobs:
         run: python3 scripts/validate_queue.py
       - name: Build public dist (exclude private data + server files)
         run: |
-          mkdir -p dist/en dist/fr dist/it dist/assets
+          mkdir -p dist/en dist/fr dist/it dist/assets dist/kanton dist/en/kanton dist/fr/kanton dist/it/kanton
           cp *.html dist/
           # All language mirrors must ship. Previously only en/ was copied, so
           # fr/ and it/ survived solely as leftovers of an older deployment and
@@ -61,6 +61,10 @@ jobs:
           cp en/*.html dist/en/
           cp fr/*.html dist/fr/
           cp it/*.html dist/it/
+          cp kanton/*.html dist/kanton/
+          cp en/kanton/*.html dist/en/kanton/
+          cp fr/kanton/*.html dist/fr/kanton/
+          cp it/kanton/*.html dist/it/kanton/
           # All static assets, not just css/js: the logo, favicons and the
           # og:image are referenced from every page's <head>.
           cp assets/* dist/assets/
