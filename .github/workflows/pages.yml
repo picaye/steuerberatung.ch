@@ -71,7 +71,7 @@ jobs:
           # every ping is accepted (HTTP 200) yet silently dropped at the
           # keyLocation check. It survived earlier deploys only as a
           # leftover artifact; a clean publish deleted it (t_32a2a8c3).
-          cp sitemap.xml *.txt dist/
+          cp sitemap.xml sitemap-*.xml *.txt dist/
       - name: Fail if a language mirror is incomplete
         run: |
           for d in en fr it; do
@@ -97,7 +97,7 @@ jobs:
             echo "::error::dist/sitemap.xml is missing — the build dropped the sitemap"
             exit 1
           fi
-          locs=$(grep -c '<loc>' dist/sitemap.xml)
+          locs=$(cat dist/sitemap.xml dist/sitemap-*.xml 2>/dev/null | grep -c '<loc>')
           if [ "$locs" -lt 150 ]; then
             echo "::error::dist/sitemap.xml has only $locs <loc> entries (<150) — sitemap truncated"
             exit 1
