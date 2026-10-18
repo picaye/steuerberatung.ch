@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lump-sum withdrawal calculator: stagger pillar 3a & pension payouts | steuerberatung.ch</title>
+<meta name="description" content="What does withdrawing your pillar 3a or pension fund capital cost? Estimate the separate tax and see the saving from staggering withdrawals over several years.">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+<link rel="canonical" href="https://steuerberatung.ch/en/bezugsrechner.html">
+<link rel="alternate" hreflang="de-CH" href="https://steuerberatung.ch/bezugsrechner.html">
+<link rel="alternate" hreflang="en" href="https://steuerberatung.ch/en/bezugsrechner.html">
+<link rel="alternate" hreflang="fr-CH" href="https://steuerberatung.ch/fr/bezugsrechner.html">
+<link rel="alternate" hreflang="it-CH" href="https://steuerberatung.ch/it/bezugsrechner.html">
+<link rel="alternate" hreflang="x-default" href="https://steuerberatung.ch/bezugsrechner.html">
+<meta property="og:title" content="Lump-sum withdrawal calculator: stagger pillar 3a & pension payouts">
+<meta property="og:description" content="What does withdrawing your pillar 3a or pension fund capital cost? Estimate the separate tax and see the saving from staggering withdrawals over several years.">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/extra.css?v=4">
+<link rel="stylesheet" href="../assets/redesign.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html"><img class="logo-img" src="../assets/logo.svg" alt="" width="32" height="32" aria-hidden="true"><span class="logo-text">steuerberatung<span class="accent">.ch</span></span></a>
+    <button class="nav-toggle" type="button" aria-label="Menü" aria-expanded="false" aria-controls="main-nav">☰</button>
+    <nav class="main-nav" id="main-nav">
+      <a href="leistungen.html">Services</a>
+      <a href="werbung.html">Advertise</a>
+      <a href="ratgeber.html">Guides</a>
+      <a href="rechner.html">Calculator</a>
+      <a href="search.html">Search</a>
+<a href="../index.html" class="lang">DE</a>
+<a href="../en/index.html" class="lang active" aria-current="true">EN</a>
+<a href="../fr/index.html" class="lang">FR</a>
+<a href="../it/index.html" class="lang">IT</a>
+    </nav>
+  </div>
+</header>
+<main>
+<div class="page-head">
+  <div class="container">
+    <h1>Capital withdrawal calculator (3a / pension fund)</h1>
+    <p>Estimate the tax on lump-sum benefits – and what staggering over several years saves you.</p>
+  </div>
+</div>
+<div class="container">
+<section class="section">
+  <form id="br-form" class="calc-form">
+    <label>Lump-sum benefit (CHF)<input type="text" name="amount" inputmode="numeric" placeholder="200000" required></label>
+    <label>Number of withdrawals<select name="n"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option></select></label>
+    <label>Canton<select name="canton"><option value="ZH" selected>Zürich</option><option value="BE">Bern</option><option value="LU">Luzern</option><option value="UR">Uri</option><option value="SZ">Schwyz</option><option value="OW">Obwalden</option><option value="NW">Nidwalden</option><option value="GL">Glarus</option><option value="ZG">Zug</option><option value="FR">Freiburg</option><option value="SO">Solothurn</option><option value="BS">Basel-Stadt</option><option value="BL">Basel-Landschaft</option><option value="SH">Schaffhausen</option><option value="AR">Appenzell A.Rh.</option><option value="AI">Appenzell I.Rh.</option><option value="SG">St. Gallen</option><option value="GR">Graubünden</option><option value="AG">Aargau</option><option value="TG">Thurgau</option><option value="TI">Tessin</option><option value="VD">Waadt</option><option value="VS">Wallis</option><option value="NE">Neuenburg</option><option value="GE">Genf</option><option value="JU">Jura</option></select></label>
+    <button type="submit" class="btn">Calculate tax</button>
+  </form>
+  <div id="br-out" role="status" aria-live="polite"></div>
+  <p class="calc-note">Estimate based on the one-fifth model (Art. 38 FATA) at the canton's average tax multiplier; cantons with special tariffs (e.g. Zurich, Bern) may differ. Binding figures come from the tax calculator or your tax administration.</p>
+  <p class="latest-more"><a href="saeule-3a-bezug-staffeln.html">How to stagger pillar 3a withdrawals →</a></p>
+</section>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div><img class="logo-img" src="../assets/logo.svg" alt="" width="28" height="28"><p>Your independent partner for taxes in Switzerland. Tax guides, calculators and referral to vetted specialists – transparent and privacy-compliant.</p></div>
+    <div><h3>Services</h3><p><a href="leistungen.html">Tax return</a> <a href="leistungen.html">Tax advice</a> <a href="ratgeber.html">Guides</a></p></div>
+    <div><h3>Legal</h3><p><a href="impressum.html">Imprint</a> <a href="datenschutz.html">Privacy</a> <a href="agb.html">Terms</a></p></div>
+    <div><h3>Contact</h3><p><a href="kontakt.html">Request advice</a></p></div>
+  </div>
+  <div class="container footer-bottom"><p>© 2026 steuerberatung.ch · Independent tax information &amp; partner mediation. steuerberatung.ch does not provide individual tax or legal advice. Advice is provided exclusively by the referred specialists.</p></div>
+</footer>
+<script>window.BR_I18N={"res_sep": "Separate tax (estimate)", "res_per": "per withdrawal", "res_tot": "Total with staggering", "res_one": "Comparison: single withdrawal", "res_save": "Saving from staggering", "err": "Please enter a valid amount."};</script>
+<script src="../assets/tax_engine_data.js?v=3"></script>
+<script src="../assets/tax_engine.js?v=3"></script>
+<script>(function(){
+  var form=document.getElementById('br-form'), out=document.getElementById('br-out');
+  function fmt(n){return 'CHF '+Math.round(n).toLocaleString('de-CH');}
+  function T(k){return (window.BR_I18N||{})[k]||k;}
+  function sepTax(amount, canton){
+    if(!window.TaxEngine) return null;
+    var e = window.TaxEngine;
+    var full = e.estimate({taxable: amount, canton: canton, married:false, children:0, taxableFed: amount});
+    if(!full) return null;
+    return (full.federal + full.cantonalCommunal) / 5;
+  }
+  form.addEventListener('submit', function(ev){
+    ev.preventDefault();
+    var amt = parseInt(form.amount.value.replace(/[^0-9]/g,''),10)||0;
+    var n = parseInt(form.n.value,10)||1;
+    var cant = form.canton.value;
+    if(amt < 1000){ out.innerHTML='<p class="a3-err">'+T('err')+'</p>'; return; }
+    var per = amt / n;
+    var one = sepTax(amt, cant);
+    var each = sepTax(per, cant);
+    if(one===null||each===null){ out.innerHTML='<p class="a3-err">Engine offline</p>'; return; }
+    var tot = each * n;
+    var save = one - tot;
+    out.innerHTML = '<div class="br-res">'
+      + '<div><h3>'+T('res_sep')+'</h3><p class="br-big">'+fmt(tot)+'</p><p>'+T('res_per')+': '+fmt(each)+' × '+n+'</p></div>'
+      + '<div><h3>'+T('res_one')+'</h3><p>'+fmt(one)+'</p></div>'
+      + '<div><h3>'+T('res_save')+'</h3><p class="br-save">'+fmt(save)+'</p></div>'
+      + '</div>';
+  });
+})();</script>
+</body>
+</html>
