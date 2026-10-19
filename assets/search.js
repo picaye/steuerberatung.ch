@@ -19,6 +19,9 @@
   var count = document.getElementById("search-count");
   var allBox = document.getElementById("search-all");
   var chips = document.getElementById("search-chips");
+  var audBar = document.getElementById("search-aud");
+  var audSel = null;
+  var AUD_KEYS = ["solo", "verheiratet", "konkubinat", "firma"];
 
   function esc(s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
 
@@ -36,12 +39,13 @@
 
   function search(q) {
     var tokens = norm(q).split(/\s+/).filter(Boolean);
-    if (!tokens.length) { out.innerHTML = ""; count.textContent = ""; return; }
+    if (!tokens.length && !audSel) { out.innerHTML = ""; count.textContent = ""; return; }
     var onlyLang = !(allBox && allBox.checked);
     var scored = [];
     for (var i = 0; i < docs.length; i++) {
       var d = docs[i];
       if (onlyLang && d.e.l !== pageLang) continue;
+      if (audSel && !(d.e.a && d.e.a.indexOf(audSel) >= 0)) continue;
       var score = 0, ok = true;
       for (var j = 0; j < tokens.length; j++) {
         var t = tokens[j], s = 0;
@@ -89,6 +93,19 @@
         input.focus();
         search(input.value);
       }
+    });
+  }
+
+  if (audBar && ui.aud) {
+    audBar.innerHTML = "<strong>" + esc(ui.audH || "") + "</strong> " +
+      '<button type="button" class="search-aud-btn on" data-a="">' + esc(ui.audAll || "All") + "</button> " +
+      AUD_KEYS.map(function (k) { return '<button type="button" class="search-aud-btn" data-a="' + k + '">' + esc(ui.aud[k] || k) + "</button>"; }).join(" ");
+    audBar.addEventListener("click", function (ev) {
+      var b = ev.target.closest ? ev.target.closest(".search-aud-btn") : null;
+      if (!b) return;
+      audSel = b.getAttribute("data-a") || null;
+      Array.prototype.forEach.call(audBar.querySelectorAll(".search-aud-btn"), function (x) { x.classList.toggle("on", x === b); });
+      search(input.value.trim());
     });
   }
 

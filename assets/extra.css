@@ -170,3 +170,8 @@
 .search-intro{margin-top:1.6rem;font-size:.95rem;color:var(--ink-soft,#374151);max-width:70ch}
 .search-intro a{text-decoration:underline}
 .src-note{font-size:.85rem;color:#6b7280;margin-top:.6rem}
+.search-aud{display:flex;align-items:center;gap:.45rem;flex-wrap:wrap;margin:1rem 0 .4rem}
+.search-aud strong{margin-right:.3rem}
+.search-aud-btn{border:1px solid #cbd5e1;background:#fff;border-radius:999px;padding:.35rem .8rem;font-size:.85rem;cursor:pointer}
+.search-aud-btn.on{background:#1d4ed8;color:#fff;border-color:#1d4ed8}
+.search-aud-btn:focus-visible{outline:2px solid #1d4ed8;outline-offset:2px}
