@@ -54,7 +54,7 @@ CANTONS = [
 ]
 
 UI = {
-"de": dict(ttl="Steuererklärung Kanton {n} {y}",
+"de": dict(ttl="Steuererklärung Kanton {n} {y}", ttl2="Steuererklärung {n} {y}",
  dsc="Steuererklärung {n} {y}: Abgabefrist, durchschnittlicher Steuerfuss, offizielles Online-Tool ({sw}) und kantonale Besonderheiten für Privatpersonen und Selbstständige.",
  h1="Kanton {n}", sub="Steuererklärung {y}: Fristen, Steuerfuss, offizielles Tool und Besonderheiten – kurz und amtlich belegt.",
  frist="Abgabefrist Steuerperiode {y}", fuss="Durchschnittlicher Steuerfuss (natürliche Personen)",
@@ -62,7 +62,7 @@ UI = {
  eff_h="Effektive Steuerbelastung", cmp_h="Steuerfüsse im Vergleich", cmp_intro="Der durchschnittliche Steuerfuss (Kanton + Gemeinden, Ehepaar ohne Kinder, ohne Kirchensteuer, Nettoabgabe) laut ESTV per 1.1.2026:",
  cmp_col1="Kanton", cmp_col2="Steuerfuss Hauptort", cmp_col3="Effektive Belastung*", back="Alle Kantone", cta="Steuererklärung im Kanton {n}Professionell machen lassen? Geprüfte Fachperson im Kanton {n} finden",
  more_h="Ratgeber-Artikel", ld_type="Steuererklärung {n}"),
-"en": dict(ttl="Canton {n} taxes {y}: deadline & e-filing",
+"en": dict(ttl="Canton of {n} taxes {y}: deadline & e-filing", ttl2="Canton {n} {y}: taxes & e-filing", ttl3="{n} taxes {y}",
  dsc="Tax return {n} {y}: filing deadline, average tax multiplier, official online tool ({sw}) and canton-specific facts for individuals and the self-employed.",
  h1="Canton of {n}", sub="Tax return {y}: deadlines, tax multiplier, official tool and cantonal specifics – concise and sourced to official pages.",
  frist="Deadline tax period {y}", fuss="Average tax multiplier (natural persons)",
@@ -70,7 +70,7 @@ UI = {
  eff_h="Effective tax burden", cmp_h="Tax multipliers compared", cmp_intro="Average tax multiplier (canton + communes, married couple without children, no church tax, net tax) per FTA as of 1 Jan 2026:",
  cmp_col1="Canton", cmp_col2="Multiplier (capital)", cmp_col3="Effective burden*", back="All cantons", cta="Have your {n} tax return done professionally? Find a vetted specialist in {n}",
  more_h="Related guides", ld_type="Tax return {n}"),
-"fr": dict(ttl="Impôts canton {frn} {y} : délai et e-déclaration",
+"fr": dict(ttl="Impôts canton {frn} {y} : délai et e-déclaration", ttl2="Impôts {frn} {y} : délai et e-déclaration", ttl3="Impôts {frn} {y}",
  dsc="Déclaration d'impôts {n} {y}: délai de dépôt, multiplicateur d'impôt moyen, outil officiel en ligne ({sw}) et particularités cantonales pour personnes physiques et indépendants.",
  h1="Canton {frn}", sub="Déclaration d'impôts {y}: délais, multiplicateur, outil officiel et particularités cantonales – concis et sourcé aux pages officielles.",
  frist="Délai période fiscale {y}", fuss="Multiplicateur moyen (personnes physiques)",
@@ -78,7 +78,7 @@ UI = {
  eff_h="Charge fiscale effective", cmp_h="Multiplicateurs comparés", cmp_intro="Multiplicateur moyen (canton + communes, couple marié sans enfants, sans impôt ecclésiastique, perception nette) selon l'AFC au 1er janvier 2026:",
  cmp_col1="Canton", cmp_col2="Multiplicateur (chef-lieu)", cmp_col3="Charge effective*", back="Tous les cantons", cta="Faire établir votre déclaration {n} par un spécialiste vérifié",
  more_h="Guides liés", ld_type="Déclaration d'impôts {n}"),
-"it": dict(ttl="Imposte cantone {n} {y}: termine e dichiarazione online",
+"it": dict(ttl="Imposte cantone {n} {y}: termine e dichiarazione online", ttl2="Imposte {n} {y}: termine e dichiarazione online", ttl3="Imposte {n} {y}",
  dsc="Dichiarazione d'imposte {n} {y}: termine di consegna, moltiplicatore medio, tool ufficiale online ({sw}) e particolarità cantonali per persone fisiche e indipendenti.",
  h1="Cantone {n}", sub="Dichiarazione d'imposte {y}: termini, moltiplicatore, tool ufficiale e particolarità cantonali – conciso e con fonti ufficiali.",
  frist="Termine periodo fiscale {y}", fuss="Moltiplicatore medio (persone fisiche)",
@@ -111,6 +111,15 @@ MORE = {  # related articles per canton type: generic set (links exist in every 
 YEAR = "2026"
 
 def esc(s): return s.replace("&","&amp;").replace("<","&lt;")
+
+def _ttl(u, n):
+    variant = None
+    for key in ("ttl", "ttl2", "ttl3"):
+        if key in u:
+            variant = u[key].format(n=n, y=YEAR, frn=_fr_canton(n))
+            if len(variant) + 20 <= 62:
+                return variant
+    return variant
 
 def page(lang, code, slug, names, idx):
     r = by_canton.get(code)
@@ -167,7 +176,7 @@ def page(lang, code, slug, names, idx):
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{u['ttl'].format(n=n,y=YEAR,frn=_fr_canton(n),n1=n)} | steuerberatung.ch</title>
+<title>{_ttl(u, n)} | steuerberatung.ch</title>
 <meta name="description" content="{u['dsc'].format(n=n,y=YEAR,sw=sw_name)}">
 <link rel="icon" type="image/png" sizes="32x32" href="{up}assets/favicon-32.png">
 <link rel="canonical" href="{canon}">
