@@ -1,0 +1,395 @@
+{
+ "13-ahv-rente-dezember-2026.html": {
+  "description": "Die 13. AHV-Rente kommt erstmals im Dezember 2026: automatisch, ein Zwölftel der Jahresrente (ca. CHF 1'260–2'520) – voll steuerbar. Alle Fakten."
+ },
+ "en/13-ahv-rente-dezember-2026.html": {
+  "description": "The 13th AHV pension arrives in December 2026: automatic, one twelfth of the annual pension (approx. CHF 1'260–2'520) – fully taxable."
+ },
+ "fr/13-ahv-rente-dezember-2026.html": {
+  "description": "La 13e rente AVS: premier versement en décembre 2026, automatique, un douzième de la rente annuelle (env. CHF 1'260–2'520) – imposable."
+ },
+ "it/13-ahv-rente-dezember-2026.html": {
+  "description": "La 13a rendita AVS: primo versamento a dicembre 2026, automatica, un dodicesimo della rendita annuale (ca. CHF 1'260–2'520) – imponibile."
+ },
+ "ahv-beitragsluecken-pruefen-nachzahlen.html": {
+  "description": "1/44 Rentenabzug pro fehlendem AHV-Jahr. So bestellen Sie das Individuelle Konto, erkennen Lücken und zahlen Beiträge der letzten 5 Jahre nach. Stand 2026."
+ },
+ "en/ahv-beitragsluecken-pruefen-nachzahlen.html": {
+  "description": "Every missing AHV year cuts your pension by 1/44 for life. Order the free account statement, spot gaps, pay in 5 years of contributions."
+ },
+ "fr/ahv-beitragsluecken-pruefen-nachzahlen.html": {
+  "description": "Une année AVS manquante réduit la rente de 1/44 à vie. Commandez gratuitement l'extrait du compte individuel, repérez les lacunes – rattrapez 5 ans. 2026."
+ },
+ "it/ahv-beitragsluecken-pruefen-nachzahlen.html": {
+  "description": "Ogni anno AVS mancante riduce la rendita di 1/44 a vita. Ordini l'estratto conto individuale, riconosca le lacune – versi i contributi degli ultimi 5 anni."
+ },
+ "ahv-mindestbeitrag-selbststaendige.html": {
+  "description": "AHV/IV/EO der Selbstständigen 2026: 10 % (AHV 8,1, IV 1,4, EO 0,5), sinkende Skala unter CHF 60'500, Mindestbeitrag CHF 530, Renten min/max, 13. Rente."
+ },
+ "en/ahv-mindestbeitrag-selbststaendige.html": {
+  "description": "AHV/IV/EO for the self-employed 2026: 10.0 % (AHV 8.1, DI 1.4, EO 0.5), sliding scale under CHF 60'500, minimum CHF 530, 13th pension."
+ },
+ "fr/ahv-mindestbeitrag-selbststaendige.html": {
+  "description": "Cotisations AVS/AI/APG des indépendants 2026 : 10 % (AVS 8,1, AI 1,4, APG 0,5), barème dégressif sous CHF 60'500, minimum CHF 530, rentes, 13e rente."
+ },
+ "it/ahv-mindestbeitrag-selbststaendige.html": {
+  "description": "Contributi AVS/AI/IPG degli indipendenti 2026: 10 % (AVS 8,1, AI 1,4, IPG 0,5), scala decrescente sotto CHF 60'500, minimo CHF 530, rendite, 13a rendita."
+ },
+ "ahv-rentenerhoehung-2027-neue-betraege.html": {
+  "description": "Der Bundesrat erhöhte am 2.10.2026 die AHV/IV-Renten per 1.1.2027 um 1,59 %: min 1'280/max 2'560 Fr., 3a-Beträge 7'373/36'864, BVG, EL/ÜL."
+ },
+ "en/ahv-rentenerhoehung-2027-neue-betraege.html": {
+  "description": "2 Oct 2026: Federal Council raises AHV/IV pensions 1.59 % from 1 Jan 2027 – min CHF 1'280, max CHF 2'560. New 3a ceilings 7'373/36'864, BVG."
+ },
+ "fr/ahv-rentenerhoehung-2027-neue-betraege.html": {
+  "description": "Le 2.10.2026, le Conseil fédéral relève les rentes AVS/AI de 1,59 % au 1.1.2027 : min 1'280, max 2'560 fr., plafonds 3a 7'373/36'864, LPP, PC."
+ },
+ "it/ahv-rentenerhoehung-2027-neue-betraege.html": {
+  "description": "Il 2.10.2026 il Consiglio federale alza le rendite AVS/AI dell'1,59 % dal 1.1.2027: min 1'280, max 2'560 fr., importi 3a 7'373/36'864, LPP, PC."
+ },
+ "auslaendisches-depot-neobroker-steuererklaerung.html": {
+  "description": "Trade Republic, IBKR, Revolut: ausländische Depots in der Steuererklärung – Verzeichnis, Steuerwerte, Quellensteuer-Rückerstattung, Schritt für Schritt."
+ },
+ "en/auslaendisches-depot-neobroker-steuererklaerung.html": {
+  "description": "Trade Republic, IBKR, Revolut: foreign accounts belong in your Swiss tax return – securities schedule, tax values, withholding refunds."
+ },
+ "fr/auslaendisches-depot-neobroker-steuererklaerung.html": {
+  "description": "Trade Republic, IBKR, Revolut : comptes étrangers dans la déclaration suisse – état des titres, cours fiscaux AFC, restitution de l'impôt."
+ },
+ "it/auslaendisches-depot-neobroker-steuererklaerung.html": {
+  "description": "Trade Republic, IBKR, Revolut: conti esteri nella dichiarazione svizzera – elenco titoli, corsi fiscali AFC, restituzione dell'imposta."
+ },
+ "dividenden-ahv-pflicht-bge-9c-532-2025.html": {
+  "description": "Bundesgericht 25.6.2026 (9C_532/2025): Dividenden über eine Holding können AHV-pflichtig sein. Lohn/Dividende klären vor dem GV-Beschluss per 31.12.2026."
+ },
+ "en/dividenden-ahv-pflicht-bge-9c-532-2025.html": {
+  "description": "25 June 2026: the Federal Supreme Court (9C_532/2025) held that holding dividends can trigger AHV salary contributions – decide before 31 Dec 2026."
+ },
+ "fr/dividenden-ahv-pflicht-bge-9c-532-2025.html": {
+  "description": "25.6.2026, TF (9C_532/2025) : dividendes via holding requalifiables en salaire AVS. Clarifiez le partage salaire/dividende avant le 31.12.2026."
+ },
+ "it/dividenden-ahv-pflicht-bge-9c-532-2025.html": {
+  "description": "25.6.2026, TF (9C_532/2025): dividendi transitati per una holding riqualificabili in salario AVS. Chiarire la ripartizione prima del 31.12.2026."
+ },
+ "eigenmietwert-abschaffung-2029.html": {
+  "description": "Eigenmietwert fällt per 1.1.2029: Der Bundesrat setzte die Reform am 1.4.2026 in Kraft. Bis Ende 2028 gilt das alte System mit vollen Abzügen."
+ },
+ "en/eigenmietwert-abschaffung-2029.html": {
+  "description": "The imputed rental value ends on 1 Jan 2029 – the Federal Council set the reform in force on 1 Apr 2026. Old rules, full deductions to end-2028."
+ },
+ "fr/eigenmietwert-abschaffung-2029.html": {
+  "description": "Valeur locative supprimée au 1.1.2029 : réforme en vigueur décidée le 1.4.2026 par le Conseil fédéral. Jusqu'à fin 2028, déductions pleines."
+ },
+ "it/eigenmietwert-abschaffung-2029.html": {
+  "description": "Valore locativo soppresso dal 1.1.2029: riforma in vigore decisa l'1.4.2026 dal Consiglio federale. Fino a fine 2028, deduzioni piene."
+ },
+ "fr/erbschaftssteuer-schenkungssteuer-schweiz.html": {
+  "description": "Impôt successions et donations en Suisse 2026 : règles cantonales, exonérations conjoint/enfants, montants exonérés, règle des 5 ans, planification."
+ },
+ "it/erbschaftssteuer-schenkungssteuer-schweiz.html": {
+  "description": "Imposta di successione e donazioni in Svizzera 2026: regole cantonali, esenzioni per coniuge e figli, importi esenti, regola dei 5 anni, pianificazione."
+ },
+ "erwerbsbedingter-umzug-kosten-abzug.html": {
+  "description": "Beruflich veranlasster Umzug: Transport, Reinigung, Makler, doppelte Miete als Berufskosten abziehen – Voraussetzungen, Liste und Abgrenzung privat."
+ },
+ "en/erwerbsbedingter-umzug-kosten-abzug.html": {
+  "description": "Job-related move? Movers, cleaning, agent fees, double rent: deduct most moving costs as professional expenses – requirements and the full list."
+ },
+ "fr/erwerbsbedingter-umzug-kosten-abzug.html": {
+  "description": "Déménagement professionnel ? Transport, nettoyage, agence, double loyer : déductibles comme frais professionnels. Conditions, liste complète."
+ },
+ "it/erwerbsbedingter-umzug-kosten-abzug.html": {
+  "description": "Trasloco professionale? Trasporti, pulizie, agenzia, doppio affitto: deduce gran parte dei costi come spese professionali. Requisiti ed elenco completo."
+ },
+ "eu-zoll-3-euro-kleinsendungen.html": {
+  "description": "EU: die 150-Euro-Zollfreigrenze ist gekippt (VO (EU) 2026/382, seit 1.7.2026) – 3 EUR Zoll pro Warenkategorie aus Drittländern, Übergangsrecht bis 2028."
+ },
+ "en/eu-zoll-3-euro-kleinsendungen.html": {
+  "description": "EU scrapped the 150-euro duty exemption (Reg. 2026/382, from 1 July 2026): 3 EUR duty per goods category on third-country parcels, transition to mid-2028."
+ },
+ "fr/eu-zoll-3-euro-kleinsendungen.html": {
+  "description": "L'UE supprime la franchise douanière de 150 EUR (règl. 2026/382, dès 1.7.2026) : 3 EUR par catégorie de marchandises, régime transitoire jusqu'à mi-2028."
+ },
+ "it/eu-zoll-3-euro-kleinsendungen.html": {
+  "description": "L'UE ha abolito la franchigia di 150 EUR (VO (UE) 2026/382, dal 1.7.2026): dazio forfettario di 3 EUR per categoria di merci, transitorio fino a metà 2028."
+ },
+ "expats-steuern-schweiz.html": {
+  "description": "Expat in der Schweiz 2026: Quellensteuer, ordentliche Nachbesteuerung ab 120'000 Franken Weltlohn, Weltvermögen und die wichtigsten Abzüge."
+ },
+ "en/expats-steuern-schweiz.html": {
+  "description": "Expat in Switzerland: 2026 guide to source tax, retroactive ordinary assessment above CHF 120'000 world salary, worldwide assets, key deductions."
+ },
+ "fr/expats-steuern-schweiz.html": {
+  "description": "Expat en Suisse 2026 : impôt à la source, TOU obligatoire dès 120'000 francs de salaire mondial, patrimoine mondial et principales déductions."
+ },
+ "it/expats-steuern-schweiz.html": {
+  "description": "Expat in Svizzera 2026: imposta alla fonte, tassazione ordinaria successiva da 120'000 franchi di salario mondiale, patrimonio mondiale, deduzioni."
+ },
+ "grenzgaenger-de-fr-it-steuern.html": {
+  "description": "Grenzgänger CH-DE: 4,5 % Quellensteuer (Art. 15a DBA), Gre-1, 60 Nichtrückkehrtage, Frist 31. Juli. FR/IT andere Regeln – Übersicht 2026."
+ },
+ "en/grenzgaenger-de-fr-it-steuern.html": {
+  "description": "CH–Germany cross-border workers: 4.5 % source tax (Art. 15a DTA), form Gre-1, 60 non-return days, deadline 31 July. FR/IT differ – 2026 overview."
+ },
+ "fr/grenzgaenger-de-fr-it-steuern.html": {
+  "description": "Frontaliers CH-DE : 4,5 % d'impôt à la source (art. 15a CDI), formulaire Gre-1, 60 jours de non-retour, échéance 31.7. FR/IT : autres règles, 2026."
+ },
+ "it/grenzgaenger-de-fr-it-steuern.html": {
+  "description": "Frontalieri CH-DE: 4,5 % di imposta alla fonte (art. 15a CDI), modulo Gre-1, 60 giorni di non ritorno, scadenza 31.7. FR/IT: regole diverse, 2026."
+ },
+ "grenzgaenger-homeoffice-telearbeit-regeln.html": {
+  "description": "Homeoffice für Grenzgänger: 40-%-Toleranz (CH-FR), 60 Nichtrückkehrtage (CH-DE), 49,9 % Sozialversicherung – Regeln, Fristen, Formulare 2026/2027."
+ },
+ "en/grenzgaenger-homeoffice-telearbeit-regeln.html": {
+  "description": "Home office for cross-border workers: 40 % tolerance (CH-FR), 60 non-return days (CH-DE), 49.9 % social-security ceiling – rules, deadlines, forms."
+ },
+ "fr/grenzgaenger-homeoffice-telearbeit-regeln.html": {
+  "description": "Télétravail des frontaliers : tolérance de 40 % (CH-FR), 60 jours de non-retour (CH-DE), cadre de 49,9 % (assurances sociales). Règles, formulaires."
+ },
+ "it/grenzgaenger-homeoffice-telearbeit-regeln.html": {
+  "description": "Home office per frontalieri: tolleranza del 40 % (CH-FR), 60 giorni di non ritorno (CH-DE), quadro del 49,9 % (assicurazioni sociali). Regole, moduli."
+ },
+ "hypothek-steuerabzug-schweiz.html": {
+  "description": "Hypothekarzinsen 2026: private Schuldzinsen bis Vermögensertrag plus CHF 50'000 (Art. 33 Abs. 1 Bst. a DBG) abziehen – richtig deklarieren, Grenzen kennen."
+ },
+ "en/hypothek-steuerabzug-schweiz.html": {
+  "description": "Deduct mortgage interest 2026: private debt interest up to investment income plus CHF 50'000 (Art. 33 para. 1 lit. a DBG) – declare it right."
+ },
+ "fr/hypothek-steuerabzug-schweiz.html": {
+  "description": "Intérêts hypothécaires 2026 : intérêts passifs privés jusqu'au revenu de la fortune plus CHF 50'000 (art. 33 al. 1 let. a LIFD) – bien déclarer, limites."
+ },
+ "it/hypothek-steuerabzug-schweiz.html": {
+  "description": "Interessi ipotecari 2026: interessi passivi privati fino al rendimento della sostanza più CHF 50'000 (art. 33 cpv. 1 lett. a LIFD), bene dichiarati."
+ },
+ "individualbesteuerung-erklaert.html": {
+  "description": "Individualbesteuerung erklärt: keine gemeinsame Veranlagung mehr, Heiratsstrafe ade – Zeitplan bis 2032, wer profitiert, was Sie jetzt tun sollten."
+ },
+ "en/individualbesteuerung-erklaert.html": {
+  "description": "Individual taxation explained: no more joint assessment, end of the marriage penalty – timetable to 2032, who benefits, what to do (or not) now."
+ },
+ "fr/individualbesteuerung-erklaert.html": {
+  "description": "Imposition individuelle : fin de la pénalisation du mariage, taxation séparée pour tous – calendrier jusqu'en 2032, qui gagne, quoi faire."
+ },
+ "it/individualbesteuerung-erklaert.html": {
+  "description": "Imposizione individuale: fine della penalizzazione del matrimonio, tassazione separata – calendario fino al 2032, chi ne beneficia, cosa fare."
+ },
+ "kapitalsteuer-ag-gmbh.html": {
+  "description": "Kapitalsteuer: Eigenkapital-Bemessung, Anrechnung der Gewinnsteuer, Mindeststeuer, Sätze 0–7 Promille – Herabsetzung und Liquidation durchrechnen."
+ },
+ "en/kapitalsteuer-ag-gmbh.html": {
+  "description": "Capital tax for AG/GmbH: levied on equity even without profit, profit-tax credit, minimum tax, rates 0–7 per mille – model capital cuts and liquidations."
+ },
+ "fr/kapitalsteuer-ag-gmbh.html": {
+  "description": "Impôt sur le capital SA/Sàrl : assis sur les capitaux propres, imputation du bénéfice, impôt minimal, taux 0–7 pour mille – calculer les cas."
+ },
+ "it/kapitalsteuer-ag-gmbh.html": {
+  "description": "Imposta sul capitale SA/Sagl: capitale proprio, imputazione dell'imposta sugli utili, minima, aliquote 0–7 per mille – calcolare i casi."
+ },
+ "krankenkassenpramien-steuerabzug.html": {
+  "description": "Krankenkassenprämien: Pauschalabzug Bund CHF 1'800/3'700, CHF 700 pro Kind – ohne Säulen 2/3a bis 2'700/5'550 – plus Krankheitskosten ab 5 %. 2026."
+ },
+ "en/krankenkassenpramien-steuerabzug.html": {
+  "description": "Premiums aren't individually deductible: federal lump sums CHF 1'800/3'700 (2'700/5'550 without pillar 2/3a), CHF 700/child, medical costs over 5 %."
+ },
+ "fr/krankenkassenpramien-steuerabzug.html": {
+  "description": "Primes non déductibles séparément : forfait fédéral CHF 1'800/3'700 (2'700/5'550 sans 2e pilier/3a), CHF 700 par enfant, frais au-delà de 5 %."
+ },
+ "it/krankenkassenpramien-steuerabzug.html": {
+  "description": "Premi non deducibili singolarmente: forfait federale CHF 1'800/3'700 (2'700/5'550 senza 2° pil./3a), CHF 700 per figlio, spese oltre il 5 %."
+ },
+ "en/kryptowaehrungen-steuern-schweiz.html": {
+  "description": "Crypto taxes in Switzerland 2026: wealth tax at ESTV rates, tax-free private gains, staking as income, professional-trader status, CARF from 2027."
+ },
+ "fr/kryptowaehrungen-steuern-schweiz.html": {
+  "description": "Cryptomonnaies en Suisse 2026 : impôt sur la fortune au cours AFC, gains privés exonérés, staking comme revenu, caractère professionnel, CARF dès 2027."
+ },
+ "it/kryptowaehrungen-steuern-schweiz.html": {
+  "description": "Criptovalute in Svizzera 2026: imposta sulla sostanza ai corsi AFC, utili privati esenti, staking come reddito, carattere professionale, CARF dal 2027."
+ },
+ "minijobs-lohnschwelle-ahv-pflicht.html": {
+  "description": "Bis 2'500 Franken Lohn pro Person und Arbeitgeber sind kurze Einsätze AHV-frei – Schwellenwert, Haushalt ab dem ersten Franken, Kultur/Media ab 2026."
+ },
+ "en/minijobs-lohnschwelle-ahv-pflicht.html": {
+  "description": "Short irregular jobs up to CHF 2'500 per person and employer: AHV-free – a threshold, not an allowance; households from the first franc; media 2026."
+ },
+ "fr/minijobs-lohnschwelle-ahv-pflicht.html": {
+  "description": "Missions courtes jusqu'à CHF 2'500 par personne et employeur : exonération AVS possible – un seuil, ménages dès le premier franc, culture/médias dès 2026."
+ },
+ "it/minijobs-lohnschwelle-ahv-pflicht.html": {
+  "description": "Impieghi brevi fino a CHF 2'500 per persona e datore: esenti da AVS – soglia non franchigia, domestici dal primo franco, cultura/media dal 2026."
+ },
+ "mwst-100k-pflicht-schweiz.html": {
+  "description": "MWST-Pflicht ab 100'000 CHF Weltumsatz (Art. 10 MwStG): Anmeldung innert 30 Tagen via ESTV, Sätze 8,1 % / 2,6 %. Schwellen, Fristen, Ausnahmen 2026."
+ },
+ "en/mwst-100k-pflicht-schweiz.html": {
+  "description": "Swiss VAT: from CHF 100'000 worldwide turnover (Art. 10 VATA) register within 30 days via FTA, rates 8.1 % / 2.6 %. Thresholds, deadlines, exceptions 2026."
+ },
+ "fr/mwst-100k-pflicht-schweiz.html": {
+  "description": "TVA dès CHF 100'000 de chiffre d'affaires mondial (art. 10 LTVA) : inscription en 30 jours via l'AFC, taux 8,1 % / 2,6 %. Seuils, délais, exceptions."
+ },
+ "it/mwst-100k-pflicht-schweiz.html": {
+  "description": "IVA da 100'000 CHF di fatturato mondiale (art. 10 LTVA): annuncio entro 30 giorni via AFC, aliquote 8,1 % / 2,6 %. Soglie, termini, eccezioni 2026."
+ },
+ "mwst-agov-pflicht-oktober-2026.html": {
+  "description": "ESTV schaltet «MWST-Abrechnung easy» per Mai 2026 ab, AGOV-Login ab 31.10.2026 obligatorisch – ohne vorbereiteten Zugang keine fristgerechte Abrechnung."
+ },
+ "en/mwst-agov-pflicht-oktober-2026.html": {
+  "description": "The ESTV is switching off 'MWST-Abrechnung easy' (May 2026) and makes AGOV login mandatory from 31 Oct 2026 – without an account, no timely VAT filing."
+ },
+ "fr/mwst-agov-pflicht-oktober-2026.html": {
+  "description": "L'AFC désactive « MWST-Abrechnung easy » (mai 2026) et impose le login AGOV dès le 31.10.2026 : sans compte préparé, plus de dépôt TVA dans les délais."
+ },
+ "it/mwst-agov-pflicht-oktober-2026.html": {
+  "description": "L'AFC spegne « MWST-Abrechnung easy » (maggio 2026) e impone il login AGOV dal 31.10.2026: senza conto preparato l'IVA trimestrale non è più depositabile."
+ },
+ "mwst-ausfuhr-0-prozent-nachweis.html": {
+  "description": "Exportware ist MWST-befreit – mit gültigem Nachweis. Seit 2026 gilt Passar statt e-dec: eVV Export, Formular 11.44, Ausfuhrdokument – Folgen ohne Beleg."
+ },
+ "en/mwst-ausfuhr-0-prozent-nachweis.html": {
+  "description": "Exports are VAT-exempt – only with valid proof. Since 2026, declarations run through Passar, not e-dec: which documents count (eVV, 11.44) and proof risks."
+ },
+ "fr/mwst-ausfuhr-0-prozent-nachweis.html": {
+  "description": "Exportations : TVA 0 % avec justificatif valide. Depuis 2026, Passar remplace e-dec : eVV Export, formulaire 11.44, document de sortie – sans preuve ?"
+ },
+ "it/mwst-ausfuhr-0-prozent-nachweis.html": {
+  "description": "Merce esportata esente da IVA solo con prova valida. Dal 2026 la dichiarazione passa da e-dec a Passar: eVV Export, Mod. 11.44, traffico turistico, rischi."
+ },
+ "pensionskassen-einkauf-steuern-sparen.html": {
+  "description": "Einkauf in die Pensionskasse: Potenzial, Sperrfrist Art. 79b BVG, WEF-Vorbezug, Rechenbeispiel – voll vom Einkommen abziehen."
+ },
+ "en/pensionskassen-einkauf-steuern-sparen.html": {
+  "description": "Buy into your pension fund and deduct it fully: potential, blocking period Art. 79b para. 3 BVG, WEF withdrawals, worked example."
+ },
+ "fr/pensionskassen-einkauf-steuern-sparen.html": {
+  "description": "Rachat volontaire dans la caisse de pension, intégralement déductible : potentiel, délai art. 79b al. 3 LPP, retrait EPL, exemple."
+ },
+ "it/pensionskassen-einkauf-steuern-sparen.html": {
+  "description": "Riscatto nella cassa pensioni, interamente deducibile: potenziale, termine di blocco art. 79b LPP, prelievo EPL, esempio di calcolo."
+ },
+ "phishing-steuerbescheid-agov-betrug.html": {
+  "description": "ESTV warnt vor Fake-Mails in ihrem Namen: amtliche Bundes-Mails enden auf @admin.ch. Falsche Rückerstattungen, Anrufe, Phishing rund um AGOV erkennen."
+ },
+ "en/phishing-steuerbescheid-agov-betrug.html": {
+  "description": "The FTA warns of scam emails in its name: official federal emails end in @admin.ch. Spot fake refunds, scam calls and AGOV-switch phishing."
+ },
+ "fr/phishing-steuerbescheid-agov-betrug.html": {
+  "description": "L'AFC met en garde contre de faux e-mails : les messages officiels de la Confédération se terminent en @admin.ch. Faux remboursements, appels, AGOV."
+ },
+ "it/phishing-steuerbescheid-agov-betrug.html": {
+  "description": "L'AFC avverte delle e-mail fraudolente a nome suo: la posta ufficiale termina con @admin.ch. Finti rimborsi, telefonate e phishing legati ad AGOV."
+ },
+ "praemienverbilligung-2027-anmelden.html": {
+  "description": "Mittlere Prämie 2027: CHF 412/Monat (+5,0 %). Prämienverbilligung beantragen – erste Kantonsfristen ab 31.10.2026: Fristen, Grenzen, Ablauf."
+ },
+ "en/praemienverbilligung-2027-anmelden.html": {
+  "description": "Average 2027 premium: CHF 412/month (+5.0 %). Many households qualify for subsidies – cantonal windows close from 31 Oct 2026: deadlines, limits, process."
+ },
+ "fr/praemienverbilligung-2027-anmelden.html": {
+  "description": "Prime moyenne 2027 : CHF 412/mois (+5,0 %). Réduction de primes : premiers délais cantonaux dès le 31.10.2026 – délais, plafonds, procédure."
+ },
+ "it/praemienverbilligung-2027-anmelden.html": {
+  "description": "Premio medio 2027: CHF 412/mese (+5,0 %). Riduzione dei premi: primi termini cantonali dal 31.10.2026 – scadenze, soglie, procedura."
+ },
+ "quellensteuer-nov-zusatzabzuege.html": {
+  "description": "Krankheitskosten, Weiterbildung, Berufskosten, Drittbetreuung: Zusatzabzüge nur via NOV – Antrag bis 31.3.2027 für die Periode 2026."
+ },
+ "en/quellensteuer-nov-zusatzabzuege.html": {
+  "description": "Medical costs, training, real professional expenses, childcare: extra deductions only via the NOV (ordinary assessment) – claim by 31.3.2027 for 2026."
+ },
+ "fr/quellensteuer-nov-zusatzabzuege.html": {
+  "description": "Frais de maladie, formation, frais professionnels, garde : déductions supplémentaires uniquement via la TOU – requête jusqu'au 31.3.2027 pour 2026."
+ },
+ "it/quellensteuer-nov-zusatzabzuege.html": {
+  "description": "Spese di malattia, formazione, spese professionali, custodia: deduzioni extra solo con la NOV – domanda entro il 31.3.2027 per il periodo 2026."
+ },
+ "saeule-3a-bezug-staffeln.html": {
+  "description": "3a-Bezug staffeln: ein Konto pro Jahr auflösen, Bezüge über Jahre verteilen, getrennte Besteuerung nutzen – Regeln und Rechenbeispiel."
+ },
+ "en/saeule-3a-bezug-staffeln.html": {
+  "description": "Pillar 3a withdrawals: close one account per year, spread cash-outs over separate periods and use the lump-sum rate – rules and example."
+ },
+ "fr/saeule-3a-bezug-staffeln.html": {
+  "description": "Retrait du 3e pilier : un compte clos par année, retraits échelonnés, imposition séparée des prestations en capital – règles et exemple chiffré."
+ },
+ "it/saeule-3a-bezug-staffeln.html": {
+  "description": "Prelievo dal 3° pilastro: un conto chiuso per anno, prelievi scaglionati su più periodi, imposizione separata – regole ed esempio di calcolo."
+ },
+ "en/saeule-3a-nachzahlen.html": {
+  "description": "New for 2026: fill pillar 3a contribution gaps retroactively – up to 10 years, first time for 2025. Requirements, example, 31 Dec deadline."
+ },
+ "fr/saeule-3a-nachzahlen.html": {
+  "description": "Dès 2026 : lacunes de cotisations du 3e pilier comblables rétroactivement – jusqu'à 10 ans, d'abord pour 2025. Conditions, exemple, délai 31 décembre."
+ },
+ "it/saeule-3a-nachzahlen.html": {
+  "description": "Novità dal 2026: colmare retroattivamente le lacune del 3° pilastro – fino a 10 anni, per la prima volta per il 2025. Requisiti, termine 31 dicembre."
+ },
+ "it/steuer-checkliste-2026.html": {
+  "description": "La checklist 2026 per la Sua dichiarazione d'imposte: documenti, deduzioni, scadenze, errori frequenti – punto per punto."
+ },
+ "fr/steuern-sparen-tipps.html": {
+  "description": "Simplement expliqué : déductions légales pour payer moins d'impôts en Suisse en 2026 – pilier 3a, frais professionnels, garde, dons."
+ },
+ "it/steuern-sparen-tipps.html": {
+  "description": "Spiegato semplicemente: deduzioni legali per pagare meno imposte in Svizzera nel 2026 – 3° pilastro, spese professionali, custodia, donazioni."
+ },
+ "teilliquidation-pensionskasse-auszahlung.html": {
+  "description": "Teilliquidation: Austretende können das ganze Guthaben bar beziehen – separat zum Vorsorgetarif besteuert. Voraussetzungen, Fristen, Steuerrechnung."
+ },
+ "en/teilliquidation-pensionskasse-auszahlung.html": {
+  "description": "Partial liquidation of a pension fund: leaving insureds can take the full balance in cash – taxed separately at the reduced pension rate. Rules, deadlines."
+ },
+ "fr/teilliquidation-pensionskasse-auszahlung.html": {
+  "description": "Liquidation partielle : les assurés sortants touchent tout leur avoir en espèces – imposition séparée au taux réduit. Conditions, délais, calcul."
+ },
+ "it/teilliquidation-pensionskasse-auszahlung.html": {
+  "description": "Liquidazione parziale della cassa: gli uscenti prelevano l'intero avere in contanti – imposizione separata, aliquota ridotta. Requisiti, termini."
+ },
+ "transparenzregister-tjpg-meldepflicht.html": {
+  "description": "Transparenzregister ab 1.10.2026: AG/GmbH melden wirtschaftlich berechtigte Personen dem BJ. Fristen Art. 51 TJPG, Ausnahmen, Bussen bis CHF 500'000."
+ },
+ "en/transparenzregister-tjpg-meldepflicht.html": {
+  "description": "Since 1 Oct 2026: AG/GmbH must report beneficial owners to the Federal Office of Justice. Art. 51 deadlines, exemptions, fines up to CHF 500'000."
+ },
+ "fr/transparenzregister-tjpg-meldepflicht.html": {
+  "description": "Depuis le 1.10.2026 : les SA/Sàrl annoncent leurs ayants droit économiques à l'OFJ. Délais (art. 51), exceptions, amendes jusqu'à 500'000 francs."
+ },
+ "it/transparenzregister-tjpg-meldepflicht.html": {
+  "description": "Dal 1.10.2026: SA e Sagl annunciano gli aventi diritto economici all'UFG. Termini art. 51, eccezioni, multe fino a 500'000 franchi (LTJ)."
+ },
+ "ueberbrueckungsleistungen-ahv-fruehpensionierung.html": {
+  "description": "Überbrückungsleistungen (ÜL) seit Dezember 2024 für ältere Arbeitslose vor der Pensionierung: Anspruch, Höhe, Wirkung auf Vermögen und Steuern."
+ },
+ "en/ueberbrueckungsleistungen-ahv-fruehpensionierung.html": {
+  "description": "Since Dec 2024, bridging benefits (ÜL) support older unemployed people before retirement: who qualifies, how much, and effects on wealth and taxes."
+ },
+ "fr/ueberbrueckungsleistungen-ahv-fruehpensionierung.html": {
+  "description": "Depuis décembre 2024, les prestations-pont soutiennent les chômeurs âgés avant la retraite : droit, montant, effets sur fortune, prévoyance et impôts."
+ },
+ "it/ueberbrueckungsleistungen-ahv-fruehpensionierung.html": {
+  "description": "Dal dicembre 2024, prestazioni ponte per i disoccupati anziani prima del pensionamento: diritto, importo, effetti su sostanza, previdenza e imposte."
+ },
+ "verrechnungssteuer-rueckerstattungsfrist-ablauf.html": {
+  "description": "35 % Verrechnungssteuer auf 2023er-Erträgen sind verloren ohne Antrag bis 31.12.2026 (Art. 32 Abs. 1 VStG). Depot prüfen, Geld zurückholen."
+ },
+ "en/verrechnungssteuer-rueckerstattungsfrist-ablauf.html": {
+  "description": "35 % withholding tax on 2023 dividends/interest is lost for good unless claimed by 31 December 2026 (Art. 32 para. 1 WHTA). Check your portfolio now."
+ },
+ "fr/verrechnungssteuer-rueckerstattungsfrist-ablauf.html": {
+  "description": "L'impôt anticipé de 35 % sur les rendements 2023 est perdu sans demande au 31.12.2026 (art. 32 al. 1 LIA) – dépôt vérifié, argent récupéré."
+ },
+ "it/verrechnungssteuer-rueckerstattungsfrist-ablauf.html": {
+  "description": "L'imposta preventiva del 35 % sui rendimenti 2023 è persa senza domanda entro il 31.12.2026 (art. 32 cpv. 1 LIP). Verifichi il deposito."
+ },
+ "verrechnungssteuer-schweiz-35-prozent.html": {
+  "description": "Verrechnungssteuer: 35 % auf Dividenden/Zinsen (Art. 13 VStG). Rückholung via Steuererklärung – Frist 3 Jahre (Art. 32 VStG), ohne Formular-110-Chaos."
+ },
+ "en/verrechnungssteuer-schweiz-35-prozent.html": {
+  "description": "Swiss withholding tax: 35 % on dividends and interest (Art. 13 VStG). Reclaim via the tax return – 3-year deadline (Art. 32), no Form 110 chaos."
+ },
+ "fr/verrechnungssteuer-schweiz-35-prozent.html": {
+  "description": "Impôt anticipé : 35 % sur dividendes et intérêts (art. 13 LIA) – récupération via la déclaration, délai de 3 ans (art. 32 LIA), sans formulaire 110."
+ },
+ "it/verrechnungssteuer-schweiz-35-prozent.html": {
+  "description": "Imposta preventiva: 35 % su dividendi e interessi (art. 13 LIP) – recupero con la dichiarazione, termine di 3 anni (art. 32 LIP), senza mod. 110."
+ }
+}

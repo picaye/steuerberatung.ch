@@ -20,6 +20,7 @@ def ld_field(t, key):
     m = re.search(r'"%s":\s*"((?:[^"\\]|\\.)*)"' % key, t)
     return json.loads('"%s"' % m.group(1)) if m else ""
 
+AUD = json.loads((ROOT / "data/audience_map.json").read_text()) if (ROOT / "data/audience_map.json").exists() else {}
 entries = []
 for lang, pre in LANGS.items():
     base = ROOT / pre
@@ -37,7 +38,8 @@ for lang, pre in LANGS.items():
         if not title:
             print("WARN no title:", pre + slug, file=sys.stderr)
             continue
-        entries.append({"l": lang, "s": slug, "t": title, "d": desc, "dt": date, "h": headings, "b": body})
+        stem = slug[:-5] if slug.endswith(".html") else slug
+        entries.append({"l": lang, "s": slug, "t": title, "d": desc, "dt": date, "h": headings, "b": body, "a": AUD.get(stem, [])})
 
 out = "window.SEARCH_INDEX=" + json.dumps(entries, ensure_ascii=False, separators=(",", ":")) + ";"
 (ROOT / "assets/search-index.js").write_text(out)
