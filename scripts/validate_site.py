@@ -29,6 +29,7 @@ for lang in ('en', 'fr', 'it'):
     files += sorted(glob.glob(f'{lang}/*.html'))
     files += sorted(glob.glob(f'{lang}/kanton/*.html'))
 
+files = [f for f in files if 'yandex_' not in f]
 problems = []
 for f in files:
     d = os.path.dirname(f)  # '' | en | fr | it

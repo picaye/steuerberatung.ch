@@ -18,6 +18,12 @@ def fuss_kurz(s):
     return (m.group(1).strip()[:28] if m else "–")
 
 # slug + localized display names (official exonyms)
+def _fr_canton(n):
+    if n[0] in "AEIOUhàé": return "d\u2019" + n
+    if n in ("Valais", "Jura"): return "du " + n
+    if n == "Grisons": return "des " + n
+    return "de " + n
+
 CANTONS = [
  ("ZH","zuerich","Zürich","Zurich","Zurich","Zurigo"),
  ("BE","bern","Bern","Berne","Bern","Berna"),
@@ -48,7 +54,7 @@ CANTONS = [
 ]
 
 UI = {
-"de": dict(ttl="Steuererklärung Kanton {n} {y}: Fristen, Steuerfuss & Online-Tool",
+"de": dict(ttl="Steuererklärung Kanton {n} {y}",
  dsc="Steuererklärung {n} {y}: Abgabefrist, durchschnittlicher Steuerfuss, offizielles Online-Tool ({sw}) und kantonale Besonderheiten für Privatpersonen und Selbstständige.",
  h1="Kanton {n}", sub="Steuererklärung {y}: Fristen, Steuerfuss, offizielles Tool und Besonderheiten – kurz und amtlich belegt.",
  frist="Abgabefrist Steuerperiode {y}", fuss="Durchschnittlicher Steuerfuss (natürliche Personen)",
@@ -56,23 +62,23 @@ UI = {
  eff_h="Effektive Steuerbelastung", cmp_h="Steuerfüsse im Vergleich", cmp_intro="Der durchschnittliche Steuerfuss (Kanton + Gemeinden, Ehepaar ohne Kinder, ohne Kirchensteuer, Nettoabgabe) laut ESTV per 1.1.2026:",
  cmp_col1="Kanton", cmp_col2="Steuerfuss Hauptort", cmp_col3="Effektive Belastung*", back="Alle Kantone", cta="Steuererklärung im Kanton {n}Professionell machen lassen? Geprüfte Fachperson im Kanton {n} finden",
  more_h="Ratgeber-Artikel", ld_type="Steuererklärung {n}"),
-"en": dict(ttl="Tax return canton {n} {y}: deadlines, tax multiplier & online tool",
+"en": dict(ttl="Canton {n} taxes {y}: deadline & e-filing",
  dsc="Tax return {n} {y}: filing deadline, average tax multiplier, official online tool ({sw}) and canton-specific facts for individuals and the self-employed.",
- h1="Canton {n}", sub="Tax return {y}: deadlines, tax multiplier, official tool and cantonal specifics – concise and sourced to official pages.",
+ h1="Canton of {n}", sub="Tax return {y}: deadlines, tax multiplier, official tool and cantonal specifics – concise and sourced to official pages.",
  frist="Deadline tax period {y}", fuss="Average tax multiplier (natural persons)",
  tool="Online tax return", amt="Cantonal tax administration", spec="Cantonal specifics",
  eff_h="Effective tax burden", cmp_h="Tax multipliers compared", cmp_intro="Average tax multiplier (canton + communes, married couple without children, no church tax, net tax) per FTA as of 1 Jan 2026:",
  cmp_col1="Canton", cmp_col2="Multiplier (capital)", cmp_col3="Effective burden*", back="All cantons", cta="Have your {n} tax return done professionally? Find a vetted specialist in {n}",
  more_h="Related guides", ld_type="Tax return {n}"),
-"fr": dict(ttl="Déclaration d'impôts canton {n} {y}: délais, multiplicateur & outil en ligne",
+"fr": dict(ttl="Impôts canton {frn} {y} : délai et e-déclaration",
  dsc="Déclaration d'impôts {n} {y}: délai de dépôt, multiplicateur d'impôt moyen, outil officiel en ligne ({sw}) et particularités cantonales pour personnes physiques et indépendants.",
- h1="Canton {n}", sub="Déclaration d'impôts {y}: délais, multiplicateur, outil officiel et particularités cantonales – concis et sourcé aux pages officielles.",
+ h1="Canton {frn}", sub="Déclaration d'impôts {y}: délais, multiplicateur, outil officiel et particularités cantonales – concis et sourcé aux pages officielles.",
  frist="Délai période fiscale {y}", fuss="Multiplicateur moyen (personnes physiques)",
  tool="Déclaration en ligne", amt="Administration fiscale cantonale", spec="Particularités cantonales",
  eff_h="Charge fiscale effective", cmp_h="Multiplicateurs comparés", cmp_intro="Multiplicateur moyen (canton + communes, couple marié sans enfants, sans impôt ecclésiastique, perception nette) selon l'AFC au 1er janvier 2026:",
  cmp_col1="Canton", cmp_col2="Multiplicateur (chef-lieu)", cmp_col3="Charge effective*", back="Tous les cantons", cta="Faire établir votre déclaration {n} par un spécialiste vérifié",
  more_h="Guides liés", ld_type="Déclaration d'impôts {n}"),
-"it": dict(ttl="Dichiarazione d'imposte canton {n} {y}: termini, moltiplicatore & tool online",
+"it": dict(ttl="Imposte cantone {n} {y}: termine e dichiarazione online",
  dsc="Dichiarazione d'imposte {n} {y}: termine di consegna, moltiplicatore medio, tool ufficiale online ({sw}) e particolarità cantonali per persone fisiche e indipendenti.",
  h1="Cantone {n}", sub="Dichiarazione d'imposte {y}: termini, moltiplicatore, tool ufficiale e particolarità cantonali – conciso e con fonti ufficiali.",
  frist="Termine periodo fiscale {y}", fuss="Moltiplicatore medio (persone fisiche)",
@@ -161,12 +167,12 @@ def page(lang, code, slug, names, idx):
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{u['ttl'].format(n=n,y=YEAR)} | steuerberatung.ch</title>
+<title>{u['ttl'].format(n=n,y=YEAR,frn=_fr_canton(n),n1=n)} | steuerberatung.ch</title>
 <meta name="description" content="{u['dsc'].format(n=n,y=YEAR,sw=sw_name)}">
 <link rel="icon" type="image/png" sizes="32x32" href="{up}assets/favicon-32.png">
 <link rel="canonical" href="{canon}">
 {alts}
-<meta property="og:title" content="{u['ttl'].format(n=n,y=YEAR)}">
+<meta property="og:title" content="{u['ttl'].format(n=n,y=YEAR,frn=_fr_canton(n))}">
 <meta property="og:description" content="{u['dsc'].format(n=n,y=YEAR,sw=sw_name)}">
 <meta property="og:type" content="article">
 <link rel="stylesheet" href="{up}assets/style.css">
@@ -188,7 +194,7 @@ def page(lang, code, slug, names, idx):
 <main>
 <div class="page-head">
   <div class="container">
-    <h1>{u['h1'].format(n=n)}</h1>
+    <h1>{u['h1'].format(n=n,frn=_fr_canton(n))}</h1>
     <p>{u['sub'].format(y=YEAR)}</p>
   </div>
 </div>

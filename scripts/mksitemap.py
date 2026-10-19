@@ -10,7 +10,7 @@ try:
     tracked = set(_r.stdout.split()) if _r.returncode == 0 else None
 except Exception:
     tracked = None
-files = sorted(glob.glob(BASE + "/*.html")) + sorted(glob.glob(BASE + "/kanton/*.html"))
+files = [f for f in sorted(glob.glob(BASE + "/*.html")) + sorted(glob.glob(BASE + "/kanton/*.html")) if "yandex_" not in f and "google" not in f.lower().split("/")[-1][:7]]
 for lang in ("en", "fr", "it"):
     files += sorted(glob.glob(BASE + f"/{lang}/*.html"))
     files += sorted(glob.glob(BASE + f"/{lang}/kanton/*.html"))

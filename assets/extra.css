@@ -167,3 +167,5 @@
 .br-res h3{margin:0 0 6px;font-size:.85rem;text-transform:uppercase;letter-spacing:.04em;color:#5a6b5d}
 .br-big{font-size:1.5rem;font-weight:800;color:var(--green,#2e7d4f);margin:0}
 .br-save{font-size:1.3rem;font-weight:800;color:#1d6b3a;margin:0}
+.search-intro{margin-top:1.6rem;font-size:.95rem;color:var(--ink-soft,#374151);max-width:70ch}
+.search-intro a{text-decoration:underline}
