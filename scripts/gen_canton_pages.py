@@ -54,7 +54,7 @@ CANTONS = [
 ]
 
 UI = {
-"de": dict(ttl="Steuererklärung Kanton {n} {y}", ttl2="Steuererklärung {n} {y}",
+"de": dict(src_tax="Kantonales Steueramt", src_etax="Offizielles Online-Tool", src_estv="ESTV: Steuersätze und Steuerfüsse", src_sthg="StHG (Bundesgesetz)", src_note="Amtliche Quellen; Stand der Steuerfüsse: ESTV-Erhebung per 1.1.2026.", ttl="Steuererklärung Kanton {n} {y}", ttl2="Steuererklärung {n} {y}",
  dsc="Steuererklärung {n} {y}: Abgabefrist, durchschnittlicher Steuerfuss, offizielles Online-Tool ({sw}) und kantonale Besonderheiten für Privatpersonen und Selbstständige.",
  h1="Kanton {n}", sub="Steuererklärung {y}: Fristen, Steuerfuss, offizielles Tool und Besonderheiten – kurz und amtlich belegt.",
  frist="Abgabefrist Steuerperiode {y}", fuss="Durchschnittlicher Steuerfuss (natürliche Personen)",
@@ -62,7 +62,7 @@ UI = {
  eff_h="Effektive Steuerbelastung", cmp_h="Steuerfüsse im Vergleich", cmp_intro="Der durchschnittliche Steuerfuss (Kanton + Gemeinden, Ehepaar ohne Kinder, ohne Kirchensteuer, Nettoabgabe) laut ESTV per 1.1.2026:",
  cmp_col1="Kanton", cmp_col2="Steuerfuss Hauptort", cmp_col3="Effektive Belastung*", back="Alle Kantone", cta="Steuererklärung im Kanton {n}Professionell machen lassen? Geprüfte Fachperson im Kanton {n} finden",
  more_h="Ratgeber-Artikel", ld_type="Steuererklärung {n}"),
-"en": dict(ttl="Canton of {n} taxes {y}: deadline & e-filing", ttl2="Canton {n} {y}: taxes & e-filing", ttl3="{n} taxes {y}",
+"en": dict(src_tax="Cantonal tax administration", src_etax="Official online filing tool", src_estv="FTD: tax rates and multipliers", src_sthg="Tax Harmonisation Act (THA)", src_note="Official sources; multiplier data: FTD survey as of 1 Jan 2026.", ttl="Canton of {n} taxes {y}: deadline & e-filing", ttl2="Canton {n} {y}: taxes & e-filing", ttl3="{n} taxes {y}",
  dsc="Tax return {n} {y}: filing deadline, average tax multiplier, official online tool ({sw}) and canton-specific facts for individuals and the self-employed.",
  h1="Canton of {n}", sub="Tax return {y}: deadlines, tax multiplier, official tool and cantonal specifics – concise and sourced to official pages.",
  frist="Deadline tax period {y}", fuss="Average tax multiplier (natural persons)",
@@ -70,7 +70,7 @@ UI = {
  eff_h="Effective tax burden", cmp_h="Tax multipliers compared", cmp_intro="Average tax multiplier (canton + communes, married couple without children, no church tax, net tax) per FTA as of 1 Jan 2026:",
  cmp_col1="Canton", cmp_col2="Multiplier (capital)", cmp_col3="Effective burden*", back="All cantons", cta="Have your {n} tax return done professionally? Find a vetted specialist in {n}",
  more_h="Related guides", ld_type="Tax return {n}"),
-"fr": dict(ttl="Impôts canton {frn} {y} : délai et e-déclaration", ttl2="Impôts {frn} {y} : délai et e-déclaration", ttl3="Impôts {frn} {y}",
+"fr": dict(src_tax="Administration fiscale cantonale", src_etax="Outil officiel de déclaration en ligne", src_estv="AFC : taux et multiplicateurs d’impôt", src_sthg="Loi sur l’harmonisation fiscale (LHID)", src_note="Sources officielles ; multiplicateurs : enquête de l’AFC au 1.1.2026.", ttl="Impôts canton {frn} {y} : délai et e-déclaration", ttl2="Impôts {frn} {y} : délai et e-déclaration", ttl3="Impôts {frn} {y}",
  dsc="Déclaration d'impôts {n} {y}: délai de dépôt, multiplicateur d'impôt moyen, outil officiel en ligne ({sw}) et particularités cantonales pour personnes physiques et indépendants.",
  h1="Canton {frn}", sub="Déclaration d'impôts {y}: délais, multiplicateur, outil officiel et particularités cantonales – concis et sourcé aux pages officielles.",
  frist="Délai période fiscale {y}", fuss="Multiplicateur moyen (personnes physiques)",
@@ -78,7 +78,7 @@ UI = {
  eff_h="Charge fiscale effective", cmp_h="Multiplicateurs comparés", cmp_intro="Multiplicateur moyen (canton + communes, couple marié sans enfants, sans impôt ecclésiastique, perception nette) selon l'AFC au 1er janvier 2026:",
  cmp_col1="Canton", cmp_col2="Multiplicateur (chef-lieu)", cmp_col3="Charge effective*", back="Tous les cantons", cta="Faire établir votre déclaration {n} par un spécialiste vérifié",
  more_h="Guides liés", ld_type="Déclaration d'impôts {n}"),
-"it": dict(ttl="Imposte cantone {n} {y}: termine e dichiarazione online", ttl2="Imposte {n} {y}: termine e dichiarazione online", ttl3="Imposte {n} {y}",
+"it": dict(src_tax="Amministrazione fiscale cantonale", src_etax="Strumento ufficiale di dichiarazione online", src_estv="AFC : aliquote e moltiplicatori", src_sthg="Legge sull’armonizzazione fiscale (LAFI)", src_note="Fonti ufficiali ; moltiplicatori : rilevazione AFC al 1.1.2026.", ttl="Imposte cantone {n} {y}: termine e dichiarazione online", ttl2="Imposte {n} {y}: termine e dichiarazione online", ttl3="Imposte {n} {y}",
  dsc="Dichiarazione d'imposte {n} {y}: termine di consegna, moltiplicatore medio, tool ufficiale online ({sw}) e particolarità cantonali per persone fisiche e indipendenti.",
  h1="Cantone {n}", sub="Dichiarazione d'imposte {y}: termini, moltiplicatore, tool ufficiale e particolarità cantonali – conciso e con fonti ufficiali.",
  frist="Termine periodo fiscale {y}", fuss="Moltiplicatore medio (persone fisiche)",
@@ -163,6 +163,14 @@ def page(lang, code, slug, names, idx):
         '<tr%s><td><a href="%s%s.html">%s</a></td><td>%s</td><td>%s</td></tr>' % (
         ' class="cmp-here"' if c[0]==code else "", "", c[1], c[idx + 1],
         fuss_kurz(by_canton.get(c[0],{}).get("steuerfuss_2026","–")), str(EFF.get(c[0],"–")) + " %") for c in rows)
+    src_lbl = {"de":"Quellen","en":"Sources","fr":"Sources","it":"Fonti"}[lang]
+    srcs = [(r.get("steueramt_url"), u["src_tax"]), (r.get("e_tax_url"), u["src_etax"]),
+            ("https://www.estv.admin.ch/de/steuersaetze-und-steuerfuesse", u["src_estv"]),
+            ("https://www.fedlex.admin.ch/eli/cc/1990/54", u["src_sthg"])]
+    src_html = "\n".join('<li><a href="%s" rel="noopener" target="_blank">%s</a></li>' % (u_, l_) for u_, l_ in srcs if u_)
+    srcbox = ('\n<section class="section sources"><div class="container"><h2>%s</h2><ul>%s</ul>\n'
+              '<p class="src-note">%s</p></div></section>' % (src_lbl, src_html, u["src_note"]))
+
     more = "\n".join('<li><a href="%s%s">%s</a></li>' % (langup, s, t) for s, t in MORE[lang])
     cta_lbl = u["cta"].replace("{n}", n)
     ld = json.dumps([
@@ -225,6 +233,7 @@ def page(lang, code, slug, names, idx):
 <h2>{u['more_h']}</h2>
 <ul>{more}</ul>
 </div></section>
+{srcbox}
 </main>
 <footer class="site-footer">
   <div class="container footer-grid">
