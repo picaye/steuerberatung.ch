@@ -78,14 +78,15 @@ for c in art:
             print("!! LATE:", c["slug"], got, ">", c["_dl"])
 
 if len(sys.argv) > 1 and sys.argv[1] == "--apply":
-    byslug = {c["slug"]: c for c in cards}
+    byslug = {c["slug"]: c for c in cards if "slug" in c}
     for s, slug in plan.items():
         card = byslug[slug]
         card["hold_until"] = str(s)
         card["priority"] = "pin-" + str(s)
     with open(JL, "w") as f:
         for c in cards:
-            f.write(json.dumps(c, ensure_ascii=False) + "\n")
+            clean = {k: v for k, v in c.items() if not k.startswith("_")}
+            f.write(json.dumps(clean, ensure_ascii=False) + "\n")
     print("APPLIED", len(plan), "pins")
     # print human calendar
     for s in sorted(plan):
