@@ -72,7 +72,7 @@ def plan(cards):
     art = [c for c in cards if c.get("status") == "pending" and c.get("type") in (None, "article")
            and (c.get("hold_until") or c["slug"] in FIXED)]
     for c in art:
-        hu = datetime.date.fromisoformat(c["hold_until"]) if c.get("hold_until") else datetime.date(2026, 10, 23)
+        hu = datetime.date.fromisoformat(c.get("release_intent") or c["hold_until"]) if (c.get("release_intent") or c.get("hold_until")) else datetime.date(2026, 10, 23)
         c["_rel"] = max(datetime.date(2026, 10, 23), hu - datetime.timedelta(days=21))
         c["_dl"] = datetime.date.fromisoformat(DEADLINE[c["slug"]]) if c.get("slug") in DEADLINE else None
     out = {}
@@ -128,6 +128,8 @@ def main():
             return  # healthy calendar: stay silent (watchdog pattern)
         for s, slug in cal.items():
             c = byslug[slug]
+            if "release_intent" not in c:
+                c["release_intent"] = c.get("hold_until")  # freeze research intent => idempotent re-plans
             c["hold_until"] = str(s)
             c["priority"] = "pin-" + str(s)
         # cards we are NOT planning (no hold_until, unpinned) keep their fields untouched
