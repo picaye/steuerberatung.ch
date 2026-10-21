@@ -158,8 +158,13 @@
 .canton-facts p{margin:0;font-size:1.02rem;font-weight:600}
 .canton-facts a{color:var(--green,#2e7d4f)}
 .cmp-here td{background:#e8f3ea;font-weight:700}
-.canton-select{margin:18px 0}
-.canton-select select{padding:10px 14px;font-size:1rem;border:2px solid #d7e0d8;border-radius:10px;background:#fff;min-width:220px}
+.canton-sec .muted{margin:-2px 0 14px}
+.canton-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(138px,1fr));gap:9px}
+.canton-grid a{display:flex;align-items:center;gap:9px;padding:10px 12px;border:1px solid #d7e0d8;border-radius:11px;background:#fff;text-decoration:none;color:#223;transition:border-color .15s,box-shadow .15s,transform .15s}
+.canton-grid a:hover{border-color:#2e7d4f;box-shadow:0 3px 10px rgba(46,125,79,.13);transform:translateY(-1px)}
+.canton-grid a b{flex:0 0 auto;font-size:.8rem;font-weight:700;color:#2e7d4f;background:#eaf4ee;border-radius:7px;padding:3px 7px;letter-spacing:.02em}
+.canton-grid a span{font-size:.92rem}
+@media(max-width:640px){.canton-grid{grid-template-columns:repeat(auto-fill,minmax(102px,1fr));gap:7px}.canton-grid a{padding:8px 9px;gap:7px}.canton-grid a span{font-size:.84rem}}
 
 /* Bezugrechner (2026-10-17) */
 .br-res{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:18px 0}
