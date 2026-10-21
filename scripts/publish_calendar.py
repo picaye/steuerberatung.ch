@@ -30,11 +30,11 @@ def fridays():
 
 FIXED = {  # drafted fast-lane articles: exact Fridays, do not move
     "lohnabrechnung-2027-ahv-iv-eo-neue-werte": "2026-12-04",
-    "kassabuch-twint-aufzeichnung-pflicht-jahresende": "2026-12-18",
     "ubs-cs-migration-steuererklaerung-2026": "2027-01-08",
     "generalversammlung-2027-gewinn-dividende-steuer": "2027-02-05",
 }
 DEADLINE = {  # latest acceptable Friday (hard topical windows)
+    "kassabuch-twint-aufzeichnung-pflicht-jahresende": "2027-03-31",
     "mwst-erhoehung-2027-ahv-armee": "2026-11-27",
     "fairness-initiative-ehepaare-2026": "2026-11-27",
     "saeule-3a-jahresende-einzahlung-2026": "2026-12-18",
@@ -48,6 +48,7 @@ DEADLINE = {  # latest acceptable Friday (hard topical windows)
     "ahv-lohnabrechnung-annualisieren-frist-31-januar": "2027-01-29",
     "carif-krypto-datenaustausch-ab-2027": "2027-01-15",
     "steuererklaerung-fristerstreckung-2027": "2027-03-19",
+    "saeule-3a-jahresende-einzahlung-2026": "2026-12-18",
 }
 
 def cluster(slug):
@@ -121,6 +122,8 @@ def main():
         for s, slug in cal.items():
             if byslug[slug].get("hold_until") != str(s):
                 changed[slug] = str(s)
+        if unplaced:
+            print("!! CARDS CANNOT MEET DEADLINES:", [c["slug"] for c in unplaced])
         if not changed:
             return  # healthy calendar: stay silent (watchdog pattern)
         for s, slug in cal.items():
