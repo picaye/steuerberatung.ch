@@ -1,0 +1,107 @@
+{
+  "slug": "generalversammlung-2027-gewinn-dividende-steuer",
+  "date": "2026-10-21",
+  "script": "scripts/_publish_20261021_gv2027.py",
+  "files_written": [
+    "scripts/_publish_20261021_gv2027.py",
+    "generalversammlung-2027-gewinn-dividende-steuer.html",
+    "en/generalversammlung-2027-gewinn-dividende-steuer.html",
+    "fr/generalversammlung-2027-gewinn-dividende-steuer.html",
+    "it/generalversammlung-2027-gewinn-dividende-steuer.html"
+  ],
+  "titles": {
+    "de": "Generalversammlung 2027: Dividende & VST",
+    "en": "General Meeting 2027: Dividend & WHT",
+    "fr": "AG 2027 : dividende et impôt anticipé",
+    "it": "AG 2027: dividendi e imposta preventiva"
+  },
+  "checks": {
+    "de_body_words": 1772,
+    "sections_per_lang": 9,
+    "cta_mid_section": 4,
+    "worked_example": "Section 7, class=cta-mid box: 100%-AG-owner dividend CHF 100'000 due 15.06.2027 -> VST 35% = CHF 35'000 due 15.07.2027, net CHF 65'000, federal 70% = CHF 70'000, cantonal floor 50% = CHF 50'000, refund by 31.12.2030; explicitly labelled 'fiktive Zahlen / illustrativ' in all 4 languages; arithmetic machine-verified",
+    "title_lengths": {"de": 40, "en": 36, "fr": 37, "it": 39},
+    "meta_lengths": {"de": 145, "en": 154, "fr": 144, "it": 158},
+    "planning_timeline_table": "Section 3, 9 rows: Bilanzstichtag -> Einberufung -> ordentliche GV (6 Monate) -> ESTV-Deklaration -> Dividendenfaelligkeit -> VST-Zahlung 30 Tage -> Meldeverfahren -> Steuererklaerung -> Rueckerstattungsfrist",
+    "decision_checklist": "Section 6: Lohn vs. Dividende ul + 5-point ol checklist, BGE 9C_532/2025 AHV risk linked to live dividenden-ahv-pflicht-bge-9c-532-2025.html",
+    "internal_links": "rechner.html (x2 DE), kontakt.html (cta-mid + Kurz gesagt), partner-pruefung.html (cta-mid), verrechnungssteuer-schweiz-35-prozent.html, verrechnungssteuer-rueckerstattungsfrist-ablauf.html, dividenden-ahv-pflicht-bge-9c-532-2025.html",
+    "validate_site": "exit 0, ALL OK (321 pages, zero problems)",
+    "leakage": "no draft markers (TODO/FIXME/Lorem/placeholder); no German body text in en/fr/it (only shared slug filenames in URLs); no cross-language href leakage",
+    "date_arithmetic": "6 months after 31.12.2026 = 30.06.2027; 15.06.2027 + 30 days = 15.07.2027; 3 years after end of 2027 = 31.12.2030 (all computed in code)"
+  },
+  "verified_claims": [
+    "OR Art. 699 Abs. 2: ordentliche Generalversammlung der AG jaehrlich innerhalb von sechs Monaten nach Abschluss des Geschaeftsjahres (fedlex DOM gelesen; die 6-Monats-Regel steht im seit 1.1.2023 geltenden Recht in Art. 699, NICHT mehr in Art. 700)",
+    "OR Art. 805 Abs. 2: ordentliche Gesellschafterversammlung der GmbH alljaehrlich innerhalb von sechs Monaten nach Schluss des Geschaeftsjahres (fedlex DOM gelesen; GmbH-Frist existiert im aktuellen Recht ausdruecklich)",
+    "OR Art. 700 Abs. 1: Einberufung der AG mindestens 20 Tage vor dem Versammlungstag (fedlex DOM)",
+    "OR Art. 805 Abs. 3: GmbH-Einberufung spaetestens 20 Tage vorher; Statuten koennen bis auf 10 Tage verkuerzen; Universalversammlung vorbehalten (fedlex DOM)",
+    "OR Art. 698 Abs. 2 Ziff. 4: unuebertragbare Befugnis der GV - Genehmigung Jahresrechnung, Beschlussfassung ueber Verwendung des Bilanzgewinnes, Festsetzung Dividende/Tantieme (fedlex DOM)",
+    "OR Art. 804 Abs. 2 Ziff. 5 und 5bis: gleichlautend fuer GmbH-Gesellschafterversammlung inkl. Rueckzahlung von Kapitalreserven (fedlex DOM)",
+    "VStG Art. 10 Abs. 1: steuerpflichtig ist der Schuldner der steuerbaren Leistung (die Gesellschaft) (fedlex DOM)",
+    "VStG Art. 11: Erfuellung durch Entrichtung (Art. 12-18) oder Meldung (Art. 19-20a) (fedlex DOM)",
+    "VStG Art. 12 Abs. 1: Steuerforderung entsteht bei Faelligkeit der steuerbaren Leistung (fedlex DOM)",
+    "VStG Art. 13 Abs. 1 Bst. a: 35 Prozent auf Kapitalertraegen (Dividenden) (fedlex DOM)",
+    "VStG Art. 14 Abs. 1: Kuerzung bei Auszahlung; Abs. 2: Angaben/Bescheinigung fuer Rueckerstattung (fedlex DOM)",
+    "VStG Art. 16 Abs. 1 Bst. c: Steuer faellig 30 Tage nach Entstehung der Steuerforderung; Abs. 2: Verzugszins ohne Mahnung, Satz per EFD-Verordnung (SR 631.014); Abs. 2bis: kein Verzugszins bei Meldeverfahren (fedlex DOM)",
+    "VStG Art. 20 Abs. 1-2: Meldung statt Entrichtung bei Kapitalertraegen, Bundesrat umschreibt die Faelle, insb. Dividendenausschuettungen im inlaendischen und grenzueberschreitenden Konzernverhaeltnis (fedlex DOM)",
+    "VStG Art. 29 Abs. 2: Rueckerstattungsantrag fruehestens nach Ablauf des Kalenderjahres der Faelligkeit (fedlex DOM; deckungsgleich mit Live-Artikel verrechnungssteuer-rueckerstattungsfrist-ablauf.html)",
+    "VStG Art. 32 Abs. 1: Anspruch erlischt drei Jahre nach Ablauf des Kalenderjahres der Faelligkeit - Originalzitat im DE-Artikel (fedlex DOM)",
+    "VStG Art. 64: Ordnungsbusse bei verspaetetem Meldeverfahren-Antrag (ESTV-Seite, wörtlich)",
+    "ESTV Deklarationspflicht: unaufgefordert innert 30 Tagen nach Genehmigung der Jahresrechnung Geschaeftsbericht/signierte Jahresrechnung + Aufstellung nach amtlichem Formular (Kapitalbestand Jahresende, GV-Datum, Gewinnverteilung, Faelligkeit); Ausloeser u.a. steuerbare Gewinnverteilung oder Bilanzsumme > CHF 5 Mio (estv.admin.ch/de/deklarationspflicht-bei-der-verrechnungssteuer, Volltext via curl, aktualisiert 22.09.2026)",
+    "ESTV Meldeverfahren: Gesuch innert 30 Tagen nach Faelligkeit der Dividende mit Formularen 106/108/102/103/110 + Jahresrechnung; bei Verspaetung Gewaehrung unter Vorbehalt Ordnungsbusse Art. 64 VStG (estv.admin.ch, Volltext via curl)",
+    "ESTV KEB: Einlagen/Aufgelder/Zuschuesse nach 31.12.1996 wie Rueckzahlung von Grund-/Stammkapital; gesondertes Konto in der Handelsbilanz + jede Veraenderung via Formular 170 melden; sonst Steuerbarkeit bei Rueckzahlung (estv.admin.ch, Volltext via curl; deckungsgleich DBG Art. 20 Abs. 3)",
+    "ESTV Zahlung/Verzugszins: Selbstdeklarationssteuer, unaufgefordert zu entrichten (Art. 16 Abs. 1-2 VStG); Verzugszins erst ab CHF 100, Satz jaehrlich per EFD-Verordnung; Fristverlaengerung/Ratenzahlung auf schriftliches Gesuch (estv.admin.ch/de/verrechnungssteuer-bezahlen, Volltext via curl)",
+    "DBG Art. 20 Abs. 1 Bst. c: Dividenden, Gewinnanteile, Liquidationsueberschuesse und geldwerte Vorteile steuerbarer Kapitalertrag (fedlex DOM)",
+    "DBG Art. 20 Abs. 1bis: Privatvermoegen - 70 Prozent steuerbar bei Beteiligung von mindestens 10 Prozent des Grund- oder Stammkapitals (fedlex DOM; STAF-Fassung in Kraft seit 1.1.2020)",
+    "DBG Art. 20 Abs. 3/4: Rueckzahlung von Kapitaleinlagereserven wie Grund-/Stammkapital; Ausschüttungsregel fuer kotierte Gesellschaften (fedlex DOM)",
+    "DBG Art. 18b: Geschaeftsvermoegen - 70 Prozent steuerbar ab 10 Prozent Beteiligung (fedlex DOM)",
+    "StHG Art. 7 Abs. 1: Kantone besteuern Dividenden aus Beteiligungen >= 10 Prozent im Umfang von 50 Prozent, koennen hoehere Besteuerung vorsehen (fedlex DOM)",
+    "StHG Art. 8 Abs. 2quinquies: Teilbesteuerung Geschaeftsvermoegen Kantone (fedlex DOM; im Artikel nicht zitiert, Hintergrundwissen)",
+    "StG Art. 8 Abs. 1: Emissionsabgabe 1 Prozent der Gegenleistung, mindestens Nennwert (fedlex DOM)",
+    "StG Art. 6 Abs. 1 Bst. h: ausgenommen entgeltliche Ausgabe von Beteiligungsrechten an AG/KommanditAG/GmbH bis gesamthaft CHF 1 Mio (fedlex DOM)",
+    "BGE 9C_532/2025 (AHV-Durchgriff auf Holding-Dividenden, WML-10%-Vermutung, 5 Jahre Nachforderung): wiederverwendet aus dem live, claim-geprueften Artikel dividenden-ahv-pflicht-bge-9c-532-2025.html, nicht neu recherchiert"
+  ],
+  "omitted_or_corrected_claims": [
+    "KARTE-KORREKTUR 'Art. 700 OR': die 6-Monats-Frist steht im aktuellen Recht in Art. 699 Abs. 2 OR (AG) bzw. Art. 805 Abs. 2 OR (GmbH); Art. 700 OR regelt heute die Einberufung (20 Tage). Artikel zitiert ausschliesslich die aktuellen Nummern.",
+    "BRIEF-KORREKTUR 'VStG SR 642.11 / Art. 19': VStG ist SR 642.21 (642.11 = DBG). Rueckerstattungsfrist 3 Jahre = Art. 32 Abs. 1 VStG (nicht Art. 19); Antrag fruehestens nach Jahresende = Art. 29 Abs. 2; 30-Tage-Zahlungsfrist = Art. 16 Abs. 1 Bst. c (nicht Art. 19).",
+    "BRIEF-KORREKTUR '60 % Teilbesteuerung federal / CHF 500'000-Schwelle': veraltet (vor STAF). Aktuell: 70 % ab 10 % Beteiligung (Art. 20 Abs. 1bis DBG, seit 1.1.2020), keine 500'000-Franken-Alternative mehr. Worked Example rechnet mit 70 % (verifiziert), nicht mit 60 %.",
+    "Meldeverfahren-Schwelle '20 % Beteiligung': NICHT publiziert - die konkrete Schwelle steht in der VStV, deren Meldeverfahren-Artikel im gerenderten fedlex-Text nicht erreichbar waren und die ESTV-Seite sie nicht nennt. Artikel formuliert qualitativ (Konzernverhaeltnis, Art. 20 VStG + ESTV-Ablauf).",
+    "Konkreter Verzugszinssatz (z.B. 5 %): NICHT publiziert - Satz wird jaehrlich per EFD-Verordnung (SR 631.014) festgelegt; Artikel nennt nur Mechanik (Art. 16 Abs. 2 VStG) und ESTV-Freigrenze CHF 100.",
+    "Kantonale Teilbesteuerungs-Saetze pro Kanton: NICHT publiziert - nur StHG-Untergrenze 50 % (Art. 7 Abs. 1 StHG) + Hinweis 'kantonal verschieden' (Karte: claim-gepruefte Site-Zahlen verwenden; Site hat keine kantonalen Saetze).",
+    "GmbH: keine ueber fedlex hinausgehende GV-Frist behauptet - Art. 805 Abs. 2 OR (6 Monate) woertlich als aktuelle Gesetzeslage zitiert; Notariats-/HR-Eintragungspflichten nur allgemein ohne Artikelnummern (Karte-Warnung), Artikel als Planungshilfe geframt.",
+    "Sanierungsgewinn-Thematik (Karte-Fakt 4): ausgelassen - Sanierungskarte noch pending, keine verifizierten Zahlen verfügbar; nur StG-Emissionsabgabe und KEB behandelt.",
+    "Stimmlage-Regeln im Protokoll (Karte-Fakt 5): nur als Checklist-Punkt 'Stimmlage sauber im Protokoll' ohne rechtliche Detailbehauptung."
+  ],
+  "sources_verified": [
+    {"url": "https://www.fedlex.admin.ch/eli/cc/27/317_321_377/de", "http_status": 200, "note": "OR SR 220; Volltext via JS-Browser extrahiert (curl liefert SPA-Shell, HTTP 200)"},
+    {"url": "https://www.fedlex.admin.ch/eli/cc/1966/371_385_384/de", "http_status": 200, "note": "VStG SR 642.21; Volltext via JS-Browser extrahiert"},
+    {"url": "https://www.fedlex.admin.ch/eli/cc/1991/1184_1184_1184/de", "http_status": 200, "note": "DBG SR 642.11; Art. 20 Abs. 1bis/3/4 und 18b via JS-Browser extrahiert"},
+    {"url": "https://www.fedlex.admin.ch/eli/cc/1991/1256_1256_1256/de", "http_status": 200, "note": "StHG SR 642.14; Art. 7 Abs. 1 via JS-Browser extrahiert"},
+    {"url": "https://www.fedlex.admin.ch/eli/cc/1974/11_11_11/de", "http_status": 200, "note": "StG SR 641.10; Art. 6 Abs. 1 Bst. h und Art. 8 Abs. 1 via JS-Browser extrahiert"},
+    {"url": "https://www.estv.admin.ch/de/verrechnungssteuer", "http_status": 200, "note": "ESTV VST-Portal; Volltext via curl"},
+    {"url": "https://www.estv.admin.ch/de/deklarationspflicht-bei-der-verrechnungssteuer", "http_status": 200, "note": "Volltext via curl (Deklarationspflicht 30 Tage, Meldeverfahren, KEB Form 170)"},
+    {"url": "https://www.estv.admin.ch/de/verrechnungssteuer-bezahlen", "http_status": 200, "note": "Volltext via curl (Faelligkeit, Verzugszins, Ratenzahlung)"}
+  ],
+  "related": [
+    "verrechnungssteuer-schweiz-35-prozent.html",
+    "dividenden-ahv-pflicht-bge-9c-532-2025.html",
+    "kapitalsteuer-ag-gmbh.html"
+  ],
+  "related_note": "validator fordert exakt 3 RELATED-Links; verrechnungssteuer-rueckerstattungsfrist-ablauf.html ist stattdessen im Body verlinkt",
+  "audience": ["firma"],
+  "ratgeber_label": {
+    "de": "Generalversammlung 2027: Dividende & VST",
+    "en": "General Meeting 2027: Dividend & WHT",
+    "fr": "AG 2027 : dividende et impôt anticipé",
+    "it": "AG 2027: dividendi e imposta preventiva"
+  },
+  "pending_parent_steps": [
+    "ratgeber.html Link in allen 4 Sprachen (ul.tick, lokalisierte Titel)",
+    "data/audience_map.json: 'generalversammlung-2027-gewinn-dividende-steuer': ['firma'] (shared file, nicht angefasst)",
+    "data/content-research.jsonl: Karte auf published setzen (shared file, nicht angefasst)",
+    "git add der 5 Dateien (nie git add -A), dann mksitemap.py (untracked-Filter), gen_latest.py, indexnow_ping.py",
+    "commit + push + Live-Verifikation der 4 URLs per curl",
+    "KALENDER: Karte hat priority pin-2027-02-01 / hold_until 2027-02-01 - Build erfolgte weisungsgemaess am 2026-10-21, Deploy-Zeitpunkt liegt beim Parent (Second-Pass-Slot Februar, kein Januar-Konflikt)"
+  ],
+  "not_committed": true,
+  "shared_files_touched": []
+}

@@ -1,0 +1,65 @@
+{
+ "ubs-cs-migration-steuererklaerung-2026": {
+  "audience": [
+   "solo",
+   "verheiratet"
+  ],
+  "ratgeber": {
+   "de": "UBS-Depot: Steuererklärung 2026",
+   "en": "UBS depot: 2026 tax return",
+   "fr": "Dépôt UBS : déclaration 2026",
+   "it": "Deposito UBS: dichiarazione 2026"
+  },
+  "pin": "2027-01-04"
+ },
+ "ahv2030-reform-beitraege-fruehrente": {
+  "audience": [
+   "solo",
+   "firma"
+  ],
+  "ratgeber": {
+   "de": "AHV2030: Was die Reform ändern würde",
+   "en": "AHV2030: What the Reform Would Change",
+   "fr": "AVS 2030 : ce que la réforme changerait",
+   "it": "Riforma AVS 2030: cosa cambierebbe"
+  },
+  "pin": "2026-11-16"
+ },
+ "lohnabrechnung-2027-ahv-iv-eo-neue-werte": {
+  "audience": [
+   "firma",
+   "solo"
+  ],
+  "ratgeber": {
+   "de": "Lohnabrechnung 2027: neue AHV/IV/EO-Beitragswerte",
+   "en": "Payroll 2027: new AHV/IV/EO values",
+   "fr": "Salaires 2027 : nouvelles valeurs de cotisation",
+   "it": "Buste paga 2027: nuovi valori contributivi"
+  },
+  "pin": "2026-11-30"
+ },
+ "generalversammlung-2027-gewinn-dividende-steuer": {
+  "audience": [
+   "firma"
+  ],
+  "ratgeber": {
+   "de": "Generalversammlung 2027: Dividende & VST",
+   "en": "General Meeting 2027: Dividend & WHT",
+   "fr": "AG 2027 : dividende et impôt anticipé",
+   "it": "AG 2027: dividendi e imposta preventiva"
+  },
+  "pin": "2027-02-01"
+ },
+ "kassabuch-twint-aufzeichnung-pflicht-jahresende": {
+  "audience": [
+   "firma"
+  ],
+  "ratgeber": {
+   "de": "Kassabuch-Pflicht: Bar, TWINT & Karte",
+   "en": "Cashbook duties: cash, TWINT & cards",
+   "fr": "Livre de caisse : espèces et TWINT",
+   "it": "Libro di cassa: contanti, TWINT, carte"
+  },
+  "pin": "2026-12-15"
+ }
+}

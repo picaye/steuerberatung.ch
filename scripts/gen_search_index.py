@@ -26,6 +26,9 @@ for lang, pre in LANGS.items():
     base = ROOT / pre
     for f in sorted(base.glob("*.html")):
         t = f.read_text()
+        head = t[:2000]
+        if 'name="robots"' in head and "noindex" in head:
+            continue  # staged drafts: invisible until publish-day noindex strip
         if '"@type": "Article"' not in t and '"@type":"Article"' not in t:
             continue
         title = ld_field(t, "headline") or (re.search(r"<h1[^>]*>([^<]+)</h1>", t) or [None, ""])[1]

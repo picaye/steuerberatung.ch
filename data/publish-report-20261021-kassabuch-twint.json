@@ -1,0 +1,78 @@
+{
+  "slug": "kassabuch-twint-aufzeichnung-pflicht-jahresende",
+  "date": "2026-10-21",
+  "script": "scripts/_publish_20261021_kassabuch_twint.py",
+  "files_written": [
+    "scripts/_publish_20261021_kassabuch_twint.py",
+    "kassabuch-twint-aufzeichnung-pflicht-jahresende.html",
+    "en/kassabuch-twint-aufzeichnung-pflicht-jahresende.html",
+    "fr/kassabuch-twint-aufzeichnung-pflicht-jahresende.html",
+    "it/kassabuch-twint-aufzeichnung-pflicht-jahresende.html"
+  ],
+  "titles": {
+    "de": "Kassabuch-Pflicht: Bar, TWINT & Karte",
+    "en": "Cashbook duties: cash, TWINT & cards",
+    "fr": "Livre de caisse : espèces et TWINT",
+    "it": "Libro di cassa: contanti, TWINT, carte"
+  },
+  "checks": {
+    "de_body_words": 1768,
+    "sections_per_lang": 10,
+    "cta_mid_section": 4,
+    "worked_example": "Gastro daily cashbook row + monthly Umsatzabstimmung (all amounts labelled illustrativ; arithmetic machine-verified: 300+1240-150=1390, 1240+860+1900=4000, 97500-1000-500=96000)",
+    "title_lengths": {"de": 37, "en": 36, "fr": 34, "it": 38},
+    "meta_lengths": {"de": 147, "en": 153, "fr": 145, "it": 152},
+    "validate_site": "exit 0, zero problems",
+    "leakage": "no cross-language text leakage; no du-form residue in DE",
+    "date_arithmetic": "180 days after 31.12.2026 = 29.06.2027; 240 days = 28.08.2027 (computed in code)"
+  },
+  "verified_claims": [
+    "MWSTG Art. 70 Abs. 1: Geschäftsbücher/Aufzeichnungen nach handelsrechtlichen Grundsätzen (fedlex Volltext gelesen)",
+    "MWSTG Art. 70 Abs. 2: Aufbewahrung bis absolute Verjährung (Art. 42 Abs. 6, zehn Jahre); Abs. 3: Liegenschaften Einlageentsteuerung/Eigenverbrauch 20 Jahre",
+    "MWSTG Art. 72 Abs. 1: Korrektur von Mängeln spätestens in der Abrechnung jener Periode, in die der 180. Tag nach Geschäftsjahresende fällt; Abs. 2-3: nachträgliche Korrekturpflicht, ESTV-Form",
+    "MWSTG Art. 79 Abs. 1: Ermessenseinschätzung bei keinen/unvollständigen Aufzeichnungen oder offensichtlich abweichenden Ergebnissen",
+    "MWSTG Art. 10 Abs. 2 lit. a: 100'000-Franken-Schwelle Steuerpflichtbefreiung",
+    "MWSTV Art. 128 Abs. 1 lit. d und Abs. 2: Umsatzabstimmung, Positionen a-j (Betriebsumsatz, Aufwandminderungen, konzerninterne Verrechnungen, Betriebsmittelverkäufe, Vorauszahlungen, übrige Zahlungseingänge, geldwerte Leistungen, Erlösminderungen, Debitorenverluste, Abschlussbuchungen)",
+    "OR Art. 957 Abs. 1 Ziff. 1: volle Buchführungspflicht ab CHF 500'000 Umsatzerlös; Abs. 2: Einnahmen/Ausgaben/Vermögenslage darunter; Abs. 3: GoB sinngemäss",
+    "OR Art. 957a Abs. 2: vollständige, wahrheitsgetreue und systematische Erfassung",
+    "OR Art. 958f: 10 Jahre Aufbewahrung, elektronisch zulässig bei Übereinstimmung + jederzeitiger Lesbarkeit",
+    "GeBüV Art. 1 Abs. 2 lit. b: Journal = chronologische Erfassung aller gebuchten Geschäftsvorfälle; Art. 2: anerkannte kaufmännische Grundsätze",
+    "DBG Art. 125 Abs. 2 lit. b: vereinfachte Buchführung -> Aufstellungen Einnahmen/Ausgaben, Vermögenslage, Privatentnahmen/-einlagen als Beilagen",
+    "ESTV mwst-jahresabstimmung: Abgleichpflicht, Formular 'Jahresabstimmung (Berichtigungsabrechnung nach Art. 72 MWSTG)', keine Berichtigung nötig wenn mangelfrei, Finalisierungsannahme nach 240 Tagen, Verzugszins ab Verfall (60 Tage bzw. 28.2. Folgejahr)",
+    "ESTV unterlagen-fuer-die-mwst-kontrolle: Umsatzabstimmung pro Jahr gegen Ziffer 200 (Art. 128 Abs. 2 MWSTV), Kassabelege, Vorsteuerabstimmung",
+    "ESTV mwst-kontrolle: MWST als Selbstveranlagungssteuer, Kontrollbefugnis Art. 78 MWSTG"
+  ],
+  "omitted_or_corrected_claims": [
+    "BGE 2A.657/2005 NICHT zitiert: bundesgericht.ch von diesem Host nicht erreichbar (TLS blocked, curl exit 35) -> Rechtsprechung allgemein als 'ständige Rechtsprechung des Bundesgerichts' formuliert",
+    "'Aufrechnungsverbot MWSTG Art. 45' weggelassen: Art. 45 MWSTG regelt die Bezugsteuer (per Art. 66 Abs. 3-Kreuzreferenz verifiziert), kein Aufrechnungsverbot auffindbar",
+    "'zeitnah per Art. 958a OR' KORRIGIERT: Art. 958a OR regelt die Fortführungsannahme, nicht die Zeitnähe -> Zeitnähe/Chronologie stattdessen über Art. 957a Abs. 2 OR + GeBüV Art. 1 Abs. 2 lit. b + Praxis begründet",
+    "TWINT als 'Bargeldäquivalent': keine offizielle ESTV-Publikation (Kreisschreiben/MWST-Info) auffindbar, die TWINT namentlich nennt -> Praxisanforderung ohne Rechtszitat formuliert (eigene Spalte/Nebenbuch, Abwicklerabrechnungen als Belege, Bruttobuchung, Nachvollziehbarkeit via MWSTV Art. 128 Abs. 2 lit. f)",
+    "OR Art. 957 'seit 1.1.2025 neu': Inkrafttretensdatum nicht gegen offizielle Quelle verifizierbar -> ohne Datum publiziert",
+    "TPS / Pflicht zu zertifizierten Kassensystemen: keine offizielle Statusseite verifiziert -> Thema weggelassen; nur die belegte Formulierung 'beweisfähige Aufzeichnung, kein bestimmtes Kassensystem vorgeschrieben' verwendet"
+  ],
+  "sources_verified": [
+    {"url": "https://www.fedlex.admin.ch/eli/cc/2009/615/de", "http_status": 200, "note": "MWSTG SR 641.20; Volltext via JS-fähigem Browser extrahiert (curl liefert nur SPA-Shell, HTTP 200)"},
+    {"url": "https://www.fedlex.admin.ch/eli/cc/2009/828/de", "http_status": 200, "note": "MWSTV SR 641.201"},
+    {"url": "https://www.fedlex.admin.ch/eli/cc/27/317_321_377/de", "http_status": 200, "note": "OR SR 220"},
+    {"url": "https://www.fedlex.admin.ch/eli/cc/2002/216/de", "http_status": 200, "note": "GeBüV SR 221.431"},
+    {"url": "https://www.fedlex.admin.ch/eli/cc/1991/1184_1184_1184/de", "http_status": 200, "note": "DBG SR 642.11"},
+    {"url": "https://www.estv.admin.ch/de/mwst-jahresabstimmung", "http_status": 200, "note": "Volltext via curl verifiziert"},
+    {"url": "https://www.estv.admin.ch/de/unterlagen-fuer-die-mwst-kontrolle", "http_status": 200, "note": "Volltext via curl verifiziert"},
+    {"url": "https://www.estv.admin.ch/de/mwst-kontrolle", "http_status": 200, "note": "Volltext via curl verifiziert"}
+  ],
+  "related": [
+    "mwst-100k-pflicht-schweiz.html",
+    "mwst-agov-pflicht-oktober-2026.html",
+    "mwst-ausfuhr-0-prozent-nachweis.html"
+  ],
+  "audience": ["firma"],
+  "pending_parent_steps": [
+    "ratgeber.html Link in allen 4 Sprachen (ul.tick, lokalisierte Titel)",
+    "git add der 5 Dateien, dann mksitemap.py (untracked-Filter!), gen_latest.py",
+    "data/content-research.jsonl: Karte auf published setzen (langs de/en/fr/it)",
+    "commit + push + Live-Verifikation der 4 URLs",
+    "data/audience_map.json: 'kassabuch-twint-aufzeichnung-pflicht-jahresende': ['firma'] (shared file, nicht angefasst)"
+  ],
+  "not_committed": true,
+  "shared_files_touched": []
+}

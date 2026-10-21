@@ -1,0 +1,43 @@
+{
+  "slug": "ahv2030-reform-beitraege-fruehrente",
+  "date": "2026-10-21",
+  "languages": {
+    "de": {
+      "path": "ahv2030-reform-beitraege-fruehrente.html",
+      "bytes": 24743,
+      "main_words": 1804,
+      "cta_mid": true,
+      "example": true,
+      "h2_sections": 10,
+      "table": true
+    },
+    "en": {
+      "path": "en/ahv2030-reform-beitraege-fruehrente.html",
+      "bytes": 25060,
+      "main_words": 2246,
+      "cta_mid": true,
+      "example": true,
+      "h2_sections": 10,
+      "table": true
+    },
+    "fr": {
+      "path": "fr/ahv2030-reform-beitraege-fruehrente.html",
+      "bytes": 26791,
+      "main_words": 2464,
+      "cta_mid": true,
+      "example": true,
+      "h2_sections": 10,
+      "table": true
+    },
+    "it": {
+      "path": "it/ahv2030-reform-beitraege-fruehrente.html",
+      "bytes": 26661,
+      "main_words": 2298,
+      "cta_mid": true,
+      "example": true,
+      "h2_sections": 10,
+      "table": true
+    }
+  },
+  "cross_language_leaks": []
+}
