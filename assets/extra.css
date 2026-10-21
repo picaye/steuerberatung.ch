@@ -159,7 +159,8 @@
 .canton-facts a{color:var(--green,#2e7d4f)}
 .cmp-here td{background:#e8f3ea;font-weight:700}
 .canton-sec .muted{margin:-2px 0 14px}
-.canton-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(138px,1fr));gap:9px}
+.canton-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(138px,1fr));gap:8px}
+.canton-sec{padding-bottom:8px}
 .canton-grid a{display:flex;align-items:center;gap:9px;padding:10px 12px;border:1px solid #d7e0d8;border-radius:11px;background:#fff;text-decoration:none;color:#223;transition:border-color .15s,box-shadow .15s,transform .15s}
 .canton-grid a:hover{border-color:#2e7d4f;box-shadow:0 3px 10px rgba(46,125,79,.13);transform:translateY(-1px)}
 .canton-grid a b{flex:0 0 auto;font-size:.8rem;font-weight:700;color:#2e7d4f;background:#eaf4ee;border-radius:7px;padding:3px 7px;letter-spacing:.02em}
