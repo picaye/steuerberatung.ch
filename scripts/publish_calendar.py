@@ -29,7 +29,6 @@ def fridays():
     return out
 
 FIXED = {  # drafted fast-lane articles: exact Fridays, do not move
-    "lohnabrechnung-2027-ahv-iv-eo-neue-werte": "2026-12-04",
     "ubs-cs-migration-steuererklaerung-2026": "2027-01-08",
     "generalversammlung-2027-gewinn-dividende-steuer": "2027-02-05",
 }
@@ -39,11 +38,11 @@ DEADLINE = {  # latest acceptable Friday (hard topical windows)
     "fairness-initiative-ehepaare-2026": "2026-11-27",
     "saeule-3a-jahresende-einzahlung-2026": "2026-12-18",
     "saeule-3a-beguenstigte-neu-2027": "2027-01-29",
-    "mwst-option-wechsel-frist-31-dezember": "2026-12-11",
+    "mwst-option-wechsel-frist-31-dezember": "2026-12-18",
+    "lohnabrechnung-2027-ahv-iv-eo-neue-werte": "2026-12-18",
     "stille-reserven-eigenkapitalaufbau-jahresende": "2026-12-11",
     "mwst-vorsteuer-eigenverbrauch-jahresende": "2026-12-11",
     "mwst-abmeldung-unter-100000-jahresende": "2026-12-11",
-    "bvg-mindestzins-2027": "2026-12-11",
     "arbeitgeber-3a-beitrag-lohnausweis": "2026-12-11",
     "ahv-lohnabrechnung-annualisieren-frist-31-januar": "2027-01-29",
     "carif-krypto-datenaustausch-ab-2027": "2027-01-15",
