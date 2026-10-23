@@ -1,38 +1,158 @@
 {
-  "_comment": "Audience tags per article slug (shared across languages). Tags: solo, verheiratet, konkubinat, firma.",
-  "13-ahv-rente-dezember-2026": ["solo", "verheiratet", "konkubinat"],
-  "ahv-beitragsluecken-pruefen-nachzahlen": ["solo", "verheiratet", "konkubinat", "firma"],
-  "ahv-mindestbeitrag-selbststaendige": ["firma"],
-  "ahv-rentenerhoehung-2027-neue-betraege": ["solo", "verheiratet", "konkubinat"],
-  "auslaendisches-depot-neobroker-steuererklaerung": ["solo", "verheiratet", "konkubinat"],
-  "dividenden-ahv-pflicht-bge-9c-532-2025": ["firma"],
-  "eigenmietwert-abschaffung-2029": ["solo", "verheiratet", "konkubinat"],
-  "erbschaftssteuer-schenkungssteuer-schweiz": ["solo", "verheiratet", "konkubinat", "firma"],
-  "erwerbsbedingter-umzug-kosten-abzug": ["solo", "verheiratet"],
-  "eu-zoll-3-euro-kleinsendungen": ["solo", "verheiratet", "konkubinat"],
-  "expats-steuern-schweiz": ["solo", "verheiratet", "konkubinat"],
-  "grenzgaenger-de-fr-it-steuern": ["solo", "verheiratet"],
-  "grenzgaenger-homeoffice-telearbeit-regeln": ["solo", "verheiratet"],
-  "hypothek-steuerabzug-schweiz": ["solo", "verheiratet", "konkubinat"],
-  "individualbesteuerung-erklaert": ["verheiratet", "konkubinat"],
-  "kapitalsteuer-ag-gmbh": ["firma"],
-  "krankenkassenpramien-steuerabzug": ["solo", "verheiratet", "konkubinat"],
-  "kryptowaehrungen-steuern-schweiz": ["solo", "verheiratet", "konkubinat"],
-  "minijobs-lohnschwelle-ahv-pflicht": ["solo", "firma"],
-  "mwst-100k-pflicht-schweiz": ["firma"],
-  "mwst-agov-pflicht-oktober-2026": ["firma"],
-  "mwst-ausfuhr-0-prozent-nachweis": ["firma"],
-  "pensionskassen-einkauf-steuern-sparen": ["solo", "verheiratet"],
-  "phishing-steuerbescheid-agov-betrug": ["solo", "verheiratet", "konkubinat"],
-  "praemienverbilligung-2027-anmelden": ["solo", "verheiratet", "konkubinat"],
-  "quellensteuer-nov-zusatzabzuege": ["solo", "verheiratet"],
-  "saeule-3a-bezug-staffeln": ["solo", "verheiratet"],
-  "saeule-3a-nachzahlen": ["solo", "verheiratet"],
-  "steuer-checkliste-2026": ["solo", "verheiratet", "konkubinat", "firma"],
-  "steuern-sparen-tipps": ["solo", "verheiratet", "konkubinat"],
-  "teilliquidation-pensionskasse-auszahlung": ["firma"],
-  "transparenzregister-tjpg-meldepflicht": ["firma"],
-  "ueberbrueckungsleistungen-ahv-fruehpensionierung": ["solo", "verheiratet"],
-  "verrechnungssteuer-rueckerstattungsfrist-ablauf": ["solo", "verheiratet"],
-  "verrechnungssteuer-schweiz-35-prozent": ["solo", "verheiratet", "firma"]
+ "_comment": "Audience tags per article slug (shared across languages). Tags: solo, verheiratet, konkubinat, firma.",
+ "13-ahv-rente-dezember-2026": [
+  "solo",
+  "verheiratet",
+  "konkubinat"
+ ],
+ "ahv-beitragsluecken-pruefen-nachzahlen": [
+  "solo",
+  "verheiratet",
+  "konkubinat",
+  "firma"
+ ],
+ "ahv-mindestbeitrag-selbststaendige": [
+  "firma"
+ ],
+ "ahv-rentenerhoehung-2027-neue-betraege": [
+  "solo",
+  "verheiratet",
+  "konkubinat"
+ ],
+ "auslaendisches-depot-neobroker-steuererklaerung": [
+  "solo",
+  "verheiratet",
+  "konkubinat"
+ ],
+ "dividenden-ahv-pflicht-bge-9c-532-2025": [
+  "firma"
+ ],
+ "eigenmietwert-abschaffung-2029": [
+  "solo",
+  "verheiratet",
+  "konkubinat"
+ ],
+ "erbschaftssteuer-schenkungssteuer-schweiz": [
+  "solo",
+  "verheiratet",
+  "konkubinat",
+  "firma"
+ ],
+ "erwerbsbedingter-umzug-kosten-abzug": [
+  "solo",
+  "verheiratet"
+ ],
+ "eu-zoll-3-euro-kleinsendungen": [
+  "solo",
+  "verheiratet",
+  "konkubinat"
+ ],
+ "expats-steuern-schweiz": [
+  "solo",
+  "verheiratet",
+  "konkubinat"
+ ],
+ "grenzgaenger-de-fr-it-steuern": [
+  "solo",
+  "verheiratet"
+ ],
+ "grenzgaenger-homeoffice-telearbeit-regeln": [
+  "solo",
+  "verheiratet"
+ ],
+ "hypothek-steuerabzug-schweiz": [
+  "solo",
+  "verheiratet",
+  "konkubinat"
+ ],
+ "individualbesteuerung-erklaert": [
+  "verheiratet",
+  "konkubinat"
+ ],
+ "kapitalsteuer-ag-gmbh": [
+  "firma"
+ ],
+ "krankenkassenpramien-steuerabzug": [
+  "solo",
+  "verheiratet",
+  "konkubinat"
+ ],
+ "kryptowaehrungen-steuern-schweiz": [
+  "solo",
+  "verheiratet",
+  "konkubinat"
+ ],
+ "minijobs-lohnschwelle-ahv-pflicht": [
+  "solo",
+  "firma"
+ ],
+ "mwst-100k-pflicht-schweiz": [
+  "firma"
+ ],
+ "mwst-agov-pflicht-oktober-2026": [
+  "firma"
+ ],
+ "mwst-ausfuhr-0-prozent-nachweis": [
+  "firma"
+ ],
+ "pensionskassen-einkauf-steuern-sparen": [
+  "solo",
+  "verheiratet"
+ ],
+ "phishing-steuerbescheid-agov-betrug": [
+  "solo",
+  "verheiratet",
+  "konkubinat"
+ ],
+ "praemienverbilligung-2027-anmelden": [
+  "solo",
+  "verheiratet",
+  "konkubinat"
+ ],
+ "quellensteuer-nov-zusatzabzuege": [
+  "solo",
+  "verheiratet"
+ ],
+ "saeule-3a-bezug-staffeln": [
+  "solo",
+  "verheiratet"
+ ],
+ "saeule-3a-nachzahlen": [
+  "solo",
+  "verheiratet"
+ ],
+ "steuer-checkliste-2026": [
+  "solo",
+  "verheiratet",
+  "konkubinat",
+  "firma"
+ ],
+ "steuern-sparen-tipps": [
+  "solo",
+  "verheiratet",
+  "konkubinat"
+ ],
+ "teilliquidation-pensionskasse-auszahlung": [
+  "firma"
+ ],
+ "transparenzregister-tjpg-meldepflicht": [
+  "firma"
+ ],
+ "ueberbrueckungsleistungen-ahv-fruehpensionierung": [
+  "solo",
+  "verheiratet"
+ ],
+ "verrechnungssteuer-rueckerstattungsfrist-ablauf": [
+  "solo",
+  "verheiratet"
+ ],
+ "verrechnungssteuer-schweiz-35-prozent": [
+  "solo",
+  "verheiratet",
+  "firma"
+ ],
+ "fairness-initiative-ehepaare-2026": [
+  "verheiratet",
+  "konkubinat"
+ ]
 }
