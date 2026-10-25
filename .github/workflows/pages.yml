@@ -43,6 +43,13 @@ jobs:
         # (noindex / status:pending / untracked in mksitemap + gen_latest)
         # fails the deploy if any guard regresses. stdlib-only, no pip.
         run: python3 scripts/test_draft_leak_guards.py
+      - name: Gate — lead-guard regression guards (t_1d6f115c)
+        # The 2026-10-25 incident (t_ede66ede): an unanchored pgrep pattern
+        # SIGKILLed healthy cloudflared tunnels 22+ times per day and every
+        # successful self-heal was burned as a cron failure (exit 10). This
+        # suite pins the config-anchored single-owner match and the host
+        # wrapper's exit-10 -> cron-success mapping. stdlib-only, no pip.
+        run: python3 scripts/test_lead_guard.py
       - name: Gate — publish queue integrity (pin/hold_until, gh#6)
         # Read-only assertion (gh#6): a pending card with priority
         # pin-YYYY-MM-DD must carry a matching hold_until, or the publish
