@@ -60,7 +60,35 @@ USER_AGENT = "steuerberatung-lead-guard/1.0"
 # points at one.
 URL_RE = re.compile(r"https://[a-z0-9-]+\.trycloudflare\.com")
 QUICK_TUNNEL_MATCH = f"cloudflared tunnel --url http://localhost:{PORT}"
-NAMED_TUNNEL_MATCH = "cloudflared tunnel --config"
+
+# Match OUR lead tunnel only. A bare "cloudflared tunnel --config" matches ANY
+# named tunnel on the machine — e.g. the immich tunnel (com.pino.cloudflared-immich,
+# added 2026-10-24). That made every hourly guard run see "2 tunnels", SIGKILL
+# the unrelated immich tunnel together with the lead one, re-Popen its own lead
+# tunnel, and leave the ch.steuerberatung.lead-tunnel KeepAlive unit crash-looping
+# on the metrics-port bind. Anchoring to the config path ends both.
+NAMED_TUNNEL_MATCH = f"cloudflared tunnel --config {TUNNEL_CONFIG}"
+
+# The launchd unit that owns this tunnel at login (see
+# ~/Library/LaunchAgents/ch.steuerberatung.lead-tunnel.plist). When it is
+# loaded it is the single owner: the guard must kickstart it instead of
+# Popen'ing an untracked clone, or the two fight over 127.0.0.1:20241.
+LAUNCHD_LABEL = "ch.steuerberatung.lead-tunnel"
+
+
+def _launchd_target() -> str:
+    return f"gui/{os.getuid()}/{LAUNCHD_LABEL}"
+
+
+def launchd_unit_loaded() -> bool:
+    return sh(["launchctl", "list", LAUNCHD_LABEL]).returncode == 0
+
+
+def launchd_owned_pids() -> set[int]:
+    """PIDs launchd currently runs for the unit (usually 0 or 1)."""
+    out = sh(["launchctl", "print", _launchd_target()]).stdout
+    m = re.search(r"^\s*pid = (\d+)", out, re.M)
+    return {int(m.group(1))} if m else set()
 
 
 def sh(cmd: list[str], **kw) -> subprocess.CompletedProcess:
@@ -76,17 +104,19 @@ def server_alive() -> bool:
 
 
 def tunnel_pids() -> list[int]:
-    """PIDs of our named tunnel, de-duplicated.
+    """PIDs of OUR lead tunnel only, de-duplicated.
 
-    cloudflared runs as a launcher plus its actual tunnel process, and both
-    match the same command string, so a naive pgrep reports two tunnels when
-    one is running. Counting the wrapper as a duplicate made the guard kill and
-    rebuild a healthy tunnel on every run — churning the public hostname and
-    leaving the form dead during each restart.
+    The match is anchored to the exact config path, so unrelated named
+    tunnels (e.g. immich via ~/.cloudflared/config.yml) are never counted.
+    That false "duplicate" was the 2026-10-24→25 repair loop: the guard saw
+    two tunnels, SIGKILLed both — including the healthy immich one — and
+    rebuilt its own clone every hour.
 
-    We count logical tunnels, not matching processes: prefer the process that
-    carries our `--metrics` flag (the one we started and control). Fall back to
-    any match when that is absent.
+    cloudflared can run as a launcher plus its actual tunnel process; keep
+    only the process carrying our `--metrics` flag when one does, so one
+    logical tunnel counts once. With the config-file metrics port neither
+    command line carries the flag, and the anchored match already yields
+    exactly one process.
     """
     out = sh(["pgrep", "-f", NAMED_TUNNEL_MATCH]).stdout
     pids = [int(p) for p in out.split() if p.strip().isdigit()]
@@ -128,11 +158,21 @@ def start_server() -> None:
 
 
 def start_tunnel() -> None:
-    """Start our named tunnel with its metrics endpoint enabled.
+    """Start the named tunnel — launchd first, detached Popen only as fallback.
+
+    When ch.steuerberatung.lead-tunnel is loaded, that unit is the single
+    owner of the tunnel and `launchctl kickstart -k` restarts it in place.
+    The guard's own detached Popen clone used to fight the KeepAlive unit for
+    the metrics port (127.0.0.1:20241): the unit crash-looped with "address
+    already in use", its transient instances polluted every later pgrep
+    window, and the guard "repaired" the same tunnel hour after hour.
 
     Runs the pre-created tunnel instead of provisioning an account-less quick
     tunnel, so there is no rate limit to hit and the hostname is fixed.
     """
+    if launchd_unit_loaded():
+        sh(["launchctl", "kickstart", "-k", _launchd_target()])
+        return
     with open(TUNNEL_LOG, "a") as log:
         subprocess.Popen(
             ["cloudflared", "tunnel", "--config", str(TUNNEL_CONFIG),
@@ -232,7 +272,12 @@ def wait_for_public_health(timeout_s: int = 150) -> tuple[str | None, str]:
         time.sleep(2)
 
     pids = tunnel_pids()
-    if len(pids) == 1 and verify(PUBLIC_URL):
+    # A healthy tunnel only counts as steady state if it is owned by the
+    # loaded launchd unit. An untracked clone (older guard builds Popen'ed
+    # their own) holds the metrics port and leaves the KeepAlive unit
+    # crash-looping, so adopt it back to launchd once.
+    owned = bool(set(pids) & launchd_owned_pids()) if launchd_unit_loaded() else True
+    if len(pids) == 1 and owned and verify(PUBLIC_URL):
         return PUBLIC_URL, "reused"
 
     action = "replaced" if pids else "started"
