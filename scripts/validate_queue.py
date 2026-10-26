@@ -89,6 +89,19 @@ def validate(path, today):
         priority = rec.get("priority")
         hold_until = rec.get("hold_until")
 
+        # Rule 6 (added 2026-10-26, card t_52601755): langs is a list field.
+        # The 2026-10-23 publish hand-wrote "langs": "de,en,fr,it" (a
+        # comma-joined string) onto fairness-initiative-ehepaare-2026; the
+        # string passed only because nothing consumed the field. Mark cards
+        # with scripts/mark_published.py, which always emits a list.
+        langs = rec.get("langs")
+        if langs is not None and not isinstance(langs, list):
+            failures.append(
+                f"FAIL: {slug} (line {line_no}) — langs {langs!r} is a "
+                f"{type(langs).__name__}, must be a JSON list like "
+                f'["de", "en"]; use scripts/mark_published.py to mark cards'
+            )
+
         if status == "published":
             # Rule 5 (added 2026-10-15 after the 601d990 breach): a card
             # published BEFORE its hold_until date consumed a future slot.
