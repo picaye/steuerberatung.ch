@@ -18,6 +18,16 @@ lines like type:recommendation/correction are ignored):
    the card needs re-pinning, not another silent sweep).
 4. Duplicate slugs among pending cards, or a pending card whose slug was
    already published -> FAIL (double-append / re-pick of published work).
+5. (2026-10-15, after the 601d990 breach) A published card whose
+   hold_until/pin date is after the publish date -> FAIL (early publish).
+6. (2026-10-26, t_84df1d95) Two pending cards sharing one `hold_until`
+   slot -> FAIL. The Friday grid holds one article per week; a double
+   booking silently starves the second card.
+7. (2026-10-26, t_84df1d95) A pending pin whose `hold_until` is not a
+   Friday on the publish grid -> FAIL. Research runs pinned Mondays;
+   the publish cron selects Fridays only, so those cards were never
+   selectable — re-pin to a free Friday
+   (`python3 scripts/publish_calendar.py --free`).
 
 Exit 0 = clean, exit 1 = violations (each printed as `FAIL: <slug> — ...`).
 Stdlib only. `--file` and `--today` exist for tests; CI uses the defaults.
@@ -44,8 +54,22 @@ def parse_date(s):
         return None
 
 
+def _load_friday_grid():
+    """Reuse the planner's Friday grid so CI and publish_calendar can never
+    drift. Falls back to an inline copy of the rule if the import fails."""
+    try:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        from publish_calendar import is_friday_slot  # noqa: F401
+        return is_friday_slot
+    except Exception:
+        def is_friday_slot(d):
+            return d.weekday() == 4 and (d.month, d.day) not in {(1, 1), (12, 23), (12, 25), (12, 30), (12, 31)}
+        return is_friday_slot
+
+
 def validate(path, today):
     failures = []
+    is_friday_slot = _load_friday_grid()
     cards = []  # (line_no, record)
     try:
         with open(path, encoding="utf-8") as fh:
@@ -73,6 +97,7 @@ def validate(path, today):
     seen_pending = {}
     published_slugs = set()
     pending_pins = 0
+    slot_bookings = {}  # hold_until -> [(slug, line_no)] for pending cards
 
     # Pass 1: every slug already claimed by a published card — including the
     # published_slug mapping (research slug != final article slug).
@@ -133,6 +158,22 @@ def validate(path, today):
         else:
             seen_pending[slug] = line_no
 
+        # Rules 7 + 8 (t_84df1d95): slot booking hygiene for every pending
+        # card that carries a hold_until, checked before the pin-priority
+        # branch below (which `continue`s for unpinned cards).
+        if isinstance(hold_until, str) and DATE_RE.match(hold_until):
+            hu_d = parse_date(hold_until)
+            if hu_d:
+                slot_bookings.setdefault(hold_until, []).append((slug, line_no))
+                if not is_friday_slot(hu_d):
+                    failures.append(
+                        f"FAIL: {slug} (line {line_no}) — off-grid pin: "
+                        f"hold_until {hold_until} is a "
+                        f"{hu_d.strftime('%A')}, but the publish grid is "
+                        f"Friday-only; re-pin to a free Friday via "
+                        f"`python3 scripts/publish_calendar.py --free`"
+                    )
+
         if not isinstance(priority, str) or not priority.startswith("pin-"):
             continue
 
@@ -168,6 +209,15 @@ def validate(path, today):
             failures.append(
                 f"FAIL: {slug} (line {line_no}) — hold_until {hold_until!r} "
                 f"does not match pin date {m.group(1)!r}"
+            )
+
+    # Rule 8 summary pass: one Friday slot may carry at most one pending pin.
+    for slot, occupants in sorted(slot_bookings.items()):
+        if len(occupants) > 1:
+            who = ", ".join(f"{s} (line {ln})" for s, ln in occupants)
+            failures.append(
+                f"FAIL: slot collision — {slot} is pinned by "
+                f"{len(occupants)} pending cards: {who}"
             )
 
     return failures, pending_pins

@@ -13,17 +13,32 @@ Modes:
   publish_calendar.py --free     next 20 free Fridays
   publish_calendar.py --fix      re-plan pins; rewrite jsonl + git commit only if
                                  something changed; prints summary when it fixes,
-                                 silent (watchdog) when all is well.
+                                 silent (watchdog) when all is well. Surplus cards
+                                 that no Friday slot (nominal horizon or beyond)
+                                 can host are DE-PINNED, never left on stale pins.
+                                 The commit is refused if the post-plan queue
+                                 carries any slot collision or off-grid pin.
+  publish_calendar.py --fix --dry-run
+                                 same planning, prints what would change, no writes.
 """
 import json, datetime, pathlib, subprocess, sys, collections
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 JL = ROOT / "data/content-research.jsonl"
 
+GRID_START = datetime.date(2026, 10, 23)
+HORIZON_END = datetime.date(2028, 6, 30)  # nominal calendar horizon
+EXCLUDED = {(1, 1), (12, 23), (12, 25), (12, 30), (12, 31)}  # holiday blackout days
+
+def is_friday_slot(d):
+    """Grid predicate: a Friday outside blackout days. Shared with
+    validate_queue.py so CI and planner never drift apart."""
+    return d.weekday() == 4 and (d.month, d.day) not in EXCLUDED
+
 def fridays():
-    d, out = datetime.date(2026, 10, 23), []
-    while d <= datetime.date(2028, 6, 30):
-        if d.weekday() == 4 and not (d.month == 1 and d.day == 1) and not (d.month == 12 and d.day in (23, 25, 30, 31)):
+    d, out = GRID_START, []
+    while d <= HORIZON_END:
+        if is_friday_slot(d):
             out.append(d)
         d += datetime.timedelta(days=1)
     return out
@@ -68,6 +83,7 @@ def load():
 
 def plan(cards):
     slots = fridays()
+    today = datetime.date.today()
     art = [c for c in cards if c.get("status") == "pending" and c.get("type") in (None, "article")
            and (c.get("hold_until") or c["slug"] in FIXED)]
     for c in art:
@@ -78,8 +94,26 @@ def plan(cards):
     for slug, when in FIXED.items():
         out[datetime.date.fromisoformat(when)] = slug
     rest = [c for c in art if c["slug"] not in FIXED]
+    # Anchor rule: a pin that is already valid (future, on the Friday grid,
+    # slot still free, deadline not passed) is KEPT as-is. Maintenance then
+    # re-pins only the broken cards — the slot calendar is a product
+    # decision, not churn fodder, and idempotent re-runs stay silent.
+    for c in list(rest):
+        hu = c.get("hold_until")
+        try:
+            d = datetime.date.fromisoformat(hu) if hu else None
+        except ValueError:
+            d = None
+        if d is None or d < today or not is_friday_slot(d) or d in out:
+            continue
+        if c["_dl"] is not None and c["_dl"] < d:
+            continue
+        out[d] = c["slug"]
+        rest.remove(c)
     recent = collections.deque(maxlen=2)
     for slot in slots:
+        if slot < today:
+            continue  # past Fridays are not placeable slots (rule 3 pins)
         if slot in out:
             recent.append(cluster(out[slot]))
             continue
@@ -95,6 +129,30 @@ def plan(cards):
         out[slot] = pick["slug"]
         rest.remove(pick)
         recent.append(cluster(pick["slug"]))
+    # Grid saturated: place the surplus on Fridays BEYOND the nominal
+    # horizon instead of leaving them on stale pins. A stale pin that the
+    # reflow later reuses is exactly the collision defect this planner is
+    # meant to prevent. Cards whose topical deadline has passed are the
+    # only ones left unplaced (reported to the caller, never pinned).
+    if rest:
+        nxt = slots[-1] + datetime.timedelta(days=1)
+        while rest:
+            slot = nxt
+            while not is_friday_slot(slot):
+                slot += datetime.timedelta(days=1)
+            elig = [c for c in rest if c["_rel"] <= slot and (c["_dl"] is None or c["_dl"] >= slot)]
+            if not elig:
+                break  # remaining cards cannot meet deadlines even past the horizon
+            elig.sort(key=lambda c: (c["_dl"] or datetime.date(2099, 1, 1),
+                                     1 if cluster(c["slug"]) in recent else 0,
+                                     c["_rel"],
+                                     {"high": 0, "medium": 1, "low": 2}.get(c.get("demand"), 3),
+                                     c["slug"]))
+            pick = elig[0]
+            out[slot] = pick["slug"]
+            rest.remove(pick)
+            recent.append(cluster(pick["slug"]))
+            nxt = slot + datetime.timedelta(days=1)
     return out, rest
 
 def main():
@@ -117,37 +175,75 @@ def main():
         return
     if "--fix" in args:
         byslug = {c["slug"]: c for c in cards if "slug" in c}
+        dry = "--dry-run" in args
         changed = {}
+        cleared = []
         for s, slug in cal.items():
             if byslug[slug].get("hold_until") != str(s):
                 changed[slug] = str(s)
+        # Surplus cards (cannot meet deadlines even past the horizon) must
+        # NOT keep their stale pins: an old pin re-used by the reflow is a
+        # collision waiting to happen. They are de-pinned instead.
+        planned_slugs = set(cal.values())
+        pinned_slugs = {c["slug"] for c in cards if c.get("status") == "pending"
+                        and c.get("type") in (None, "article")
+                        and (c.get("hold_until") or c["slug"] in FIXED)}
+        for slug in pinned_slugs - planned_slugs:
+            if byslug[slug].get("hold_until"):
+                cleared.append(slug)
         if unplaced:
-            print("!! CARDS CANNOT MEET DEADLINES:", [c["slug"] for c in unplaced])
-        if not changed:
+            print("!! CARDS CANNOT MEET DEADLINES (de-pinned):", [c["slug"] for c in unplaced])
+        if not changed and not cleared:
             return  # healthy calendar: stay silent (watchdog pattern)
-        for s, slug in cal.items():
-            c = byslug[slug]
-            if "release_intent" not in c:
-                c["release_intent"] = c.get("hold_until")  # freeze research intent => idempotent re-plans
-            c["hold_until"] = str(s)
-            c["priority"] = "pin-" + str(s)
-        # cards we are NOT planning (no hold_until, unpinned) keep their fields untouched
-        with open(JL, "w") as f:
-            for c in cards:
-                clean = {k: v for k, v in c.items() if not k.startswith("_")}
-                f.write(json.dumps(clean, ensure_ascii=False) + "\n")
-        r = subprocess.run(["python3", str(ROOT / "scripts/validate_queue.py")], capture_output=True, text=True)
-        if "OK" not in r.stdout:
-            subprocess.run(["git", "-C", str(ROOT), "checkout", "--", "data/content-research.jsonl"])
-            print("FIX REJECTED by validator:", (r.stdout or r.stderr)[:200])
-            sys.exit(1)
-        subprocess.run(["git", "-C", str(ROOT), "add", "data/content-research.jsonl", "scripts/publish_calendar.py"])
-        subprocess.run(["git", "-C", str(ROOT), "commit", "-m",
-                        f"publish calendar maintenance: re-pinned {len(changed)} card(s) (collision/deadline/cluster hygiene)"])
-        subprocess.run(["git", "-C", str(ROOT), "push", "-q"])
-        print("publish calendar: re-pinned", len(changed), "card(s)")
-        for slug, when in sorted(changed.items(), key=lambda x: x[1]):
-            print(" ", when, slug)
+        if dry:
+            print("DRY-RUN: would re-pin", len(changed), "card(s); would de-pin", len(cleared), "card(s)")
+            for slug, when in sorted(changed.items(), key=lambda x: x[1]):
+                print("  ->", when, slug)
+            for slug in cleared:
+                print("  de-pin", slug)
+        else:
+            for s, slug in cal.items():
+                c = byslug[slug]
+                if "release_intent" not in c:
+                    c["release_intent"] = c.get("hold_until")  # freeze research intent => idempotent re-plans
+                c["hold_until"] = str(s)
+                c["priority"] = "pin-" + str(s)
+            for slug in cleared:
+                c = byslug[slug]
+                c["hold_until"] = None
+                if isinstance(c.get("priority"), str) and c["priority"].startswith("pin-"):
+                    c["priority"] = c.get("demand") or "medium"
+            # Post-plan collision assertion: every Friday slot may carry at
+            # most one pending pin. If the plan is not collision-free the
+            # commit is REFUSED (never push a knowingly-broken queue).
+            slot_count = collections.Counter(
+                c["hold_until"] for c in cards
+                if c.get("status") == "pending" and c.get("type") in (None, "article")
+                and c.get("hold_until"))
+            collisions = {s: n for s, n in slot_count.items() if n > 1}
+            offgrid = [s for s in slot_count if not is_friday_slot(datetime.date.fromisoformat(s))]
+            if collisions or offgrid:
+                print("FIX ABORTED — collisions:", collisions, "off-grid:", offgrid)
+                sys.exit(1)
+            with open(JL, "w") as f:
+                for c in cards:
+                    clean = {k: v for k, v in c.items() if not k.startswith("_")}
+                    clean.pop("hold_until", None) if c.get("hold_until") is None and "hold_until" in c else None
+                    f.write(json.dumps(clean, ensure_ascii=False) + "\n")
+            r = subprocess.run(["python3", str(ROOT / "scripts/validate_queue.py")], capture_output=True, text=True)
+            if "OK" not in r.stdout:
+                subprocess.run(["git", "-C", str(ROOT), "checkout", "--", "data/content-research.jsonl"])
+                print("FIX REJECTED by validator:", (r.stdout or r.stderr)[:200])
+                sys.exit(1)
+            subprocess.run(["git", "-C", str(ROOT), "add", "data/content-research.jsonl", "scripts/publish_calendar.py"])
+            subprocess.run(["git", "-C", str(ROOT), "commit", "-m",
+                            f"publish calendar maintenance: re-pinned {len(changed)} card(s)"
+                            + (f", de-pinned {len(cleared)}" if cleared else "")
+                            + " (collision/deadline/cluster hygiene)"])
+            subprocess.run(["git", "-C", str(ROOT), "push", "-q"])
+            print("publish calendar: re-pinned", len(changed), "card(s)")
+            for slug, when in sorted(changed.items(), key=lambda x: x[1]):
+                print(" ", when, slug)
 
 if __name__ == "__main__":
     main()
