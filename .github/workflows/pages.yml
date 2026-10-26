@@ -50,6 +50,14 @@ jobs:
         # suite pins the config-anchored single-owner match and the host
         # wrapper's exit-10 -> cron-success mapping. stdlib-only, no pip.
         run: python3 scripts/test_lead_guard.py
+      - name: Gate — publish-calendar planner guards (t_2da26364)
+        # The 2026-10-26 Monday-cron defect: fridays() anchored at the
+        # hardcoded GRID_START re-pinned cards into a past slot and the
+        # validator rejected every run. This suite pins that --fix never
+        # emits a past pin, valid pins stay idempotent, expired-deadline
+        # cards are de-pinned not pinned, and --dry-run is read-only.
+        # stdlib-only, no pip.
+        run: python3 scripts/test_publish_calendar.py
       - name: Gate — publish queue integrity (pin/hold_until, gh#6)
         # Read-only assertion (gh#6): a pending card with priority
         # pin-YYYY-MM-DD must carry a matching hold_until, or the publish
