@@ -14,6 +14,9 @@ Guards under test (scripts/publish_calendar.py):
       days (EXCLUDED), within [GRID_START, HORIZON_END].
   P5  --fix --dry-run is read-only: exit 0 and no working-tree changes on a
       healthy queue (watchdog contract of the Monday cron wrapper).
+  P6  the maintenance commit message is ALWAYS card-stamped: the --fix cron
+      stream was the dominant source of uncarded commits on main (t_d0820b72,
+      fleet convention t_45ab7c9f; scripts/uncarded_commits.py sweeps).
 
 The planner reads datetime.date.today() internally; tests fake the clock by
 swapping the module-global `datetime` name for a shim whose date subclass
@@ -147,6 +150,24 @@ def test_fridays_invariants(pc):
     for d in fs:
         assert d.weekday() == 4, f"P4: {d} is not a Friday"
         assert (d.month, d.day) not in pc.EXCLUDED, f"P4: blackout day {d} in grid"
+
+
+# P6 --------------------------------------------------------------------
+
+def test_maintenance_commit_message_is_stamped(pc):
+    msg = pc.maintenance_commit_message(3, 0)
+    assert msg.startswith("publish calendar maintenance: re-pinned 3 card(s)")
+    assert "de-pinned" not in msg, "P6: zero de-pins must not appear in message"
+    assert pc.CARD_STAMP_RE.fullmatch(pc.MAINTENANCE_CARD), \
+        f"P6: MAINTENANCE_CARD {pc.MAINTENANCE_CARD!r} is not a card id"
+    assert pc.MAINTENANCE_CARD in msg, "P6: maintenance commit lacks its card stamp"
+    msg2 = pc.maintenance_commit_message(2, 1)
+    assert "de-pinned 1" in msg2 and pc.MAINTENANCE_CARD in msg2
+    # The commit call must build its message through this function — an
+    # inline f-string would bypass the stamp guard.
+    src = SCRIPT.read_text()
+    assert 'maintenance_commit_message(len(changed), len(cleared))' in src, \
+        "P6: --fix no longer commits via maintenance_commit_message()"
 
 
 def main() -> int:

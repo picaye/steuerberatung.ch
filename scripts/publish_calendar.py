@@ -18,13 +18,31 @@ Modes:
                                  can host are DE-PINNED, never left on stale pins.
                                  The commit is refused if the post-plan queue
                                  carries any slot collision or off-grid pin.
+                                 Maintenance commits are always card-stamped
+                                 with MAINTENANCE_CARD (uncarded-stream guard).
   publish_calendar.py --fix --dry-run
                                  same planning, prints what would change, no writes.
 """
-import json, datetime, pathlib, subprocess, sys, collections
+import json, datetime, pathlib, re, subprocess, sys, collections
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 JL = ROOT / "data/content-research.jsonl"
+
+# Standing anchor card for the --fix maintenance stream (t_d0820b72). Every
+# commit this script makes must carry a card id: scripts/uncarded_commits.py
+# fails sweeps on uncarded streams, and this cron stream was its dominant
+# source (fleet convention established in t_45ab7c9f).
+MAINTENANCE_CARD = "t_d0820b72"
+
+# Same shape scripts/uncarded_commits.py audits for.
+CARD_STAMP_RE = re.compile(r"t_[0-9a-f]{8}")
+
+
+def maintenance_commit_message(changed_n: int, cleared_n: int) -> str:
+    """Commit message for a --fix maintenance run, always card-stamped."""
+    return (f"publish calendar maintenance: re-pinned {changed_n} card(s)"
+            + (f", de-pinned {cleared_n}" if cleared_n else "")
+            + f" (collision/deadline/cluster hygiene) ({MAINTENANCE_CARD})")
 
 GRID_START = datetime.date(2026, 10, 23)
 HORIZON_END = datetime.date(2028, 6, 30)  # nominal calendar horizon
@@ -237,9 +255,7 @@ def main():
                 sys.exit(1)
             subprocess.run(["git", "-C", str(ROOT), "add", "data/content-research.jsonl", "scripts/publish_calendar.py"])
             subprocess.run(["git", "-C", str(ROOT), "commit", "-m",
-                            f"publish calendar maintenance: re-pinned {len(changed)} card(s)"
-                            + (f", de-pinned {len(cleared)}" if cleared else "")
-                            + " (collision/deadline/cluster hygiene)"])
+                            maintenance_commit_message(len(changed), len(cleared))])
             subprocess.run(["git", "-C", str(ROOT), "push", "-q"])
             print("publish calendar: re-pinned", len(changed), "card(s)")
             for slug, when in sorted(changed.items(), key=lambda x: x[1]):
