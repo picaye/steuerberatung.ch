@@ -58,6 +58,15 @@ jobs:
         # cards are de-pinned not pinned, and --dry-run is read-only.
         # stdlib-only, no pip.
         run: python3 scripts/test_publish_calendar.py
+      - name: Gate — publish-commit stamp guards (C1-C6, t_a0e122fe)
+        # The 2026-10-30 sweep-378 gap: t_d0820b72 stamped only the
+        # maintenance stream, so the publish day's content (e6a4672) and
+        # search-index (cad7eb3) commits reached origin/main un-stamped
+        # and grew the uncarded backlog. scripts/publish_commit.py is now
+        # the only committer for that stream; this suite pins that every
+        # message it can produce carries a (t_xxxxxxxx) stamp the
+        # uncarded_commits.py audit recognises. stdlib-only, no pip.
+        run: python3 scripts/test_publish_commit.py
       - name: Gate — publish queue integrity (pin/hold_until, gh#6)
         # Read-only assertion (gh#6): a pending card with priority
         # pin-YYYY-MM-DD must carry a matching hold_until, or the publish
