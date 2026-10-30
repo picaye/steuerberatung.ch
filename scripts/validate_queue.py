@@ -28,6 +28,11 @@ lines like type:recommendation/correction are ignored):
    the publish cron selects Fridays only, so those cards were never
    selectable — re-pin to a free Friday
    (`python3 scripts/publish_calendar.py --free`).
+8. (2026-10-30, t_6544e449) A published card without a well-formed
+   `published_at` -> FAIL. The 2026-10-30 regression: the publish stamp
+   wrote the wrong key (`published_date`), so the first new publish after
+   the c474a136 null-backfill re-opened the hole this check now seals.
+   The flip tool is scripts/mark_published.py.
 
 Exit 0 = clean, exit 1 = violations (each printed as `FAIL: <slug> — ...`).
 Stdlib only. `--file` and `--today` exist for tests; CI uses the defaults.
@@ -128,6 +133,16 @@ def validate(path, today):
             )
 
         if status == "published":
+            # Rule 8 (t_6544e449): the schema field is published_at; a
+            # published card without it re-opens the null-check hole.
+            pa = rec.get("published_at")
+            if not (isinstance(pa, str) and DATE_RE.match(pa)):
+                failures.append(
+                    f"FAIL: {slug} (line {line_no}) — published without a "
+                    f"well-formed published_at (got {pa!r}); stamp it via "
+                    f"scripts/mark_published.py (wrong-key regression, "
+                    f"t_6544e449)"
+                )
             # Rule 5 (added 2026-10-15 after the 601d990 breach): a card
             # published BEFORE its hold_until date consumed a future slot.
             hu = hold_until if isinstance(hold_until, str) and DATE_RE.match(hold_until or "") else None
