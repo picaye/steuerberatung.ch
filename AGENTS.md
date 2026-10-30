@@ -25,6 +25,10 @@ qa, decider.
 ## Conventions
 - New DE article: use `scripts/article_template.py` — it auto-injects the
   RELATED block from `scripts/related_map.json` (DE only; FR/IT/EN stay None).
+- The 06:30 publish lane's commits (`content:` / `search-index:`) must be made
+  through `scripts/publish_commit.py`, never a raw `git commit` — the wrapper
+  stamps every message with the standing anchor card (t_fcff6abc) so the
+  uncarded_commits.py audit stays green (t_a0e122fe).
 - After publishing: `python3 scripts/indexnow_ping.py` (non-fatal by design).
 - Sitemap: regenerate with `scripts/mksitemap.py`.
 - ESTV fixtures refresh each January: `scripts/fetch_estv_fixtures.py 2027`
