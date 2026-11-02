@@ -415,11 +415,12 @@ section { padding: 56px 0; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .price-card.featured { transform: none; }
 }
-input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--green); }
+input[type="checkbox"] { width: 18px; height: 18px; box-sizing: content-box; accent-color: var(--green); }
 @media (max-width: 520px) {
   .footer-grid { grid-template-columns: 1fr; }
   section { padding: 40px 0; }
-  /* iOS Safari auto-zooms on focus when form text is <16px */
-  input, select, textarea { font-size: 16px; }
+  /* iOS Safari auto-zooms on focus when form text is <16px (double selector outlasts later-loaded redesign.css) */
+  input:not([type="checkbox"]):not([type="radio"]), select, textarea,
+  .form-field input, .form-field select, .form-field textarea { font-size: 16px; }
   input[type="checkbox"] { width: 22px; height: 22px; }
 }
