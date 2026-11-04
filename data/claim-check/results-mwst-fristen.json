@@ -1,0 +1,167 @@
+[
+  {
+    "id": "c1",
+    "claim": "Die Abrechnung ist der ESTV innert 60 Tagen nach Ablauf der Abrechnungsperiode unaufgefordert einzureichen.",
+    "source": "mwstg_art71",
+    "verdict": "supports",
+    "confidence": 1.0,
+    "needs_review": false,
+    "probabilities": {
+      "supports": 1.0,
+      "contradicts": 0.0,
+      "silent": 0.0,
+      "unusable": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "c2",
+    "claim": "Die in der Abrechnungsperiode entstandene Steuerforderung ist innert 60 Tagen nach Ablauf der Abrechnungsperiode zu begleichen.",
+    "source": "mwstg_art86",
+    "verdict": "supports",
+    "confidence": 1.0,
+    "needs_review": false,
+    "probabilities": {
+      "supports": 1.0,
+      "contradicts": 0.0,
+      "silent": 0.0,
+      "unusable": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "c3",
+    "claim": "Gesetzliche Regel ist die vierteljährliche Abrechnung; bei Abrechnung nach Saldosteuersätzen erfolgt die Abrechnung halbjährlich.",
+    "source": "mwstg_art35",
+    "verdict": "supports",
+    "confidence": 0.99,
+    "needs_review": false,
+    "probabilities": {
+      "supports": 0.99,
+      "contradicts": 0.01,
+      "silent": 0.0,
+      "unusable": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "c4",
+    "claim": "Auf Antrag erfolgt die Abrechnung bei einem Umsatz von nicht mehr als 5'005'000 Franken pro Jahr aus steuerbaren Leistungen jährlich; bei regelmässigem Vorsteuerüberschuss monatlich.",
+    "source": "mwstg_art35",
+    "verdict": "supports",
+    "confidence": 0.93,
+    "needs_review": false,
+    "probabilities": {
+      "supports": 0.95,
+      "contradicts": 0.05,
+      "silent": 0.0,
+      "unusable": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "c5",
+    "claim": "Einreichefristen laut ESTV: 1. Quartal bis 31. Mai, 2. Quartal bis 31. August, 3. Quartal bis 30. November, 4. Quartal bis 28./29. Februar; Semester 1 bis 31. August, Semester 2 und Jahresrechnung bis 28./29. Februar.",
+    "source": "estv_fristen",
+    "verdict": "supports",
+    "confidence": 0.97,
+    "needs_review": false,
+    "probabilities": {
+      "supports": 0.98,
+      "contradicts": 0.02,
+      "silent": 0.0,
+      "unusable": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "c6",
+    "claim": "Im Rahmen des Jahresabschlusses festgestellte Mängel müssen spätestens in der Abrechnung über jene Periode korrigiert werden, in die der 180. Tag seit Ende des Geschäftsjahres fällt.",
+    "source": "mwstg_art72",
+    "verdict": "supports",
+    "confidence": 1.0,
+    "needs_review": false,
+    "probabilities": {
+      "supports": 1.0,
+      "contradicts": 0.0,
+      "silent": 0.0,
+      "unusable": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "c7",
+    "claim": "Bei jährlicher Abrechnung erhebt die ESTV provisorische Steuern in Raten: bei effektiver Methode je ein Viertel der massgebenden Steuerforderung zahlbar bis 150., 240. und 330. Tage nach Beginn der Steuerperiode; bei Saldosteuersätzen die Hälfte bis zum 240. Tag.",
+    "source": "mwstg_art86a",
+    "verdict": "supports",
+    "confidence": 0.93,
+    "needs_review": false,
+    "probabilities": {
+      "supports": 0.95,
+      "contradicts": 0.05,
+      "silent": 0.0,
+      "unusable": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "c8",
+    "claim": "Bei verspäteter Zahlung wird ohne Mahnung ein Verzugszins geschuldet.",
+    "source": "mwstg_art87",
+    "verdict": "supports",
+    "confidence": 0.97,
+    "needs_review": false,
+    "probabilities": {
+      "supports": 0.98,
+      "contradicts": 0.01,
+      "silent": 0.0,
+      "unusable": 0.01
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "c9",
+    "claim": "Die jährliche Abrechnung muss während mindestens einer ganzen Steuerperiode beibehalten werden; ein Rückwechsel zur jährlichen Abrechnung ist frühestens nach drei Steuerperioden möglich; Wechsel sind jeweils nur auf Beginn einer Steuerperiode möglich.",
+    "source": "mwstg_art35a",
+    "verdict": "supports",
+    "confidence": 0.97,
+    "needs_review": false,
+    "probabilities": {
+      "supports": 0.98,
+      "contradicts": 0.01,
+      "silent": 0.01,
+      "unusable": 0.0
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "c10",
+    "claim": "Gesuche um Fristverlängerung sind elektronisch über den Service «MWST abrechnen» im ESTV-Portal einzureichen (Art. 123 MWSTV); die Verlängerung ist kostenlos.",
+    "source": "estv_fristen",
+    "verdict": "supports",
+    "confidence": 0.93,
+    "needs_review": false,
+    "probabilities": {
+      "supports": 0.95,
+      "contradicts": 0.03,
+      "silent": 0.01,
+      "unusable": 0.01
+    },
+    "model": "jev-latest"
+  },
+  {
+    "id": "c11",
+    "claim": "Ergibt sich aus der Steuerabrechnung ein Überschuss zugunsten der steuerpflichtigen Person, wird er ausbezahlt; erfolgt die Auszahlung später als 60 Tage nach Eintreffen der Steuerabrechnung bei der ESTV, wird ab dem 61. Tag ein Vergütungszins ausgerichtet.",
+    "source": "mwstg_art88",
+    "verdict": "supports",
+    "confidence": 0.99,
+    "needs_review": false,
+    "probabilities": {
+      "supports": 0.99,
+      "contradicts": 0.01,
+      "silent": 0.0,
+      "unusable": 0.0
+    },
+    "model": "jev-latest"
+  }
+]

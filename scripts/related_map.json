@@ -65,8 +65,8 @@
   "steuern-sparen-tipps.html"
  ],
  "mwst-100k-pflicht-schweiz.html": [
+  "mwst-abrechnung-fristen.html",
   "mwst-agov-pflicht-oktober-2026.html",
-  "eu-zoll-3-euro-kleinsendungen.html",
   "mwst-ausfuhr-0-prozent-nachweis.html"
  ],
  "pensionskassen-einkauf-steuern-sparen.html": [
@@ -172,6 +172,11 @@
  "kapitalsteuer-ag-gmbh.html": [
   "verrechnungssteuer-schweiz-35-prozent.html",
   "dividenden-ahv-pflicht-bge-9c-532-2025.html",
+  "transparenzregister-tjpg-meldepflicht.html"
+ ],
+ "mwst-abrechnung-fristen.html": [
+  "mwst-100k-pflicht-schweiz.html",
+  "mwst-ausfuhr-0-prozent-nachweis.html",
   "transparenzregister-tjpg-meldepflicht.html"
  ]
 }
