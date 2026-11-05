@@ -23,6 +23,13 @@ qa, decider.
   against the official source text (TypeSafe). No figure ships unchecked.
 
 ## Conventions
+- **Every commit pushed to main must carry its kanban card id (`t_XXXXXXXX`,
+  8 hex chars) in the commit message.** GitHub issue refs alone ("Pino #10")
+  do NOT count. Host-side audit: `python3 scripts/uncarded_commits.py` prints
+  each of the last 20 `origin/main` commits with the card ref found and flags
+  uncarded ones (exit 1 if any). Commits that predate the convention are
+  annotated retroactively via git notes (`refs/notes/commits` containing the
+  card id); when pushing such a fix-up, also `git push origin refs/notes/commits`.
 - New DE article: use `scripts/article_template.py` — it auto-injects the
   RELATED block from `scripts/related_map.json` (DE only; FR/IT/EN stay None).
 - The 06:30 publish lane's commits (`content:` / `search-index:`) must be made
