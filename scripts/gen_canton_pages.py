@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generate 26 canton hub pages x 4 languages from data/cantons_raw.json.
 Path: /kanton/<slug>.html (+ en/ fr/ it/). Requires: python3 scripts/gen_canton_pages.py"""
-import json, os, sys, datetime
+import json, os
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://steuerberatung.ch"

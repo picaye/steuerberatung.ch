@@ -81,7 +81,6 @@ def test_fix_never_emits_past_pin(pc):
     out, unplaced = plan_at(pc, cards, today)
     assert today >= pc.GRID_START, "fixture assumes GRID_START is in the past"
     assert today not in out.values(), "past slot must not be reused"
-    from datetime import date as _d
     for slot, slug in out.items():
         if slug in pc.FIXED:
             continue  # fixed fast-lanes are content decisions, tested in P1b
