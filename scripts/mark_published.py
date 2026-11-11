@@ -47,6 +47,9 @@ import sys
 import tempfile
 from pathlib import Path
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import jsonl_guard  # noqa: E402  size guard for the queue, t_2ed95a27
+
 _PIN_RE = re.compile(r"^pin-(\d{4}-\d{2}-\d{2})$")
 _DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
@@ -90,6 +93,9 @@ def main(argv=None) -> int:
     ap.add_argument("--no-validate", action="store_true",
                     help="skip the validate_queue.py subprocess — unit tests "
                          "with synthetic queue records only")
+    ap.add_argument("--force", action="store_true",
+                    help="allow the write even if the size guard (t_2ed95a27) "
+                         "would reject it")
     args = ap.parse_args(argv)
 
     try:
@@ -174,6 +180,14 @@ def main(argv=None) -> int:
     if changed != [idx + 1] or len(lines) != len(old_lines):
         print(f"mark_published: sanity check failed — would change lines {changed}; "
               "aborting", file=sys.stderr)
+        return 1
+
+    # t_2ed95a27 size guard: never let a publish mark shrink the queue.
+    rejected, msg = jsonl_guard.shrink_rejected(old_lines, lines,
+                                                force=args.force)
+    if msg:
+        print(msg, file=sys.stderr)
+    if rejected:
         return 1
 
     # Write a temp sibling, validate it, then atomically replace.

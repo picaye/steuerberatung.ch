@@ -40,6 +40,9 @@ import json
 import os
 import sys
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import jsonl_guard  # noqa: E402  size guard for the queue, t_2ed95a27
+
 PENDING_CAP = 100          # mirrors scripts/inflow_gate.py PENDING_CAP
 DRAIN_MARGIN = 2           # land at pending <= cap - margin
 
@@ -158,6 +161,9 @@ def main(argv=None):
                          f"{DRAIN_MARGIN})")
     ap.add_argument("--dry-run", action="store_true",
                     help="print the audit line, write nothing")
+    ap.add_argument("--force", action="store_true",
+                    help="allow the write even if the size guard (t_2ed95a27) "
+                         "would reject it")
     args = ap.parse_args(argv)
 
     if args.cap < 1 or args.margin < 0 or args.margin >= args.cap:
@@ -184,14 +190,18 @@ def main(argv=None):
         print("auto_drain: dry-run — file not modified", file=sys.stderr)
         return 0
     if demoted:
-        tmp = args.file + ".auto-drain.tmp"
-        with open(tmp, "w", encoding="utf-8") as fh:
-            fh.writelines(new_lines)
-        os.replace(tmp, args.file)
-        if not new_lines or not new_lines[-1].endswith("\n"):
-            # keep the file newline-terminated like every prior drain
-            with open(args.file, "a", encoding="utf-8") as fh:
-                fh.write("\n")
+        # t_2ed95a27 size guard: a drain only flips statuses, so the
+        # non-empty line count must not drop below 50% of the original.
+        rejected, msg = jsonl_guard.shrink_rejected(lines, new_lines,
+                                                    force=args.force)
+        if msg:
+            print(msg, file=sys.stderr)
+        if rejected:
+            return 1
+        ok, err = jsonl_guard.guarded_replace(args.file, new_lines)
+        if not ok:
+            print(err, file=sys.stderr)
+            return 1
     return 0
 
 

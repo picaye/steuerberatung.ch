@@ -67,6 +67,11 @@ jobs:
         # message it can produce carries a (t_xxxxxxxx) stamp the
         # uncarded_commits.py audit recognises. stdlib-only, no pip.
         run: python3 scripts/test_publish_commit.py
+      - name: Gate — queue size-guard regression (t_2ed95a27)
+        # 2026-11-11: data/content-research.jsonl was truncated to 0 bytes
+        # twice by an unguarded agent-side rewrite. Every rewrite path must
+        # refuse a >50% shrink without --force.
+        run: python3 scripts/test_jsonl_guard.py
       - name: Gate — publish queue integrity (pin/hold_until, gh#6)
         # Read-only assertion (gh#6): a pending card with priority
         # pin-YYYY-MM-DD must carry a matching hold_until, or the publish
