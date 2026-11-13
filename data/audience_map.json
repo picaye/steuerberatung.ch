@@ -1,6 +1,4 @@
 {
-  "mwst-abrechnung-fristen": ["firma"],
-  "stille-reserven-eigenkapitalaufbau-jahresende": ["firma", "solo"],
   "13-ahv-rente-dezember-2026": [
     "solo",
     "verheiratet",
@@ -20,6 +18,10 @@
     "solo",
     "verheiratet",
     "konkubinat"
+  ],
+  "arbeitgeber-3a-beitrag-lohnausweis": [
+    "firma",
+    "solo"
   ],
   "auslaendisches-depot-neobroker-steuererklaerung": [
     "solo",
@@ -95,6 +97,9 @@
   "mwst-100k-pflicht-schweiz": [
     "firma"
   ],
+  "mwst-abrechnung-fristen": [
+    "firma"
+  ],
   "mwst-agov-pflicht-oktober-2026": [
     "firma"
   ],
@@ -142,6 +147,10 @@
     "solo",
     "verheiratet",
     "konkubinat"
+  ],
+  "stille-reserven-eigenkapitalaufbau-jahresende": [
+    "firma",
+    "solo"
   ],
   "teilliquidation-pensionskasse-auszahlung": [
     "firma"
