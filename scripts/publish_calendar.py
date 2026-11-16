@@ -61,6 +61,8 @@ def fridays():
         d += datetime.timedelta(days=1)
     return out
 
+PREP_WINDOW_DAYS = 7  # a pinned card may be picked from slot - this many days
+
 FIXED = {  # drafted fast-lane articles: exact Fridays, do not move
     "ubs-cs-migration-steuererklaerung-2026": "2027-01-08",
     "generalversammlung-2027-gewinn-dividende-steuer": "2027-02-05",

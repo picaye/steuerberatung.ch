@@ -49,6 +49,7 @@ from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import jsonl_guard  # noqa: E402  size guard for the queue, t_2ed95a27
+import publish_calendar  # noqa: E402  FIXED pins gate, t_4fa4b841
 
 _PIN_RE = re.compile(r"^pin-(\d{4}-\d{2}-\d{2})$")
 _DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
@@ -90,6 +91,9 @@ def main(argv=None) -> int:
                          "published_at (default: today); "
                          "--published-date kept as a compat alias")
     ap.add_argument("--file", default=DEFAULT_QUEUE)
+    ap.add_argument("--calendar", default=None,
+                    help="publish_calendar.py to read FIXED/PREP_WINDOW_DAYS "
+                         "from (test seam; default: the repo's own)")
     ap.add_argument("--no-validate", action="store_true",
                     help="skip the validate_queue.py subprocess — unit tests "
                          "with synthetic queue records only")
@@ -145,6 +149,45 @@ def main(argv=None) -> int:
               f"published_at={rec.get('published_at', rec.get('published_date'))!r} "
               f"langs={rec.get('langs')!r} — nothing to do", file=sys.stderr)
         return 1
+
+    # t_4fa4b841: FIXED calendar pins gate the write too. Evidence chain:
+    # arbeitgeber-3a-beitrag-lohnausweis was FIXED-pinned for 2026-12-11
+    # (publish_calendar.py @ 7998b4b) but published Fri 2026-11-13 (bdb388b)
+    # because neither the picker prose nor this writer consulted the FIXED
+    # dict — the queue-side hold_until had drifted to the publish day, so
+    # validate_queue rule 5 (jsonl-only) could not see the breach. A card
+    # whose FIXED slot is more than PREP_WINDOW_DAYS after the publish stamp
+    # is REFUSED here; a human-set slot_override is the only escape
+    # (CTO ruling 2026-10-15: slot calendar changes are the founder's call).
+    cal_mod = publish_calendar
+    if args.calendar:
+        import importlib.util
+        _spec = importlib.util.spec_from_file_location(
+            "_pubcal", args.calendar)
+        cal_mod = importlib.util.module_from_spec(_spec)
+        _spec.loader.exec_module(cal_mod)
+    fixed_slot = cal_mod.FIXED.get(args.slug)
+    if isinstance(fixed_slot, str) and _DATE_RE.match(fixed_slot):
+        window = getattr(cal_mod, "PREP_WINDOW_DAYS", 7)
+        days_early = (dt.date.fromisoformat(fixed_slot)
+                      - dt.date.fromisoformat(stamp)).days
+        if days_early > window:
+            if rec.get("slot_override"):
+                print(f"mark_published: {args.slug} is FIXED for "
+                      f"{fixed_slot} but the card carries slot_override="
+                      f"{rec['slot_override']!r} — proceeding (human call)",
+                      file=sys.stderr)
+            else:
+                print(f"mark_published: REFUSED — {args.slug} is FIXED-pinned "
+                      f"for {fixed_slot} in scripts/publish_calendar.py, "
+                      f"{days_early} days after the {stamp} stamp "
+                      f"(prep window is {window} days). Publishing early "
+                      f"defeats the cluster-spread hygiene the Friday grid "
+                      f"encodes (incident: bdb388b). Run "
+                      f"scripts/publish_picker.py for the week's selection; "
+                      f"only a human-set slot_override lifts this gate.",
+                      file=sys.stderr)
+                return 1
 
     rec["status"] = "published"
     rec["published_at"] = stamp  # schema field (t_fcff6abc); NOT published_date
