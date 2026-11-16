@@ -76,7 +76,9 @@ DEADLINE = {  # latest acceptable Friday (hard topical windows)
     "stille-reserven-eigenkapitalaufbau-jahresende": "2026-12-11",
     "mwst-vorsteuer-eigenverbrauch-jahresende": "2026-12-11",
     "mwst-abmeldung-unter-100000-jahresende": "2026-12-11",
-    "arbeitgeber-3a-beitrag-lohnausweis": "2026-12-11",
+    # 'arbeitgeber-3a-beitrag-lohnausweis' pin released 2026-11-16: topic was published
+    # early by the daily publish cron (bdb388b, Fri 2026-11-13) and is live+linked;
+    # the slot would reserve a phantom Friday for consumed content. See dossier W7 finding.
     "ahv-lohnabrechnung-annualisieren-frist-31-januar": "2027-01-29",
     "carif-krypto-datenaustausch-ab-2027": "2027-01-15",
     "steuererklaerung-fristerstreckung-2027": "2027-03-19",
