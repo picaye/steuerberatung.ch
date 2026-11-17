@@ -1,5 +1,14 @@
 #!/usr/bin/env python3
-"""Canonical commit wrapper for the 06:30 publish stream (card t_a0e122fe).
+"""Canonical commit wrapper for BOTH publish streams (cards t_a0e122fe, t_80f46bde).
+
+Rework t_80f46bde (2026-11-06): the Friday-09:00 publish cron bypassed this
+wrapper with raw `git commit` and pushed two uncarded commits (136f31a
+"content: <slug> (de/en/fr/it)" and eda011c "build: latest strip, sitemap,
+search-index for <slug>"). Root cause: the rule and the wrapper only covered
+the 06:30 stream's `content:`/`search-index:` shapes. From now on every
+publish-lane commit shape — the 06:30 stream AND the Friday-09:00 stream
+(incl. the `build:` regen commit and the slash-lang subject form) — must be
+produced here; there is still no free-message path.
 
 Why this exists: t_d0820b72 card-stamped ONLY the maintenance stream
 (publish_calendar.py MAINTENANCE_CARD), and its QA handoff named the
@@ -28,6 +37,12 @@ Guarantees:
   * `content` stages the standard publish file set for a slug (article
     mirrors, index/ratgeber pages, sitemaps, the queue flip) plus any
     extra --files (e.g. the one-off generator script under scripts/).
+  * `content --slash-lang` emits the Friday-lane subject form
+    "content: <slug> (de/en/fr/it)" (136f31a-style) instead of the
+    comma form — both are wrapper-produced and stamped.
+  * `build <slug>` stages the Friday regen set (homepage latest strips
+    x4, all sitemaps incl. root, the search index) and emits
+    "build: latest strip, sitemap, search-index for <slug>" (eda011c-style).
   * `search-index` stages exactly assets/search-index.js.
   * Both refuse to create an empty commit and never push — the host
     flow pushes main + refs/notes after the CI gate passes.
@@ -37,8 +52,13 @@ Guarantees:
 
 Usage (from repo root, publish day, after mark_published.py + the page
 build + gen_search_index have written the working tree):
+    # 06:30 stream:
     python3 scripts/publish_commit.py content <slug> --langs de,en,fr,it
     python3 scripts/publish_commit.py search-index
+    # Friday-09:00 stream (t_80f46bde): slash-lang subject + build regen
+    python3 scripts/publish_commit.py content <slug> --slash-lang \
+        --files data/audience_map.json scripts/_publish_<date>_<slug>.py
+    python3 scripts/publish_commit.py build <slug>
     # run that belongs to a specific card instead of the anchor:
     python3 scripts/publish_commit.py content <slug> --card t_6544e449
 
@@ -77,6 +97,7 @@ def default_content_paths(slug: str, langs: list[str]) -> list[str]:
         f"{slug}.html",
         "index.html",
         "ratgeber.html",
+        "sitemap.xml",
         "sitemap-de.xml",
         "sitemap-en.xml",
         "sitemap-fr.xml",
@@ -92,6 +113,24 @@ def default_content_paths(slug: str, langs: list[str]) -> list[str]:
             f"{lang}/ratgeber.html",
         ]
     return paths
+
+
+def build_paths(slug: str) -> list[str]:
+    """File set of the Friday regen commit (eda011c shape): the generated
+    homepage latest strips, every sitemap, and the search index. Paths the
+    run did not touch are skipped by stage(); --files extends the set."""
+    return [
+        "index.html",
+        "en/index.html",
+        "fr/index.html",
+        "it/index.html",
+        "sitemap.xml",
+        "sitemap-de.xml",
+        "sitemap-en.xml",
+        "sitemap-fr.xml",
+        "sitemap-it.xml",
+        SEARCH_INDEX_PATH,
+    ]
 
 
 def normalize_langs(value: str | list) -> list[str]:
@@ -126,13 +165,25 @@ def stamped(message: str, card: str) -> str:
     return f"{msg} ({card})"
 
 
-def content_commit_message(slug: str, langs: list[str], card: str = PUBLISH_CARD) -> str:
-    lang_str = ",".join(langs) if langs else "de"
+def content_commit_message(slug: str, langs: list[str], card: str = PUBLISH_CARD,
+                           slash_lang: bool = False) -> str:
+    """Subject for a content publish.
+
+    slash_lang=True emits the Friday-lane historical form
+    "content: <slug> (de/en/fr/it)" (136f31a); the default comma form
+    matches the 06:30 stream (f4fa476). Both go through stamped().
+    """
+    lang_str = ("/" if slash_lang else ",").join(langs) if langs else "de"
     return stamped(f"content: {slug} ({lang_str})", card)
 
 
 def search_index_commit_message(card: str = PUBLISH_CARD) -> str:
     return stamped("search-index: refresh", card)
+
+
+def build_commit_message(slug: str, card: str = PUBLISH_CARD) -> str:
+    """Friday-lane regen subject (eda011c): latest strips + sitemaps + index."""
+    return stamped(f"build: latest strip, sitemap, search-index for {slug}", card)
 
 
 def git(*args: str) -> subprocess.CompletedProcess:
@@ -180,6 +231,8 @@ def main(argv: list[str] | None = None) -> int:
     c = sub.add_parser("content", help="commit a published article set")
     c.add_argument("slug")
     c.add_argument("--langs", default="de,en,fr,it")
+    c.add_argument("--slash-lang", action="store_true",
+                   help="Friday-lane subject form '(de/en/fr/it)' instead of '(de,en,fr,it)'")
     c.add_argument("--files", action="append", default=[],
                    help="extra path to stage (repeatable), e.g. the generator script")
     c.add_argument("--card", default=PUBLISH_CARD)
@@ -187,12 +240,22 @@ def main(argv: list[str] | None = None) -> int:
     s = sub.add_parser("search-index", help="commit a search-index refresh")
     s.add_argument("--card", default=PUBLISH_CARD)
 
+    b = sub.add_parser("build", help="commit the Friday regen set (latest strips, sitemaps, search index)")
+    b.add_argument("slug")
+    b.add_argument("--files", action="append", default=[],
+                   help="extra path to stage (repeatable)")
+    b.add_argument("--card", default=PUBLISH_CARD)
+
     args = ap.parse_args(argv)
 
     if args.mode == "content":
         langs = normalize_langs(args.langs)
-        msg = content_commit_message(args.slug, langs, args.card)
+        msg = content_commit_message(args.slug, langs, args.card,
+                                     slash_lang=args.slash_lang)
         rc = stage(default_content_paths(args.slug, langs) + args.files)
+    elif args.mode == "build":
+        msg = build_commit_message(args.slug, args.card)
+        rc = stage(build_paths(args.slug) + args.files)
     else:
         msg = search_index_commit_message(args.card)
         rc = stage([SEARCH_INDEX_PATH])

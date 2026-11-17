@@ -25,9 +25,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          # fetch-depth 2 so the post-deploy IndexNow step can diff HEAD^..HEAD
-          # to find the changed pages. Default (1) would hide the parent commit.
-          fetch-depth: 2
+          # fetch-depth 40: the post-deploy IndexNow step needs HEAD^..HEAD,
+          # and the card-stamp audit gate below walks the last 40 commits.
+          fetch-depth: 40
+      - name: Fetch commit notes (card-stamp audit input)
+        # The audit reads retro-stamps from refs/notes/commits. Checkout
+        # never fetches notes; anything else (e.g. relying on FETCH_HEAD)
+        # silently points notes at main and over-reports uncarded.
+        run: git fetch origin "+refs/notes/commits:refs/notes/commits"
       - name: Gate — tax engine tests (AGENTS.md working contract)
         # AGENTS.md declares these gates; without them here, any push to main
         # shipped to Pages even when the engine tests failed. Non-zero exit
@@ -58,7 +63,7 @@ jobs:
         # cards are de-pinned not pinned, and --dry-run is read-only.
         # stdlib-only, no pip.
         run: python3 scripts/test_publish_calendar.py
-      - name: Gate — publish-commit stamp guards (C1-C6, t_a0e122fe)
+      - name: Gate — publish-commit stamp guards (C1-C8, t_a0e122fe/t_80f46bde)
         # The 2026-10-30 sweep-378 gap: t_d0820b72 stamped only the
         # maintenance stream, so the publish day's content (e6a4672) and
         # search-index (cad7eb3) commits reached origin/main un-stamped
@@ -80,6 +85,16 @@ jobs:
         # job — it never auto-fixes the queue; the research cron repairs
         # its own appends before pushing.
         run: python3 scripts/validate_queue.py
+      - name: Gate — card-stamp audit of pushed history (t_80f46bde)
+        # The Friday 2026-11-06 gap: 136f31a/eda011c bypassed the wrapper and
+        # deploy 42194156716 was GREEN anyway — the gates above unit-test the
+        # wrapper but never audit actual origin state. This walks the last 40
+        # commits of the pushed sha; any new uncarded commit fails the deploy.
+        # Named pre-convention baseline (retire as they age out of the window):
+        # 00f11a0 (t_6884615a's own lane), 1c3be26 + 261aa9d (2026-10-23
+        # publish pair, pre-convention) — without the allowlist the gate is
+        # permanently red on history the wrapper never produced.
+        run: python3 scripts/uncarded_commits.py --repo . --ref HEAD -n 40 --allow-uncarded 00f11a0,1c3be26,261aa9d
       - name: Build public dist (exclude private data + server files)
         run: |
           mkdir -p dist/en dist/fr dist/it dist/assets dist/kanton dist/en/kanton dist/fr/kanton dist/it/kanton

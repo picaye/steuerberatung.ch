@@ -16,6 +16,12 @@ lock the two properties that keep the stream carded:
       stamped (t_fcff6abc) and stages the expected file set.
   C6  behaviour: `search-index` commits exactly assets/search-index.js
       stamped, and refuses an empty second run instead of committing.
+  C7  behaviour (t_80f46bde): `content --slash-lang` lands the Friday-lane
+      subject "content: <slug> (de/en/fr/it) (t_fcff6abc)" — byte-equal to
+      136f31a's subject apart from the stamp.
+  C8  behaviour (t_80f46bde): `build <slug>` lands "build: latest strip,
+      sitemap, search-index for <slug> (t_fcff6abc)" and stages exactly the
+      regen set the run touched — byte-equal to eda011c's subject + stamp.
 
 Stdlib only — the check runs the publish-commit path end to end in a temp
 repo. git is required (skips with rc 0 when absent, same as the other
@@ -86,13 +92,18 @@ def main() -> int:
         pc.content_commit_message("y", ["de"], card="t_6544e449"),
         pc.search_index_commit_message(),
         pc.search_index_commit_message(card="t_6544e449"),
+        pc.content_commit_message("stille-reserven", ["de", "en", "fr", "it"], slash_lang=True),
+        pc.build_commit_message("stille-reserven"),
+        pc.build_commit_message("z", card="t_6544e449"),
     ]
     for m in msgs:
         assert re.search(r"\(t_[0-9a-f]{8}\)$", m), m
         assert audit.CARD_RE.search(m), m
     assert msgs[0] == "content: mwst-erhoehung-2027-ahv-armee (de,en,fr,it) (t_fcff6abc)", msgs[0]
     assert msgs[3] == "search-index: refresh (t_fcff6abc)", msgs[3]
-    results.append(("C2", "content/search-index builders always end in an audit-recognised stamp"))
+    assert msgs[5] == "content: stille-reserven (de/en/fr/it) (t_fcff6abc)", msgs[5]
+    assert msgs[6] == "build: latest strip, sitemap, search-index for stille-reserven (t_fcff6abc)", msgs[6]
+    results.append(("C2", "content/search-index/build/slash-lang builders all end in an audit-recognised stamp"))
 
     # C3 stamped() invariants
     assert pc.stamped("foo (t_11111111)", "t_11111111") == "foo (t_11111111)"  # no double stamp
@@ -121,8 +132,8 @@ def main() -> int:
     results.append(("C4", "CLI commits only builder-produced messages (no free-message path)"))
 
     if shutil.which("git") is None:
-        for name, desc in (("C5", "skipped: git unavailable"), ("C6", "skipped: git unavailable")):
-            results.append((name, desc))
+        for name in ("C5", "C6", "C7", "C8"):
+            results.append((name, "skipped: git unavailable"))
     else:
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
@@ -174,6 +185,57 @@ def main() -> int:
             assert res.returncode == 1 and "empty commit" in res.stderr, res.stderr + res.stdout
             assert _git(repo, "rev-list", "--count", "HEAD") == count_before
             results.append(("C6", "search-index commit scoped to assets/search-index.js; second run refuses empty"))
+
+            # C7 content --slash-lang behaviour (Friday lane, 136f31a shape)
+            slug2 = "stille-reserven-eigenkapitalaufbau-jahresende"
+            for p in [f"{slug2}.html", "en/ratgeber.html", f"en/{slug2}.html",
+                      "fr/ratgeber.html", f"fr/{slug2}.html",
+                      "it/index.html", f"it/{slug2}.html", "it/ratgeber.html",
+                      "data/audience_map.json", "sitemap.xml",
+                      "scripts/_publish_20261106_stille_reserven.py"]:
+                f = repo / p
+                f.parent.mkdir(parents=True, exist_ok=True)
+                f.write_text("friday\n")
+            _git(repo, "add", "-A")
+            _git(repo, "commit", "-qm", "seed2 (t_99999998)")
+            for p in (f"{slug2}.html", f"en/{slug2}.html", f"fr/{slug2}.html", f"it/{slug2}.html",
+                      "data/audience_map.json", "sitemap.xml",
+                      "scripts/_publish_20261106_stille_reserven.py"):
+                (repo / p).write_text("friday2\n")
+            res = subprocess.run(
+                [sys.executable, str(repo / "scripts" / "publish_commit.py"),
+                 "content", slug2, "--slash-lang",
+                 "--files", "data/audience_map.json",
+                 "--files", "scripts/_publish_20261106_stille_reserven.py"],
+                capture_output=True, text=True, cwd=repo)
+            assert res.returncode == 0, res.stderr
+            msg = _git(repo, "log", "-1", "--format=%s").strip()
+            assert msg == f"content: {slug2} (de/en/fr/it) (t_fcff6abc)", msg
+            files = set(_git(repo, "show", "--name-only", "--format=", "HEAD").split())
+            for must in (f"{slug2}.html", f"it/{slug2}.html", "sitemap.xml",
+                         "data/audience_map.json",
+                         "scripts/_publish_20261106_stille_reserven.py"):
+                assert must in files, f"missing {must} in {files}"
+            results.append(("C7", "content --slash-lang lands the 136f31a-shaped subject, stamped"))
+
+            # C8 build behaviour (Friday regen, eda011c shape)
+            for p in ["index.html", "en/index.html", "fr/index.html", "sitemap.xml",
+                      "sitemap-de.xml", "sitemap-en.xml", "sitemap-fr.xml", "sitemap-it.xml",
+                      "assets/search-index.js"]:
+                (repo / p).write_text("regen\n")
+            res = subprocess.run(
+                [sys.executable, str(repo / "scripts" / "publish_commit.py"),
+                 "build", "stille-reserven"],
+                capture_output=True, text=True, cwd=repo)
+            assert res.returncode == 0, res.stderr
+            msg = _git(repo, "log", "-1", "--format=%s").strip()
+            assert msg == "build: latest strip, sitemap, search-index for stille-reserven (t_fcff6abc)", msg
+            files = set(_git(repo, "show", "--name-only", "--format=", "HEAD").split())
+            assert files == {"index.html", "en/index.html", "fr/index.html",
+                             "sitemap.xml", "sitemap-de.xml", "sitemap-en.xml",
+                             "sitemap-fr.xml", "sitemap-it.xml",
+                             "assets/search-index.js"}, files
+            results.append(("C8", "build lands the eda011c-shaped subject, stamps it, stages the regen set only"))
 
     width = max(len(n) for n, _ in results)
     for name, desc in results:
