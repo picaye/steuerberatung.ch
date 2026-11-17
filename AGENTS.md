@@ -32,10 +32,15 @@ qa, decider.
   card id); when pushing such a fix-up, also `git push origin refs/notes/commits`.
 - New DE article: use `scripts/article_template.py` — it auto-injects the
   RELATED block from `scripts/related_map.json` (DE only; FR/IT/EN stay None).
-- The 06:30 publish lane's commits (`content:` / `search-index:`) must be made
-  through `scripts/publish_commit.py`, never a raw `git commit` — the wrapper
-  stamps every message with the standing anchor card (t_fcff6abc) so the
-  uncarded_commits.py audit stays green (t_a0e122fe).
+- ALL publish-lane commits — from BOTH publish crons (daily 06:30 AND
+  Friday 09:00) and EVERY message shape they produce (`content: …`,
+  `search-index: …`, `build: latest strip, sitemap, search-index for <slug>`) —
+  must be made through `scripts/publish_commit.py`, never a raw `git commit`.
+  The wrapper stamps every message with the standing anchor card (t_fcff6abc)
+  so the uncarded_commits.py audit stays green (t_a0e122fe; Friday-lane shapes
+  and the `build:` mode added by t_80f46bde after 136f31a/eda011c bypassed it).
+  The Friday generator script writes files only; committing its output is the
+  wrapper's job: `content <slug> --slash-lang --files …` then `build <slug>`.
 - After publishing: `python3 scripts/indexnow_ping.py` (non-fatal by design).
 - Sitemap: regenerate with `scripts/mksitemap.py`.
 - ESTV fixtures refresh each January: `scripts/fetch_estv_fixtures.py 2027`
