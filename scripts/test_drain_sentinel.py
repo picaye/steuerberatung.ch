@@ -46,6 +46,7 @@ from __future__ import annotations
 
 import datetime
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -177,8 +178,8 @@ def main():
     build_rolling(r, 50, day=8)
     v = scan(r)
     check("S3 out-of-window drain commits excluded from rolling total",
-          v["verdict"] == "OK" and v["rolling_drain_demotions"] == 0,
-          json.dumps(v["rolling_drain_demotions"]))
+          v["verdict"] == "OK" and v.get("rolling_drain_demotions") == 0,
+          json.dumps(v.get("rolling_drain_demotions", v)))
 
     # S4 manual demotions don't inflate the rolling AUTO-DRAIN volume
     # (8 <= per-commit limit, so the only question is the rolling total)
@@ -189,9 +190,9 @@ def main():
                  "content-research: manual backlog sweep", day=2)
     v = scan(r)
     check("S4 non-drain commit demotions not counted in rolling7d",
-          v["verdict"] == "OK" and v["rolling_drain_demotions"] == 0
-          and v["max_commit_demotions"] == 8,
-          json.dumps({k: v[k] for k in
+          v["verdict"] == "OK" and v.get("rolling_drain_demotions") == 0
+          and v.get("max_commit_demotions") == 8,
+          json.dumps({k: v.get(k) for k in
                       ("rolling_drain_demotions", "max_commit_demotions")}))
 
     # S5 per-commit boundary: 10 OK, 11 ALERT
@@ -399,7 +400,37 @@ def main():
           and len(out16["demoted"]) == 2,
           p16.stdout + p16.stderr)
 
-    print(f"\n{16} guards run, {len(FAILURES)} failed"
+    # S17 symlinked repo path: git rev-parse --show-toplevel returns the
+    # RESOLVED path, so an unresolved queue path escapes the repo in the
+    # relpath call and every history scan degrades to SKIPPED
+    # (t_5ab9cd2b — host macOS tmpdir /var -> /private/var symptom).
+    # Built via an explicit symlink so it fails on ANY platform, not just
+    # hosts whose tmpdir happens to be symlinked.
+    link = tmp / "repo-link"
+    try:
+        os.symlink(str(r), str(link))
+    except (OSError, NotImplementedError):
+        check("S17 symlinked queue path scans history (not SKIPPED)", False,
+              "os.symlink unavailable on this platform")
+    else:
+        v17 = auto_drain.sentinel_scan(str(link / REL), as_of=NOW)
+        check("S17 symlinked queue path scans history (not SKIPPED)",
+              v17["verdict"] != "SKIPPED"
+              and v17.get("commits_scanned", 0) >= 2,
+              json.dumps(v17))
+        # a degraded SKIPPED dict must still render through every consumer
+        try:
+            line = auto_drain.sentinel_line(
+                {"type": "drain-sentinel", "verdict": "SKIPPED",
+                 "reason": "git log failed: fatal: ... outside repository",
+                 "alerts": [], "hard_flags": [], "commits_scanned": 0})
+            ok18 = line.startswith("sentinel: SKIPPED")
+        except KeyError as e:
+            ok18, line = False, f"KeyError {e}"
+        check("S18 sentinel_line renders a stripped SKIPPED dict",
+              ok18, line)
+
+    print(f"\n{18} guards run, {len(FAILURES)} failed"
           + (f": {FAILURES}" if FAILURES else ""))
     return 1 if FAILURES else 0
 

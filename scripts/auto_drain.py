@@ -232,11 +232,17 @@ def drain(lines, cap, margin, warns):
 # --------------------------------------------------------------------------
 
 def _git(repo, *args):
-    """git helper: (returncode, stdout). Never raises into a drain."""
+    """git helper: (returncode, stdout). Never raises into a drain.
+
+    On failure with empty stdout, return stderr instead: callers fold the
+    text into SKIPPED reasons, and dropping stderr turned "fatal: <path>
+    is outside repository" into an undiagnosable empty string (t_5ab9cd2b).
+    """
     try:
         p = subprocess.run(("git", "-C", repo) + args,
                            capture_output=True, text=True)
-        return p.returncode, p.stdout
+        out = p.stdout or (p.stderr if p.returncode != 0 else "")
+        return p.returncode, out
     except OSError:
         return 1, ""
 
@@ -356,9 +362,15 @@ def _evaluate(events_by_commit, msgs, days, rolling_limit, per_commit_limit):
 def _scan_history(queue_path, days, as_of=None):
     """Collect (events_by_commit, msgs) for queue-touching commits within
     the window, or (None, SKIPPED-verdict) when history is unavailable."""
-    q = os.path.abspath(queue_path)
+    # realpath, not abspath: `git rev-parse --show-toplevel` returns the
+    # FULLY RESOLVED root, so both sides of every relpath/toplevel
+    # comparison must be resolved too. An unresolved symlink hop (macOS
+    # /var -> /private/var tmpdirs; any symlinked checkout) made relpath
+    # escape the repo, `git log -- <escaped>` failed rc=128, and the
+    # guardrail silently degraded to SKIPPED (t_5ab9cd2b).
+    q = os.path.realpath(queue_path)
     rc, toplevel = _git(os.path.dirname(q), "rev-parse", "--show-toplevel")
-    toplevel = toplevel.strip()
+    toplevel = os.path.realpath(toplevel.strip()) if toplevel.strip() else ""
     if rc != 0 or not toplevel:
         return None, {"type": "drain-sentinel", "verdict": "SKIPPED",
                       "reason": "queue file is not inside a git repo; "
@@ -447,12 +459,15 @@ def sentinel_line(verdict):
     it must never re-derive a tally by hand (t_19d5ba8d rule 2)."""
     if verdict.get("verdict") == "SKIPPED":
         return f"sentinel: SKIPPED ({verdict.get('reason', '?')})"
-    return (f"sentinel: {verdict['verdict']} "
-            f"rolling7d={verdict['rolling_drain_demotions']}"
-            f"/{verdict['rolling_limit']} "
-            f"per-commit-max={verdict['max_commit_demotions']}"
-            f"/{verdict['per_commit_limit']} "
-            f"hard-flags={len(verdict['hard_flags'])}")
+    # .get everywhere: a degraded verdict dict must render, not KeyError
+    # into a live drain (t_5ab9cd2b — host run crashed on a missing
+    # rolling_drain_demotions while assembling the check message).
+    return (f"sentinel: {verdict.get('verdict', '?')} "
+            f"rolling7d={verdict.get('rolling_drain_demotions', '?')}"
+            f"/{verdict.get('rolling_limit', '?')} "
+            f"per-commit-max={verdict.get('max_commit_demotions', '?')}"
+            f"/{verdict.get('per_commit_limit', '?')} "
+            f"hard-flags={len(verdict.get('hard_flags', []))}")
 
 
 def main(argv=None):
