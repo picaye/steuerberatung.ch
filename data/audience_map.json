@@ -111,6 +111,10 @@
     "verheiratet",
     "firma"
   ],
+  "mwst-vorsteuer-eigenverbrauch-jahresende": [
+    "firma",
+    "solo"
+  ],
   "pensionskassen-einkauf-steuern-sparen": [
     "solo",
     "verheiratet"
