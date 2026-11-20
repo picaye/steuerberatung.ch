@@ -22,6 +22,10 @@ Modes:
                                  with MAINTENANCE_CARD (uncarded-stream guard).
   publish_calendar.py --fix --dry-run
                                  same planning, prints what would change, no writes.
+  publish_calendar.py --watchdog daily false-green guard (t_651281a3): every pin
+                                 whose binding slot is due must serve HTTP 200;
+                                 prints PIN_SLIPPED <slug> and exits 1 otherwise.
+                                 Silent + exit 0 when healthy.
 """
 import json, datetime, pathlib, re, subprocess, sys, collections
 
@@ -177,9 +181,72 @@ def plan(cards):
             nxt = slot + datetime.timedelta(days=1)
     return out, rest
 
+# ---------------------------------------------------------------------------
+# --watchdog (t_651281a3 AC2): the false-green publish-slot guard
+# ---------------------------------------------------------------------------
+def _http_status(url, timeout=20):
+    import urllib.error, urllib.request
+    req = urllib.request.Request(
+        url, headers={"User-Agent": "publish-calendar-watchdog/1.0 (t_651281a3)"})
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as r:
+            return getattr(r, "status", None) or r.getcode()
+    except urllib.error.HTTPError as e:
+        return e.code
+    except Exception:
+        return None
+
+
+def watchdog(args):
+    """Daily independent check for a publish run that went 'delivered' while
+    its artifact never landed (t_651281a3: 2026-11-20 Friday slot). Uses the
+    picker's OWN binding-slot rules: any pinned card whose slot date is due
+    (days_until <= 0) must serve HTTP 200 at https://steuerberatung.ch/
+    <slug>.html; anything else (404, 5xx, timeout) means the slot silently
+    slipped -> print PIN_SLIPPED <slug> and exit 1. Silent + exit 0 when
+    healthy, the Monday-Cron watchdog contract. Cheaper than the in-run
+    PUBLISH_SLIP gate (git log on origin/main, no network) but catches the
+    one agent shape the gate cannot: a run that never executed the gate.
+    Test seams: --today, --queue, --calendar, --base-url (forwarded to the
+    picker or used directly)."""
+    def opt(name, default):
+        return args[args.index(name) + 1] if name in args else default
+    here = pathlib.Path(__file__).resolve().parent
+    base = str(opt("--base-url", "https://steuerberatung.ch")).rstrip("/")
+    cmd = [sys.executable, str(here / "publish_picker.py")]
+    for flag in ("--queue", "--calendar", "--today"):
+        if flag in args:
+            cmd += [flag, opt(flag, None)]
+    r = subprocess.run(cmd, capture_output=True, text=True)
+    if r.returncode != 0:
+        print(f"watchdog: publish_picker exited {r.returncode}: "
+              f"{r.stderr.strip()[:200]}", file=sys.stderr)
+        return 2
+    doc = json.loads(r.stdout)
+    entries = ([doc.get("pick")] if doc.get("pick") else []) + doc.get("eligible", [])
+    seen, slips = set(), 0
+    for e in entries:
+        if (not e or e["slug"] in seen or not e.get("pinned")
+                or e.get("days_until") is None or e["days_until"] > 0):
+            continue
+        seen.add(e["slug"])
+        code = _http_status(f"{base}/{e['slug']}.html")
+        if code != 200:
+            print(f"PIN_SLIPPED {e['slug']} (slot {e['slot']} "
+                  f"days_until={e['days_until']} http={code})")
+            slips += 1
+    if slips:
+        print(f"watchdog: {slips} due pin(s) not serving 200 on {base}",
+              file=sys.stderr)
+        return 1
+    return 0
+
+
 def main():
     cards = load()
     args = sys.argv[1:]
+    if "--watchdog" in args:
+        sys.exit(watchdog(args))
     if "--free" in args:
         cal = plan(cards)[0]
         n = 0

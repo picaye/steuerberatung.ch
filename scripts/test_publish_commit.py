@@ -22,6 +22,15 @@ lock the two properties that keep the stream carded:
   C8  behaviour (t_80f46bde): `build <slug>` lands "build: latest strip,
       sitemap, search-index for <slug> (t_fcff6abc)" and stages exactly the
       regen set the run touched — byte-equal to eda011c's subject + stamp.
+  C9  behaviour (t_651281a3): `gate` exits 4 printing 'PUBLISH_SLIP <slug>'
+      when the picker reports a due pinned pick and no commit touching
+      <slug>.html has landed on origin/main — the 2026-11-20 Friday
+      false-green (cron said 'delivered', page 404'd all day) must be
+      unproducible end-to-end.
+  C10 `gate` passes (rc 0) when nothing is due (prep-window days_until>0).
+  C11 `gate` passes (rc 0) once the article commit has landed on origin/main.
+  C12 `gate` still slips a landed-but-noindex draft: committing the drafted
+      fast-lane page is NOT publishing (draft != published).
 
 Stdlib only — the check runs the publish-commit path end to end in a temp
 repo. git is required (skips with rc 0 when absent, same as the other
@@ -30,6 +39,7 @@ suites' tolerance for CI images without git config).
 from __future__ import annotations
 
 import importlib.util
+import json
 import re
 import shutil
 import subprocess
@@ -70,8 +80,11 @@ def _make_repo(root: Path) -> Path:
     _git(repo, "config", "user.name", "publish-commit-test")
     # publish_commit anchors REPO at its own file location; install the
     # real script into the throwaway repo so the CLI targets this repo.
+    # (t_651281a3: `gate` shells out to publish_picker.py, which itself
+    # loads the calendar — both must exist at REPO-relative paths.)
     (repo / "scripts").mkdir()
-    shutil.copy(HERE / "publish_commit.py", repo / "scripts" / "publish_commit.py")
+    for s in ("publish_commit.py", "publish_picker.py", "publish_calendar.py"):
+        shutil.copy(HERE / s, repo / "scripts" / s)
     return repo
 
 
@@ -236,6 +249,86 @@ def main() -> int:
                              "sitemap-fr.xml", "sitemap-it.xml",
                              "assets/search-index.js"}, files
             results.append(("C8", "build lands the eda011c-shaped subject, stamps it, stages the regen set only"))
+
+            # ---- C9–C12: completion gate `gate` (t_651281a3) ----------------
+            # The 2026-11-20 Friday false-green: cron c431b4839129 stored
+            # status=completed / delivery_outcome=delivered while origin/main
+            # never received the due pinned article (live page 404 all day).
+            # These checks run the gate in a throwaway repo with a real (local
+            # file-protocol) origin: a due pinned card with nothing landed must
+            # exit non-zero printing 'PUBLISH_SLIP <slug>' — a false-green must
+            # be unproducible — while a landed run exits 0.
+            def _run_gate(r, *extra):
+                return subprocess.run(
+                    [sys.executable, str(r / "scripts" / "publish_commit.py"),
+                     "gate", *extra],
+                    capture_output=True, text=True, cwd=r)
+
+            gslug = "gate-due-article"
+            dslug = "gate-draft-article"
+            q = repo / "data" / "content-research.jsonl"
+            q.write_text(json.dumps({
+                "slug": gslug, "status": "pending", "title": "Gate Due",
+                "demand": "high", "date": "2026-11-02",
+                "hold_until": "2026-11-20", "priority": "pin-2026-11-20",
+            }) + "\n" + json.dumps({
+                "slug": dslug, "status": "pending", "title": "Gate Draft",
+                "demand": "medium", "date": "2026-11-03",
+                "hold_until": "2026-12-04", "priority": "pin-2026-12-04",
+            }) + "\n")
+            _git(repo, "add", "data/content-research.jsonl")
+            _git(repo, "commit", "-qm", "gate seed queue (t_99999997)")
+
+            origin_dir = root / "gate-origin.git"
+            _git(root, "init", "-q", "--bare", str(origin_dir))
+            _git(repo, "remote", "add", "origin", str(origin_dir))
+            _git(repo, "push", "-q", "origin", "main")
+
+            # C9 the incident shape: due pin, no commit touching <slug>.html
+            # anywhere on origin/main -> non-zero + PUBLISH_SLIP <slug>
+            res = _run_gate(repo, "--today", "2026-11-20")
+            assert res.returncode == pc.GATE_SLIP_EXIT != 0, \
+                f"C9 rc={res.returncode}: {res.stdout}{res.stderr}"
+            assert f"PUBLISH_SLIP {gslug}" in res.stdout, f"C9 stdout: {res.stdout}"
+            assert f"PUBLISH_SLIP {dslug}" not in res.stdout, \
+                "C9: a not-yet-due pin must not be reported"
+            results.append(("C9", "gate exits 4 with 'PUBLISH_SLIP <slug>' "
+                                  "on a due pin with no landed commit"))
+
+            # C10 a legitimately not-due clock passes (no false alarm)
+            res = _run_gate(repo, "--today", "2026-11-13")
+            assert res.returncode == 0 and "PUBLISH_SLIP" not in res.stdout, \
+                f"C10 rc={res.returncode}: {res.stdout}{res.stderr}"
+            results.append(("C10", "gate OK (rc 0, no PUBLISH_SLIP) when no "
+                                   "pinned pick is due"))
+
+            # C11 the good-run shape: content commit pushed to origin/main -> OK
+            (repo / f"{gslug}.html").write_text("<html><title>ok</title></html>\n")
+            (repo / "en").mkdir(exist_ok=True)
+            (repo / "en" / f"{gslug}.html").write_text("<html><title>ok</title></html>\n")
+            _git(repo, "add", "-A")
+            _git(repo, "commit", "-qm", f"content: {gslug} (de/en/fr/it) (t_fcff6abc)")
+            _git(repo, "push", "-q", "origin", "main")
+            res = _run_gate(repo, "--today", "2026-11-20")
+            assert res.returncode == 0 and f"PUBLISH_GATE OK: {gslug}" in res.stdout, \
+                f"C11 rc={res.returncode}: {res.stdout}{res.stderr}"
+            results.append(("C11", "gate OK (rc 0) once the article commit has "
+                                   "landed on origin/main"))
+
+            # C12 a drafted fast-lane page still carrying noindex meta has NOT
+            # published — committing it must not silence the gate
+            (repo / f"{dslug}.html").write_text(
+                '<html><head><meta name="robots" content="noindex"></head></html>\n')
+            _git(repo, "add", f"{dslug}.html")
+            _git(repo, "commit", "-qm", f"draft: {dslug} (t_99999996)")
+            _git(repo, "push", "-q", "origin", "main")
+            res = _run_gate(repo, "--today", "2026-12-04")
+            assert res.returncode == pc.GATE_SLIP_EXIT, \
+                f"C12 rc={res.returncode}: {res.stdout}{res.stderr}"
+            assert f"PUBLISH_SLIP {dslug}" in res.stdout and "noindex" in res.stdout, \
+                f"C12 stdout: {res.stdout}"
+            results.append(("C12", "gate refuses a landed-but-noindex draft as "
+                                   "PUBLISH_SLIP (draft != published)"))
 
     width = max(len(n) for n, _ in results)
     for name, desc in results:

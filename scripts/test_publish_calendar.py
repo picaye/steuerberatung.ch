@@ -17,6 +17,12 @@ Guards under test (scripts/publish_calendar.py):
   P6  the maintenance commit message is ALWAYS card-stamped: the --fix cron
       stream was the dominant source of uncarded commits on main (t_d0820b72,
       fleet convention t_45ab7c9f; scripts/uncarded_commits.py sweeps).
+  P7  --watchdog (t_651281a3): a pin whose slot is due while the live page
+      does not serve 200 prints PIN_SLIPPED <slug> and exits 1 — the daily
+      backstop for a publish cron that reports 'delivered' but landed
+      nothing (2026-11-20 Friday false-green).
+  P8  --watchdog is silent with exit 0 when the due page serves 200.
+  P9  --watchdog never probes a pin that is not due yet.
 
 The planner reads datetime.date.today() internally; tests fake the clock by
 swapping the module-global `datetime` name for a shim whose date subclass
@@ -30,6 +36,7 @@ from __future__ import annotations
 
 import datetime
 import importlib.util
+import json
 import subprocess
 import sys
 from pathlib import Path
@@ -167,6 +174,106 @@ def test_maintenance_commit_message_is_stamped(pc):
     src = SCRIPT.read_text()
     assert 'maintenance_commit_message(len(changed), len(cleared))' in src, \
         "P6: --fix no longer commits via maintenance_commit_message()"
+
+
+# P7–P9: --watchdog false-green guard (t_651281a3) ------------------------
+# 2026-11-20: the Friday publish cron delivered 'completed' while the due
+# pinned page 404'd all day. --watchdog must name every due pin that does
+# not serve 200 (PIN_SLIPPED + exit 1), stay silent when it serves 200, and
+# never probe the site for a pin that is not due yet.
+
+import contextlib
+import http.server
+import socket
+import tempfile
+import threading
+import urllib.error  # noqa: F401  (kept for parity; watchdog probes via HTTP)
+
+
+def _due_queue(td, slug, hold_until="2026-11-20"):
+    q = td / "queue.jsonl"
+    q.write_text(json.dumps({
+        "slug": slug, "status": "pending", "title": "Watchdog Due",
+        "demand": "high", "date": "2026-11-02",
+        "hold_until": hold_until, "priority": f"pin-{hold_until}",
+    }) + "\n", encoding="utf-8")
+    return q
+
+
+@contextlib.contextmanager
+def _serve(handler_cls):
+    srv = http.server.ThreadingHTTPServer(("127.0.0.1", 0), handler_cls)
+    threading.Thread(target=srv.serve_forever, daemon=True).start()
+    try:
+        yield f"http://127.0.0.1:{srv.server_address[1]}"
+    finally:
+        srv.shutdown()
+
+
+def _run_watchdog(queue, today, base_url):
+    return subprocess.run(
+        [sys.executable, str(SCRIPT), "--watchdog", "--today", today,
+         "--queue", str(queue), "--base-url", base_url],
+        capture_output=True, text=True, timeout=120)
+
+
+def test_watchdog_fires_pin_slipped(pc):
+    """P7: due pin + non-200 (404 handler) -> PIN_SLIPPED <slug>, exit 1."""
+    slug = "watchdog-slip-card"
+    with tempfile.TemporaryDirectory() as td:
+        root = Path(td)
+        q = _due_queue(root, slug)
+
+        class Four04(http.server.BaseHTTPRequestHandler):
+            def do_GET(self):
+                self.send_response(404)
+                self.end_headers()
+
+            def log_message(self, format, *args):  # silence access log
+                pass
+
+        with _serve(Four04) as base:
+            r = _run_watchdog(q, "2026-11-20", base)
+        assert r.returncode == 1, f"P7: exit {r.returncode}: {r.stdout}{r.stderr}"
+        assert f"PIN_SLIPPED {slug}" in r.stdout, f"P7 stdout: {r.stdout}"
+
+
+def test_watchdog_silent_when_page_serves(pc):
+    """P8: same due pin but the page serves 200 -> exit 0, stdout empty."""
+    slug = "watchdog-healthy-card"
+    with tempfile.TemporaryDirectory() as td:
+        root = Path(td)
+        q = _due_queue(root, slug)
+
+        class Ok200(http.server.BaseHTTPRequestHandler):
+            def do_GET(self):
+                self.send_response(200)
+                self.end_headers()
+                self.wfile.write(b"<html>ok</html>")
+
+            def log_message(self, format, *args):  # silence access log
+                pass
+
+        with _serve(Ok200) as base:
+            r = _run_watchdog(q, "2026-11-20", base)
+        assert r.returncode == 0, f"P8: exit {r.returncode}: {r.stdout}{r.stderr}"
+        assert r.stdout == "", f"P8: watchdog must be silent when healthy: {r.stdout!r}"
+
+
+def test_watchdog_ignores_future_pin(pc):
+    """P9: a pin not due yet must not be probed at all — a dead base-url
+    (port bound then closed) would fire if the watchdog ever woke early."""
+    slug = "watchdog-future-card"
+    with tempfile.TemporaryDirectory() as td:
+        root = Path(td)
+        q = _due_queue(root, slug, hold_until="2026-12-11")
+        s = socket.socket()
+        s.bind(("127.0.0.1", 0))
+        dead_port = s.getsockname()[1]
+        s.close()
+        r = _run_watchdog(q, "2026-11-20", f"http://127.0.0.1:{dead_port}")
+        assert r.returncode == 0, f"P9: exit {r.returncode}: {r.stdout}{r.stderr}"
+        assert "PIN_SLIPPED" not in r.stdout, f"P9 stdout: {r.stdout}"
 
 
 def main() -> int:

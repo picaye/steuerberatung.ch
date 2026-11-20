@@ -50,6 +50,22 @@ Guarantees:
     know about AND that does not exist on disk (a publish that touched
     fewer pages than the default set must still commit).
 
+Completion gate `gate` (t_651281a3, 2026-11-20): the Friday-09:00 run of
+cron c431b4839129 stored status=completed / delivery_outcome=delivered
+while its entire response was an 86-char command echo — nothing was built,
+committed or pushed, the pin (days_until=0) silently slipped and the
+human-visible publish slot went empty (live page 404, next auto run a full
+week later). A 'delivered' executions row cannot be trusted as publish
+proof, so the run now ends with a machine check that no cooperative agent
+can pass falsely: if the picker still reports a pick whose pinned slot is
+due (days_until <= 0) and no commit touching <slug>.html has landed on
+origin/main (root blob absent, or still carrying noindex draft meta), the
+gate prints "PUBLISH_SLIP <slug>" and exits 4 — the cron prompt turns a
+non-zero gate into a [CRON_FAILURE] delivery, so the false-green shape is
+no longer producible end-to-end. The uncooperative-agent residual (an run
+that never even runs the gate) is covered by the daily
+publish_calendar.py --watchdog (PIN_SLIPPED), t_651281a3 AC2.
+
 Usage (from repo root, publish day, after mark_published.py + the page
 build + gen_search_index have written the working tree):
     # 06:30 stream:
@@ -61,12 +77,16 @@ build + gen_search_index have written the working tree):
     python3 scripts/publish_commit.py build <slug>
     # run that belongs to a specific card instead of the anchor:
     python3 scripts/publish_commit.py content <slug> --card t_6544e449
+    # MANDATORY final step of every publish cron run (t_651281a3):
+    python3 scripts/publish_commit.py gate
 
-Exit codes: 0 commit created, 1 usage/validation refusal, 2 git error.
+Exit codes: 0 commit created / gate OK, 1 usage/validation refusal,
+2 git error, 4 PUBLISH_SLIP (due pick with nothing landed on origin/main).
 """
 from __future__ import annotations
 
 import argparse
+import json
 import re
 import subprocess
 import sys
@@ -131,6 +151,106 @@ def build_paths(slug: str) -> list[str]:
         "sitemap-it.xml",
         SEARCH_INDEX_PATH,
     ]
+
+
+# ---------------------------------------------------------------------------
+# Completion gate (t_651281a3): prove the run's artifact actually landed
+# ---------------------------------------------------------------------------
+GATE_SLIP_EXIT = 4
+LANG_MIRRORS = ("en", "fr", "it")
+
+
+def pick_json(queue: str, calendar: str, today: str | None):
+    """Run the picker (same deterministic rules the publish lane used) and
+    return its JSON document, or None on failure (message already printed)."""
+    picker = REPO / "scripts" / "publish_picker.py"
+    cmd = [sys.executable, str(picker), "--queue", queue, "--calendar", calendar]
+    if today:
+        cmd += ["--today", today]
+    res = subprocess.run(cmd, capture_output=True, text=True)
+    if res.returncode != 0:
+        print(f"gate: publish_picker exited {res.returncode}: "
+              f"{res.stderr.strip()[:200]}", file=sys.stderr)
+        return None
+    try:
+        return json.loads(res.stdout)
+    except json.JSONDecodeError as exc:
+        print(f"gate: unparsable picker output: {exc}", file=sys.stderr)
+        return None
+
+
+def resolve_ref(skip_fetch: bool, ref_override: str | None) -> str | None:
+    """The pushed truth: origin/main after a fetch (falling back to any
+    resolvable candidate). Never trusts the local working tree."""
+    if not skip_fetch:
+        git("fetch", "--quiet", "origin", "main")
+    if ref_override:
+        return ref_override
+    for cand in ("origin/main", "origin/HEAD", "HEAD"):
+        if git("rev-parse", "--verify", "-q", cand).returncode == 0:
+            return cand
+    return None
+
+
+def landed_on_ref(ref: str, slug: str) -> tuple[bool, str]:
+    """True iff a commit touching <slug>.html is on ref AND the page there
+    is published (root blob exists, no mirror still carries noindex draft
+    meta). A noindex blob is the drafted fast-lane shape — committed but
+    deliberately NOT published, so it must not count as landing."""
+    if not git("log", "-1", "--format=%H", ref, "--", f"{slug}.html").stdout.strip():
+        return False, f"no commit touching {slug}.html on {ref}"
+    r = git("show", f"{ref}:{slug}.html")
+    if r.returncode != 0:
+        return False, f"{slug}.html absent from {ref} tree"
+    if "noindex" in r.stdout:
+        return False, f"{slug}.html on {ref} still carries noindex draft meta"
+    for lang in LANG_MIRRORS:
+        probe = git("show", f"{ref}:{lang}/{slug}.html")
+        if probe.returncode == 0 and "noindex" in probe.stdout:
+            return False, f"{lang}/{slug}.html on {ref} still carries noindex draft meta"
+    return True, "published blob on ref"
+
+
+def due_pinned(doc: dict) -> list[dict]:
+    """Entries the picker says are pinned AND due (days_until <= 0): the AC1
+    condition. pick comes first; eligible is scanned too as a safety net,
+    de-duplicated by slug."""
+    out, seen = [], set()
+    for e in [doc.get("pick")] + doc.get("eligible", []):
+        if (e and e.get("pinned") and e.get("days_until") is not None
+                and e["days_until"] <= 0 and e["slug"] not in seen):
+            seen.add(e["slug"])
+            out.append(e)
+    return out
+
+
+def gate(args) -> int:
+    """AC1 (t_651281a3): a due pinned pick with nothing landed on origin/main
+    must exit 4 printing PUBLISH_SLIP <slug>. A run that legitimately
+    published nothing (pick null, or nothing due) passes OK."""
+    doc = pick_json(args.queue, args.calendar, args.today)
+    if doc is None:
+        return 2
+    due = due_pinned(doc)
+    if not due:
+        pick = doc.get("pick")
+        print("PUBLISH_GATE OK: no due pinned pick "
+              f"(pick={pick.get('slug') if pick else None})")
+        return 0
+    ref = resolve_ref(args.skip_fetch, args.ref)
+    if ref is None:
+        print("gate: cannot resolve origin/main ref", file=sys.stderr)
+        return 2
+    rc = 0
+    for e in due:
+        ok, why = landed_on_ref(ref, e["slug"])
+        if ok:
+            print(f"PUBLISH_GATE OK: {e['slug']} (slot {e['slot']}) landed on {ref}")
+        else:
+            print(f"PUBLISH_SLIP {e['slug']} (slot {e['slot']} "
+                  f"days_until={e['days_until']}): {why}")
+            rc = GATE_SLIP_EXIT
+    return rc
 
 
 def normalize_langs(value: str | list) -> list[str]:
@@ -246,8 +366,20 @@ def main(argv: list[str] | None = None) -> int:
                    help="extra path to stage (repeatable)")
     b.add_argument("--card", default=PUBLISH_CARD)
 
+    g = sub.add_parser("gate", help="MANDATORY run-end completion gate (t_651281a3): "
+                                    "PUBLISH_SLIP + exit 4 if a due pinned pick did not "
+                                    "land on origin/main")
+    g.add_argument("--queue", default=str(REPO / "data" / "content-research.jsonl"))
+    g.add_argument("--calendar", default=str(REPO / "scripts" / "publish_calendar.py"))
+    g.add_argument("--today", default=None, help="override today (tests/forensics)")
+    g.add_argument("--ref", default=None, help="override landing ref (tests/forensics)")
+    g.add_argument("--skip-fetch", action="store_true",
+                   help="do not fetch origin first (tests/offline)")
+
     args = ap.parse_args(argv)
 
+    if args.mode == "gate":
+        return gate(args)
     if args.mode == "content":
         langs = normalize_langs(args.langs)
         msg = content_commit_message(args.slug, langs, args.card,
