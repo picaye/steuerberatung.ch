@@ -154,15 +154,19 @@ def main():
     check("A6 equal demand demotes oldest date first",
           out["demoted"] == ["t_old(low)"], f"{out}")
 
-    # A7 audit contract
+    # A7 audit contract (t_19d5ba8d: audit line carries the sentinel
+    # verdict; this fixture lives outside a git repo so the verdict is
+    # SKIPPED — a drain must still succeed, never crash on missing history)
     q = write_queue([card(f"s{i}") for i in range(11)])
     proc, out = run_drain(q, "--cap", "10", "--margin", "2")
-    check("A7 stdout is one JSON object, exact keys, slug(demand) labels",
+    check("A7 stdout is one JSON object, exact keys, slug(demand) labels, sentinel carried",
           proc.stdout.strip().count("\n") == 0
           and set(out) == {"demoted", "pending_before", "pending_after",
-                           "cap", "margin"}
+                           "cap", "margin", "sentinel"}
           and all("(" in d and d.endswith(")") for d in out["demoted"])
-          and out["cap"] == 10 and out["margin"] == 2,
+          and out["cap"] == 10 and out["margin"] == 2
+          and out["sentinel"]["type"] == "drain-sentinel"
+          and out["sentinel"]["verdict"] == "SKIPPED",
           f"stdout={proc.stdout!r}")
 
     # A8 idempotent: second run demotes nothing
