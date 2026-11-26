@@ -69,7 +69,8 @@ def load_gate():
 
 def run_gate(queue_path: Path):
     proc = subprocess.run(
-        [sys.executable, str(SCRIPT), "--file", str(queue_path)],
+        [sys.executable, str(SCRIPT), "--file", str(queue_path),
+         "--state-file", str(Path(tempfile.mkdtemp()) / "run_gate.state.json")],
         capture_output=True, text=True,
     )
     payload = json.loads(proc.stdout)
@@ -156,13 +157,21 @@ def main():
           and proc.returncode == 0
           and "line 2" in proc.stderr, f"{out} rc={proc.returncode} stderr={proc.stderr!r}")
 
-    # G7b stdout contract: exactly one JSON object, keys fixed
+    # G7b stdout contract: exactly one JSON object. t_ae7d83c3 extends the
+    # schema with severity/saturation_days/ossified; original keys preserved.
     proc, out = run_gate(write_queue([card("x", "pending")]))
-    check("G7b stdout keys are exactly pending/cap/gated/free_fridays/gate_reason",
+    check("G7b stdout keys are exactly pending/cap/gated/free_fridays/gate_reason"
+          "/severity/saturation_days/ossified",
           proc.stdout.strip().startswith("{")
           and proc.stdout.strip().endswith("}")
-          and set(out) == {"pending", "cap", "gated", "free_fridays", "gate_reason"}
+          and set(out) == {"pending", "cap", "gated", "free_fridays", "gate_reason",
+                           "severity", "saturation_days", "ossified"}
           and proc.stdout.strip().count("\n") == 0,
+          f"stdout={proc.stdout!r}")
+    check("G7b original keys keep their pre-t_ae7d83c3 types/values",
+          isinstance(out["pending"], int) and out["cap"] == gate.PENDING_CAP
+          and isinstance(out["gated"], bool)
+          and out["gate_reason"] in (None, "pending_cap", "no_free_fridays"),
           f"stdout={proc.stdout!r}")
 
     # G8 second gate: saturated grid, pending well below cap -> gated
@@ -174,12 +183,14 @@ def main():
         gate.count_free_fridays = lambda cards, today=None: 0
         buf_out, buf_err = io.StringIO(), io.StringIO()
         with contextlib.redirect_stdout(buf_out), contextlib.redirect_stderr(buf_err):
-            rc = gate.main(["--file", str(write_queue([card("only1", "pending")]))])
+            rc = gate.main(["--file", str(write_queue([card("only1", "pending")])),
+                            "--state-file", str(Path(tempfile.mkdtemp()) / "g8.state.json")])
         payload = json.loads(buf_out.getvalue())
         check("G8 pending<cap + 0 free Fridays: gated, rc 3, reason no_free_fridays",
               rc == 3 and payload["gated"] is True
               and payload["gate_reason"] == "no_free_fridays"
-              and payload["pending"] == 1,
+              and payload["pending"] == 1
+              and payload["severity"] == "AMBER",
               f"rc={rc} {payload}")
         check("G8 gated run prints GATED decision line to stderr",
               "GATED" in buf_err.getvalue(), f"stderr={buf_err.getvalue()!r}")
@@ -188,10 +199,12 @@ def main():
         q11 = write_queue([card(f"s{i}", "pending") for i in range(cap + 5)])
         buf_out, buf_err = io.StringIO(), io.StringIO()
         with contextlib.redirect_stdout(buf_out), contextlib.redirect_stderr(buf_err):
-            rc = gate.main(["--file", str(q11)])
+            rc = gate.main(["--file", str(q11),
+                            "--state-file", str(Path(tempfile.mkdtemp()) / "g11.state.json")])
         payload = json.loads(buf_out.getvalue())
         check("G11 both gates closed: reason is pending_cap",
-              rc == 3 and payload["gate_reason"] == "pending_cap",
+              rc == 3 and payload["gate_reason"] == "pending_cap"
+              and payload["severity"] == "RED",
               f"rc={rc} {payload}")
 
         # G10 fail-open: calendar unavailable -> cap alone gates. Simulate
@@ -209,7 +222,8 @@ def main():
         try:
             buf_out, buf_err = io.StringIO(), io.StringIO()
             with contextlib.redirect_stdout(buf_out), contextlib.redirect_stderr(buf_err):
-                rc = gate.main(["--file", str(write_queue([card("x", "pending")]))])
+                rc = gate.main(["--file", str(write_queue([card("x", "pending")])),
+                                "--state-file", str(Path(tempfile.mkdtemp()) / "g10.state.json")])
             payload = json.loads(buf_out.getvalue())
             check("G10 calendar failure + pending<cap: NOT gated (fail-open), rc 0",
                   rc == 0 and payload["gated"] is False
@@ -220,7 +234,8 @@ def main():
                   "WARN" in buf_err.getvalue(), f"stderr={buf_err.getvalue()!r}")
             buf_out, buf_err = io.StringIO(), io.StringIO()
             with contextlib.redirect_stdout(buf_out), contextlib.redirect_stderr(buf_err):
-                rc = gate.main(["--file", str(q11)])
+                rc = gate.main(["--file", str(q11),
+                                "--state-file", str(Path(tempfile.mkdtemp()) / "g10b.state.json")])
             payload = json.loads(buf_out.getvalue())
             check("G10b calendar failure + pending>=cap: still gated via cap",
                   rc == 3 and payload["gate_reason"] == "pending_cap",
@@ -241,6 +256,161 @@ def main():
     check("G9b end-to-end on saturated fixture: free_fridays 0 and gated rc 3",
           out9["free_fridays"] == 0 and out9["gated"] is True
           and proc.returncode == 3, f"{out9} rc={proc.returncode}")
+
+    # ---- G12-G23: severity split + anti-ossification tripwire (t_ae7d83c3)
+    # Alerting interpretation ONLY: exit codes and append-blocking from G1-G11
+    # must not move. Severity ladder (worst-gate-governs): RED > AMBER > GREEN.
+    def days_ago(n):
+        return (datetime.date.today() - datetime.timedelta(days=n)).isoformat()
+
+    def seed_state(path, since, last=None):
+        path.write_text(json.dumps({
+            "saturation_since": since,
+            "consecutive_days": 0,  # recomputed from dates; ignored on read
+            "last_seen": last or datetime.date.today().isoformat(),
+        }), encoding="utf-8")
+        return path
+
+    def sat_queue(name, extra_plain=0):
+        """Saturated calendar fixture (pins every open Friday -> free==0)
+        plus `extra_plain` unpinned pending fillers."""
+        lines = [json.dumps(c) for c in saturated]
+        lines += [card(f"{name}-fill{i}", "pending") for i in range(extra_plain)]
+        return write_queue(lines)
+
+    def run_gate_q(queue_path, state_path):
+        proc = subprocess.run(
+            [sys.executable, str(SCRIPT), "--file", str(queue_path),
+             "--state-file", str(state_path)],
+            capture_output=True, text=True)
+        return proc, json.loads(proc.stdout)
+
+    def state_of(path):
+        return json.loads(path.read_text(encoding="utf-8"))
+
+    from pathlib import Path as _P
+
+    # ---- G12: saturation -> AMBER, counter advances in the REPORT only.
+    q = sat_queue("g12")
+    st = seed_state(_P(tempfile.mkdtemp()) / "g12.state.json", days_ago(2))
+    proc, out = run_gate_q(q, st)
+    check("G12 saturation stays gated (exit 3) — behavior unchanged",
+          proc.returncode == 3 and out.get("gated") is True, str(out))
+    check("G12 saturation severity is AMBER, not RED",
+          out.get("severity") == "AMBER" and out.get("ossified") is False,
+          str(out))
+    check("G12 saturation counter reports day 3 of streak",
+          out.get("saturation_days") == 3, str(out))
+    check("G12 counter persisted across runs",
+          state_of(st).get("consecutive_days") == 3
+          and state_of(st).get("saturation_since") == days_ago(2),
+          st.read_text(encoding="utf-8").strip())
+    _, out_b = run_gate_q(q, st)
+    check("G12 same-day repeat run does not double-count",
+          out_b.get("saturation_days") == 3, str(out_b))
+
+    # ---- G13: cap-breach -> RED (actionable, unchanged)
+    q = write_queue([card(f"g13-{i}", "pending") for i in range(gate.PENDING_CAP)])
+    st = seed_state(_P(tempfile.mkdtemp()) / "g13.state.json", days_ago(9))
+    proc, out = run_gate_q(q, st)
+    check("G13 cap-breach severity is RED",
+          proc.returncode == 3 and out.get("gate_reason") == "pending_cap"
+          and out.get("severity") == "RED", str(out))
+    check("G13 cap-breach with healthy calendar resets streak",
+          state_of(st).get("consecutive_days") == 0,
+          st.read_text(encoding="utf-8").strip())
+
+    # ---- G14: healthy -> GREEN + tripwire counter RESETS
+    q = write_queue([card("g14-0", "pending")])
+    st = seed_state(_P(tempfile.mkdtemp()) / "g14.state.json", days_ago(5))
+    proc, out = run_gate_q(q, st)
+    check("G14 healthy state: rc 0, severity GREEN",
+          proc.returncode == 0 and out.get("severity") == "GREEN", str(out))
+    check("G14 non-saturating observation resets persisted counter",
+          state_of(st).get("consecutive_days") == 0
+          and state_of(st).get("saturation_since") is None,
+          st.read_text(encoding="utf-8").strip())
+
+    # ---- G15: >14 consecutive saturation days -> RED saturation-ossified
+    st = seed_state(_P(tempfile.mkdtemp()) / "g15.state.json", days_ago(15))
+    proc, out = run_gate_q(sat_queue("g15"), st)
+    check("G15 day-16 saturation escalates to RED (exit 3 unchanged)",
+          proc.returncode == 3 and out.get("severity") == "RED", str(out))
+    check("G15 escalation flags ossified + carries the streak",
+          out.get("ossified") is True and out.get("saturation_days") == 16,
+          str(out))
+    check("G15 escalation reason visible in stderr",
+          "gate_reason=saturation-ossified" in proc.stderr
+          and "ESCALATE" in proc.stderr, proc.stderr.strip())
+
+    # ---- G15b: exactly 14-day streak is still AMBER (grace is inclusive)
+    st = seed_state(_P(tempfile.mkdtemp()) / "g15b.state.json", days_ago(13))
+    _, out = run_gate_q(sat_queue("g15b"), st)
+    check("G15b day-14 saturation still AMBER (escalates only past 14)",
+          out.get("severity") == "AMBER" and out.get("saturation_days") == 14
+          and out.get("ossified") is False, str(out))
+
+    # ---- G16: cap-breach while saturated must NOT reset the streak
+    q = sat_queue("g16", extra_plain=gate.PENDING_CAP - len(saturated) + 1)
+    st = seed_state(_P(tempfile.mkdtemp()) / "g16.state.json", days_ago(6))
+    _, out = run_gate_q(q, st)
+    check("G16 cap-breach day keeps severity RED but calendar streak persists",
+          out.get("severity") == "RED"
+          and state_of(st).get("consecutive_days") == 7,
+          str(out) + " " + st.read_text(encoding="utf-8").strip())
+
+    # ---- G17: calendar read failure leaves counter untouched, reports streak
+    st = seed_state(_P(tempfile.mkdtemp()) / "g17.state.json", days_ago(4))
+    before = state_of(st)
+    days_read, since_read = gate.update_saturation_state(str(st), None)
+    check("G17 failed calendar read neither resets nor advances persisted state",
+          state_of(st) == before, st.read_text(encoding="utf-8").strip())
+    check("G17 failed read still reports the elapsed streak",
+          days_read == 5 and since_read == before["saturation_since"],
+          str((days_read, since_read)))
+
+    # ---- G18: skipped cron runs still advance the streak (calendar days)
+    st = seed_state(_P(tempfile.mkdtemp()) / "g18.state.json",
+                    days_ago(9), last=days_ago(4))
+    _, out = run_gate_q(sat_queue("g18"), st)
+    check("G18 gap between runs advances by calendar days",
+          out.get("saturation_days") == 10, str(out))
+
+    # ---- G19: severity ladder governs overall (worst-gate contract)
+    check("G19 severity ladder RED > AMBER > GREEN",
+          gate.SEVERITY_RANK["RED"] > gate.SEVERITY_RANK["AMBER"]
+          > gate.SEVERITY_RANK["GREEN"], str(gate.SEVERITY_RANK))
+
+    # ---- G20/G21: headline carries gate_reason=no_free_fridays; no flattening
+    q = sat_queue("g20")
+    st = _P(tempfile.mkdtemp()) / "g20.state.json"
+    proc, out = run_gate_q(q, st)
+    check("G20 saturating run reports gate_reason=no_free_fridays + AMBER",
+          out.get("gate_reason") == "no_free_fridays"
+          and out.get("severity") == "AMBER"
+          and "gate_reason=no_free_fridays" in proc.stderr, str(out))
+    check("G21 AMBER never flattened: gated implies severity != GREEN",
+          out.get("gated") is True and out.get("severity") != "GREEN", str(out))
+
+    # ---- G22: append-blocking is unchanged under AMBER (dry-run +5)
+    # The gate refusing (exit 3) before AND after +5 unpinned appends is what
+    # keeps the drain hook from publishing them; severity split must not move
+    # that answer.
+    st = seed_state(_P(tempfile.mkdtemp()) / "g22.state.json", days_ago(1))
+    proc, out = run_gate_q(sat_queue("g22a"), st)
+    check("G22 pre-append saturated gate blocks (AMBER, exit 3)",
+          proc.returncode == 3 and out.get("severity") == "AMBER", str(out))
+    proc, out = run_gate_q(sat_queue("g22b", extra_plain=5), st)
+    check("G22 +5 appends while saturated still refused (exit 3, still AMBER)",
+          proc.returncode == 3 and out.get("severity") == "AMBER"
+          and out.get("saturation_days") == 2, str(out))
+
+    # ---- G23: missing state file on a saturating day starts the streak at 1
+    st = _P(tempfile.mkdtemp()) / "missing" / "state.json"
+    proc, out = run_gate_q(sat_queue("g23"), st)
+    check("G23 fresh streak starts at day 1 AMBER and creates state file",
+          out.get("saturation_days") == 1 and out.get("severity") == "AMBER"
+          and st.exists(), str(out))
 
     print(f"\n{CHECKS} guards run, {len(FAILURES)} failed"
           + (f": {FAILURES}" if FAILURES else ""))
