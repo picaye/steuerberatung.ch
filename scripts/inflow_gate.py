@@ -17,7 +17,23 @@ Friday grid has 0 free slots to 2028-06-30, appended topics have NO publish
 path — the drain just demotes fresh HIGH-demand topics to backlog. New rule:
 while publish_calendar reports zero free Fridays (today..horizon), the gate is
 closed regardless of the pending count. Fail-open: if the calendar cannot be
-computed, only the pending cap gates (old behavior), with a stderr warning.
+computed, only the count-based gates fire (cap AND suspend floor below — both
+calendar-independent), with a stderr warning.
+
+THIRD GATE — cto hard-suspend floor (t_e0dbafb1, cto scope call 2026-11-27
+"SUSPEND new research adds — do NOT expand capacity"): the saturation gate
+still left one hole — if a Friday slot ever freed up, appends would
+re-authorize while the queue sat ~97 deep. CTO ruling: no new research adds
+until pending < 60. While PENDING_SUSPEND_FLOOR <= pending < PENDING_CAP the
+gate is closed regardless of the calendar; the rule is self-lifting (the
+condition simply stops firing below the floor) and an early release or a new
+floor is a cto decision at the weekly review, not something this script
+guesses. Severity is AMBER (executing a standing directive is steady state,
+not an incident — cto ruling 2026-11-26), but when the calendar is
+simultaneously saturated past the tripwire grace it escalates to RED like
+no_free_fridays: suspending adds does not fix the publish grid (97 pending at
+1 published/Friday is ~37 weeks to the floor), so escalation pressure must
+stay alive.
 
 SEVERITY SPLIT — alerting interpretation only (t_ae7d83c3, cto ruling 2026-11-26):
   Since the grid booked to 2028-06-30, the no_free_fridays gate stays closed
@@ -25,11 +41,15 @@ SEVERITY SPLIT — alerting interpretation only (t_ae7d83c3, cto ruling 2026-11-
   everyone to ignore it (alert fatigue). The gate's BEHAVIOR is unchanged — exit
   3 still blocks unpinned appends exactly as before — but its report severity is
   split:
-    pending >= cap (cap-breach)      -> RED    (actionable, unchanged)
-    free_fridays == 0, pending < cap -> AMBER  (steady-state saturation; the
-                                                 headline MUST carry
-                                                 gate_reason=no_free_fridays)
-    not gated                        -> GREEN
+    pending >= cap (cap-breach)        -> RED    (actionable, unchanged)
+    cap > pending >= suspend_floor     -> AMBER  (cto suspend directive; the
+                                                   headline carries
+                                                   gate_reason=cto_suspend,
+                                                   RED under ossification)
+    free_fridays == 0, pending < floor -> AMBER  (steady-state saturation; the
+                                                   headline MUST carry
+                                                   gate_reason=no_free_fridays)
+    not gated                          -> GREEN
   Report severity ladder (site-verify "worst gate governs", t_6467c6c1):
   RED > AMBER > GREEN. AMBER is visible in the headline and the daily rollup,
   never flattened into GREEN, and still governs overall against any GREEN.
@@ -48,18 +68,22 @@ SEVERITY SPLIT — alerting interpretation only (t_ae7d83c3, cto ruling 2026-11-
   (format below) with "saturation_since": "2026-11-25".
 
 Contract (consumed by the cron prompt, not by CI):
-  stdout: one JSON object {"pending": N, "cap": PENDING_CAP, "gated": bool,
+  stdout: one JSON object {"pending": N, "cap": PENDING_CAP,
+                           "suspend_floor": PENDING_SUSPEND_FLOOR,
+                           "gated": bool,
                            "free_fridays": int|null,
-                           "gate_reason": "pending_cap"|"no_free_fridays"|null,
+                           "gate_reason": "pending_cap"|"cto_suspend"|
+                                          "no_free_fridays"|null,
                            "severity": "RED"|"AMBER"|"GREEN",
                            "saturation_days": int,
                            "ossified": bool}
-  exit 0  -> not gated (pending < cap AND calendar has a free Friday),
-             or queue file missing (pending: 0)
-  exit 3  -> gated   (pending >= cap OR free_fridays == 0)  [UNCHANGED by the
-             severity split — appends stay blocked under AMBER]
+  exit 0  -> not gated (pending < suspend_floor AND calendar has a free
+             Friday), or queue file missing (pending: 0)
+  exit 3  -> gated (pending >= cap OR pending >= suspend_floor OR
+             free_fridays == 0)  [UNCHANGED by the severity split — appends
+             stay blocked under AMBER]
   The cron branches on the exit code only; free_fridays/gate_reason/severity/
-  saturation_days/ossified are additive observability fields.
+  saturation_days/ossified/suspend_floor are additive observability fields.
 
   State file (.local/inflow_gate_saturation.json, gitignored; --state-file for
   tests): {"saturation_since": "YYYY-MM-DD"|null,
@@ -84,6 +108,12 @@ import datetime
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEFAULT_QUEUE = os.path.join(REPO_ROOT, "data", "content-research.jsonl")
 PENDING_CAP = 100
+# t_e0dbafb1 cto scope call 2026-11-27: hard-suspend research adds while
+# pending >= this floor, independent of the calendar. Self-lifting: below the
+# floor the condition stops firing; release/floor changes are cto weekly-
+# review decisions. 60 chosen so the queue drains toward publish depth
+# instead of oscillating 98->103 at the cap.
+PENDING_SUSPEND_FLOOR = 60
 FREE_FRIDAYS_REPORT_LIMIT = 20  # mirrors publish_calendar.py --free
 DEFAULT_STATE = os.path.join(REPO_ROOT, ".local", "inflow_gate_saturation.json")
 # t_ae7d83c3: AMBER(no_free_fridays) grace window. Once the consecutive
@@ -172,10 +202,19 @@ def update_saturation_state(path, free, today=None):
 def decide_severity(gate_reason, free, saturation_days):
     """Map a gating decision to a report severity. Exit codes and blocking
     are NOT decided here — this is interpretation only (cto ruling: the gate
-    keeps blocking appends exactly as today)."""
+    keeps blocking appends exactly as today).
+
+    t_e0dbafb1 floor extension: cto_suspend is AMBER steady state (executing
+    a standing directive is not an incident) and shares the tripwire
+    escalation ONLY while the calendar is simultaneously observed saturated
+    (free == 0). A floor-breach with open Fridays is a pure queue-depth
+    signal; the streak may merely be stale from a state file seeded while
+    the grid was booked, so it must not escalate."""
     if gate_reason == "pending_cap":
         return "RED"
-    if gate_reason == "no_free_fridays":
+    if gate_reason == "cto_suspend" and free != 0:
+        return "AMBER"
+    if gate_reason in ("no_free_fridays", "cto_suspend"):
         return "RED" if saturation_days > OSSIFICATION_GRACE_DAYS else "AMBER"
     return "GREEN"
 
@@ -257,7 +296,8 @@ def count_free_fridays(cards, today=None):
         return n
     except Exception as exc:  # noqa: BLE001 — fail-open by design
         print(f"WARN: calendar saturation check failed ({exc}); "
-              "gating on the pending cap only", file=sys.stderr)
+              "gating on the count-based caps only (pending_cap / "
+              "cto_suspend)", file=sys.stderr)
         return None
 
 
@@ -275,6 +315,11 @@ def main(argv=None):
     free = count_free_fridays(read_cards(args.file))
     if pending >= PENDING_CAP:
         gated, reason = True, "pending_cap"
+    elif pending >= PENDING_SUSPEND_FLOOR:
+        # The cto suspend floor outranks the calendar reason: at/above it,
+        # adds are barred even if a Friday slot opens, so naming the
+        # binding constraint keeps the headline honest (t_e0dbafb1).
+        gated, reason = True, "cto_suspend"
     elif free == 0:
         gated, reason = True, "no_free_fridays"
     else:
@@ -285,9 +330,10 @@ def main(argv=None):
     # None (read failure) -> state untouched.
     days, since = update_saturation_state(args.state_file, free)
     severity = decide_severity(reason, free, days)
-    ossified = (reason == "no_free_fridays"
-                and days > OSSIFICATION_GRACE_DAYS)
-    print(json.dumps({"pending": pending, "cap": PENDING_CAP, "gated": gated,
+    ossified = (reason in ("no_free_fridays", "cto_suspend")
+                and free == 0 and days > OSSIFICATION_GRACE_DAYS)
+    print(json.dumps({"pending": pending, "cap": PENDING_CAP,
+                      "suspend_floor": PENDING_SUSPEND_FLOOR, "gated": gated,
                       "free_fridays": free, "gate_reason": reason,
                       "severity": severity,
                       "saturation_days": days,
@@ -299,6 +345,17 @@ def main(argv=None):
             extra = (f"; saturation_days={days}/{OSSIFICATION_GRACE_DAYS} grace"
                      + (f" since {since} — ESCALATE: capacity/suspend "
                         "decision required" if ossified else ""))
+        elif reason == "cto_suspend":
+            extra = (f", suspend_floor={PENDING_SUSPEND_FLOOR} — cto directive "
+                     "(t_e0dbafb1): no research adds until pending < "
+                     f"{PENDING_SUSPEND_FLOOR}")
+            if free == 0:
+                extra += (f"; saturation_days={days}/{OSSIFICATION_GRACE_DAYS}"
+                          " grace")
+                if ossified:
+                    extra += (" — ESCALATE: publish grid still saturated past "
+                              "grace despite suspend; capacity decision "
+                              "required at weekly review")
         print(f"inflow_gate: GATED [{severity}] (gate_reason={tag}) — "
               f"pending={pending}, cap={PENDING_CAP}, free_fridays={free}"
               f"{extra}; no unpinned appends this run, flip to backlog "

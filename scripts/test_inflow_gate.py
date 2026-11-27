@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """test_inflow_gate.py — regression guards for scripts/inflow_gate.py
-(t_376b7fb7 cap gate; t_e0dbafb1 second gate: calendar saturation).
+(t_376b7fb7 cap gate; t_e0dbafb1 second gate: calendar saturation;
+ t_e0dbafb1 third gate 2026-11-27: cto hard-suspend floor PENDING_SUSPEND_FLOOR=60).
 
 Guards under test:
-  G1  below cap + free Fridays -> {"pending": N<100, "gated": false,
+  G1  below the suspend floor + free Fridays -> {"pending": N<60, "gated": false,
       "gate_reason": null}, exit 0 (normal research behaviour untouched).
+      (Was `cap - 1` pre-floor; the cto floor now closes that band by design.)
   G2  exactly at cap (pending == PENDING_CAP) -> gated, exit 3, reason
       pending_cap. The cap is inclusive: cron contract `pending=N >= cap=100`.
   G3  above cap -> gated, exit 3.
@@ -21,7 +23,8 @@ Guards under test:
   G9  free-Friday counting mirrors publish_calendar --free exactly (uses
       pc.fridays(), counts slots not in plan() output and >= today).
   G10 fail-open: if the calendar cannot be computed (free_fridays null),
-      ONLY the pending cap gates — a planner bug never freezes inflow.
+      ONLY the count-based caps gate (pending_cap, and the suspend floor per
+      G26) — a planner bug never freezes the saturation half of inflow.
   G11 precedence: both conditions true -> gate_reason is pending_cap.
 
     python3 scripts/test_inflow_gate.py
@@ -101,12 +104,17 @@ def main():
     gate = load_gate()
     cap = gate.PENDING_CAP
     check("G7a PENDING_CAP constant is 100", cap == 100, f"got {cap}")
+    floor = gate.PENDING_SUSPEND_FLOOR
+    check("G7c PENDING_SUSPEND_FLOOR constant is 60 and below cap",
+          floor == 60 and floor < cap, f"got {floor}")
 
-    # G1 below cap (fresh temp queue pins nothing -> free Fridays > 0)
-    q = write_queue([card(f"s{i}", "pending") for i in range(cap - 1)])
+    # G1 below the suspend floor (fresh temp queue pins nothing -> free
+    # Fridays > 0). t_e0dbafb1 floor: was `cap - 1` (99) — that band is now
+    # gated by design; see G24-G26.
+    q = write_queue([card(f"s{i}", "pending") for i in range(floor - 1)])
     proc, out = run_gate(q)
-    check("G1 below cap + free calendar: not gated, exit 0",
-          out["pending"] == cap - 1 and out["cap"] == cap
+    check("G1 below floor + free calendar: not gated, exit 0",
+          out["pending"] == floor - 1 and out["cap"] == cap
           and out["gated"] is False and out["gate_reason"] is None
           and out["free_fridays"] > 0
           and proc.returncode == 0, f"{out} rc={proc.returncode}")
@@ -158,20 +166,23 @@ def main():
           and "line 2" in proc.stderr, f"{out} rc={proc.returncode} stderr={proc.stderr!r}")
 
     # G7b stdout contract: exactly one JSON object. t_ae7d83c3 extends the
-    # schema with severity/saturation_days/ossified; original keys preserved.
+    # schema with severity/saturation_days/ossified; t_e0dbafb1 floor adds
+    # suspend_floor; original keys preserved.
     proc, out = run_gate(write_queue([card("x", "pending")]))
-    check("G7b stdout keys are exactly pending/cap/gated/free_fridays/gate_reason"
-          "/severity/saturation_days/ossified",
+    check("G7b stdout keys are exactly pending/cap/suspend_floor/gated/"
+          "free_fridays/gate_reason/severity/saturation_days/ossified",
           proc.stdout.strip().startswith("{")
           and proc.stdout.strip().endswith("}")
-          and set(out) == {"pending", "cap", "gated", "free_fridays", "gate_reason",
-                           "severity", "saturation_days", "ossified"}
+          and set(out) == {"pending", "cap", "suspend_floor", "gated",
+                           "free_fridays", "gate_reason", "severity",
+                           "saturation_days", "ossified"}
           and proc.stdout.strip().count("\n") == 0,
           f"stdout={proc.stdout!r}")
     check("G7b original keys keep their pre-t_ae7d83c3 types/values",
           isinstance(out["pending"], int) and out["cap"] == gate.PENDING_CAP
           and isinstance(out["gated"], bool)
-          and out["gate_reason"] in (None, "pending_cap", "no_free_fridays"),
+          and out["gate_reason"] in (None, "pending_cap", "cto_suspend",
+                                     "no_free_fridays"),
           f"stdout={proc.stdout!r}")
 
     # G8 second gate: saturated grid, pending well below cap -> gated
@@ -381,14 +392,19 @@ def main():
           gate.SEVERITY_RANK["RED"] > gate.SEVERITY_RANK["AMBER"]
           > gate.SEVERITY_RANK["GREEN"], str(gate.SEVERITY_RANK))
 
-    # ---- G20/G21: headline carries gate_reason=no_free_fridays; no flattening
+    # ---- G20/G21: headline carries the binding gate_reason; no flattening.
+    # t_e0dbafb1 floor: a fully-saturated real grid pins ~84 Fridays, so the
+    # queue sits above the suspend floor and the reported reason is
+    # cto_suspend (floor outranks the calendar). The no_free_fridays
+    # headline itself is guarded by G8 (below-floor queue).
     q = sat_queue("g20")
     st = _P(tempfile.mkdtemp()) / "g20.state.json"
     proc, out = run_gate_q(q, st)
-    check("G20 saturating run reports gate_reason=no_free_fridays + AMBER",
-          out.get("gate_reason") == "no_free_fridays"
+    check("G20 saturating run at/above floor reports gate_reason=cto_suspend + AMBER",
+          out.get("gate_reason") == "cto_suspend"
           and out.get("severity") == "AMBER"
-          and "gate_reason=no_free_fridays" in proc.stderr, str(out))
+          and out.get("free_fridays") == 0
+          and "gate_reason=cto_suspend" in proc.stderr, str(out))
     check("G21 AMBER never flattened: gated implies severity != GREEN",
           out.get("gated") is True and out.get("severity") != "GREEN", str(out))
 
@@ -411,6 +427,71 @@ def main():
     check("G23 fresh streak starts at day 1 AMBER and creates state file",
           out.get("saturation_days") == 1 and out.get("severity") == "AMBER"
           and st.exists(), str(out))
+
+    # ---- G24-G26: cto hard-suspend floor (t_e0dbafb1, 2026-11-27) ----
+    # G24: at the floor with a FULLY OPEN calendar -> gated. The whole point
+    # of the directive: adds stop at pending >= 60, not 100. AMBER (a
+    # standing directive being executed is not an incident), not ossified.
+    q = write_queue([card(f"g24-{i}", "pending") for i in range(floor)])
+    proc, out = run_gate_q(q, _P(tempfile.mkdtemp()) / "g24.state.json")
+    check("G24 pending == floor, open calendar: gated cto_suspend rc 3 AMBER",
+          proc.returncode == 3 and out.get("gated") is True
+          and out.get("gate_reason") == "cto_suspend"
+          and out.get("severity") == "AMBER"
+          and out.get("ossified") is False
+          and out.get("free_fridays", 0) > 0
+          and out.get("suspend_floor") == floor, str(out))
+    check("G24 stderr names the cto directive + the resume condition",
+          "gate_reason=cto_suspend" in proc.stderr
+          and "no research adds until pending < 60" in proc.stderr,
+          proc.stderr.strip())
+
+    # G25: floor outranks no_free_fridays when both hold (in-process so the
+    # calendar can be monkeypatched; pending=99 < cap keeps it out of
+    # pending_cap). free_fridays stays observable in the JSON.
+    saved = gate.count_free_fridays
+    gate.count_free_fridays = lambda cards, today=None: 0
+    try:
+        buf_out, buf_err = io.StringIO(), io.StringIO()
+        q99 = write_queue([card(f"g25-{i}", "pending") for i in range(cap - 1)])
+        with contextlib.redirect_stdout(buf_out), contextlib.redirect_stderr(buf_err):
+            rc = gate.main(["--file", str(q99),
+                            "--state-file",
+                            str(_P(tempfile.mkdtemp()) / "g25.state.json")])
+        payload = json.loads(buf_out.getvalue())
+        check("G25 floor band + saturated grid: reason cto_suspend (priority), "
+              "AMBER day 1, free_fridays still reported 0",
+              rc == 3 and payload["gate_reason"] == "cto_suspend"
+              and payload["free_fridays"] == 0
+              and payload["severity"] == "AMBER", f"rc={rc} {payload}")
+    finally:
+        gate.count_free_fridays = saved
+
+    # G26: the floor is calendar-INDEPENDENT — a planner outage does not
+    # reopen the gate for a queue at/above 60. Fail-open (G10/G10b) exempts
+    # only the saturation half; below the floor G10 still fails open.
+    broken = types.ModuleType("publish_calendar")
+    def _boom26(*a, **k):
+        raise RuntimeError("planner exploded")
+    broken.plan = _boom26
+    broken.fridays = _boom26
+    saved_mod = sys.modules.get("publish_calendar")
+    sys.modules["publish_calendar"] = broken
+    try:
+        buf_out, buf_err = io.StringIO(), io.StringIO()
+        with contextlib.redirect_stdout(buf_out), contextlib.redirect_stderr(buf_err):
+            rc = gate.main(["--file", str(write_queue(
+                [card(f"g26-{i}", "pending") for i in range(floor + 10)])),
+                "--state-file",
+                str(_P(tempfile.mkdtemp()) / "g26.state.json")])
+        payload = json.loads(buf_out.getvalue())
+        check("G26 calendar outage + pending >= floor: still gated via floor "
+              "(cto_suspend, free_fridays null)",
+              rc == 3 and payload["gate_reason"] == "cto_suspend"
+              and payload["free_fridays"] is None
+              and payload["severity"] == "AMBER", f"rc={rc} {payload}")
+    finally:
+        sys.modules["publish_calendar"] = saved_mod
 
     print(f"\n{CHECKS} guards run, {len(FAILURES)} failed"
           + (f": {FAILURES}" if FAILURES else ""))
