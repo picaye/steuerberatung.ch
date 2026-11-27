@@ -55,6 +55,14 @@ jobs:
         # suite pins the config-anchored single-owner match and the host
         # wrapper's exit-10 -> cron-success mapping. stdlib-only, no pip.
         run: python3 scripts/test_lead_guard.py
+      - name: Gate — calculator CTA form-nesting DOM shape (t_31134495)
+        # The c405367 corruption (fixed by 12f1913, live 2026-11-27 23:17Z):
+        # .lead-cta-form sat nested inside the calculator form on 8 pages —
+        # raw-HTML curl markers passed while browsers dropped the CTA from
+        # the DOM. Pages CI only builds, so this DOM-shape suite is the
+        # tripwire: 2/2 form counts, no lead-form nesting, app.js wired.
+        # stdlib-only, no pip.
+        run: python3 scripts/test_calc_dom.py
       - name: Gate — publish-calendar planner + PIN_SLIPPED watchdog guards (t_2da26364, t_651281a3)
         # The 2026-10-26 Monday-cron defect: fridays() anchored at the
         # hardcoded GRID_START re-pinned cards into a past slot and the

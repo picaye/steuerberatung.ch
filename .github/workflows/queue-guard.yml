@@ -18,3 +18,5 @@ jobs:
         uses: actions/checkout@v4
       - name: Validate publish queue (pin/hold_until, duplicates, past pins)
         run: python3 scripts/validate_queue.py
+      - name: Guard calculator CTA form nesting (t_31134495)
+        run: python3 scripts/test_calc_dom.py
