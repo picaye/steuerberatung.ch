@@ -186,3 +186,16 @@
 .search-aud-btn{border:1px solid #cbd5e1;background:#fff;border-radius:999px;padding:.35rem .8rem;font-size:.85rem;cursor:pointer}
 .search-aud-btn.on{background:#1d4ed8;color:#fff;border-color:#1d4ed8}
 .search-aud-btn:focus-visible{outline:2px solid #1d4ed8;outline-offset:2px}
+
+/* Inline lead CTA (t_a425526a): article cards + calculator result blocks.
+   Static markup (in initial paint => no layout shift); status line is display:none
+   until it carries a message, so success/error never nudges the page. */
+.cta-mid.lead-cta{margin:22px 0}
+.lead-cta .lead-cta-copy{margin:0 0 12px}
+.lead-cta form{display:grid;gap:10px}
+.lead-cta-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.lead-cta input,.lead-cta textarea{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:8px;font:inherit;background:#fff;color:inherit}
+.lead-cta textarea{resize:vertical}
+.lead-cta-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.lead-cta-alt{font-size:.85rem;color:var(--green,#2e7d4f);font-weight:600}
+@media (max-width:640px){.lead-cta-fields{grid-template-columns:1fr}}

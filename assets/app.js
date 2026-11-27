@@ -26,7 +26,8 @@
       calcFortune: "Vermögenssteuer",
       calcPersonal: "Persönlicher Abzug/Steuer (kantonal)",
       calcModeLive: "Berechnet nach den offiziellen ESTV-Tarifen für Ihre Gemeinde.",
-      calcModeEstimate: "Offline-Schätzung mit Kantonsdurchschnitt – die Live-Anbindung ist derzeit nicht erreichbar."
+      calcModeEstimate: "Offline-Schätzung mit Kantonsdurchschnitt – die Live-Anbindung ist derzeit nicht erreichbar.",
+      ctaCalcPrefill: "Ich habe den Steuerrechner benutzt: Einkommen {income}, effektiver Satz {eff} ({loc}). Ich möchte meine Angaben unverbindlich prüfen lassen."
     },
     en: {
       errRequired: "Please enter your name and e-mail address.",
@@ -50,7 +51,8 @@
       calcFortune: "Wealth tax",
       calcPersonal: "Personal tax/credit (cantonal)",
       calcModeLive: "Calculated with the official ESTV tariffs for your municipality.",
-      calcModeEstimate: "Offline estimate using canton averages — the live connection is currently unavailable."
+      calcModeEstimate: "Offline estimate using canton averages — the live connection is currently unavailable.",
+      ctaCalcPrefill: "I used the tax calculator: income {income}, effective rate {eff} ({loc}). I would like my figures checked – no obligation."
     },
     fr: {
       errRequired: "Veuillez indiquer votre nom et votre adresse e-mail.",
@@ -74,7 +76,8 @@
       calcFortune: "Impôt sur la fortune",
       calcPersonal: "Taxe personnelle/crédit (cantonal)",
       calcModeLive: "Calculé selon les tarifs officiels de l'AFC pour votre commune.",
-      calcModeEstimate: "Estimation hors ligne avec les moyennes cantonales – la connexion live est actuellement indisponible."
+      calcModeEstimate: "Estimation hors ligne avec les moyennes cantonales – la connexion live est actuellement indisponible.",
+      ctaCalcPrefill: "J’ai utilisé le calculateur d’impôts : revenu {income}, taux effectif {eff} ({loc}). Je souhaite faire vérifier mes chiffres sans engagement."
     },
     it: {
       errRequired: "Inserisca nome e indirizzo e-mail.",
@@ -98,7 +101,8 @@
       calcFortune: "Imposta sulla sostanza",
       calcPersonal: "Imposta personale/credito (cantonale)",
       calcModeLive: "Calcolato con le tariffe ufficiali AFC per il Suo comune.",
-      calcModeEstimate: "Stima offline con medie cantonali – la connessione live non è attualmente disponibile."
+      calcModeEstimate: "Stima offline con medie cantonali – la connessione live non è attualmente disponibile.",
+      ctaCalcPrefill: "Ho usato il calcolatore d’imposte: reddito {income}, aliquota effettiva {eff} ({loc}). Desidero una verifica senza impegno."
     }
   };
   var docLang = (document.documentElement.lang || "de").slice(0, 2).toLowerCase();
@@ -195,6 +199,62 @@
         });
     });
   }
+
+  /* ---------- Inline lead CTA forms (t_a425526a) ----------
+     Compact enquiry form embedded in article cards and shown after a calculator
+     result. Same /api/lead contract as #lead-form — one endpoint, one payload
+     shape — plus `page`, so every lead names the CTA that produced it. */
+  function leadCtaSend(form, e) {
+    e.preventDefault();
+    var status = form.querySelector(".form-status");
+    var say = function (cls, txt) {
+      if (status) { status.className = "form-status " + cls; status.textContent = txt; }
+    };
+    var field = function (n) { var el = form.querySelector("[name=" + n + "]"); return el ? el.value.trim() : ""; };
+    var data = {
+      name: field("name"),
+      email: field("email"),
+      canton: field("canton"),
+      situation: form.getAttribute("data-situation") || "",
+      message: field("message"),
+      lang: docLang,
+      page: location.pathname
+    };
+    if (!data.name || !data.email) { say("err", T.errRequired); return; }
+    var btn = form.querySelector("button[type=submit]");
+    var btnLabel = btn ? btn.textContent : "";
+    if (btn) { btn.disabled = true; btn.textContent = T.sending; }
+    var fail = function () {
+      // Same escape hatch as the main form: the enquiry reaches the mailbox by
+      // mail instead of the visitor being told it failed.
+      window.location.href = "mailto:info@steuerberatung.ch" +
+        "?subject=" + encodeURIComponent("Anfrage steuerberatung.ch: " + data.situation) +
+        "&body=" + encodeURIComponent([data.name, data.email, data.situation, "", data.message, "Seite: " + data.page].join("\n"));
+      say("ok", T.mailFallback);
+      if (btn) { btn.disabled = false; btn.textContent = btnLabel; }
+    };
+    var endpoint = window.LEAD_ENDPOINT;
+    if (!endpoint) { fail(); return; }
+    fetch(endpoint.replace(/\/$/, "") + "/api/lead", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    })
+      .then(function (res) { if (!res.ok) throw new Error("HTTP " + res.status); return res.json(); })
+      .then(function (out) {
+        if (!out || out.ok !== true) throw new Error("server did not store lead");
+        // Success replaces the form: no accidental double submits.
+        var done = document.createElement("p");
+        done.className = "form-status ok";
+        done.setAttribute("role", "status");
+        done.textContent = T.ok;
+        if (form.parentNode) form.parentNode.replaceChild(done, form);
+      })
+      .catch(fail);
+  }
+  Array.prototype.forEach.call(document.querySelectorAll("form.lead-cta-form"), function (f) {
+    f.addEventListener("submit", function (e) { leadCtaSend(f, e); });
+  });
 
   /* ---------- Tax calculator ----------
      Primary: official ESTV engine via our proxy (/api/tax on the lead
@@ -301,6 +361,16 @@
       return "<tr><td>" + label + "</td><td>" + fmt(val) + "</td></tr>";
     }
 
+    /* Result CTA (t_a425526a): revealed only once numbers are on screen, and it
+       pre-fills the message so the enquiry carries the visitor's own figures. */
+    function showCalcCta(prefill) {
+      var cta = document.getElementById("calc-cta");
+      if (!cta) return;
+      cta.hidden = false;
+      var m = cta.querySelector("[name=message]");
+      if (m && !m.value && prefill) m.value = prefill;
+    }
+
     function renderLive(f, tax) {
       var out = document.getElementById("calc-result");
       var incomeTotal = tax.fed + tax.canton + tax.city + tax.church + tax.personal;
@@ -317,6 +387,7 @@
         resultRow(T.calcTotal, tax.total) + "</table>" +
         "<div class='calc-mode live'>" + T.calcModeLive + "</div>" +
         "<div class='disclaimer'>" + T.calcDisclaimer + "</div>";
+      showCalcCta(T.ctaCalcPrefill.replace("{income}", fmt(f.taxable)).replace("{eff}", (eff * 100).toFixed(1) + " %").replace("{loc}", tax.location + " " + f.year));
     }
 
     function renderFallback(f) {
@@ -336,6 +407,7 @@
         resultRow(T.calcTotal, r.total) + "</table>" +
         "<div class='calc-mode est'>" + T.calcModeEstimate + "</div>" +
         "<div class='disclaimer'>" + T.calcDisclaimer + "</div>";
+      showCalcCta(T.ctaCalcPrefill.replace("{income}", fmt(f.taxable)).replace("{eff}", (r.effective * 100).toFixed(1) + " %").replace("{loc}", canton));
     }
 
     var CANTON_WORDS = { zürich:"ZH", zurich:"ZH", bern:"BE", luzern:"LU", basel:"BS",

@@ -53,6 +53,15 @@
     <button type="submit" class="btn">Steuer berechnen</button>
   </form>
   <div id="br-out" role="status" aria-live="polite"></div>
+<div id="br-cta" class="cta-mid lead-cta" hidden>
+<div class="lead-cta-copy"><strong>Bezugszeitplan optimal gestalten?</strong> Die beste Staffelung hängt von Kanton, Alter und übriger Steuerrechnung ab. Eine <a href="partner-pruefung.html">geprüfte Fachperson</a> rechnet Ihren Zeitplan durch.</div>
+<form class="lead-cta-form" data-situation="Kapitalbezugsrechner">
+<div class="lead-cta-fields"><input name="name" aria-label="Name" placeholder="Name *" autocomplete="name" required maxlength="200"><input name="email" type="email" aria-label="E-Mail" placeholder="E-Mail *" autocomplete="email" required maxlength="200"></div>
+<textarea name="message" rows="2" aria-label="Kurz Ihre Situation (optional)" placeholder="Kurz Ihre Situation (optional)" maxlength="2000"></textarea>
+<div class="lead-cta-row"><button type="submit" class="btn btn-primary">Unverbindlich anfragen</button><a class="lead-cta-alt" href="kontakt.html">Oder: Kontaktformular →</a></div>
+<p class="form-status" role="status" aria-live="polite"></p>
+</form>
+</div>
   <p class="calc-note">Richtwert nach dem Fünftelungsmodell (Art. 38 DBG) mit dem mittleren Steuerfuss des gewählten Kantons; Kantone mit Sondertarifen (z. B. Zürich, Bern) können abweichen. Verbindliche Zahlen nennt der Steuerrechner oder Ihre Steuerverwaltung.</p>
   <p class="latest-more"><a href="saeule-3a-bezug-staffeln.html">Säule 3a clever staffeln: So gehen Sie vor →</a></p>
 </section>
@@ -69,7 +78,7 @@
   </div>
   <div class="container footer-bottom"><p>© 2026 steuerberatung.ch · Unabhängige Steuer-Information &amp; Vermittlung. steuerberatung.ch erbringt keine individuelle Steuer- oder Rechtsberatung. Die Beratung erfolgt ausschliesslich durch die vermittelten Fachpersonen.</p></div>
 </footer>
-<script>window.BR_I18N={"res_sep": "Getrennte Steuer (Richtwert)", "res_per": "pro Bezug", "res_tot": "Gesamt bei Staffelung", "res_one": "Vergleich: ein einziger Bezug", "res_save": "Ersparnis durch Staffelung", "err": "Bitte gültigen Betrag eingeben."};</script>
+<script>window.BR_I18N={"res_sep": "Getrennte Steuer (Richtwert)", "res_per": "pro Bezug", "res_tot": "Gesamt bei Staffelung", "res_one": "Vergleich: ein einziger Bezug", "res_save": "Ersparnis durch Staffelung", "err": "Bitte gültigen Betrag eingeben.","cta_msg": "Ich habe den Kapitalbezugsrechner benutzt: CHF {amount}, {n} Bezüge, Kanton {canton}. Ich möchte den Zeitplan prüfen lassen."};</script>
 <script src="assets/tax_engine_data.js?v=3"></script>
 <script src="assets/tax_engine.js?v=3"></script>
 <script>(function(){
@@ -100,6 +109,8 @@
       + '<div><h3>'+T('res_one')+'</h3><p>'+fmt(one)+'</p></div>'
       + '<div><h3>'+T('res_save')+'</h3><p class="br-save">'+fmt(save)+'</p></div>'
       + '</div>';
+    var cta=document.getElementById('br-cta');
+    if(cta){cta.hidden=false;var m=cta.querySelector('[name=message]');if(m&&!m.value)m.value=T('cta_msg').replace('{amount}',fmt(amt)).replace('{n}',n).replace('{canton}',cant);}
   });
 })();</script>
 </body>

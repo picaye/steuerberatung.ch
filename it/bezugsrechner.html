@@ -53,6 +53,15 @@
     <button type="submit" class="btn">Calcolare l'imposta</button>
   </form>
   <div id="br-out" role="status" aria-live="polite"></div>
+<div id="br-cta" class="cta-mid lead-cta" hidden>
+<div class="lead-cta-copy"><strong>Pianificare il prelievo in modo ottimale?</strong> La suddivisione ideale dipende da cantone, età e resto della dichiarazione. Un <a href="partner-pruefung.html">consulente verificato</a> calcola il suo piano.</div>
+<form class="lead-cta-form" data-situation="Calcolatore delle prestazioni in capitale">
+<div class="lead-cta-fields"><input name="name" aria-label="Nome" placeholder="Nome *" autocomplete="name" required maxlength="200"><input name="email" type="email" aria-label="E-mail" placeholder="E-mail *" autocomplete="email" required maxlength="200"></div>
+<textarea name="message" rows="2" aria-label="Descriva brevemente la sua situazione (facoltativo)" placeholder="Descriva brevemente la sua situazione (facoltativo)" maxlength="2000"></textarea>
+<div class="lead-cta-row"><button type="submit" class="btn btn-primary">Richieda un’offerta senza impegno</button><a class="lead-cta-alt" href="kontakt.html">Oppure: modulo di contatto →</a></div>
+<p class="form-status" role="status" aria-live="polite"></p>
+</form>
+</div>
   <p class="calc-note">Stima secondo il modello del quinto (art. 38 LIFD) al moltiplicatore medio del cantone scelto; cantoni con tariffe speciali (p. es. Zurigo, Berna) possono discostarsi. I cifre vincolanti provengono dal calcolatore d'imposte o dall'amministrazione fiscale.</p>
   <p class="latest-more"><a href="saeule-3a-bezug-staffeln.html">Come scaglionare i prelievi del 3° pilastro →</a></p>
 </section>
@@ -69,7 +78,7 @@
   </div>
   <div class="container footer-bottom"><p>© 2026 steuerberatung.ch · Informazione fiscale indipendente &amp; mediazione. steuerberatung.ch non fornisce consulenza fiscale o giuridica individuale. La consulenza è fornita esclusivamente dagli specialisti incaricati.</p></div>
 </footer>
-<script>window.BR_I18N={"res_sep": "Imposta separata (stima)", "res_per": "per prelievo", "res_tot": "Totale con scaglionamento", "res_one": "Confronto: un solo prelievo", "res_save": "Risparmio dallo scaglionamento", "err": "Inserite un importo valido."};</script>
+<script>window.BR_I18N={"res_sep": "Imposta separata (stima)", "res_per": "per prelievo", "res_tot": "Totale con scaglionamento", "res_one": "Confronto: un solo prelievo", "res_save": "Risparmio dallo scaglionamento", "err": "Inserite un importo valido.","cta_msg": "Ho usato il calcolatore delle prestazioni in capitale: CHF {amount}, {n} prelievi, cantone {canton}. Desidero una verifica del piano."};</script>
 <script src="../assets/tax_engine_data.js?v=3"></script>
 <script src="../assets/tax_engine.js?v=3"></script>
 <script>(function(){
@@ -100,6 +109,8 @@
       + '<div><h3>'+T('res_one')+'</h3><p>'+fmt(one)+'</p></div>'
       + '<div><h3>'+T('res_save')+'</h3><p class="br-save">'+fmt(save)+'</p></div>'
       + '</div>';
+    var cta=document.getElementById('br-cta');
+    if(cta){cta.hidden=false;var m=cta.querySelector('[name=message]');if(m&&!m.value)m.value=T('cta_msg').replace('{amount}',fmt(amt)).replace('{n}',n).replace('{canton}',cant);}
   });
 })();</script>
 </body>

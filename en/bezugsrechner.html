@@ -53,6 +53,15 @@
     <button type="submit" class="btn">Calculate tax</button>
   </form>
   <div id="br-out" role="status" aria-live="polite"></div>
+<div id="br-cta" class="cta-mid lead-cta" hidden>
+<div class="lead-cta-copy"><strong>Plan the withdrawal schedule?</strong> The best spread depends on your canton, age and overall tax bill. A <a href="partner-pruefung.html">vetted professional</a> can work out your schedule.</div>
+<form class="lead-cta-form" data-situation="Withdrawal calculator">
+<div class="lead-cta-fields"><input name="name" aria-label="Name" placeholder="Name *" autocomplete="name" required maxlength="200"><input name="email" type="email" aria-label="E-mail" placeholder="E-mail *" autocomplete="email" required maxlength="200"></div>
+<textarea name="message" rows="2" aria-label="Briefly, your situation (optional)" placeholder="Briefly, your situation (optional)" maxlength="2000"></textarea>
+<div class="lead-cta-row"><button type="submit" class="btn btn-primary">Request a no-obligation quote</button><a class="lead-cta-alt" href="kontakt.html">Or: contact form →</a></div>
+<p class="form-status" role="status" aria-live="polite"></p>
+</form>
+</div>
   <p class="calc-note">Estimate based on the one-fifth model (Art. 38 FATA) at the canton's average tax multiplier; cantons with special tariffs (e.g. Zurich, Bern) may differ. Binding figures come from the tax calculator or your tax administration.</p>
   <p class="latest-more"><a href="saeule-3a-bezug-staffeln.html">How to stagger pillar 3a withdrawals →</a></p>
 </section>
@@ -69,7 +78,7 @@
   </div>
   <div class="container footer-bottom"><p>© 2026 steuerberatung.ch · Independent tax information &amp; partner mediation. steuerberatung.ch does not provide individual tax or legal advice. Advice is provided exclusively by the referred specialists.</p></div>
 </footer>
-<script>window.BR_I18N={"res_sep": "Separate tax (estimate)", "res_per": "per withdrawal", "res_tot": "Total with staggering", "res_one": "Comparison: single withdrawal", "res_save": "Saving from staggering", "err": "Please enter a valid amount."};</script>
+<script>window.BR_I18N={"res_sep": "Separate tax (estimate)", "res_per": "per withdrawal", "res_tot": "Total with staggering", "res_one": "Comparison: single withdrawal", "res_save": "Saving from staggering", "err": "Please enter a valid amount.","cta_msg": "I used the lump-sum withdrawal calculator: CHF {amount}, {n} withdrawals, canton {canton}. I would like the schedule checked."};</script>
 <script src="../assets/tax_engine_data.js?v=3"></script>
 <script src="../assets/tax_engine.js?v=3"></script>
 <script>(function(){
@@ -100,6 +109,8 @@
       + '<div><h3>'+T('res_one')+'</h3><p>'+fmt(one)+'</p></div>'
       + '<div><h3>'+T('res_save')+'</h3><p class="br-save">'+fmt(save)+'</p></div>'
       + '</div>';
+    var cta=document.getElementById('br-cta');
+    if(cta){cta.hidden=false;var m=cta.querySelector('[name=message]');if(m&&!m.value)m.value=T('cta_msg').replace('{amount}',fmt(amt)).replace('{n}',n).replace('{canton}',cant);}
   });
 })();</script>
 </body>

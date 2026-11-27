@@ -53,6 +53,15 @@
     <button type="submit" class="btn">Calculer l'impôt</button>
   </form>
   <div id="br-out" role="status" aria-live="polite"></div>
+<div id="br-cta" class="cta-mid lead-cta" hidden>
+<div class="lead-cta-copy"><strong>Un calendrier de retrait optimal ?</strong> L’échelonnement idéal dépend du canton, de l’âge et du reste de votre déclaration. Un <a href="partner-pruefung.html">spécialiste vérifié</a> calcule votre calendrier.</div>
+<form class="lead-cta-form" data-situation="Calculateur de prestations en capital">
+<div class="lead-cta-fields"><input name="name" aria-label="Nom" placeholder="Nom *" autocomplete="name" required maxlength="200"><input name="email" type="email" aria-label="E-mail" placeholder="E-mail *" autocomplete="email" required maxlength="200"></div>
+<textarea name="message" rows="2" aria-label="Décrivez brièvement votre situation (facultatif)" placeholder="Décrivez brièvement votre situation (facultatif)" maxlength="2000"></textarea>
+<div class="lead-cta-row"><button type="submit" class="btn btn-primary">Demander sans engagement</button><a class="lead-cta-alt" href="kontakt.html">Ou : formulaire de contact →</a></div>
+<p class="form-status" role="status" aria-live="polite"></p>
+</form>
+</div>
   <p class="calc-note">Estimation selon le modèle du cinquième (art. 38 LIFD) au taux moyen du canton choisi ; les cantons à tarif spécial (p. ex. Zurich, Berne) peuvent s'en écarter. Les chiffres opposables proviennent du calculateur d'impôts ou de votre administration fiscale.</p>
   <p class="latest-more"><a href="saeule-3a-bezug-staffeln.html">Échelonner ses retraits du 3e pilier : la marche à suivre →</a></p>
 </section>
@@ -69,7 +78,7 @@
   </div>
   <div class="container footer-bottom"><p>© 2026 steuerberatung.ch · Information fiscale indépendante &amp; médiation. steuerberatung.ch ne fournit pas de conseil fiscal ou juridique individuel. Le conseil est fourni exclusivement par les spécialistes mandatés.</p></div>
 </footer>
-<script>window.BR_I18N={"res_sep": "Impôt séparé (estimation)", "res_per": "par retrait", "res_tot": "Total avec échelonnement", "res_one": "Comparaison : un seul retrait", "res_save": "Économie par échelonnement", "err": "Veuillez saisir un montant valide."};</script>
+<script>window.BR_I18N={"res_sep": "Impôt séparé (estimation)", "res_per": "par retrait", "res_tot": "Total avec échelonnement", "res_one": "Comparaison : un seul retrait", "res_save": "Économie par échelonnement", "err": "Veuillez saisir un montant valide.","cta_msg": "J’ai utilisé le calculateur de prestations en capital : CHF {amount}, {n} retraits, canton {canton}. Je souhaite faire vérifier le calendrier."};</script>
 <script src="../assets/tax_engine_data.js?v=3"></script>
 <script src="../assets/tax_engine.js?v=3"></script>
 <script>(function(){
@@ -100,6 +109,8 @@
       + '<div><h3>'+T('res_one')+'</h3><p>'+fmt(one)+'</p></div>'
       + '<div><h3>'+T('res_save')+'</h3><p class="br-save">'+fmt(save)+'</p></div>'
       + '</div>';
+    var cta=document.getElementById('br-cta');
+    if(cta){cta.hidden=false;var m=cta.querySelector('[name=message]');if(m&&!m.value)m.value=T('cta_msg').replace('{amount}',fmt(amt)).replace('{n}',n).replace('{canton}',cant);}
   });
 })();</script>
 </body>

@@ -101,6 +101,15 @@
 </div>
 <button type="submit" class="btn btn-primary">Calculer</button>
 <div id="calc-result" class="calc-result" aria-live="polite"></div>
+<div id="calc-cta" class="cta-mid lead-cta" hidden>
+<div class="lead-cta-copy"><strong>Une vérification individuelle ?</strong> Le calculateur travaille avec des moyennes. Un <a href="partner-pruefung.html">spécialiste vérifié</a> calcule avec votre commune, votre état civil et vos déductions réelles.</div>
+<form class="lead-cta-form" data-situation="Résultat du calculateur">
+<div class="lead-cta-fields"><input name="name" aria-label="Nom" placeholder="Nom *" autocomplete="name" required maxlength="200"><input name="email" type="email" aria-label="E-mail" placeholder="E-mail *" autocomplete="email" required maxlength="200"></div>
+<textarea name="message" rows="2" aria-label="Décrivez brièvement votre situation (facultatif)" placeholder="Décrivez brièvement votre situation (facultatif)" maxlength="2000"></textarea>
+<div class="lead-cta-row"><button type="submit" class="btn btn-primary">Demander sans engagement</button><a class="lead-cta-alt" href="kontakt.html">Ou : formulaire de contact →</a></div>
+<p class="form-status" role="status" aria-live="polite"></p>
+</form>
+</div>
 <p class="muted disclaimer">Calculé selon les tarifs officiels et les multiplicateurs de l’Administration fédérale des contributions (Swiss Tax Calculator, version simple) : toutes les communes, impôt ecclésiastique et sur la fortune compris, avec les procédures de splitting cantonales et les déductions pour enfants. La saisie est le revenu imposable ; appliquez vos déductions personnelles au préalable. Seule la décision de l’autorité fiscale est contraignante.</p>
 <p class="muted" style="font-size:.85rem">Source des données : ESTV swisstaxcalculator.estv.admin.ch (tarifs, multiplicateurs et règles de déduction 2026/2025). Si la connexion live tombe, le calculateur continue en estimation cantonale hors ligne – l’affichage indique le mode.</p>
 </form>
