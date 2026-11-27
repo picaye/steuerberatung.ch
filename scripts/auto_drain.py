@@ -74,6 +74,7 @@ Sentinel read-only modes (for triage / CI / forced dry-runs):
 
 import argparse
 import datetime
+import glob
 import json
 import os
 import re
@@ -99,6 +100,43 @@ PIN_PRIORITY_RE = re.compile(r"^pin-(\d{4}-\d{2}-\d{2})$")
 # a citation of the card carrying the ruling, e.g. "ruling: t_19d5ba8d".
 RULING_RE = re.compile(r"\bruling[:\s=]*\(?(t_[0-9a-f]{8})\)?", re.IGNORECASE)
 DRAIN_MSG_MARK = "auto-drain"  # commit-message marker of the drain stream
+
+
+def warn_dead_published_slugs(path):
+    """Guard against slug rot: a status=published record whose slug has no
+    deployed *.html is a phantom page — demotion/latest-strip would fire on
+    it forever (or never). Returns the offending slugs; the drain only
+    warns (non-fatal), the pinned-slot test and pipeline-health escalate."""
+    queue_abs = os.path.abspath(path)
+    root = os.path.dirname(os.path.dirname(queue_abs))
+    if not os.path.isdir(root) or not glob.glob(os.path.join(root, "*.html")):
+        # `path` isn't the repo's data/ queue (e.g. a test fixture) — check
+        # the real queue so a relative invocation can't false-warn.
+        queue_abs = os.path.join(REPO_ROOT, "data", "content-research.jsonl")
+        root = REPO_ROOT
+    deployed = {os.path.splitext(os.path.basename(p))[0]
+                for pat in ("*.html", "en/*.html", "fr/*.html", "it/*.html")
+                for p in glob.glob(os.path.join(root, pat))}
+    dead = []
+    try:
+        with open(queue_abs, encoding="utf-8") as f:
+            for line in f:
+                if not line.startswith("{"):
+                    continue
+                try:
+                    rec = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+                if (isinstance(rec, dict) and rec.get("status") == "published"
+                        and rec.get("slug") and rec["slug"] not in deployed):
+                    dead.append(rec["slug"])
+    except OSError:
+        return []
+    if dead:
+        print(f"[drain] WARN dead published slugs in {os.path.basename(path)} "
+              f"(no deployed page, demotion/latest-strip fire on phantoms): "
+              f"{sorted(set(dead))}")
+    return sorted(set(dead))
 
 
 def _fixed_slugs():
@@ -528,6 +566,9 @@ def main(argv=None):
             lines = fh.readlines()
     except FileNotFoundError:
         lines = []
+
+    # Slug-rot guard (t_bd3d0b9a): published records must point at deployed pages.
+    warn_dead_published_slugs(args.file)
 
     warns = []
     new_lines, demoted, before, after = drain(lines, args.cap, args.margin,
