@@ -78,9 +78,12 @@
   </div>
   <div class="container footer-bottom"><p>© 2026 steuerberatung.ch · Informazione fiscale indipendente &amp; mediazione. steuerberatung.ch non fornisce consulenza fiscale o giuridica individuale. La consulenza è fornita esclusivamente dagli specialisti incaricati.</p></div>
 </footer>
-<script>window.BR_I18N={"res_sep": "Imposta separata (stima)", "res_per": "per prelievo", "res_tot": "Totale con scaglionamento", "res_one": "Confronto: un solo prelievo", "res_save": "Risparmio dallo scaglionamento", "err": "Inserite un importo valido.","cta_msg": "Ho usato il calcolatore delle prestazioni in capitale: CHF {amount}, {n} prelievi, cantone {canton}. Desidero una verifica del piano."};</script>
+<script>window.BR_I18N={"res_sep": "Imposta separata (stima)", "res_per": "per prelievo", "res_tot": "Totale con scaglionamento", "res_one": "Confronto: un solo prelievo", "res_save": "Risparmio dallo scaglionamento", "err": "Inserite un importo valido.","cta_msg": "Ho usato il calcolatore delle prestazioni in capitale: {amount}, {n} prelievi, cantone {canton}. Desidero una verifica del piano."};</script>
 <script src="../assets/tax_engine_data.js?v=3"></script>
 <script src="../assets/tax_engine.js?v=3"></script>
+<script src="../assets/endpoint.js"></script>
+<script src="../assets/track.js"></script>
+<script src="../assets/app.js?v=3"></script>
 <script>(function(){
   var form=document.getElementById('br-form'), out=document.getElementById('br-out');
   function fmt(n){return 'CHF '+Math.round(n).toLocaleString('de-CH');}

@@ -78,9 +78,12 @@
   </div>
   <div class="container footer-bottom"><p>© 2026 steuerberatung.ch · Unabhängige Steuer-Information &amp; Vermittlung. steuerberatung.ch erbringt keine individuelle Steuer- oder Rechtsberatung. Die Beratung erfolgt ausschliesslich durch die vermittelten Fachpersonen.</p></div>
 </footer>
-<script>window.BR_I18N={"res_sep": "Getrennte Steuer (Richtwert)", "res_per": "pro Bezug", "res_tot": "Gesamt bei Staffelung", "res_one": "Vergleich: ein einziger Bezug", "res_save": "Ersparnis durch Staffelung", "err": "Bitte gültigen Betrag eingeben.","cta_msg": "Ich habe den Kapitalbezugsrechner benutzt: CHF {amount}, {n} Bezüge, Kanton {canton}. Ich möchte den Zeitplan prüfen lassen."};</script>
+<script>window.BR_I18N={"res_sep": "Getrennte Steuer (Richtwert)", "res_per": "pro Bezug", "res_tot": "Gesamt bei Staffelung", "res_one": "Vergleich: ein einziger Bezug", "res_save": "Ersparnis durch Staffelung", "err": "Bitte gültigen Betrag eingeben.","cta_msg": "Ich habe den Kapitalbezugsrechner benutzt: {amount}, {n} Bezüge, Kanton {canton}. Ich möchte den Zeitplan prüfen lassen."};</script>
 <script src="assets/tax_engine_data.js?v=3"></script>
 <script src="assets/tax_engine.js?v=3"></script>
+<script src="assets/endpoint.js"></script>
+<script src="assets/track.js"></script>
+<script src="assets/app.js?v=3"></script>
 <script>(function(){
   var form=document.getElementById('br-form'), out=document.getElementById('br-out');
   function fmt(n){return 'CHF '+Math.round(n).toLocaleString('de-CH');}

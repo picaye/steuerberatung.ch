@@ -78,9 +78,12 @@
   </div>
   <div class="container footer-bottom"><p>© 2026 steuerberatung.ch · Independent tax information &amp; partner mediation. steuerberatung.ch does not provide individual tax or legal advice. Advice is provided exclusively by the referred specialists.</p></div>
 </footer>
-<script>window.BR_I18N={"res_sep": "Separate tax (estimate)", "res_per": "per withdrawal", "res_tot": "Total with staggering", "res_one": "Comparison: single withdrawal", "res_save": "Saving from staggering", "err": "Please enter a valid amount.","cta_msg": "I used the lump-sum withdrawal calculator: CHF {amount}, {n} withdrawals, canton {canton}. I would like the schedule checked."};</script>
+<script>window.BR_I18N={"res_sep": "Separate tax (estimate)", "res_per": "per withdrawal", "res_tot": "Total with staggering", "res_one": "Comparison: single withdrawal", "res_save": "Saving from staggering", "err": "Please enter a valid amount.","cta_msg": "I used the lump-sum withdrawal calculator: {amount}, {n} withdrawals, canton {canton}. I would like the schedule checked."};</script>
 <script src="../assets/tax_engine_data.js?v=3"></script>
 <script src="../assets/tax_engine.js?v=3"></script>
+<script src="../assets/endpoint.js"></script>
+<script src="../assets/track.js"></script>
+<script src="../assets/app.js?v=3"></script>
 <script>(function(){
   var form=document.getElementById('br-form'), out=document.getElementById('br-out');
   function fmt(n){return 'CHF '+Math.round(n).toLocaleString('de-CH');}

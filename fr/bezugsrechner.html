@@ -78,9 +78,12 @@
   </div>
   <div class="container footer-bottom"><p>© 2026 steuerberatung.ch · Information fiscale indépendante &amp; médiation. steuerberatung.ch ne fournit pas de conseil fiscal ou juridique individuel. Le conseil est fourni exclusivement par les spécialistes mandatés.</p></div>
 </footer>
-<script>window.BR_I18N={"res_sep": "Impôt séparé (estimation)", "res_per": "par retrait", "res_tot": "Total avec échelonnement", "res_one": "Comparaison : un seul retrait", "res_save": "Économie par échelonnement", "err": "Veuillez saisir un montant valide.","cta_msg": "J’ai utilisé le calculateur de prestations en capital : CHF {amount}, {n} retraits, canton {canton}. Je souhaite faire vérifier le calendrier."};</script>
+<script>window.BR_I18N={"res_sep": "Impôt séparé (estimation)", "res_per": "par retrait", "res_tot": "Total avec échelonnement", "res_one": "Comparaison : un seul retrait", "res_save": "Économie par échelonnement", "err": "Veuillez saisir un montant valide.","cta_msg": "J’ai utilisé le calculateur de prestations en capital : {amount}, {n} retraits, canton {canton}. Je souhaite faire vérifier le calendrier."};</script>
 <script src="../assets/tax_engine_data.js?v=3"></script>
 <script src="../assets/tax_engine.js?v=3"></script>
+<script src="../assets/endpoint.js"></script>
+<script src="../assets/track.js"></script>
+<script src="../assets/app.js?v=3"></script>
 <script>(function(){
   var form=document.getElementById('br-form'), out=document.getElementById('br-out');
   function fmt(n){return 'CHF '+Math.round(n).toLocaleString('de-CH');}
