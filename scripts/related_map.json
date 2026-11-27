@@ -188,5 +188,10 @@
     "saeule-3a-nachzahlen.html",
     "saeule-3a-bezug-staffeln.html",
     "lohnabrechnung-2027-ahv-iv-eo-neue-werte.html"
+  ],
+  "mwst-abmeldung-unter-100000-jahresende.html": [
+    "mwst-100k-pflicht-schweiz.html",
+    "mwst-vorsteuer-eigenverbrauch-jahresende.html",
+    "mwst-abrechnung-fristen.html"
   ]
 }

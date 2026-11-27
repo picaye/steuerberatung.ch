@@ -174,5 +174,9 @@
     "solo",
     "verheiratet",
     "firma"
+  ],
+  "mwst-abmeldung-unter-100000-jahresende": [
+    "solo",
+    "firma"
   ]
 }
