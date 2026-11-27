@@ -369,13 +369,20 @@ def main():
           p15a.returncode == 0 and v15a["verdict"] == "OK"
           and qpath.read_bytes() == snap15,
           p15a.stdout + p15a.stderr)
-    # land an actual demotion commit in the fixture history, then alert on it
+    # Land an actual demotion commit in the fixture history, then alert on
+    # it. The --sentinel CLI has no --as-of, so _scan_history windows on the
+    # REAL wall clock (auto_drain.py: `now = as_of or datetime.now(utc)`).
+    # The commit date must therefore be anchored to wall-clock now, not the
+    # module's frozen NOW: a frozen stamp aged out of the 7-day window once
+    # real time passed NOW+7d (2026-11-27 12:00Z), making S15b fail forever
+    # with commits_scanned=0 -> verdict OK (t_1c8a32fe).
     subprocess.run([sys.executable, str(SCRIPT), "--file", str(qpath),
                     "--cap", "6", "--margin", "2"],
                    capture_output=True, text=True)
-    commit_queue_at_now = git(r, "add", "-A", env_date=NOW)
+    real_now = datetime.datetime.now(datetime.timezone.utc)
+    commit_queue_at_now = git(r, "add", "-A", env_date=real_now)
     git(r, "commit", "-q", "-m", "content-research: auto-drain — S15 fixture",
-        env_date=NOW)
+        env_date=real_now)
     assert commit_queue_at_now == ""
     p15b = subprocess.run([sys.executable, str(SCRIPT), "--file", str(qpath),
                            "--sentinel", "--days", "7",
